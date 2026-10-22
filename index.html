@@ -6,6 +6,11 @@
     <title>qwertt — Websites people love to use</title>
     <meta name="description" content="Designer & frontend developer from Uzbekistan. Websites and web apps that turn visitors into clients — two real case studies: qwerttclients and kinoqwertt." />
     <meta name="theme-color" content="#F9F4EC" />
+    <script>
+      try {
+        if (location.pathname === '/' && localStorage.getItem('lang') === 'ru') location.replace('/ru/' + location.hash)
+      } catch (e) {}
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

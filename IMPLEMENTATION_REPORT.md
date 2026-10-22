@@ -34,7 +34,7 @@ Built from `PORTFOLIO_IMPLEMENTATION.md` + `portfolio-handoff/` (design `Main.dc
 | Contact, footer, live clock, copy email | `Sections.jsx → Contact, Footer`, `Common.jsx → LiveClock, CopyEmail` | new · done |
 | Connect drawer + brief form | `ConnectDrawer.jsx`, `ConnectContext.jsx` | new · done |
 | Motion helpers | `src/lib/motion.js` (scroll loop, `useReveal`, `useScrollProgress`, `useCountUp`, media queries), `src/lib/dialog.js` | new · done |
-| All copy / data / placeholders | `src/content/portfolio.js` | new · done |
+| All copy / data / placeholders | `src/content/en.js`, `ru.js` (copy), `shared.js` (links, images, bitmaps, terminal output), `lang.js` + `i18n.jsx` (language context) | new · done |
 
 Assets: all 11 screenshots copied to `public/work/`. Fonts: Inter Tight + JetBrains Mono from Google Fonts (`display=swap`, preconnect). Unused design fonts (Inter, Bebas Neue) were not loaded.
 
@@ -54,7 +54,7 @@ Dependencies added: none at runtime. Build-time: none (the prerender uses Vite's
 - What the visitor sees: a pinned panel with a browser frame; scrolling the page scrolls the real product inside the frame, chapter rail on the right follows, callout "Free times on every card — no dead ends" appears around 30–45%.
 - How it works: wrapper `400vh`, inner `.stage` `position: sticky; top: max(24px, 50vh − 410px)`. Progress `p = (stickyTop − rect.top) / (trackHeight − stageHeight)`. 5 chapters × 0.2. Chapters sharing a screenshot are merged into one segment that scrolls continuously (`translate3d(0, −(imgH − viewH)·segP, 0)`); segment images cross-fade (260 ms opacity). Rail bar `scaleX(local)`, scrollbar thumb `translateY(p·room)`, callout opacity by progress window.
 - Trigger: scroll progress.
-- Implemented in: `ScrollStage.jsx`, data in `portfolio.js → projects[0].stage`.
+- Implemented in: `ScrollStage.jsx`, data in `en.js / ru.js → projects[0].stage`.
 - Depends on: frontend only; screenshots `qwerttclients-home/place-amber/booking-barber/business.jpg`.
 - In the design vs. added: layout designed; all movement added in code.
 - Reduced motion: no sticky; five framed screenshots in a grid with chapter captions (also used below 1024 px).
@@ -80,14 +80,14 @@ Dependencies added: none at runtime. Build-time: none (the prerender uses Vite's
 ### F4 — Proof console
 - What the visitor sees: `npm test` output typing in line by line, then `tests 23 · pass 23` and the four stats count up.
 - How it works: all lines are in the DOM (prerendered); when armed (JS, below fold) lines get `visibility: hidden`; at ≥40 % visible each line becomes visible with `calc(i·40ms)` delay and the ✔ flashes; numbers use `useCountUp`. Runs once (observer disconnects).
-- Implemented in: `ProofConsole.jsx`; data `portfolio.js → proof`.
+- Implemented in: `ProofConsole.jsx`; data `shared.js → terminal` + `en.js / ru.js → proof`.
 - Reduced motion: everything shown immediately; no blinking cursor.
 - Verified? **Yes** — screenshot after trigger; no-JS HTML contains all lines.
 
 ### F5 — Living "q"
 - What the visitor sees: hero q draws cell by cell on load; cells push away from the mouse (≤ 18 px within 80 px) and spring back; case/contact marks morph q → ticket → film → @ when they enter view.
 - How it works: `PixelMark.jsx` renders 49 grid cells; draw = CSS keyframes (`scale` + opacity, 12 ms stagger); repel = rAF-throttled pointermove writing the `translate` property (pointer type `mouse` only); morph = cells start in the previous bitmap and transition opacity/scale with `i·10ms` delay over 600 ms.
-- Implemented in: `PixelMark.jsx`, bitmaps `portfolio.js → marks`.
+- Implemented in: `PixelMark.jsx`, bitmaps `shared.js → marks`.
 - Reduced motion: static final shapes, no cursor reaction.
 - Verified? **Yes** for shapes (cell-by-cell DOM check of the hero q against its bitmap) and morph end states (screenshots). Cursor repel verified by code only (headless run had no pointer movement).
 - Limitations: per-section morph only; the single travelling mark [SUGGESTION] was not built.
@@ -131,6 +131,12 @@ Dependencies added: none at runtime. Build-time: none (the prerender uses Vite's
 - Reduced motion: no clip animation.
 - Verified? **Yes** (screenshot mid-transition shows the rounded inset).
 
+### Russian version (added after the first review)
+- What the visitor sees: EN / RU switch in the header; Russian page at `/ru/` with every text translated (nav, hero, both cases, services, pricing, about, FAQ, contact, footer, Connect drawer incl. form labels, errors and the mailto body). Literal `npm test` output and the CSS excerpt stay English (marked `lang="en"`); its comment is translated.
+- How it works: `LangProvider` + `useT()`; language comes from the URL (`/` = en, `/ru/` = ru). The build prerenders `dist/index.html` and `dist/ru/index.html` with the right `<html lang>`, title, description and `hreflang` links. The choice is saved in `localStorage`; an inline head script sends a returning RU reader from `/` to `/ru/` before first paint. Switching keeps the current `#hash`.
+- Verified? **Yes** — click RU → `/ru/#…`, stored `ru`; visiting `/` redirects to `/ru/`; click EN → `/`, stored `en`; RU screenshots of every section and the drawer at 1440 px; validation messages in Russian; 0 px overflow at 820–1920 px; no console or hydration errors.
+- Limitations: both languages ship in one JS bundle (+8 KB gzip).
+
 ### Extras added
 - Unsplash credit under Case 01 screens; "Unofficial redesign concept — not affiliated with IMDb" under Case 02 screens.
 - Skip link, `robots.txt`, meta description, `theme-color`, image preload for the hero.
@@ -154,14 +160,13 @@ Screenshots (1440×900 unless noted): `…\scratchpad\qa\shots1\` — hero, ever
 
 ## 6. Known gaps & next steps for the owner
 
-1. **Placeholders** — fill in `src/content/portfolio.js`: name, email, Telegram, LinkedIn, Instagram, city, experience, languages, availability, reply time, support days, bio, portrait, prices, durations, budgets, FAQ answers 2–5, Imprint/Privacy URLs. Unknown links render as visible dotted-underline text, never as dead links.
+1. **Placeholders** — fill in `src/content/en.js` **and** `src/content/ru.js` (texts) and `src/content/shared.js` (email, Telegram, LinkedIn handles and all URLs): name, email, Telegram, LinkedIn, Instagram, city, experience, languages, availability, reply time, support days, bio, portrait, prices, durations, budgets, FAQ answers 2–5, Imprint/Privacy URLs. Unknown links render as visible dotted-underline text, never as dead links.
 2. **Form delivery** — set `VITE_FORM_ENDPOINT` (e.g. a Formspree form URL) in `.env` to send briefs directly; until then the form opens the visitor's email app.
 3. **qwerttclients live URL** — set `links.qwerttclientsCase`; the "Read the full case →" button shows `[case URL]` until then.
 4. **"Open all 38 screens ↗"** links to the private design artifact `claude.ai/artifact/JXSTpeT2…` — share it publicly or replace the link, otherwise visitors can't open it.
 5. **Portrait** — replace the placeholder block in About with a real 4:5 photo.
 6. **Images** — screenshots ship as the original JPEGs (no image pipeline in the project). Lighthouse estimates ~260 KB savings from WebP/AVIF + responsive sizes; converting them is the next performance step.
 7. **Fonts** — Google Fonts CSS is render-blocking (~0.9 s on the Lighthouse throttled profile); self-hosting the two families would remove it.
-8. **RU version** — the RU switch is shown as in the design but is non-interactive ("coming soon"); no Russian copy exists yet.
 9. Mobile layout below 1024 px is a readable stacked fallback, not a designed mobile version (per §11.5).
 
 ## 7. How to run / edit
@@ -174,4 +179,4 @@ npm run preview   # serve dist/ at http://localhost:4173
 npm run lint
 ```
 
-Content: `src/content/portfolio.js` (all copy, projects, chapters, test lines, links, placeholders). Tokens: `src/styles/tokens.css`. Screenshots: `public/work/`.
+Content: `src/content/en.js` and `src/content/ru.js` (all copy, same shape — edit both), `src/content/shared.js` (links, contacts, images, bitmaps, test lines). Tokens: `src/styles/tokens.css`. Screenshots: `public/work/`.

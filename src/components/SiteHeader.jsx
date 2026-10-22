@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { nav, owner } from '../content/portfolio.js'
+import { useT } from '../content/i18n.jsx'
+import { PATHS, rememberLang } from '../content/lang.js'
 import { clamp, onScrollFrame } from '../lib/motion.js'
 import { Roll } from './Common.jsx'
 import { ConnectLink, useConnect } from './ConnectContext.jsx'
@@ -12,7 +13,32 @@ const SPY = [
   { nav: 'contact', from: 'contact', to: 'contact' }
 ]
 
+function LangSwitch() {
+  const { lang, ui } = useT()
+  const go = (to) => (e) => {
+    rememberLang(to)
+    // keep the reader's place when switching
+    e.currentTarget.href = PATHS[to] + window.location.hash
+  }
+  return (
+    <nav aria-label={ui.langLabel} className="lang">
+      {['en', 'ru'].map((l) =>
+        l === lang ? (
+          <span key={l} aria-current="true" className="lang__on">
+            {l.toUpperCase()}
+          </span>
+        ) : (
+          <a key={l} href={PATHS[l]} hrefLang={l} lang={l} className="lang__off" onClick={go(l)}>
+            {l.toUpperCase()}
+          </a>
+        )
+      )}
+    </nav>
+  )
+}
+
 export default function SiteHeader() {
+  const { nav, owner, ui } = useT()
   const [active, setActive] = useState(null)
   const [hidden, setHidden] = useState(false)
   const [inverted, setInverted] = useState(false)
@@ -79,12 +105,9 @@ export default function SiteHeader() {
           <div className="site-header__meta">
             <span className="status">
               <span className="status__dot" aria-hidden="true" />
-              Booking {owner.availability}
+              {ui.booking} {owner.availability}
             </span>
-            <span className="lang">
-              <span aria-current="true" className="lang__on">EN</span>{' '}
-              <span className="lang__off" title="Russian version coming soon">RU</span>
-            </span>
+            <LangSwitch />
           </div>
         </div>
       </header>

@@ -1,16 +1,30 @@
-// Injects the server-rendered page into dist/index.html so the content is in
-// the HTML before any JavaScript runs (no empty hero, works without JS).
-import { readFile, rm, writeFile } from 'node:fs/promises'
+// Writes the server-rendered page into dist/index.html (English) and
+// dist/ru/index.html (Russian), so content is in the HTML before any JS runs.
+import { mkdir, readFile, rm, writeFile } from 'node:fs/promises'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
-const { render } = await import(pathToFileURL(`${root}dist-ssr/entry-server.js`).href)
+const { render, meta } = await import(pathToFileURL(`${root}dist-ssr/entry-server.js`).href)
 
-const file = `${root}dist/index.html`
-const html = await readFile(file, 'utf8')
+const template = await readFile(`${root}dist/index.html`, 'utf8')
 const marker = '<div id="root"></div>'
-if (!html.includes(marker)) throw new Error('Root marker not found in dist/index.html')
+if (!template.includes(marker)) throw new Error('Root marker not found in dist/index.html')
 
-await writeFile(file, html.replace(marker, `<div id="root">${render()}</div>`))
+const escape = (s) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;')
+
+for (const [lang, out] of [['en', 'dist/index.html'], ['ru', 'dist/ru/index.html']]) {
+  const m = meta(lang)
+  const html = template
+    .replace('<html lang="en">', `<html lang="${lang}">`)
+    .replace(/<title>.*?<\/title>/, `<title>${escape(m.title)}</title>`)
+    .replace(
+      /<meta name="description" content=".*?" \/>/,
+      `<meta name="description" content="${escape(m.description)}" />\n    <link rel="alternate" hreflang="en" href="/" />\n    <link rel="alternate" hreflang="ru" href="/ru/" />`
+    )
+    .replace(marker, `<div id="root">${render(lang)}</div>`)
+  if (lang === 'ru') await mkdir(`${root}dist/ru`, { recursive: true })
+  await writeFile(`${root}${out}`, html)
+  console.log(`prerendered ${out}`)
+}
+
 await rm(`${root}dist-ssr`, { recursive: true, force: true })
-console.log('prerendered dist/index.html')

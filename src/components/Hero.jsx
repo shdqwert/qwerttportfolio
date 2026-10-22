@@ -1,11 +1,13 @@
 import { useRef } from 'react'
-import { hero, images, owner } from '../content/portfolio.js'
+import { useT } from '../content/i18n.jsx'
+import { images } from '../content/shared.js'
 import { clamp, useReducedMotion, useScrollProgress } from '../lib/motion.js'
 import BrowserFrame from './BrowserFrame.jsx'
 import { ConnectLink } from './ConnectContext.jsx'
 import PixelMark from './PixelMark.jsx'
 
 export default function Hero() {
+  const { hero, owner } = useT()
   const reduced = useReducedMotion()
   const areaRef = useRef(null)
   const previewRef = useRef(null)
@@ -66,7 +68,7 @@ export default function Hero() {
                 src={img.src}
                 width={img.w}
                 height={img.h}
-                alt="qwerttclients home page: search for restaurants, salons, hotels and sports with available times"
+                alt={hero.previewAlt}
                 fetchPriority="high"
                 decoding="async"
                 className="hero__img"
@@ -76,7 +78,7 @@ export default function Hero() {
         </div>
         <p className="hero__tag hero__tag--right" ref={(el) => (tagRefs.current[1] = el)}>
           {hero.taglineRight[0]} <span aria-hidden="true" className="hero__swap">↔</span>
-          <span className="sr-only"> and </span> {hero.taglineRight[1]}
+          <span className="sr-only"> {hero.and} </span> {hero.taglineRight[1]}
         </p>
       </div>
     </section>

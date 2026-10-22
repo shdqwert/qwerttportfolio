@@ -184,14 +184,17 @@ a.flink:hover { color: var(--paper); }
 .site-header__meta { display: flex; align-items: center; gap: 20px; font-size: 14px; font-weight: 600; }
 .status { display: flex; align-items: center; gap: 8px; }
 .status__dot { width: 7px; height: 7px; border-radius: 50%; background: var(--ok); }
+.lang { display: flex; gap: 6px; }
 .lang__on { text-decoration: underline; }
-.lang__off { color: var(--stone); cursor: help; }
+.lang__off { color: var(--stone); text-decoration: none; transition: color var(--d-fast); }
+.lang__off:hover { color: var(--ink); }
 
 .site-header.is-inverted { background: var(--ink); color: var(--paper); }
 .site-header.is-inverted .navlink { color: var(--paper); }
 .site-header.is-inverted .navlink:hover,
 .site-header.is-inverted .navlink.is-active { background: var(--paper); color: var(--ink); }
 .site-header.is-inverted .lang__off { color: var(--ash); }
+.site-header.is-inverted .lang__off:hover { color: var(--paper); }
 
 /* ==========================================================================
    Pixel mark (F5)
@@ -256,8 +259,9 @@ a.flink:hover { color: var(--paper); }
 .hero__tag { font-weight: 600; text-align: left; }
 .hero__tag--left { grid-column: 1; grid-row: 1; margin-top: 96px; font-size: 22px; line-height: 1.05; letter-spacing: -.06em; }
 .hero__tag--right {
-  grid-column: 3; grid-row: 1; justify-self: end; margin-top: 120px;
-  font-size: 14px; display: flex; gap: 8px; align-items: center; white-space: nowrap;
+  grid-column: 3; grid-row: 1; justify-self: end; margin-top: 120px; padding-left: 24px;
+  font-size: 14px; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 4px 8px; align-items: center;
+  text-align: right;
 }
 .hero__swap { border: 1.5px solid var(--ink); border-radius: var(--r-pill); padding: 0 6px; font-size: 11px; }
 

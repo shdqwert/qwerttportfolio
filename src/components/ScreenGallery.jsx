@@ -1,9 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { images } from '../content/portfolio.js'
+import { useT } from '../content/i18n.jsx'
+import { images } from '../content/shared.js'
 import { useDialog } from '../lib/dialog.js'
 import { useReveal } from '../lib/motion.js'
 
 function Lightbox({ screens, index, onClose, onMove }) {
+  const { ui } = useT()
   const panelRef = useRef(null)
   const closeRef = useRef(null)
   const scrollRef = useRef(null)
@@ -25,7 +27,7 @@ function Lightbox({ screens, index, onClose, onMove }) {
   const s = screens[index]
   const im = images[s.img]
   return (
-    <div className="lightbox" role="dialog" aria-modal="true" aria-label={`Screen ${index + 1} of ${screens.length}: ${s.caption}`}>
+    <div className="lightbox" role="dialog" aria-modal="true" aria-label={ui.screenOf(index + 1, screens.length, s.caption)}>
       <div className="lightbox__backdrop" onClick={onClose} />
       <div className="lightbox__panel" ref={panelRef}>
         <div className="lightbox__bar">
@@ -33,12 +35,12 @@ function Lightbox({ screens, index, onClose, onMove }) {
             {String(index + 1).padStart(2, '0')} / {String(screens.length).padStart(2, '0')} · {s.caption}
           </span>
           <div className="lightbox__actions">
-            <button type="button" className="btn-small" onClick={() => onMove(-1)} aria-label="Previous screen">←</button>
-            <button type="button" className="btn-small" onClick={() => onMove(1)} aria-label="Next screen">→</button>
-            <button type="button" className="btn-small" onClick={onClose} ref={closeRef}>Close ✕</button>
+            <button type="button" className="btn-small" onClick={() => onMove(-1)} aria-label={ui.prevScreen}>←</button>
+            <button type="button" className="btn-small" onClick={() => onMove(1)} aria-label={ui.nextScreen}>→</button>
+            <button type="button" className="btn-small" onClick={onClose} ref={closeRef}>{ui.close}</button>
           </div>
         </div>
-        <div className="lightbox__scroll" ref={scrollRef} tabIndex={0} aria-label="Full screenshot, scrollable">
+        <div className="lightbox__scroll" ref={scrollRef} tabIndex={0} aria-label={ui.fullScreenshot}>
           <img src={im.src} width={im.w} height={im.h} alt={s.alt} decoding="async" />
         </div>
       </div>
@@ -48,6 +50,7 @@ function Lightbox({ screens, index, onClose, onMove }) {
 
 // Three real screens; click opens a full-length lightbox.
 export default function ScreenGallery({ screens, caption, dark }) {
+  const { ui } = useT()
   const [open, setOpen] = useState(null)
   const [ref, cls] = useReveal({ threshold: 0.15 })
   const close = useCallback(() => setOpen(null), [])
@@ -60,9 +63,9 @@ export default function ScreenGallery({ screens, caption, dark }) {
           const im = images[s.img]
           return (
             <figure className="screen" key={s.caption} style={{ '--i': i }}>
-              <button type="button" className={`shot screen__shot${dark ? ' is-dark' : ''}`} onClick={() => setOpen(i)} aria-label={`View screen: ${s.caption}`}>
+              <button type="button" className={`shot screen__shot${dark ? ' is-dark' : ''}`} onClick={() => setOpen(i)} aria-label={ui.viewScreenLabel + s.caption}>
                 <img src={im.src} width={im.w} height={im.h} alt={s.alt} loading="lazy" decoding="async" />
-                <span className="screen__view" aria-hidden="true">View screen</span>
+                <span className="screen__view" aria-hidden="true">{ui.viewScreen}</span>
               </button>
               <figcaption className="mono screen__caption">{s.caption}</figcaption>
             </figure>

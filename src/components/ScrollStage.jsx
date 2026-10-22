@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { images } from '../content/portfolio.js'
+import { useT } from '../content/i18n.jsx'
+import { images } from '../content/shared.js'
 import { NARROW, clamp, onScrollFrame, useMediaQuery, useReducedMotion } from '../lib/motion.js'
 import BrowserFrame from './BrowserFrame.jsx'
 
@@ -27,6 +28,7 @@ function MouseIcon({ dark }) {
 // F1 / F2 — pinned, scroll-linked product walkthrough. The page scrolls
 // natively; the stage is position: sticky and only reads scroll progress.
 export default function ScrollStage({ stage, dark = false }) {
+  const { ui } = useT()
   const reduced = useReducedMotion()
   const narrow = useMediaQuery(NARROW)
   const segments = useMemo(() => toSegments(stage.chapters), [stage.chapters])
@@ -179,9 +181,9 @@ export default function ScrollStage({ stage, dark = false }) {
           <div className="stage__hint">
             <MouseIcon dark={dark} />
             <span>
-              Keep scrolling — the site moves,
+              {ui.keepScrolling[0]}
               <br />
-              the page stays.
+              {ui.keepScrolling[1]}
             </span>
           </div>
         </div>

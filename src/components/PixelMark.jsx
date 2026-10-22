@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { marks } from '../content/portfolio.js'
+import { marks } from '../content/shared.js'
 import { prefersReduced, useReveal } from '../lib/motion.js'
 
 const cellsOf = (name) => marks[name].join('').split('').map((c) => c === '1')

@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
-import { compare, images } from '../content/portfolio.js'
+import { useT } from '../content/i18n.jsx'
+import { images } from '../content/shared.js'
 import { clamp, prefersReduced } from '../lib/motion.js'
 
 const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2)
 
 // F3 — design canvas (clipped layer) over the live build.
 export default function CompareSlider() {
+  const { compare } = useT()
   const [pos, setPos] = useState(54)
   const boxRef = useRef(null)
   const touched = useRef(false)
@@ -74,8 +76,8 @@ export default function CompareSlider() {
     setPos(clamp(next, 0, 100))
   }
 
-  const design = images[compare.design]
-  const built = images[compare.built]
+  const design = images.qcDesignTop
+  const built = images.qcBuiltTop
   const value = Math.round(pos)
 
   return (
@@ -100,25 +102,25 @@ export default function CompareSlider() {
         onPointerUp={() => (dragging.current = false)}
         onPointerCancel={() => (dragging.current = false)}
       >
-        <img className="compare__built" src={built.src} width={built.w} height={built.h} alt="qwerttclients home page running as the live React app" loading="lazy" decoding="async" draggable="false" />
-        <img className="compare__design" src={design.src} width={design.w} height={design.h} alt="The same qwerttclients home page as a design canvas" loading="lazy" decoding="async" draggable="false" />
+        <img className="compare__built" src={built.src} width={built.w} height={built.h} alt={compare.builtAlt} loading="lazy" decoding="async" draggable="false" />
+        <img className="compare__design" src={design.src} width={design.w} height={design.h} alt={compare.designAlt} loading="lazy" decoding="async" draggable="false" />
         <div className="compare__line" aria-hidden="true" />
         <div
           className="compare__handle"
           role="slider"
           tabIndex={0}
-          aria-label="Compare design and live build"
+          aria-label={compare.aria}
           aria-valuemin={0}
           aria-valuemax={100}
           aria-valuenow={value}
-          aria-valuetext={`${value}% design`}
+          aria-valuetext={compare.valueText(value)}
           onKeyDown={onKeyDown}
         >
           <svg width="10" height="16" viewBox="0 0 10 16" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M8 2 2 8l6 6" /></svg>
           <svg width="10" height="16" viewBox="0 0 10 16" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="m2 2 6 6-6 6" /></svg>
         </div>
-        <span className="mono compare__tag compare__tag--design">Design · canvas</span>
-        <span className="mono compare__tag compare__tag--built">Live build · React + API</span>
+        <span className="mono compare__tag compare__tag--design">{compare.designTag}</span>
+        <span className="mono compare__tag compare__tag--built">{compare.builtTag}</span>
       </div>
     </div>
   )

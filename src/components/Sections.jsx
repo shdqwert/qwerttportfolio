@@ -1,5 +1,6 @@
 import { useId, useRef, useState } from 'react'
-import { about, contact, cssExcerpt, faq, links, owner, pricing, qcHelps, services, values } from '../content/portfolio.js'
+import { useT } from '../content/i18n.jsx'
+import { contactInfo, cssLines, links, stack } from '../content/shared.js'
 import { clamp, useReducedMotion, useReveal, useScrollProgress } from '../lib/motion.js'
 import { CopyEmail, LiveClock, MaybeLink } from './Common.jsx'
 import { ConnectLink } from './ConnectContext.jsx'
@@ -7,9 +8,10 @@ import InkSection from './InkSection.jsx'
 import PixelMark from './PixelMark.jsx'
 
 export function ValueColumns() {
+  const { values, ui } = useT()
   const [ref, cls] = useReveal({ threshold: 0.3 })
   return (
-    <section aria-label="What you get" className="wrap values-section">
+    <section aria-label={ui.whatYouGet} className="wrap values-section">
       <div className={`values ${cls}`} ref={ref}>
         {values.map((v, i) => (
           <div className="value rule-col" key={v.title} style={{ '--i': i }}>
@@ -24,11 +26,12 @@ export function ValueColumns() {
 }
 
 export function QcHelps() {
+  const { qcHelps } = useT()
   return (
     <>
-      <h3 className="h3 helps__title">How it helps</h3>
+      <h3 className="h3 helps__title">{qcHelps.title}</h3>
       <div className="panel">
-        <div className="mono muted">For clients</div>
+        <div className="mono muted">{qcHelps.clientsLabel}</div>
         <ul className="helps__list">
           {qcHelps.clients.map((t) => (
             <li key={t}>{t}</li>
@@ -36,7 +39,7 @@ export function QcHelps() {
         </ul>
       </div>
       <div className="panel panel--ink">
-        <div className="mono ash">For businesses</div>
+        <div className="mono ash">{qcHelps.businessesLabel}</div>
         <ul className="helps__list">
           {qcHelps.businesses.map((t) => (
             <li key={t}>{t}</li>
@@ -45,10 +48,11 @@ export function QcHelps() {
       </div>
       <div className="btn-row">
         <MaybeLink href={links.qwerttclientsCase} className="btn btn-ink">
-          Read the full case →{!links.qwerttclientsCase && <span className="btn__ph"> [case URL]</span>}
+          {qcHelps.readCase}
+          {!links.qwerttclientsCase && <span className="btn__ph"> {qcHelps.caseUrl}</span>}
         </MaybeLink>
         <MaybeLink href={links.qwerttclientsScreens} className="btn btn-line">
-          Open all 38 screens ↗
+          {qcHelps.allScreens}
         </MaybeLink>
       </div>
     </>
@@ -56,16 +60,18 @@ export function QcHelps() {
 }
 
 export function KinoAside() {
+  const { kinoAside: k } = useT()
   const [ref, cls] = useReveal({ threshold: 0.3 })
+  const lines = [{ c: k.comment }, ...cssLines]
   return (
     <>
       <div className="codecard">
         <div className="mono ash codecard__head">
-          <span>styles · from the live build</span>
-          <span>excerpt</span>
+          <span>{k.codeLabel}</span>
+          <span>{k.excerpt}</span>
         </div>
         <pre className={`codecard__pre ${cls}`} ref={ref}>
-          {cssExcerpt.map((line, i) => (
+          {lines.map((line, i) => (
             <span className={`codecard__line${typeof line === 'object' ? ' is-comment' : ''}`} key={i} style={{ '--i': i }}>
               {typeof line === 'object' ? line.c : line}
               {'\n'}
@@ -74,15 +80,15 @@ export function KinoAside() {
         </pre>
       </div>
       <div className="panel panel--paper">
-        <div className="mono muted">What this shows a client</div>
-        <p className="panel__lead">I can take a designer’s Figma file and ship it as a fast, maintainable app — and catch the bugs before your users do.</p>
+        <div className="mono muted">{k.clientLabel}</div>
+        <p className="panel__lead">{k.clientText}</p>
       </div>
       <div className="btn-row">
         <MaybeLink href={links.kinoqwerttLive} className="btn btn-paper">
-          Open live site ↗
+          {k.live}
         </MaybeLink>
         <MaybeLink href={links.kinoqwerttRepo} className="btn btn-ghost">
-          GitHub ↗
+          {k.repo}
         </MaybeLink>
       </div>
     </>
@@ -90,6 +96,7 @@ export function KinoAside() {
 }
 
 export function PricingCards({ compact = false }) {
+  const { pricing, services } = useT()
   const [ref, cls] = useReveal({ threshold: 0.2 })
   return (
     <div className={`pricing${compact ? ' pricing--compact' : ''} ${compact ? '' : cls}`} ref={compact ? undefined : ref}>
@@ -103,8 +110,8 @@ export function PricingCards({ compact = false }) {
           <div className="price__bottom">
             <span className="price__amount">{p.price}</span>
             {!compact && (
-              <ConnectLink className={`btn btn-sm ${p.ink ? 'btn-paper' : 'btn-line'}`} aria-label={`Discuss the ${p.name} package`}>
-                Discuss
+              <ConnectLink className={`btn btn-sm ${p.ink ? 'btn-paper' : 'btn-line'}`} aria-label={services.discussAria(p.name)}>
+                {services.discuss}
               </ConnectLink>
             )}
           </div>
@@ -144,6 +151,7 @@ function ScrubHeading({ text, className }) {
 }
 
 export function Services() {
+  const { services } = useT()
   const [ref, cls] = useReveal({ threshold: 0.3 })
   return (
     <section id="services" className="wrap section">
@@ -163,6 +171,7 @@ export function Services() {
 }
 
 export function About() {
+  const { about, owner } = useT()
   const reduced = useReducedMotion()
   const portraitRef = useRef(null)
   const sectionRef = useScrollProgress(
@@ -207,7 +216,7 @@ export function About() {
       <div className="stack">
         <div className="mono muted">{about.stackLabel}</div>
         <ul className="chips">
-          {about.stack.map((t) => (
+          {[...stack, about.stackEdit].map((t) => (
             <li className="chip" key={t}>
               {t}
             </li>
@@ -220,6 +229,7 @@ export function About() {
 
 // F11 — accordion, one item open at a time.
 export function FaqList({ items, initial = 0, compact = false }) {
+  const { ui } = useT()
   const [open, setOpen] = useState(initial)
   const base = useId()
   return (
@@ -231,7 +241,7 @@ export function FaqList({ items, initial = 0, compact = false }) {
             <h3 className="faq__h">
               <button type="button" className="faq__q" aria-expanded={isOpen} aria-controls={`${base}-${i}`} id={`${base}-q${i}`} onClick={() => setOpen(isOpen ? -1 : i)}>
                 <span>{f.q}</span>
-                <span className="mono muted faq__state">{isOpen ? 'Close −' : 'Open +'}</span>
+                <span className="mono muted faq__state">{isOpen ? ui.shut : ui.open}</span>
               </button>
             </h3>
             <div className="faq__a" id={`${base}-${i}`} role="region" aria-labelledby={`${base}-q${i}`} inert={!isOpen}>
@@ -247,6 +257,7 @@ export function FaqList({ items, initial = 0, compact = false }) {
 }
 
 export function Faq() {
+  const { faq } = useT()
   const [ref, cls] = useReveal({ threshold: 0.2 })
   return (
     <section aria-labelledby="faq-title" className="wrap section">
@@ -263,10 +274,11 @@ export function Faq() {
 }
 
 export function Contact() {
+  const { contact, owner, ui } = useT()
   const emailRef = useRef(null)
   const [ref, cls] = useReveal({ threshold: 0.3 })
   return (
-    <InkSection id="contact" className="contact-section" label="Contact">
+    <InkSection id="contact" className="contact-section" label={ui.contact}>
       <div className={`wrap contact ${cls}`} ref={ref}>
         <PixelMark shape="at" from="film" cell={12} />
         <p className="mono ash contact__motto">{contact.motto}</p>
@@ -280,19 +292,19 @@ export function Contact() {
           ))}
         </h2>
         <div className="contact__email-row">
-          <a href={`mailto:${owner.email}`} className="contact__email" ref={emailRef}>
-            {owner.email}
+          <a href={`mailto:${contactInfo.email}`} className="contact__email" ref={emailRef}>
+            {contactInfo.email}
           </a>
           <CopyEmail className="copy copy--paper" targetRef={emailRef} />
         </div>
         <div className="btn-row center">
           <ConnectLink className="btn btn-paper">{contact.cta}</ConnectLink>
           <MaybeLink href={links.telegram} className="btn btn-ghost">
-            Telegram {owner.telegram}
+            Telegram {contactInfo.telegram}
           </MaybeLink>
         </div>
         <div className="mono ash contact__time">
-          <LiveClock /> · usually replies within {owner.replyTime}
+          <LiveClock /> · {contact.replies} {owner.replyTime}
         </div>
       </div>
     </InkSection>
@@ -300,20 +312,28 @@ export function Contact() {
 }
 
 export function Footer() {
+  const { nav, footer, owner } = useT()
   const [ref, cls] = useReveal({ threshold: 0.1 })
   return (
     <footer className="ink footer-section" data-theme="ink">
       <div className={`wrap footer ${cls}`} ref={ref}>
         <div className="footer__cols">
-          <nav aria-label="Sitemap" className="footer__col">
-            <span className="footer__head">Sitemap</span>
-            <a className="flink" href="#work">Work</a>
-            <a className="flink" href="#services">Services</a>
-            <a className="flink" href="#about">About</a>
-            <ConnectLink className="flink">Connect</ConnectLink>
+          <nav aria-label={footer.sitemap} className="footer__col">
+            <span className="footer__head">{footer.sitemap}</span>
+            {nav.map((item) =>
+              item.href === '#connect' ? (
+                <ConnectLink key={item.id} className="flink">
+                  {item.label}
+                </ConnectLink>
+              ) : (
+                <a key={item.id} className="flink" href={item.href}>
+                  {item.label}
+                </a>
+              )
+            )}
           </nav>
-          <nav aria-label="Channels" className="footer__col footer__col--right">
-            <span className="footer__head">Channels</span>
+          <nav aria-label={footer.channels} className="footer__col footer__col--right">
+            <span className="footer__head">{footer.channels}</span>
             <MaybeLink className="flink" href={links.telegram}>Telegram</MaybeLink>
             <MaybeLink className="flink" href={links.github}>GitHub</MaybeLink>
             <MaybeLink className="flink" href={links.linkedin}>LinkedIn</MaybeLink>
@@ -323,12 +343,12 @@ export function Footer() {
         <div className="footer__bottom">
           <span>©2026</span>
           <span className="footer__legal">
-            <MaybeLink className="flink flink--sm" href={links.imprint}>Imprint</MaybeLink>
-            <MaybeLink className="flink flink--sm" href={links.privacy}>Privacy</MaybeLink>
+            <MaybeLink className="flink flink--sm" href={links.imprint}>{footer.imprint}</MaybeLink>
+            <MaybeLink className="flink flink--sm" href={links.privacy}>{footer.privacy}</MaybeLink>
           </span>
           <span className="footer__sign">
             <PixelMark shape="q" color="var(--paper)" cell={2} />
-            Crafted by {owner.name}
+            {footer.crafted} {owner.name}
           </span>
         </div>
       </div>

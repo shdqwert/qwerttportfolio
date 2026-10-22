@@ -185,7 +185,7 @@ a.flink:hover { color: var(--paper); }
 .status { display: flex; align-items: center; gap: 8px; }
 .status__dot { width: 7px; height: 7px; border-radius: 50%; background: var(--ok); }
 .lang__on { text-decoration: underline; }
-.lang__off { color: #8A857B; cursor: help; }
+.lang__off { color: var(--stone); cursor: help; }
 
 .site-header.is-inverted { background: var(--ink); color: var(--paper); }
 .site-header.is-inverted .navlink { color: var(--paper); }
@@ -288,7 +288,11 @@ a.flink:hover { color: var(--paper); }
   display: flex; align-items: center; gap: 6px; padding: 0 14px;
 }
 .browser__dot { width: 9px; height: 9px; border-radius: 50%; background: #CFC9BC; }
-.browser__url { margin: 0 auto; color: var(--stone); font-size: 11px; transform: translateX(-24px); }
+.browser__url {
+  flex: 1; min-width: 0; padding-right: 39px;
+  text-align: center; color: var(--stone); font-size: 11px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
 .browser__view { position: relative; flex: 1; min-height: 0; overflow: hidden; }
 .browser--dark { background: #0C0C0C; outline: 1px solid rgba(249, 244, 236, .1); }
 .browser--dark .browser__bar { background: #262522; }
@@ -525,7 +529,7 @@ a.flink:hover { color: var(--paper); }
 .stage__chapter {
   display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 8px;
   padding: 14px 0; border-top: 1px solid rgba(10, 10, 10, .14);
-  opacity: .45;
+  opacity: .62; /* design .45 raised to pass 4.5:1 */
   transition: opacity var(--d-ui) var(--ease-out);
 }
 .stage__chapter.is-active { opacity: 1; }

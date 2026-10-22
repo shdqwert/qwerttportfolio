@@ -99,10 +99,14 @@ export default function ScrollStage({ stage, dark = false }) {
         <ol className="stage-static__list">
           {stage.chapters.map((c, i) => {
             const im = images[c.img]
+            // Chapters sharing one long screenshot show successive parts of it.
+            const seg = segments.find((s) => i >= s.start && i <= s.end)
+            const len = seg.end - seg.start
+            const y = len ? Math.round(((i - seg.start) / len) * 60) : 0
             return (
               <li key={c.t} className="stage-static__item">
                 <BrowserFrame url={stage.url} dark={dark} className="stage-static__frame">
-                  <img src={im.src} width={im.w} height={im.h} alt={c.alt} loading="lazy" decoding="async" />
+                  <img src={im.src} width={im.w} height={im.h} alt={c.alt} loading="lazy" decoding="async" style={{ objectPosition: `center ${y}%` }} />
                 </BrowserFrame>
                 <div className="stage-static__text">
                   <span className="mono">{String(i + 1).padStart(2, '0')}</span>

@@ -121,10 +121,12 @@ function ScrubHeading({ text, className }) {
   const wordRefs = useRef([])
   const ref = useScrollProgress(
     (_, r, vh) => {
+      // Off-screen (or past) the heading stays fully opaque.
+      const offscreen = r.top > vh || r.bottom < 0
       const p = clamp((vh * 0.95 - r.top) / (vh * 0.45))
       const n = words.length
       wordRefs.current.forEach((el, i) => {
-        if (el) el.style.opacity = (0.2 + 0.8 * clamp(p * n - i)).toFixed(3)
+        if (el) el.style.opacity = offscreen ? '' : (0.2 + 0.8 * clamp(p * n - i)).toFixed(3)
       })
     },
     { enabled: !reduced }

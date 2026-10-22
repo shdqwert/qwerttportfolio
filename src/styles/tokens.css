@@ -1,0 +1,44 @@
+:root {
+  /* colour */
+  --paper: #F9F4EC;
+  --paper-2: #EDE8DE;
+  --ink: #0A0A0A;
+  --ink-2: #1A1917;
+  --ink-hover: #2A2926;
+  --stone: #5E5A52;
+  --ash: #9A958B;
+  --body-muted: #3B3833;
+  --body-muted-dark: #C8C3B8;
+  --accent: #FF47E7;
+  --ok: #1E9E5A;
+  --ok-term: #4ADE80;
+  --rule: rgba(10, 10, 10, .16);
+  --rule-dark: rgba(249, 244, 236, .18);
+
+  /* type */
+  --font-sans: "Inter Tight", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Consolas, monospace;
+  --track-tight: -0.04em;
+  --track-display: -0.085em;
+
+  /* layout */
+  --frame: 1440px;
+  --gutter: 32px;
+  --gap: 24px;
+  --section: 180px;
+  --header-h: 70px;
+  --r-pill: 999px;
+  --r-panel: 24px;
+  --r-card: 16px;
+  --r-shot: 12px;
+  --r-nav: 8px;
+
+  /* motion */
+  --ease-out: cubic-bezier(.2, .7, .2, 1);
+  --ease-in-out: cubic-bezier(.65, 0, .35, 1);
+  --ease-spring: cubic-bezier(.34, 1.56, .64, 1);
+  --d-fast: 200ms;
+  --d-ui: 350ms;
+  --d-reveal: 700ms;
+  --d-page: 1000ms;
+}

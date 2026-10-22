@@ -1,11 +1,11 @@
 {
-  "name": "portfolio-project",
+  "name": "qwerttportfolio",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && vite build --ssr src/entry-server.jsx --outDir dist-ssr && node scripts/prerender.js",
     "lint": "oxlint",
     "preview": "vite preview"
   },

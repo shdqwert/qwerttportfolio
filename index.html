@@ -4,29 +4,33 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>qwertt — Websites people love to use</title>
-    <meta name="description" content="Designer & frontend developer from Uzbekistan. Websites and web apps that turn visitors into clients — two real case studies: qwerttclients and kinoqwertt." />
-    <meta name="theme-color" content="#F9F4EC" />
+    <meta name="description" content="Designer & frontend developer from Uzbekistan. Websites and web apps that turn visitors into clients." />
+    <meta name="theme-color" content="#111110" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <script>
       try {
-        if (location.pathname === '/' && localStorage.getItem('lang') === 'ru') location.replace('/ru/' + location.hash)
+        if (location.pathname === '/' && localStorage.getItem('lang') === 'ru') location.replace('/ru/' + location.search + location.hash)
       } catch (e) {}
-      // First visit this session, motion allowed, no deep link → play the intro.
-      try {
+      (function () {
         var h = document.documentElement
-        if (!sessionStorage.getItem('introSeen') && !location.hash && !matchMedia('(prefers-reduced-motion: reduce)').matches && !/[?&]nointro/.test(location.search)) {
-          h.classList.add('intro-pending')
-          setTimeout(function () { h.classList.remove('intro-pending') }, 4000)
+        var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches
+        if (!reduce) {
+          h.classList.add('js-motion')
+          // safety: never leave content hidden if the app fails to boot
+          setTimeout(function () { if (!window.__motionReady) h.classList.remove('js-motion') }, 2500)
         }
-      } catch (e) {}
+        try {
+          var home = /^\/(ru\/?)?$/.test(location.pathname)
+          if (home && !reduce && !sessionStorage.getItem('introSeen') && !location.hash && !/[?&]nointro/.test(location.search)) {
+            h.classList.add('intro-pending')
+            setTimeout(function () { h.classList.remove('intro-pending') }, 4000)
+          }
+        } catch (e) {}
+      })()
     </script>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" />
-    <link rel="preload" as="image" href="/work/qwerttclients-home.jpg" fetchpriority="high" />
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

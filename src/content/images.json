@@ -1,0 +1,1292 @@
+{
+ "dark/d-business": {
+  "src": "/assets/dark/d-business.jpg",
+  "w": 1200,
+  "h": 750,
+  "avif": [
+   {
+    "w": 640,
+    "src": "/assets/opt/dark/d-business-640.avif"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/dark/d-business-1200.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 640,
+    "src": "/assets/opt/dark/d-business-640.webp"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/dark/d-business-1200.webp"
+   }
+  ]
+ },
+ "dark/d-flow-amber": {
+  "src": "/assets/dark/d-flow-amber.jpg",
+  "w": 960,
+  "h": 600,
+  "avif": [
+   {
+    "w": 640,
+    "src": "/assets/opt/dark/d-flow-amber-640.avif"
+   },
+   {
+    "w": 960,
+    "src": "/assets/opt/dark/d-flow-amber-960.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 640,
+    "src": "/assets/opt/dark/d-flow-amber-640.webp"
+   },
+   {
+    "w": 960,
+    "src": "/assets/opt/dark/d-flow-amber-960.webp"
+   }
+  ]
+ },
+ "dark/d-flow-blue-room-jazz-night": {
+  "src": "/assets/dark/d-flow-blue-room-jazz-night.jpg",
+  "w": 960,
+  "h": 600,
+  "avif": [
+   {
+    "w": 640,
+    "src": "/assets/opt/dark/d-flow-blue-room-jazz-night-640.avif"
+   },
+   {
+    "w": 960,
+    "src": "/assets/opt/dark/d-flow-blue-room-jazz-night-960.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 640,
+    "src": "/assets/opt/dark/d-flow-blue-room-jazz-night-640.webp"
+   },
+   {
+    "w": 960,
+    "src": "/assets/opt/dark/d-flow-blue-room-jazz-night-960.webp"
+   }
+  ]
+ },
+ "dark/d-flow-merion-hotel": {
+  "src": "/assets/dark/d-flow-merion-hotel.jpg",
+  "w": 960,
+  "h": 600,
+  "avif": [
+   {
+    "w": 640,
+    "src": "/assets/opt/dark/d-flow-merion-hotel-640.avif"
+   },
+   {
+    "w": 960,
+    "src": "/assets/opt/dark/d-flow-merion-hotel-960.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 640,
+    "src": "/assets/opt/dark/d-flow-merion-hotel-640.webp"
+   },
+   {
+    "w": 960,
+    "src": "/assets/opt/dark/d-flow-merion-hotel-960.webp"
+   }
+  ]
+ },
+ "dark/d-flow-riverside-sports-club": {
+  "src": "/assets/dark/d-flow-riverside-sports-club.jpg",
+  "w": 960,
+  "h": 600,
+  "avif": [
+   {
+    "w": 640,
+    "src": "/assets/opt/dark/d-flow-riverside-sports-club-640.avif"
+   },
+   {
+    "w": 960,
+    "src": "/assets/opt/dark/d-flow-riverside-sports-club-960.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 640,
+    "src": "/assets/opt/dark/d-flow-riverside-sports-club-640.webp"
+   },
+   {
+    "w": 960,
+    "src": "/assets/opt/dark/d-flow-riverside-sports-club-960.webp"
+   }
+  ]
+ },
+ "dark/d-flow-studio-noir": {
+  "src": "/assets/dark/d-flow-studio-noir.jpg",
+  "w": 960,
+  "h": 600,
+  "avif": [
+   {
+    "w": 640,
+    "src": "/assets/opt/dark/d-flow-studio-noir-640.avif"
+   },
+   {
+    "w": 960,
+    "src": "/assets/opt/dark/d-flow-studio-noir-960.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 640,
+    "src": "/assets/opt/dark/d-flow-studio-noir-640.webp"
+   },
+   {
+    "w": 960,
+    "src": "/assets/opt/dark/d-flow-studio-noir-960.webp"
+   }
+  ]
+ },
+ "dark/d-home-top": {
+  "src": "/assets/dark/d-home-top.jpg",
+  "w": 1200,
+  "h": 550,
+  "avif": [
+   {
+    "w": 640,
+    "src": "/assets/opt/dark/d-home-top-640.avif"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/dark/d-home-top-1200.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 640,
+    "src": "/assets/opt/dark/d-home-top-640.webp"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/dark/d-home-top-1200.webp"
+   }
+  ]
+ },
+ "dark/d-home": {
+  "src": "/assets/dark/d-home.jpg",
+  "w": 1200,
+  "h": 1975,
+  "avif": [
+   {
+    "w": 640,
+    "src": "/assets/opt/dark/d-home-640.avif"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/dark/d-home-1200.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 640,
+    "src": "/assets/opt/dark/d-home-640.webp"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/dark/d-home-1200.webp"
+   }
+  ]
+ },
+ "dark/d-place": {
+  "src": "/assets/dark/d-place.jpg",
+  "w": 1200,
+  "h": 1924,
+  "avif": [
+   {
+    "w": 640,
+    "src": "/assets/opt/dark/d-place-640.avif"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/dark/d-place-1200.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 640,
+    "src": "/assets/opt/dark/d-place-640.webp"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/dark/d-place-1200.webp"
+   }
+  ]
+ },
+ "dark/d-search": {
+  "src": "/assets/dark/d-search.jpg",
+  "w": 1200,
+  "h": 1354,
+  "avif": [
+   {
+    "w": 640,
+    "src": "/assets/opt/dark/d-search-640.avif"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/dark/d-search-1200.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 640,
+    "src": "/assets/opt/dark/d-search-640.webp"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/dark/d-search-1200.webp"
+   }
+  ]
+ },
+ "lab/dune-bg": {
+  "src": "/assets/lab/dune-bg.jpg",
+  "w": 655,
+  "h": 482,
+  "avif": [
+   {
+    "w": 640,
+    "src": "/assets/opt/lab/dune-bg-640.avif"
+   },
+   {
+    "w": 655,
+    "src": "/assets/opt/lab/dune-bg-655.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 640,
+    "src": "/assets/opt/lab/dune-bg-640.webp"
+   },
+   {
+    "w": 655,
+    "src": "/assets/opt/lab/dune-bg-655.webp"
+   }
+  ]
+ },
+ "lab/dune-poster": {
+  "src": "/assets/lab/dune-poster.jpg",
+  "w": 591,
+  "h": 863,
+  "avif": [
+   {
+    "w": 591,
+    "src": "/assets/opt/lab/dune-poster-591.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 591,
+    "src": "/assets/opt/lab/dune-poster-591.webp"
+   }
+  ]
+ },
+ "lab/incep-bg": {
+  "src": "/assets/lab/incep-bg.jpg",
+  "w": 1280,
+  "h": 720,
+  "avif": [
+   {
+    "w": 640,
+    "src": "/assets/opt/lab/incep-bg-640.avif"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/lab/incep-bg-1200.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 640,
+    "src": "/assets/opt/lab/incep-bg-640.webp"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/lab/incep-bg-1200.webp"
+   }
+  ]
+ },
+ "lab/incep-poster": {
+  "src": "/assets/lab/incep-poster.jpg",
+  "w": 227,
+  "h": 341,
+  "avif": [
+   {
+    "w": 227,
+    "src": "/assets/opt/lab/incep-poster-227.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 227,
+    "src": "/assets/opt/lab/incep-poster-227.webp"
+   }
+  ]
+ },
+ "lab/inter-bg": {
+  "src": "/assets/lab/inter-bg.jpg",
+  "w": 1280,
+  "h": 720,
+  "avif": [
+   {
+    "w": 640,
+    "src": "/assets/opt/lab/inter-bg-640.avif"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/lab/inter-bg-1200.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 640,
+    "src": "/assets/opt/lab/inter-bg-640.webp"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/lab/inter-bg-1200.webp"
+   }
+  ]
+ },
+ "lab/inter-poster": {
+  "src": "/assets/lab/inter-poster.jpg",
+  "w": 227,
+  "h": 338,
+  "avif": [
+   {
+    "w": 227,
+    "src": "/assets/opt/lab/inter-poster-227.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 227,
+    "src": "/assets/opt/lab/inter-poster-227.webp"
+   }
+  ]
+ },
+ "lab/pixel-r2": {
+  "src": "/assets/lab/pixel-r2.png",
+  "w": 640,
+  "h": 420,
+  "avif": [
+   {
+    "w": 640,
+    "src": "/assets/opt/lab/pixel-r2-640.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 640,
+    "src": "/assets/opt/lab/pixel-r2-640.webp"
+   }
+  ]
+ },
+ "photos/b1-big": {
+  "src": "/assets/photos/b1-big.jpg",
+  "w": 1200,
+  "h": 800,
+  "avif": [
+   {
+    "w": 640,
+    "src": "/assets/opt/photos/b1-big-640.avif"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/photos/b1-big-1200.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 640,
+    "src": "/assets/opt/photos/b1-big-640.webp"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/photos/b1-big-1200.webp"
+   }
+  ]
+ },
+ "photos/b4-s": {
+  "src": "/assets/photos/b4-s.jpg",
+  "w": 560,
+  "h": 373,
+  "avif": [
+   {
+    "w": 560,
+    "src": "/assets/opt/photos/b4-s-560.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 560,
+    "src": "/assets/opt/photos/b4-s-560.webp"
+   }
+  ]
+ },
+ "photos/c1-s": {
+  "src": "/assets/photos/c1-s.jpg",
+  "w": 560,
+  "h": 373,
+  "avif": [
+   {
+    "w": 560,
+    "src": "/assets/opt/photos/c1-s-560.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 560,
+    "src": "/assets/opt/photos/c1-s-560.webp"
+   }
+  ]
+ },
+ "photos/c3-s": {
+  "src": "/assets/photos/c3-s.jpg",
+  "w": 560,
+  "h": 373,
+  "avif": [
+   {
+    "w": 560,
+    "src": "/assets/opt/photos/c3-s-560.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 560,
+    "src": "/assets/opt/photos/c3-s-560.webp"
+   }
+  ]
+ },
+ "photos/f3-s": {
+  "src": "/assets/photos/f3-s.jpg",
+  "w": 560,
+  "h": 373,
+  "avif": [
+   {
+    "w": 560,
+    "src": "/assets/opt/photos/f3-s-560.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 560,
+    "src": "/assets/opt/photos/f3-s-560.webp"
+   }
+  ]
+ },
+ "photos/h2-s": {
+  "src": "/assets/photos/h2-s.jpg",
+  "w": 560,
+  "h": 373,
+  "avif": [
+   {
+    "w": 560,
+    "src": "/assets/opt/photos/h2-s-560.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 560,
+    "src": "/assets/opt/photos/h2-s-560.webp"
+   }
+  ]
+ },
+ "photos/ho2-big": {
+  "src": "/assets/photos/ho2-big.jpg",
+  "w": 1200,
+  "h": 800,
+  "avif": [
+   {
+    "w": 640,
+    "src": "/assets/opt/photos/ho2-big-640.avif"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/photos/ho2-big-1200.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 640,
+    "src": "/assets/opt/photos/ho2-big-640.webp"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/photos/ho2-big-1200.webp"
+   }
+  ]
+ },
+ "photos/ho3-s": {
+  "src": "/assets/photos/ho3-s.jpg",
+  "w": 560,
+  "h": 373,
+  "avif": [
+   {
+    "w": 560,
+    "src": "/assets/opt/photos/ho3-s-560.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 560,
+    "src": "/assets/opt/photos/ho3-s-560.webp"
+   }
+  ]
+ },
+ "photos/j1-s": {
+  "src": "/assets/photos/j1-s.jpg",
+  "w": 560,
+  "h": 373,
+  "avif": [
+   {
+    "w": 560,
+    "src": "/assets/opt/photos/j1-s-560.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 560,
+    "src": "/assets/opt/photos/j1-s-560.webp"
+   }
+  ]
+ },
+ "photos/j2-big": {
+  "src": "/assets/photos/j2-big.jpg",
+  "w": 1200,
+  "h": 800,
+  "avif": [
+   {
+    "w": 640,
+    "src": "/assets/opt/photos/j2-big-640.avif"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/photos/j2-big-1200.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 640,
+    "src": "/assets/opt/photos/j2-big-640.webp"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/photos/j2-big-1200.webp"
+   }
+  ]
+ },
+ "photos/p1-s": {
+  "src": "/assets/photos/p1-s.jpg",
+  "w": 560,
+  "h": 373,
+  "avif": [
+   {
+    "w": 560,
+    "src": "/assets/opt/photos/p1-s-560.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 560,
+    "src": "/assets/opt/photos/p1-s-560.webp"
+   }
+  ]
+ },
+ "photos/r2-big": {
+  "src": "/assets/photos/r2-big.jpg",
+  "w": 1200,
+  "h": 800,
+  "avif": [
+   {
+    "w": 640,
+    "src": "/assets/opt/photos/r2-big-640.avif"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/photos/r2-big-1200.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 640,
+    "src": "/assets/opt/photos/r2-big-640.webp"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/photos/r2-big-1200.webp"
+   }
+  ]
+ },
+ "photos/r4-s": {
+  "src": "/assets/photos/r4-s.jpg",
+  "w": 560,
+  "h": 373,
+  "avif": [
+   {
+    "w": 560,
+    "src": "/assets/opt/photos/r4-s-560.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 560,
+    "src": "/assets/opt/photos/r4-s-560.webp"
+   }
+  ]
+ },
+ "photos/r5-s": {
+  "src": "/assets/photos/r5-s.jpg",
+  "w": 560,
+  "h": 373,
+  "avif": [
+   {
+    "w": 560,
+    "src": "/assets/opt/photos/r5-s-560.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 560,
+    "src": "/assets/opt/photos/r5-s-560.webp"
+   }
+  ]
+ },
+ "photos/s1-s": {
+  "src": "/assets/photos/s1-s.jpg",
+  "w": 560,
+  "h": 373,
+  "avif": [
+   {
+    "w": 560,
+    "src": "/assets/opt/photos/s1-s-560.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 560,
+    "src": "/assets/opt/photos/s1-s-560.webp"
+   }
+  ]
+ },
+ "photos/sp1-s": {
+  "src": "/assets/photos/sp1-s.jpg",
+  "w": 560,
+  "h": 373,
+  "avif": [
+   {
+    "w": 560,
+    "src": "/assets/opt/photos/sp1-s-560.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 560,
+    "src": "/assets/opt/photos/sp1-s-560.webp"
+   }
+  ]
+ },
+ "photos/sp3-s": {
+  "src": "/assets/photos/sp3-s.jpg",
+  "w": 560,
+  "h": 373,
+  "avif": [
+   {
+    "w": 560,
+    "src": "/assets/opt/photos/sp3-s-560.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 560,
+    "src": "/assets/opt/photos/sp3-s-560.webp"
+   }
+  ]
+ },
+ "photos/t1-big": {
+  "src": "/assets/photos/t1-big.jpg",
+  "w": 1200,
+  "h": 800,
+  "avif": [
+   {
+    "w": 640,
+    "src": "/assets/opt/photos/t1-big-640.avif"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/photos/t1-big-1200.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 640,
+    "src": "/assets/opt/photos/t1-big-640.webp"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/photos/t1-big-1200.webp"
+   }
+  ]
+ },
+ "photos/t2-s": {
+  "src": "/assets/photos/t2-s.jpg",
+  "w": 560,
+  "h": 373,
+  "avif": [
+   {
+    "w": 560,
+    "src": "/assets/opt/photos/t2-s-560.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 560,
+    "src": "/assets/opt/photos/t2-s-560.webp"
+   }
+  ]
+ },
+ "photos/w3-s": {
+  "src": "/assets/photos/w3-s.jpg",
+  "w": 560,
+  "h": 373,
+  "avif": [
+   {
+    "w": 560,
+    "src": "/assets/opt/photos/w3-s-560.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 560,
+    "src": "/assets/opt/photos/w3-s-560.webp"
+   }
+  ]
+ },
+ "photos/y3-s": {
+  "src": "/assets/photos/y3-s.jpg",
+  "w": 560,
+  "h": 373,
+  "avif": [
+   {
+    "w": 560,
+    "src": "/assets/opt/photos/y3-s-560.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 560,
+    "src": "/assets/opt/photos/y3-s-560.webp"
+   }
+  ]
+ },
+ "renders/flow-amber": {
+  "src": "/assets/renders/flow-amber.jpg",
+  "w": 960,
+  "h": 600,
+  "avif": [
+   {
+    "w": 640,
+    "src": "/assets/opt/renders/flow-amber-640.avif"
+   },
+   {
+    "w": 960,
+    "src": "/assets/opt/renders/flow-amber-960.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 640,
+    "src": "/assets/opt/renders/flow-amber-640.webp"
+   },
+   {
+    "w": 960,
+    "src": "/assets/opt/renders/flow-amber-960.webp"
+   }
+  ]
+ },
+ "renders/flow-blue-room-jazz-night": {
+  "src": "/assets/renders/flow-blue-room-jazz-night.jpg",
+  "w": 960,
+  "h": 600,
+  "avif": [
+   {
+    "w": 640,
+    "src": "/assets/opt/renders/flow-blue-room-jazz-night-640.avif"
+   },
+   {
+    "w": 960,
+    "src": "/assets/opt/renders/flow-blue-room-jazz-night-960.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 640,
+    "src": "/assets/opt/renders/flow-blue-room-jazz-night-640.webp"
+   },
+   {
+    "w": 960,
+    "src": "/assets/opt/renders/flow-blue-room-jazz-night-960.webp"
+   }
+  ]
+ },
+ "renders/flow-merion-hotel": {
+  "src": "/assets/renders/flow-merion-hotel.jpg",
+  "w": 960,
+  "h": 600,
+  "avif": [
+   {
+    "w": 640,
+    "src": "/assets/opt/renders/flow-merion-hotel-640.avif"
+   },
+   {
+    "w": 960,
+    "src": "/assets/opt/renders/flow-merion-hotel-960.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 640,
+    "src": "/assets/opt/renders/flow-merion-hotel-640.webp"
+   },
+   {
+    "w": 960,
+    "src": "/assets/opt/renders/flow-merion-hotel-960.webp"
+   }
+  ]
+ },
+ "renders/flow-riverside-sports-club": {
+  "src": "/assets/renders/flow-riverside-sports-club.jpg",
+  "w": 960,
+  "h": 600,
+  "avif": [
+   {
+    "w": 640,
+    "src": "/assets/opt/renders/flow-riverside-sports-club-640.avif"
+   },
+   {
+    "w": 960,
+    "src": "/assets/opt/renders/flow-riverside-sports-club-960.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 640,
+    "src": "/assets/opt/renders/flow-riverside-sports-club-640.webp"
+   },
+   {
+    "w": 960,
+    "src": "/assets/opt/renders/flow-riverside-sports-club-960.webp"
+   }
+  ]
+ },
+ "renders/flow-studio-noir": {
+  "src": "/assets/renders/flow-studio-noir.jpg",
+  "w": 960,
+  "h": 547,
+  "avif": [
+   {
+    "w": 640,
+    "src": "/assets/opt/renders/flow-studio-noir-640.avif"
+   },
+   {
+    "w": 960,
+    "src": "/assets/opt/renders/flow-studio-noir-960.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 640,
+    "src": "/assets/opt/renders/flow-studio-noir-640.webp"
+   },
+   {
+    "w": 960,
+    "src": "/assets/opt/renders/flow-studio-noir-960.webp"
+   }
+  ]
+ },
+ "renders/home-dark": {
+  "src": "/assets/renders/home-dark.jpg",
+  "w": 1200,
+  "h": 1975,
+  "avif": [
+   {
+    "w": 640,
+    "src": "/assets/opt/renders/home-dark-640.avif"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/renders/home-dark-1200.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 640,
+    "src": "/assets/opt/renders/home-dark-640.webp"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/renders/home-dark-1200.webp"
+   }
+  ]
+ },
+ "renders/home-ru": {
+  "src": "/assets/renders/home-ru.jpg",
+  "w": 1200,
+  "h": 750,
+  "avif": [
+   {
+    "w": 640,
+    "src": "/assets/opt/renders/home-ru-640.avif"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/renders/home-ru-1200.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 640,
+    "src": "/assets/opt/renders/home-ru-640.webp"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/renders/home-ru-1200.webp"
+   }
+  ]
+ },
+ "renders/home-uz": {
+  "src": "/assets/renders/home-uz.jpg",
+  "w": 1200,
+  "h": 750,
+  "avif": [
+   {
+    "w": 640,
+    "src": "/assets/opt/renders/home-uz-640.avif"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/renders/home-uz-1200.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 640,
+    "src": "/assets/opt/renders/home-uz-640.webp"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/renders/home-uz-1200.webp"
+   }
+  ]
+ },
+ "renders/place-dark-ru": {
+  "src": "/assets/renders/place-dark-ru.jpg",
+  "w": 1200,
+  "h": 750,
+  "avif": [
+   {
+    "w": 640,
+    "src": "/assets/opt/renders/place-dark-ru-640.avif"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/renders/place-dark-ru-1200.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 640,
+    "src": "/assets/opt/renders/place-dark-ru-640.webp"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/renders/place-dark-ru-1200.webp"
+   }
+  ]
+ },
+ "shots/kinoqwertt-home": {
+  "src": "/assets/shots/kinoqwertt-home.jpg",
+  "w": 1200,
+  "h": 5211,
+  "avif": [
+   {
+    "w": 640,
+    "src": "/assets/opt/shots/kinoqwertt-home-640.avif"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/shots/kinoqwertt-home-1200.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 640,
+    "src": "/assets/opt/shots/kinoqwertt-home-640.webp"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/shots/kinoqwertt-home-1200.webp"
+   }
+  ]
+ },
+ "shots/kinoqwertt-title-dune2": {
+  "src": "/assets/shots/kinoqwertt-title-dune2.jpg",
+  "w": 1200,
+  "h": 5962,
+  "avif": [
+   {
+    "w": 640,
+    "src": "/assets/opt/shots/kinoqwertt-title-dune2-640.avif"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/shots/kinoqwertt-title-dune2-1200.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 640,
+    "src": "/assets/opt/shots/kinoqwertt-title-dune2-640.webp"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/shots/kinoqwertt-title-dune2-1200.webp"
+   }
+  ]
+ },
+ "shots/kinoqwertt-top250": {
+  "src": "/assets/shots/kinoqwertt-top250.jpg",
+  "w": 1200,
+  "h": 2500,
+  "avif": [
+   {
+    "w": 640,
+    "src": "/assets/opt/shots/kinoqwertt-top250-640.avif"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/shots/kinoqwertt-top250-1200.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 640,
+    "src": "/assets/opt/shots/kinoqwertt-top250-640.webp"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/shots/kinoqwertt-top250-1200.webp"
+   }
+  ]
+ },
+ "shots/qwerttclients-booking-barber": {
+  "src": "/assets/shots/qwerttclients-booking-barber.jpg",
+  "w": 1200,
+  "h": 683,
+  "avif": [
+   {
+    "w": 640,
+    "src": "/assets/opt/shots/qwerttclients-booking-barber-640.avif"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/shots/qwerttclients-booking-barber-1200.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 640,
+    "src": "/assets/opt/shots/qwerttclients-booking-barber-640.webp"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/shots/qwerttclients-booking-barber-1200.webp"
+   }
+  ]
+ },
+ "shots/qwerttclients-built-top": {
+  "src": "/assets/shots/qwerttclients-built-top.jpg",
+  "w": 1200,
+  "h": 550,
+  "avif": [
+   {
+    "w": 640,
+    "src": "/assets/opt/shots/qwerttclients-built-top-640.avif"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/shots/qwerttclients-built-top-1200.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 640,
+    "src": "/assets/opt/shots/qwerttclients-built-top-640.webp"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/shots/qwerttclients-built-top-1200.webp"
+   }
+  ]
+ },
+ "shots/qwerttclients-business": {
+  "src": "/assets/shots/qwerttclients-business.jpg",
+  "w": 1200,
+  "h": 817,
+  "avif": [
+   {
+    "w": 640,
+    "src": "/assets/opt/shots/qwerttclients-business-640.avif"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/shots/qwerttclients-business-1200.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 640,
+    "src": "/assets/opt/shots/qwerttclients-business-640.webp"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/shots/qwerttclients-business-1200.webp"
+   }
+  ]
+ },
+ "shots/qwerttclients-design-top": {
+  "src": "/assets/shots/qwerttclients-design-top.jpg",
+  "w": 1200,
+  "h": 550,
+  "avif": [
+   {
+    "w": 640,
+    "src": "/assets/opt/shots/qwerttclients-design-top-640.avif"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/shots/qwerttclients-design-top-1200.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 640,
+    "src": "/assets/opt/shots/qwerttclients-design-top-640.webp"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/shots/qwerttclients-design-top-1200.webp"
+   }
+  ]
+ },
+ "shots/qwerttclients-home": {
+  "src": "/assets/shots/qwerttclients-home.jpg",
+  "w": 1200,
+  "h": 1975,
+  "avif": [
+   {
+    "w": 640,
+    "src": "/assets/opt/shots/qwerttclients-home-640.avif"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/shots/qwerttclients-home-1200.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 640,
+    "src": "/assets/opt/shots/qwerttclients-home-640.webp"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/shots/qwerttclients-home-1200.webp"
+   }
+  ]
+ },
+ "shots/qwerttclients-intro": {
+  "src": "/assets/shots/qwerttclients-intro.jpg",
+  "w": 1200,
+  "h": 750,
+  "avif": [
+   {
+    "w": 640,
+    "src": "/assets/opt/shots/qwerttclients-intro-640.avif"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/shots/qwerttclients-intro-1200.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 640,
+    "src": "/assets/opt/shots/qwerttclients-intro-640.webp"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/shots/qwerttclients-intro-1200.webp"
+   }
+  ]
+ },
+ "shots/qwerttclients-place-amber": {
+  "src": "/assets/shots/qwerttclients-place-amber.jpg",
+  "w": 1200,
+  "h": 1924,
+  "avif": [
+   {
+    "w": 640,
+    "src": "/assets/opt/shots/qwerttclients-place-amber-640.avif"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/shots/qwerttclients-place-amber-1200.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 640,
+    "src": "/assets/opt/shots/qwerttclients-place-amber-640.webp"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/shots/qwerttclients-place-amber-1200.webp"
+   }
+  ]
+ },
+ "shots/qwerttclients-search": {
+  "src": "/assets/shots/qwerttclients-search.jpg",
+  "w": 1200,
+  "h": 1354,
+  "avif": [
+   {
+    "w": 640,
+    "src": "/assets/opt/shots/qwerttclients-search-640.avif"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/shots/qwerttclients-search-1200.avif"
+   }
+  ],
+  "webp": [
+   {
+    "w": 640,
+    "src": "/assets/opt/shots/qwerttclients-search-640.webp"
+   },
+   {
+    "w": 1200,
+    "src": "/assets/opt/shots/qwerttclients-search-1200.webp"
+   }
+  ]
+ }
+}

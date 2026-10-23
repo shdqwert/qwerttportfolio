@@ -1,0 +1,66 @@
+.browser { display: flex; flex-direction: column; background: var(--qc-bg); border-radius: var(--r-shot); overflow: hidden; }
+.bar { height: 34px; flex: none; background: #E9E5DC; display: flex; align-items: center; gap: 6px; padding: 0 14px; }
+.dot { width: 9px; height: 9px; border-radius: 50%; background: #CFC9BC; }
+.url { flex: 1; min-width: 0; text-align: center; padding-right: 39px; color: var(--stone); font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.view { position: relative; flex: 1; min-height: 0; overflow: hidden; }
+.browserDark { outline: 1px solid rgba(236, 232, 223, .1); }
+.browserDark .bar { background: #262522; height: 38px; }
+.browserDark .dot { background: #45433E; width: 10px; height: 10px; }
+.browserDark .url { color: var(--ash); }
+
+.sheen {
+  position: absolute; inset: 0; pointer-events: none; z-index: 2;
+  background: linear-gradient(120deg, transparent 32%, rgba(255, 255, 255, .16) 50%, transparent 68%);
+  transform: translateX(-130%);
+}
+
+.pricing { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 96px; }
+.price { position: relative; overflow: hidden; background: var(--paper-2); border-radius: var(--r-card); padding: 28px; display: flex; flex-direction: column; gap: 12px; min-height: 300px; transition: transform var(--d-ui) var(--ease-out); }
+.price:hover { transform: translateY(-6px); }
+.priceInk { background: var(--ink); color: var(--paper); }
+@media (prefers-reduced-motion: no-preference) {
+  .priceInk::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1.5px var(--accent); opacity: 0; animation: glow 3.2s ease-in-out infinite; pointer-events: none; }
+}
+@keyframes glow { 50% { opacity: .75; } }
+.priceTop { display: flex; justify-content: space-between; gap: 12px; }
+.priceName { font: 600 34px/1 var(--font-display); letter-spacing: var(--track); }
+.weeks { color: var(--stone); white-space: nowrap; }
+.priceInk .weeks { color: var(--ash); }
+.priceText { font-size: 16px; color: var(--body-muted); letter-spacing: -.02em; }
+.priceInk .priceText { color: var(--body-muted-dark); }
+.priceBottom { margin-top: auto; display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; }
+.amount { font: 600 30px/1 var(--font-display); letter-spacing: var(--track); }
+.pricingCompact { grid-template-columns: 1fr; margin-top: 0; gap: 12px; }
+.pricingCompact .price { min-height: 0; padding: 22px 24px; gap: 10px; }
+
+.faq { border-top: 1px solid var(--rule); }
+.faqDark { border-top-color: var(--rule-dark); }
+.item { border-bottom: 1px solid var(--rule); }
+.faqDark .item { border-bottom-color: var(--rule-dark); }
+.h { font: inherit; }
+.q { width: 100%; padding: 22px 0; display: flex; justify-content: space-between; align-items: center; gap: 24px; background: none; border: 0; cursor: pointer; text-align: left; font: 600 22px/1.25 var(--font-sans); letter-spacing: var(--track); }
+.state { flex: none; }
+.a { overflow: hidden; }
+.item:not(.isOpen) .a { height: 0; visibility: hidden; }
+.state { display: inline-block; }
+.a p { max-width: 720px; padding-bottom: 22px; margin-top: -10px; font-size: 16px; line-height: 1.5; letter-spacing: -.02em; color: var(--body-muted); }
+.faqCompact .q { padding: 13px 0; font-size: 16px; }
+.faqCompact .a p { font-size: 14px; padding-bottom: 14px; margin-top: -4px; }
+
+.h3 { margin-bottom: 28px; font-size: clamp(38px, 3.33vw, 48px); line-height: .95; }
+.numrow { position: relative; display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 12px; padding: 18px 0; }
+.numrow:last-child { border-bottom: 1px solid var(--rule); }
+.numRule { position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--rule); }
+.numlistDark .numRule { background: var(--rule-dark); }
+.numlistDark .numrow:last-child { border-bottom-color: var(--rule-dark); }
+.numNo { color: var(--stone); padding-top: 4px; }
+.numlistDark .numNo { color: var(--ash); }
+.numTitle { font-size: 20px; font-weight: 600; letter-spacing: var(--track); }
+.numText { margin-top: 6px; font-size: 15px; line-height: 1.45; letter-spacing: -.02em; color: var(--body-muted); }
+.numlistDark .numText { color: var(--body-muted-dark); }
+
+@media (max-width: 1023px) {
+  .pricing { grid-template-columns: minmax(0, 1fr); }
+}
+
+.numlist { position: relative; }

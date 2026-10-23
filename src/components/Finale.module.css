@@ -1,0 +1,51 @@
+.finale { position: relative; text-align: left; isolation: isolate; }
+/* L4 — stage lighting: vignette + a soft spotlight that follows the moving line */
+.vignette {
+  position: absolute; inset: -120px -32px; z-index: -1; pointer-events: none;
+  background: radial-gradient(ellipse at 50% 40%, transparent 45%, var(--shade));
+}
+.spot {
+  position: absolute; left: 50%; top: 0; z-index: -1;
+  width: 900px; height: 300px; margin-left: -450px;
+  background: radial-gradient(closest-side, rgba(255, 186, 120, .12), transparent);
+  pointer-events: none;
+}
+:global(.light-off) .vignette, :global(.light-off) .spot, :global(.light-off) .bloom, :global(.light-off) .rim { display: none; }
+
+.call { display: flex; align-items: center; gap: 12px; color: var(--paper); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; }
+.callDot { position: relative; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+@media (prefers-reduced-motion: no-preference) {
+  .callDot::after { content: ""; position: absolute; inset: -5px; border-radius: 50%; border: 2px solid var(--accent); animation: ring 2.4s ease-out infinite; }
+}
+@keyframes ring { from { transform: scale(.5); opacity: .9; } to { transform: scale(1.5); opacity: 0; } }
+.sep { color: var(--ash); }
+.flap { color: var(--accent); text-shadow: 0 0 12px var(--light-signal); min-width: 12ch; }
+
+.fin { position: relative; display: block; margin-top: 40px; color: var(--paper); text-decoration: none; }
+.fin:focus-visible { outline-offset: 8px; }
+.head {
+  display: flex; flex-direction: column; gap: 6px;
+  font: 600 clamp(72px, 9.44vw, 136px)/.95 var(--font-display); letter-spacing: var(--track);
+}
+.line { display: flex; align-items: center; gap: 28px; white-space: nowrap; will-change: transform; }
+.note { font-size: 13px; letter-spacing: .02em; color: var(--ash); max-width: 130px; line-height: 1.4; white-space: normal; }
+.win {
+  position: relative; flex: none; border-radius: 12px; overflow: hidden;
+  box-shadow: 0 24px 50px -18px rgba(0, 0, 0, .7);
+}
+.win img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.win picture:not(:first-child) img { visibility: hidden; opacity: 0; }
+.tag {
+  position: absolute; left: 8px; bottom: 8px; z-index: 2;
+  padding: 4px 7px; border-radius: 5px; background: var(--accent); color: var(--ink);
+  font-size: 10px; line-height: 1; letter-spacing: .08em; text-transform: uppercase;
+}
+.rim { position: absolute; inset: 0; border-radius: 12px; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .12); z-index: 1; }
+.bloom { position: absolute; left: 10%; right: 10%; bottom: -30px; height: 40px; z-index: -1; background: radial-gradient(closest-side, rgba(255, 140, 80, .35), transparent); opacity: 0; }
+.arrowWrap { display: inline-flex; }
+.arrow path { stroke-dasharray: 240; }
+
+@media (max-width: 1023px) {
+  .line { flex-wrap: wrap; white-space: normal; padding-left: 0 !important; gap: 14px; }
+  .win { width: 160px !important; height: 80px !important; }
+}

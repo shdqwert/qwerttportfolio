@@ -1,0 +1,13 @@
+.gate {
+  position: fixed; inset: 0; z-index: 220;
+  background: var(--ink); color: var(--paper);
+  display: flex; align-items: center; justify-content: center;
+  visibility: hidden; opacity: 0;
+  pointer-events: none;
+}
+.holes {
+  position: absolute; left: 0; right: 0; top: -7px; height: 14px;
+  background-image: radial-gradient(circle, var(--paper) 0 5px, transparent 5.5px);
+  background-size: 22px 14px; background-position: center;
+}
+.label { font-size: 14px; letter-spacing: .14em; color: var(--paper); }

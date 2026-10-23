@@ -1,0 +1,7 @@
+.roll { display: inline-block; height: 1.15em; overflow: hidden; line-height: 1.15; vertical-align: middle; }
+.chars { display: inline-flex; }
+.col { display: inline-flex; flex-direction: column; }
+@media (prefers-reduced-motion: no-preference) {
+  .col { transition: transform 350ms var(--ease-out); transition-delay: calc(var(--i) * 12ms); }
+  :global(a:hover) .col, :global(a:focus-visible) .col, :global(button:hover) .col, :global(button:focus-visible) .col { transform: translateY(-50%); }
+}

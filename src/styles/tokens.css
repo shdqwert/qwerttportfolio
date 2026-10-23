@@ -1,32 +1,55 @@
 :root {
-  /* colour */
-  --paper: #F9F4EC;
-  --paper-2: #EDE8DE;
-  --ink: #0A0A0A;
+  /* colour — v3 ticket identity */
+  --paper: #ECE8DF;
+  --paper-2: #DEDAD0;
+  --paper-3: #E2DDD0;
+  --ink: #111110;
   --ink-2: #1A1917;
+  --ink-3: #141412;
   --ink-hover: #2A2926;
   --stone: #5E5A52;
   --ash: #9A958B;
   --body-muted: #3B3833;
   --body-muted-dark: #C8C3B8;
-  --accent: #FF47E7;
+  --accent: #FF4F1F;
+  --accent-ink: #B5340E; /* signal orange dark enough for small text on paper */
   --ok: #1E9E5A;
   --ok-term: #4ADE80;
   --rule: rgba(10, 10, 10, .16);
-  --rule-dark: rgba(249, 244, 236, .18);
+  --rule-dark: rgba(236, 232, 223, .18);
+
+  /* qwerttclients night theme (the app's own tokens) */
+  --qc-ink: #DEE4EA;
+  --qc-ink-2: #B6C2CF;
+  --qc-ink-3: #8C9BAB;
+  --qc-bg: #161A1D;
+  --qc-surface: #1D2125;
+  --qc-surface-2: #22272B;
+  --qc-line: #2C333A;
+  --qc-line-strong: #454F59;
+  --qc-accent: #579DFF;
+  --qc-accent-hover: #85B8FF;
+  --qc-accent-press: #CCE0FF;
+  --qc-accent-tint: #1C2B41;
+  --qc-success: #4BCE97;
+  --qc-success-tint: #164B35;
+  --qc-warn: #E2B203;
+  --qc-warn-tint: #533F04;
+  --qc-danger: #F87168;
+  --qc-danger-tint: #5D1F1A;
 
   /* type */
-  --font-sans: "Inter Tight", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Barlow Condensed", "Roboto Condensed", "Arial Narrow", sans-serif;
+  --font-sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Consolas, monospace;
-  --track-tight: -0.04em;
-  --track-display: -0.085em;
+  --track: -0.01em;
 
   /* layout */
   --frame: 1440px;
   --gutter: 32px;
   --gap: 24px;
   --section: 180px;
-  --header-h: 70px;
+  --header-h: 88px;
   --r-pill: 999px;
   --r-panel: 24px;
   --r-card: 16px;
@@ -36,9 +59,18 @@
   /* motion */
   --ease-out: cubic-bezier(.2, .7, .2, 1);
   --ease-in-out: cubic-bezier(.65, 0, .35, 1);
-  --ease-spring: cubic-bezier(.34, 1.56, .64, 1);
-  --d-fast: 200ms;
-  --d-ui: 350ms;
-  --d-reveal: 700ms;
-  --d-page: 1000ms;
+  --ease-snap: cubic-bezier(.3, 1.4, .5, 1);
+  --d-micro: 160ms;
+  --d-ui: 320ms;
+  --d-reveal: 800ms;
+  --d-open: 1000ms;
+  --d-page: 1100ms;
+  --stagger: 70ms;
+  --rise: 24px;
+
+  /* light */
+  --light-warm: rgba(255, 186, 120, .10);
+  --light-signal: rgba(255, 79, 31, .16);
+  --light-white: rgba(255, 255, 255, .07);
+  --shade: rgba(0, 0, 0, .55);
 }

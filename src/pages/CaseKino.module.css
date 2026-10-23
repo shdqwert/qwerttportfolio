@@ -1,0 +1,48 @@
+.page { background: var(--ink); color: var(--paper); }
+.hero { position: relative; overflow: hidden; }
+.heroIn { position: relative; height: max(860px, 100vh); }
+.beam { position: absolute; left: -10%; top: -10%; width: 70%; height: 120%; pointer-events: none; background: conic-gradient(from 120deg at 0% 0%, transparent 0deg, rgba(255, 236, 200, .12) 18deg, transparent 40deg); opacity: .35; }
+.beam i { position: absolute; width: 3px; height: 3px; border-radius: 50%; background: rgba(255, 236, 200, .8); }
+@media (prefers-reduced-motion: no-preference) { .beam i { animation: dust 12s linear infinite; } }
+@keyframes dust { to { transform: translate(60px, -90px); opacity: 0; } }
+:global(.light-off) .beam { display: none; }
+@media (prefers-reduced-motion: reduce) { .beam { display: none; } }
+.kicker { position: absolute; left: var(--gutter); top: 120px; display: flex; align-items: center; gap: 10px; }
+.h1 { position: absolute; left: var(--gutter); top: 150px; font-size: clamp(96px, 11.67vw, 168px); line-height: .86; }
+.tagline { position: absolute; left: 212px; top: 430px; font-size: 24px; line-height: 1.05; font-weight: 600; display: flex; flex-direction: column; }
+.heroMedia { position: absolute; right: var(--gutter); bottom: 60px; width: min(760px, 55%); aspect-ratio: 760 / 475; border-radius: 14px; overflow: hidden; background: var(--ink-3); box-shadow: 0 40px 80px -30px rgba(0, 0, 0, .9); outline: 1px solid rgba(249, 244, 236, .1); }
+.heroMedia img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.viewSite { position: absolute; left: 212px; bottom: 60px; display: inline-flex; align-items: center; height: 48px; border-radius: 999px; background: var(--paper); color: var(--ink); text-decoration: none; overflow: hidden; width: 300px; }
+.viewLabel { flex: none; padding: 0 18px; font-size: 15px; font-weight: 600; border-right: 1px solid rgba(10, 10, 10, .2); height: 100%; display: flex; align-items: center; }
+.viewMarquee { flex: 1; min-width: 0; color: var(--stone); padding-left: 14px; }
+.viewUrl { padding-right: 6px; white-space: nowrap; }
+
+.detail { padding-top: 60px; padding-bottom: 160px; display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 64px; align-items: start; }
+.media { display: flex; flex-direction: column; gap: 24px; }
+.panel { margin: 0; position: relative; background: var(--ink-2); border-radius: 16px; padding: 56px 64px; }
+.no { position: absolute; right: 20px; top: 18px; }
+.shot { border-radius: 10px; overflow: hidden; background: #0C0C0C; }
+.shot img { width: 100%; height: 100%; object-fit: cover; }
+.cap { position: absolute; left: 20px; bottom: 18px; }
+.aside { position: sticky; top: 96px; display: flex; flex-direction: column; gap: 26px; }
+.summary { font-size: 21px; line-height: 1.25; font-weight: 600; }
+.body { font-size: 16px; line-height: 1.5; color: var(--body-muted-dark); }
+.asideTitle { font: 600 18px/1.2 var(--font-sans); letter-spacing: -.02em; margin-bottom: 10px; }
+.credit { display: flex; justify-content: space-between; gap: 12px; padding: 9px 0; border-top: 1px solid rgba(249, 244, 236, .14); font-size: 15px; color: var(--body-muted-dark); transition: color .4s; }
+.credit > :last-child { font-weight: 600; text-align: right; }
+.creditOn { color: var(--paper); }
+@media (prefers-reduced-motion: reduce) { .credit { opacity: 1; } }
+.code { background: var(--ink-3); border-radius: 12px; padding: 16px 18px; outline: 1px solid rgba(249, 244, 236, .1); }
+.pre { margin: 10px 0 0; font: 12.5px/1.65 var(--font-mono); letter-spacing: 0; color: #E8E3D8; white-space: pre; display: flex; flex-direction: column; }
+.fixed li { display: flex; gap: 8px; padding: 9px 0; border-top: 1px solid rgba(249, 244, 236, .14); font-size: 14px; line-height: 1.45; color: var(--body-muted-dark); }
+.fixed li:last-child { border-bottom: 1px solid rgba(249, 244, 236, .14); }
+.tick { color: var(--ok-term); }
+
+@media (max-width: 1023px) {
+  .heroIn { height: auto; padding: 140px var(--gutter) 60px; display: flex; flex-direction: column; gap: 24px; }
+  .kicker, .h1, .tagline, .heroMedia, .viewSite { position: relative; left: auto; top: auto; right: auto; bottom: auto; }
+  .heroMedia { width: 100%; }
+  .detail { grid-template-columns: minmax(0, 1fr); }
+  .aside { position: static; }
+  .panel { padding: 40px 20px; }
+}

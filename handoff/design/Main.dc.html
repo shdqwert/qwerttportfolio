@@ -1,0 +1,629 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>qwertt — Portfolio home</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Barlow+Condensed:wght@500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;family=Inter:wght@400;500;600;700&amp;family=Bebas+Neue&amp;display=swap">
+<style>
+h1,h2,h3{font-family:'Barlow Condensed',sans-serif}
+body{margin:0;background:#ECE8DF}
+a{color:#111110}a:hover{color:#5E5A52}
+.mono{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.02em;font-weight:500}
+.btn{display:inline-flex;align-items:center;gap:10px;height:48px;padding:0 22px;border-radius:999px;font:600 15px/1 'IBM Plex Sans',sans-serif;letter-spacing:-.005em;text-decoration:none;transition:background .3s,color .3s,transform .35s cubic-bezier(.2,.7,.2,1);box-sizing:border-box}
+.btn:focus-visible,.navlink:focus-visible,.flink:focus-visible,.copy:focus-visible{outline:2px solid #FF4F1F;outline-offset:3px}
+.btn-ink{background:#111110;color:#ECE8DF}.btn-ink:hover{background:#2A2926;color:#ECE8DF;transform:translateY(-2px)}
+.btn-line{border:1.5px solid #111110;color:#111110}.btn-line:hover{background:#111110;color:#ECE8DF}
+.btn-paper{background:#ECE8DF;color:#111110}.btn-paper:hover{background:#FFFFFF;color:#111110;transform:translateY(-2px)}
+.btn-ghost{border:1.5px solid rgba(249,244,236,.35);color:#ECE8DF}.btn-ghost:hover{background:#ECE8DF;color:#111110}
+.navlink{display:inline-flex;align-items:center;height:30px;padding:0 10px;border-radius:8px;font:600 14px/1 'IBM Plex Sans',sans-serif;letter-spacing:-.005em;color:#111110;text-decoration:none;transition:background .25s,color .25s}
+.navlink:hover{background:#ECE8DF;color:#111110}
+.shot{border-radius:12px;overflow:hidden;outline:1px solid rgba(10,10,10,.1);transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.shot:hover{transform:translateY(-6px)}
+.flink{color:#9A958B;text-decoration:none;font:600 20px/1.6 'IBM Plex Sans',sans-serif;letter-spacing:-.005em}
+.flink:hover{color:#ECE8DF}
+.copy{height:30px;padding:0 12px;border-radius:8px;border:none;background:#111110;color:#ECE8DF;font:500 12px 'JetBrains Mono',monospace;cursor:pointer}
+
+/* ===== DEPARTURE FINALE + TERMINAL FOOTER (shared on every page) ===== */
+.fx{--fx-d:10s}
+.fx .fl{animation:fx-in var(--fx-d) cubic-bezier(.2,.7,.2,1) infinite both}
+.fx .fl.l{--from:-140px}.fx .fl.r{--from:160px}
+.fx .fl:nth-child(2){animation-delay:.12s}.fx .fl:nth-child(3){animation-delay:.24s}.fx .fl:nth-child(4){animation-delay:.36s}
+@keyframes fx-in{0%{transform:translateX(var(--from));opacity:.25}22%,92%{transform:none;opacity:1}100%{transform:none;opacity:0}}
+.fx .win{position:relative;flex:none;border-radius:12px;overflow:hidden;animation:fx-open var(--fx-d) cubic-bezier(.65,0,.35,1) infinite both;box-shadow:0 24px 50px -18px rgba(0,0,0,.7)}
+.fx .fl:nth-child(3) .win{animation-delay:.35s}
+@keyframes fx-open{0%,6%{clip-path:inset(0 50% 0 50% round 12px);transform:rotate(0) scale(.9)}26%,92%{clip-path:inset(0 0 0 0 round 12px);transform:rotate(var(--tilt,-3deg)) scale(1)}100%{clip-path:inset(0 0 0 0 round 12px);transform:rotate(var(--tilt,-3deg)) scale(1);opacity:0}}
+.fx .win img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--pos,top);display:block;opacity:0;animation:fx-cyc var(--fx-d) linear infinite}
+.fx .win img:nth-child(1){animation-delay:0s}.fx .win img:nth-child(2){animation-delay:calc(var(--fx-d) / -3 * 2)}.fx .win img:nth-child(3){animation-delay:calc(var(--fx-d) / -3)}
+@keyframes fx-cyc{0%{opacity:1;transform:scale(1.12) translateY(0)}30%{opacity:1;transform:scale(1) translateY(-4%)}33.3%,100%{opacity:0;transform:scale(1) translateY(-4%)}}
+.fx .win[data-tag="next"] img{opacity:1;animation:none}
+.fx .win::after{content:attr(data-tag);position:absolute;left:8px;bottom:8px;padding:4px 7px;border-radius:5px;background:#FF4F1F;color:#111110;font:500 10px/1 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase}
+.fx .arw path{stroke-dasharray:240;animation:fx-draw var(--fx-d) ease-out infinite both;animation-delay:.6s}
+@keyframes fx-draw{0%,20%{stroke-dashoffset:240}40%,100%{stroke-dashoffset:0}}
+.fx a.fin:hover .win{transform:rotate(0) scale(1.05)}
+.fx a.fin:hover .arw{transform:translateX(14px)}.fx .arw{transition:transform .4s cubic-bezier(.2,.7,.2,1)}
+.fx .flap{display:inline-block;height:1.2em;overflow:hidden;vertical-align:bottom}
+.fx .flap>span{display:flex;flex-direction:column;animation:fx-flap 7.5s steps(1) infinite}
+@keyframes fx-flap{0%{transform:translateY(0)}20%{transform:translateY(-1.2em)}40%{transform:translateY(-2.4em)}60%{transform:translateY(-3.6em)}80%{transform:translateY(-4.8em)}}
+.fx .tick{display:flex;width:max-content;animation:fx-tick 32s linear infinite}
+@keyframes fx-tick{to{transform:translateX(-50%)}}
+.fx .deal{position:absolute;inset:0 0 8px 0;border-radius:14px;background:#ECE8DF;color:#111110;padding:10px;box-sizing:border-box;display:flex;flex-direction:column;gap:10px;box-shadow:0 30px 60px -20px rgba(0,0,0,.8);animation:fx-deal 9s cubic-bezier(.65,0,.35,1) infinite both}
+.fx .deal:nth-child(2){animation-delay:-3s}.fx .deal:nth-child(3){animation-delay:-6s}
+@keyframes fx-deal{0%{transform:translate(0,0) rotate(-1.5deg);z-index:3}28%{transform:translate(0,0) rotate(-1.5deg);z-index:3}36%{transform:translate(260px,-40px) rotate(14deg);z-index:3}37%{z-index:1}45%{transform:translate(8px,14px) rotate(6deg);z-index:1}66%{transform:translate(4px,8px) rotate(-4deg);z-index:2}100%{transform:translate(0,0) rotate(-1.5deg);z-index:3}}
+.fx .word span{display:inline-block;animation:fx-rise var(--fx-d) cubic-bezier(.2,.7,.2,1) infinite both}
+@keyframes fx-rise{0%,8%{transform:translateY(60%);opacity:0}30%,100%{transform:none;opacity:1}}
+.fx .holes{background-image:radial-gradient(circle,#111110 0 5px,transparent 5.5px);background-size:22px 14px;background-position:center;height:14px}
+.fx .flink2{color:#9A958B;text-decoration:none;font:600 15px/1.7 'IBM Plex Sans',sans-serif}.fx .flink2:hover{color:#FF4F1F}
+.fx .fbtn{display:inline-flex;align-items:center;gap:10px;height:48px;padding:0 22px;border-radius:999px;font:600 15px/1 'IBM Plex Sans',sans-serif;text-decoration:none;background:#ECE8DF;color:#111110;transition:background .3s,transform .35s}
+.fx .fbtn:hover{background:#FF4F1F;color:#111110;transform:translateY(-2px)}
+.fx a:focus-visible{outline:2px solid #FF4F1F;outline-offset:3px}
+@media (prefers-reduced-motion: reduce){.fx *{animation:none !important}.fx .win img:first-child{opacity:1}}
+</style>
+</helmet>
+<div style="width: 100%; background: #ECE8DF; color: #111110; font-family: 'IBM Plex Sans', sans-serif; letter-spacing: -0.01em; overflow: hidden">
+
+<!-- NAV: boarding-pass strip -->
+
+
+<!-- HERO -->
+<header style="max-width: 1440px; margin: 0 auto; padding: 18px 32px; box-sizing: border-box">
+<div style="display: flex; align-items: stretch; height: 52px; background: #111110; color: #ECE8DF; border-radius: 10px; overflow: hidden; position: relative">
+<a href="#top" aria-label="qwertt — home" style="display: flex; align-items: center; gap: 10px; padding: 0 18px; text-decoration: none; color: #ECE8DF; border-right: 2px dashed rgba(236,232,223,.25)"><span aria-hidden="true" style="display: inline-grid; grid-template-columns: repeat(7, 4px); grid-auto-rows: 4px; gap: 1px"><sc-for list="{{markLight}}" as="c" hint-placeholder-count="49"><span style="background: {{c.bg}}; border-radius: 50%"></span></sc-for></span><span style="font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 700; letter-spacing: .01em">QWERTT</span></a>
+<nav aria-label="Main" style="display: flex; align-items: center; gap: 2px; padding: 0 10px; flex: 1">
+<a class="navlink" href="#work" aria-current="page" style="background: #FF4F1F; color: #111110">Work</a>
+<a class="navlink" href="#services" style="color: #ECE8DF">Services</a>
+<a class="navlink" href="#about" style="color: #ECE8DF">About</a>
+<a class="navlink" href="Lab.dc.html" style="color: #ECE8DF">Lab</a>
+<a class="navlink" href="Connect.dc.html" style="color: #ECE8DF">Connect</a>
+</nav>
+<div class="mono" style="display: flex; align-items: center; gap: 18px; padding: 0 18px; border-left: 2px dashed rgba(236,232,223,.25); color: #9A958B"><span>GATE <b style="color: #ECE8DF">GMT+5</b></span><span>STATUS <b style="color: #4ADE80">BOARDING [Q1 2027]</b></span><span><b style="color: #ECE8DF; text-decoration: underline">EN</b> RU</span></div>
+<span aria-hidden="true" style="position: absolute; left: -9px; top: 17px; width: 18px; height: 18px; border-radius: 50%; background: #ECE8DF"></span>
+<span aria-hidden="true" style="position: absolute; right: -9px; top: 17px; width: 18px; height: 18px; border-radius: 50%; background: #ECE8DF"></span>
+</div>
+</header><section id="top" style="position: relative; max-width: 1440px; margin: 0 auto; padding: 36px 32px 0; box-sizing: border-box; text-align: center">
+<h1 style="font-family: 'Barlow Condensed', sans-serif; margin: 0; font-size: 112px; line-height: 0.92; font-weight: 600; letter-spacing: -0.01em">Websites people<br>love to use.</h1>
+<div aria-hidden="true" style="display: inline-grid; grid-template-columns: repeat(7, 9px); grid-auto-rows: 9px; margin-top: 44px">
+<sc-for list="{{mark}}" as="c" hint-placeholder-count="49"><span style="background: {{c.bg}}; border-radius: 50%"></span></sc-for>
+</div>
+<p style="margin: 28px 0 0; font-size: 14px; font-weight: 600; color: #5E5A52; letter-spacing: -0.03em">[Your Name] · Designer &amp; Frontend Developer</p>
+<p style="margin: 18px auto 0; max-width: 560px; font-size: 20px; line-height: 1.3; font-weight: 600; letter-spacing: -0.01em">I design and build websites and web apps that turn visitors into clients — clear, fast and crafted down to the last detail.</p>
+<div style="display: flex; justify-content: center; gap: 10px; margin-top: 28px">
+<a class="btn btn-ink" href="#work">See two case studies ↓</a>
+<a class="btn btn-line" href="Connect.dc.html">Start a project</a>
+</div>
+<div class="shot" style="width: 880px; height: 557px; margin: 64px auto 0; background: #161A1D; box-shadow: 0 40px 80px -50px rgba(10,10,10,.5); display: flex; flex-direction: column">
+<div style="height: 34px; flex: none; background: #E9E5DC; display: flex; align-items: center; gap: 6px; padding: 0 14px"><span style="width: 9px; height: 9px; border-radius: 50%; background: #CFC9BC"></span><span style="width: 9px; height: 9px; border-radius: 50%; background: #CFC9BC"></span><span style="width: 9px; height: 9px; border-radius: 50%; background: #CFC9BC"></span><span class="mono" style="margin: 0 auto; color: #5E5A52; font-size: 11px">qwerttclients.com</span></div>
+<img src="/_blob/8b14532205a87548d90b6a43fa8ccc98" alt="qwerttclients home page: search for restaurants, salons, hotels and sports with available times" style="width: 100%; flex: 1; min-height: 0; object-fit: cover; object-position: top; display: block">
+</div>
+<div style="position: absolute; left: 32px; top: 700px; text-align: left; font-size: 22px; line-height: 1.05; font-weight: 600; letter-spacing: -0.01em">Built for people<br>who hate waiting.</div>
+<div style="position: absolute; right: 32px; top: 724px; font-size: 14px; font-weight: 600; display: flex; gap: 8px; align-items: center">Uzbekistan <span aria-hidden="true" style="border: 1.5px solid #111110; border-radius: 999px; padding: 0 6px; font-size: 11px">↔</span> Remote worldwide</div>
+</section>
+
+<!-- WHAT YOU GET -->
+<section aria-label="What you get" style="max-width: 1440px; margin: 0 auto; padding: 140px 32px 0; box-sizing: border-box">
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px">
+<div style="border-top: 1.5px solid #111110; padding-top: 18px; display: flex; flex-direction: column; gap: 10px"><span class="mono" style="color: #5E5A52">01</span><span style="font-size: 24px; font-weight: 600; line-height: 1.05; letter-spacing: -0.01em">One person, design to code</span><span style="font-size: 15px; line-height: 1.45; letter-spacing: -0.02em; color: #3B3833">You talk to the one who designs and ships it. Nothing gets lost in handover.</span></div>
+<div style="border-top: 1.5px solid #111110; padding-top: 18px; display: flex; flex-direction: column; gap: 10px"><span class="mono" style="color: #5E5A52">02</span><span style="font-size: 24px; font-weight: 600; line-height: 1.05; letter-spacing: -0.01em">Built around your goal</span><span style="font-size: 15px; line-height: 1.45; letter-spacing: -0.02em; color: #3B3833">Bookings, leads or sales — every screen is designed to move people to that action.</span></div>
+<div style="border-top: 1.5px solid #111110; padding-top: 18px; display: flex; flex-direction: column; gap: 10px"><span class="mono" style="color: #5E5A52">03</span><span style="font-size: 24px; font-weight: 600; line-height: 1.05; letter-spacing: -0.01em">Fast and solid code</span><span style="font-size: 15px; line-height: 1.45; letter-spacing: -0.02em; color: #3B3833">Clean React or Webflow builds, no heavy UI kits, responsive and accessible.</span></div>
+<div style="border-top: 1.5px solid #111110; padding-top: 18px; display: flex; flex-direction: column; gap: 10px"><span class="mono" style="color: #5E5A52">04</span><span style="font-size: 24px; font-weight: 600; line-height: 1.05; letter-spacing: -0.01em">Yours to edit</span><span style="font-size: 15px; line-height: 1.45; letter-spacing: -0.02em; color: #3B3833">CMS and a handover call, so your team updates content without me.</span></div>
+</div>
+</section>
+
+<!-- CASE 01 OPENER: "Book a ___" slot reel, sticky, the word and the photo change as you scroll -->
+<section id="work" aria-label="Case 01 — qwerttclients" style="position: relative; margin-top: 180px; height: 900px; background: #111110; color: #ECE8DF; overflow: hidden">
+<img src="/_blob/898ea9e0626f2eb70dd3d2a40c4457a8" alt="Restaurant interior with set tables — one of the real venues in qwerttclients" style="position: absolute; right: 0; top: 0; width: 70%; height: 100%; object-fit: cover; display: block">
+<div aria-hidden="true" style="position: absolute; inset: 0; background: rgba(10,10,10,.42)"></div>
+<div aria-hidden="true" style="position: absolute; left: 0; top: 0; bottom: 0; width: 34%; background: #111110"></div>
+<div style="position: absolute; left: 32px; top: 40px; right: 32px; display: flex; justify-content: space-between; align-items: center">
+<span class="mono" style="display: flex; align-items: center; gap: 10px"><span aria-hidden="true" style="display: inline-grid; grid-template-columns: repeat(7, 4px); grid-auto-rows: 4px"><sc-for list="{{markTicket}}" as="c" hint-placeholder-count="49"><span style="background: {{c.bg}}; border-radius: 50%"></span></sc-for></span>Case 01 / 02 — qwerttclients</span>
+<span class="mono" style="color: #C8C3B8">Working product · front end, API, database</span>
+</div>
+<div style="position: absolute; left: 32px; top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: 36px">
+<span style="font-family: 'Barlow Condensed', sans-serif; font-size: 168px; line-height: 1; font-weight: 600; letter-spacing: -0.01em">Book a</span>
+<div aria-live="polite" style="position: relative; height: 504px; width: 620px; overflow: hidden">
+<span aria-hidden="true" style="font-family: 'Barlow Condensed', sans-serif; position: absolute; left: 0; top: 0px; font-size: 168px; line-height: 1; font-weight: 600; letter-spacing: -0.01em; color: rgba(249,244,236,.18)">ticket</span>
+<span style="font-family: 'Barlow Condensed', sans-serif; position: absolute; left: 0; top: 168px; font-size: 168px; line-height: 1; font-weight: 600; letter-spacing: -0.01em; color: #ECE8DF">table<span style="color: #FF4F1F">.</span></span>
+<span aria-hidden="true" style="font-family: 'Barlow Condensed', sans-serif; position: absolute; left: 0; top: 336px; font-size: 168px; line-height: 1; font-weight: 600; letter-spacing: -0.01em; color: rgba(249,244,236,.18)">haircut</span>
+</div>
+</div>
+<!-- photo reel: one real photo per word -->
+<div style="position: absolute; right: 32px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 10px">
+<sc-for list="{{reel}}" as="r" hint-placeholder-count="5">
+<div style="display: flex; align-items: center; gap: 12px; justify-content: flex-end; opacity: {{r.op}}"><span class="mono">{{r.word}}</span><span style="width: 118px; height: 78px; border-radius: 8px; overflow: hidden; outline: {{r.ol}}; outline-offset: 3px; flex: none"><img src="{{r.src}}" alt="" style="width: 100%; height: 100%; object-fit: cover; display: block"></span></div>
+</sc-for>
+</div>
+<div style="position: absolute; left: 32px; right: 32px; bottom: 40px; display: flex; justify-content: space-between; align-items: center">
+<span class="mono" style="display: flex; align-items: center; gap: 10px"><svg width="16" height="24" viewBox="0 0 22 32" fill="none" stroke="#ECE8DF" stroke-width="2" aria-hidden="true"><rect x="1" y="1" width="20" height="30" rx="10"></rect><line x1="11" y1="7" x2="11" y2="12"></line></svg>Scroll — the plan changes</span>
+<span style="display: flex; gap: 6px" aria-hidden="true"><span style="width: 28px; height: 3px; background: #ECE8DF"></span><span style="width: 28px; height: 3px; background: #ECE8DF"></span><span style="width: 28px; height: 3px; background: rgba(249,244,236,.25)"></span><span style="width: 28px; height: 3px; background: rgba(249,244,236,.25)"></span><span style="width: 28px; height: 3px; background: rgba(249,244,236,.25)"></span></span>
+<span class="mono" style="color: #C8C3B8">Photos: Unsplash, as used in the app</span>
+</div>
+</section>
+
+<!-- CASE 01 -->
+
+
+<!-- CASE 02 (dark) -->
+<section style="max-width: 1440px; margin: 0 auto; padding: 140px 32px 0; box-sizing: border-box">
+<div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 40px">
+<h2 style="font-family: 'Barlow Condensed', sans-serif; margin: 0; font-size: 168px; line-height: 0.86; font-weight: 600; letter-spacing: -0.01em">qwerttclients</h2>
+<p style="margin: 0 0 10px; max-width: 420px; font-size: 22px; line-height: 1.2; font-weight: 600; letter-spacing: -0.01em">One place to find and book anything nearby — and a dashboard where the owner sees the day.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 56px; border-top: 1.5px solid #111110">
+<sc-for list="{{qcNumbers}}" as="n" hint-placeholder-count="4">
+<div style="padding: 22px 20px 0 0; border-right: {{n.br}}; padding-left: {{n.pl}}"><div style="font-family: 'Barlow Condensed', sans-serif; font-size: 112px; line-height: 0.9; font-weight: 600; letter-spacing: -0.01em">{{n.v}}</div><div class="mono" style="color: #5E5A52; margin-top: 14px; line-height: 1.5; white-space: pre-line">{{n.k}}</div></div>
+</sc-for>
+</div>
+<div class="mono" style="margin-top: 28px; color: #5E5A52">Role: UX · UI · design system · front end · API — React 19, React Router, Vite, Fastify, SQLite</div>
+
+<!-- PHOTO STORM: 50 real places fly in and settle into one search -->
+<div aria-label="Real venue photos converging into the qwerttclients home page" style="position: relative; margin-top: 96px; height: 860px; border-radius: 24px; background: #111110; color: #ECE8DF; overflow: hidden">
+<sc-for list="{{storm}}" as="s" hint-placeholder-count="16">
+<span aria-hidden="true" style="position: absolute; left: {{s.x}}; top: {{s.y}}; width: {{s.w}}; height: {{s.h}}; border-radius: 10px; overflow: hidden; transform: rotate({{s.r}}); opacity: {{s.o}}; box-shadow: 0 20px 40px -10px rgba(0,0,0,.8)"><img src="{{s.src}}" alt="" style="width: 100%; height: 100%; object-fit: cover; display: block"></span>
+</sc-for>
+<div style="position: absolute; left: 50%; top: 50%; width: 640px; height: 400px; margin: -200px 0 0 -320px; border-radius: 12px; overflow: hidden; background: #FFFFFF; box-shadow: 0 50px 100px -30px rgba(0,0,0,.95); outline: 6px solid rgba(249,244,236,.08)">
+<img src="/_blob/8b14532205a87548d90b6a43fa8ccc98" alt="qwerttclients home page: one search bar for every category" style="width: 100%; height: 100%; object-fit: cover; object-position: top; display: block">
+</div>
+<div style="font-family: 'Barlow Condensed', sans-serif; position: absolute; left: 40px; top: 36px; font-size: 88px; line-height: 0.9; font-weight: 600; letter-spacing: -0.01em">50 real<br>places.</div>
+<div style="font-family: 'Barlow Condensed', sans-serif; position: absolute; right: 40px; bottom: 36px; font-size: 88px; line-height: 0.9; font-weight: 600; letter-spacing: -0.01em; text-align: right">One<br>search<span style="color: #FF4F1F">.</span></div>
+<div class="mono" style="position: absolute; left: 40px; bottom: 40px; color: #9A958B; line-height: 1.6">Restaurants · cafés · barbers · salons · spa<br>hotels · courts · coworking · live events</div>
+</div>
+
+<!-- SCROLL STAGE (pinned section, wheel scroll drives the frame) -->
+<div aria-label="Scroll through qwerttclients" style="margin-top: 24px; background: #1A1917; color: #ECE8DF; border-radius: 20px; padding: 40px; display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 40px; height: 820px; box-sizing: border-box">
+<div style="position: relative; border-radius: 12px; overflow: hidden; background: #161A1D; box-shadow: 0 40px 80px -40px rgba(0,0,0,.9); outline: 1px solid rgba(236,232,223,.1); display: flex; flex-direction: column">
+<div style="height: 38px; flex: none; background: #262522; display: flex; align-items: center; gap: 6px; padding: 0 14px"><span style="width: 10px; height: 10px; border-radius: 50%; background: #45433E"></span><span style="width: 10px; height: 10px; border-radius: 50%; background: #45433E"></span><span style="width: 10px; height: 10px; border-radius: 50%; background: #45433E"></span><span class="mono" style="margin: 0 auto; color: #9A958B; font-size: 11px">qwerttclients.com / Tashkent / Restaurants</span></div>
+<div style="position: relative; flex: 1; overflow: hidden">
+<img src="/_blob/8b14532205a87548d90b6a43fa8ccc98" alt="qwerttclients home page, scrolled to venues available today" style="width: 100%; display: block; transform: translateY(-430px)">
+<div style="position: absolute; left: 24%; top: 336px; display: flex; align-items: center; gap: 10px"><span style="width: 14px; height: 14px; border-radius: 50%; background: #FF4F1F; box-shadow: 0 0 0 6px rgba(255,79,31,.25)"></span><span style="background: #ECE8DF; color: #111110; padding: 8px 12px; border-radius: 8px; font-size: 14px; font-weight: 600; letter-spacing: -0.02em">Free times on every card — no dead ends</span></div>
+<div aria-hidden="true" style="position: absolute; right: 6px; top: 8px; bottom: 8px; width: 4px; border-radius: 4px; background: rgba(236,232,223,.1)"><div style="position: absolute; top: 30%; height: 22%; left: 0; right: 0; border-radius: 4px; background: rgba(236,232,223,.5)"></div></div>
+</div>
+</div>
+<div style="display: flex; flex-direction: column">
+<span class="mono" style="color: #9A958B">Scroll through the real product</span>
+<ol style="margin: 20px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column">
+<sc-for list="{{qcChapters}}" as="c" hint-placeholder-count="5">
+<li style="display: grid; grid-template-columns: 32px 1fr; gap: 8px; padding: 14px 0; border-top: 1px solid rgba(236,232,223,.14); opacity: {{c.op}}">
+<span class="mono" style="padding-top: 3px">{{c.no}}</span>
+<div><div style="font-size: 19px; font-weight: 600; letter-spacing: -0.01em">{{c.t}}</div><sc-if value="{{c.on}}" hint-placeholder-val="{{false}}"><div style="font-size: 14px; line-height: 1.4; letter-spacing: -0.01em; color: #C8C3B8; margin-top: 6px">{{c.d}}</div><div style="height: 2px; background: rgba(236,232,223,.15); margin-top: 12px"><div style="width: 45%; height: 2px; background: #ECE8DF"></div></div></sc-if></div>
+</li>
+</sc-for>
+</ol>
+<div style="margin-top: auto; display: flex; align-items: center; gap: 12px">
+<svg width="22" height="32" viewBox="0 0 22 32" fill="none" stroke="#ECE8DF" stroke-width="1.6" aria-hidden="true"><rect x="1" y="1" width="20" height="30" rx="10"></rect><line x1="11" y1="7" x2="11" y2="12"></line></svg>
+<span style="font-size: 14px; font-weight: 600; letter-spacing: -0.03em; line-height: 1.2">Keep scrolling — the site moves,<br>the page stays.</span>
+</div>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 40px">
+<figure style="margin: 0"><div class="shot" style="height: 280px; background: #161A1D"><img src="/_blob/348e0e76027a8074f7f3c46b67842e27" alt="Venue page for the restaurant Amber with photo gallery and booking panel" style="width: 100%; height: 100%; object-fit: cover; object-position: top; display: block"></div><figcaption class="mono" style="color: #5E5A52; margin-top: 12px; line-height: 1.6">Venue page — photo gallery, menu, reviews, free times for the table.</figcaption></figure>
+<figure style="margin: 0"><div class="shot" style="height: 280px; background: #161A1D"><img src="/_blob/b79aecf9a282300e8dad140ca0fca1a9" alt="Barber booking: choose a service and a specialist" style="width: 100%; height: 100%; object-fit: cover; object-position: top; display: block"></div><figcaption class="mono" style="color: #5E5A52; margin-top: 12px; line-height: 1.6">Barber flow — service and specialist first, then date and time.</figcaption></figure>
+<figure style="margin: 0"><div class="shot" style="height: 280px; background: #161A1D"><img src="/_blob/5806c8b1126d8615f99e4222df748327" alt="Business dashboard with today’s schedule by table and a request to accept" style="width: 100%; height: 100%; object-fit: cover; object-position: top; display: block"></div><figcaption class="mono" style="color: #5E5A52; margin-top: 12px; line-height: 1.6">Owner view — schedule by table, occupancy, requests to accept.</figcaption></figure>
+</div>
+
+<!-- BOOK BY SCROLLING: three scroll steps fill the booking; a ticket prints at the end -->
+<div aria-label="Booking demo driven by scroll" style="margin-top: 112px; background: #111110; color: #ECE8DF; border-radius: 24px; padding: 48px; display: grid; grid-template-columns: minmax(0, 1fr) 420px; gap: 56px; box-sizing: border-box">
+<div>
+<div style="display: flex; justify-content: space-between; align-items: flex-end">
+<h3 style="font-family: 'Barlow Condensed', sans-serif; margin: 0; font-size: 64px; line-height: 0.92; font-weight: 600; letter-spacing: -0.01em">Book it by<br>scrolling.</h3>
+<ol style="margin: 0; padding: 0; list-style: none; display: flex; gap: 6px" aria-label="Booking steps">
+<li class="mono" style="height: 32px; padding: 0 12px; border-radius: 8px; background: #262522; display: flex; align-items: center; gap: 6px"><span style="color: #4ADE80">✓</span>01 Place</li>
+<li class="mono" style="height: 32px; padding: 0 12px; border-radius: 8px; background: #262522; display: flex; align-items: center; gap: 6px"><span style="color: #4ADE80">✓</span>02 Time</li>
+<li class="mono" aria-current="step" style="height: 32px; padding: 0 12px; border-radius: 8px; background: #ECE8DF; color: #111110; display: flex; align-items: center; gap: 6px"><span style="width: 7px; height: 7px; border-radius: 50%; background: #FF4F1F"></span>03 Confirm</li>
+</ol>
+</div>
+<!-- mini booking UI, styled like the real app -->
+<div style="margin-top: 32px; background: #1D2125; color: #DEE4EA; outline: 1px solid #2C333A; border-radius: 16px; overflow: hidden; font-family: 'IBM Plex Sans', sans-serif; letter-spacing: -0.02em; position: relative">
+<div style="display: grid; grid-template-columns: 220px 1fr; gap: 0">
+<img src="/_blob/1d9d4de2424251d7b690dba0ac63408c" alt="Studio Noir barbershop interior" style="width: 220px; height: 100%; min-height: 330px; object-fit: cover; display: block">
+<div style="padding: 22px 24px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; justify-content: space-between"><div><div style="font-size: 22px; font-weight: 700; letter-spacing: -0.03em">Studio Noir</div><div style="font-size: 13px; color: #8C9BAB; margin-top: 2px">Barber · Bunyodkor Ave 3 · ★ 4.9 (156)</div></div><span style="height: 24px; padding: 0 8px; border-radius: 4px; background: #1C2B41; color: #579DFF; font-size: 11px; font-weight: 700; display: flex; align-items: center">HAIRCUT · $12</span></div>
+<div style="display: flex; gap: 6px"><sc-for list="{{demoDays}}" as="d" hint-placeholder-count="5"><span style="width: 56px; height: 52px; border-radius: 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; background: {{d.bg}}; color: {{d.fg}}; border: 1px solid {{d.bd}}">{{d.w}}<b style="font-size: 17px">{{d.n}}</b></span></sc-for></div>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px"><sc-for list="{{demoSlots}}" as="s" hint-placeholder-count="8"><span style="height: 38px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 600; background: {{s.bg}}; color: {{s.fg}}; border: 1px solid {{s.bd}}; text-decoration: {{s.td}}">{{s.t}}</span></sc-for></div>
+<div style="position: relative"><span style="height: 46px; border-radius: 4px; background: #CCE0FF; color: #1D2125; font-weight: 600; font-size: 15px; display: flex; align-items: center; justify-content: center; transform: scale(.98)">Confirm 18:30 with Dmitry K.</span><span aria-hidden="true" style="position: absolute; left: 62%; top: 22px; width: 18px; height: 18px; border-radius: 50%; background: rgba(255,79,31,.35); border: 2px solid #FF4F1F"></span></div>
+</div>
+</div>
+</div>
+<p class="mono" style="margin: 18px 0 0; color: #9A958B">Scroll picks the place, then the time, then presses Confirm — the same flow a real guest goes through.</p>
+</div>
+<!-- the ticket prints out of a slot -->
+<div style="position: relative; display: flex; flex-direction: column; align-items: center">
+<div aria-hidden="true" style="width: 380px; height: 22px; border-radius: 11px; background: #262522; box-shadow: inset 0 -6px 0 #141412"></div>
+<div style="width: 330px; margin-top: -6px; background: #ECE8DF; color: #111110; border-radius: 0 0 14px 14px; padding: 26px 26px 22px; box-sizing: border-box; transform: rotate(2deg); transform-origin: top center; box-shadow: 0 40px 60px -20px rgba(0,0,0,.9); display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; justify-content: space-between; align-items: center"><span aria-hidden="true" style="display: inline-grid; grid-template-columns: repeat(7, 6px); grid-auto-rows: 6px"><sc-for list="{{markTicket}}" as="c" hint-placeholder-count="49"><span style="background: {{c.bg}}; border-radius: 50%"></span></sc-for></span><span class="mono" style="color: #5E5A52">BOOKED ✓</span></div>
+<div style="font-family: 'Barlow Condensed', sans-serif; font-size: 40px; font-weight: 600; letter-spacing: -0.01em; line-height: 0.95">Studio Noir</div>
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px 12px; font-size: 14px">
+<div><div class="mono" style="color: #5E5A52">Service</div><div style="font-weight: 600; margin-top: 3px">Haircut · 30 min</div></div>
+<div><div class="mono" style="color: #5E5A52">Specialist</div><div style="font-weight: 600; margin-top: 3px">Dmitry K.</div></div>
+<div><div class="mono" style="color: #5E5A52">When</div><div style="font-weight: 600; margin-top: 3px">Fri, 23 Oct · 18:30</div></div>
+<div><div class="mono" style="color: #5E5A52">Total</div><div style="font-weight: 600; margin-top: 3px">$12 · pay there</div></div>
+</div>
+<div aria-hidden="true" style="height: 0; border-top: 2px dashed rgba(10,10,10,.25); margin: 4px -26px"></div>
+<div style="display: flex; justify-content: space-between; align-items: center"><div><div class="mono" style="color: #5E5A52">Reference</div><div style="font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 500; letter-spacing: .04em; margin-top: 3px">QW-7K2M9</div></div><span aria-hidden="true" style="display: inline-grid; grid-template-columns: repeat(9, 6px); grid-auto-rows: 6px"><sc-for list="{{qr}}" as="q" hint-placeholder-count="81"><span style="background: {{q.bg}}"></span></sc-for></span></div>
+<div class="mono" style="color: #5E5A52">Show this at the door · added to calendar</div>
+</div>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-top: 112px">
+<div>
+<h3 style="font-family: 'Barlow Condensed', sans-serif; margin: 0 0 28px; font-size: 48px; line-height: 0.95; font-weight: 600; letter-spacing: -0.01em">Decisions that make it work</h3>
+<ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column">
+<li style="display: grid; grid-template-columns: 48px 1fr; gap: 12px; padding: 18px 0; border-top: 1px solid rgba(10,10,10,.16)"><span class="mono" style="color: #5E5A52; padding-top: 4px">01</span><div><div style="font-size: 20px; font-weight: 600; letter-spacing: -0.01em">Search first, not categories first</div><div style="font-size: 15px; line-height: 1.45; letter-spacing: -0.02em; color: #3B3833; margin-top: 6px">What + where + when in one bar, so people reach real options in one step.</div></div></li>
+<li style="display: grid; grid-template-columns: 48px 1fr; gap: 12px; padding: 18px 0; border-top: 1px solid rgba(10,10,10,.16)"><span class="mono" style="color: #5E5A52; padding-top: 4px">02</span><div><div style="font-size: 20px; font-weight: 600; letter-spacing: -0.01em">Free slots on every card</div><div style="font-size: 15px; line-height: 1.45; letter-spacing: -0.02em; color: #3B3833; margin-top: 6px">No dead ends: you see availability before you open a page.</div></div></li>
+<li style="display: grid; grid-template-columns: 48px 1fr; gap: 12px; padding: 18px 0; border-top: 1px solid rgba(10,10,10,.16)"><span class="mono" style="color: #5E5A52; padding-top: 4px">03</span><div><div style="font-size: 20px; font-weight: 600; letter-spacing: -0.01em">A flow for each kind of booking</div><div style="font-size: 15px; line-height: 1.45; letter-spacing: -0.02em; color: #3B3833; margin-top: 6px">Table and guests, service and specialist, hotel dates and room, sport court, event tickets — five flows, one system.</div></div></li>
+<li style="display: grid; grid-template-columns: 48px 1fr; gap: 12px; padding: 18px 0; border-top: 1px solid rgba(10,10,10,.16); border-bottom: 1px solid rgba(10,10,10,.16)"><span class="mono" style="color: #5E5A52; padding-top: 4px">04</span><div><div style="font-size: 20px; font-weight: 600; letter-spacing: -0.01em">It actually works, end to end</div><div style="font-size: 15px; line-height: 1.45; letter-spacing: -0.02em; color: #3B3833; margin-top: 6px">Real API and database: live availability, booking, reschedule, cancel, calendar export, owner dashboard — covered by 23 integration tests.</div></div></li>
+</ol>
+</div>
+<div style="display: flex; flex-direction: column; gap: 16px">
+<h3 style="font-family: 'Barlow Condensed', sans-serif; margin: 0 0 12px; font-size: 48px; line-height: 0.95; font-weight: 600; letter-spacing: -0.01em">How it helps</h3>
+<div style="background: #DEDAD0; border-radius: 16px; padding: 28px"><div class="mono" style="color: #5E5A52">For clients</div><ul style="margin: 14px 0 0; padding: 0 0 0 18px; display: flex; flex-direction: column; gap: 8px; font-size: 17px; line-height: 1.4; letter-spacing: -0.03em; font-weight: 500"><li>Book in about a minute, any time of day</li><li>See price, reviews and free times before committing</li><li>Reminders and easy rescheduling</li></ul></div>
+<div style="background: #111110; color: #ECE8DF; border-radius: 16px; padding: 28px"><div class="mono" style="color: #9A958B">For businesses</div><ul style="margin: 14px 0 0; padding: 0 0 0 18px; display: flex; flex-direction: column; gap: 8px; font-size: 17px; line-height: 1.4; letter-spacing: -0.03em; font-weight: 500"><li>Bookings come in while the phone is quiet</li><li>Automatic reminders to cut no-shows</li><li>One calendar for every staff member</li></ul></div>
+<div style="display: flex; gap: 10px; margin-top: 12px"><a class="btn btn-ink" href="CaseQwerttclients.dc.html">Read the full case →</a><a class="btn btn-line" href="https://claude.ai/artifact/JXSTpeT2DMm6nLsUvURD6Q">Open all 38 screens ↗</a></div>
+</div>
+</div>
+
+<!-- DESIGN → CODE SLIDER -->
+<div style="margin-top: 140px">
+<div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 28px">
+<div><div class="mono" style="color: #5E5A52">Design → Code</div><h3 style="font-family: 'Barlow Condensed', sans-serif; margin: 14px 0 0; font-size: 64px; line-height: 0.92; font-weight: 600; letter-spacing: -0.01em">Drag the line.<br>Same layout — now it works.</h3></div>
+<p style="margin: 0; max-width: 360px; font-size: 16px; line-height: 1.45; letter-spacing: -0.02em; color: #3B3833">Left: the original design canvas. Right: the same screen in the running app, with real photos and live data. Nothing got lost between design and code.</p>
+</div>
+<div role="img" aria-label="Comparison slider: the qwerttclients home page as a design on the left and as the working site on the right" style="position: relative; width: 1376px; height: 631px; border-radius: 16px; overflow: hidden; box-shadow: 0 40px 80px -50px rgba(10,10,10,.55); outline: 1px solid rgba(10,10,10,.1); cursor: ew-resize">
+<img src="/_blob/a355a1e022da1e21d9196029b7135ca4" alt="" style="position: absolute; inset: 0; width: 1376px; height: 631px; display: block">
+<div style="position: absolute; left: 0; top: 0; bottom: 0; width: 54%; overflow: hidden"><img src="/_blob/11d399288d20da6cd88955a8d57592c4" alt="" style="width: 1376px; height: 631px; display: block"></div>
+<div style="position: absolute; left: 54%; top: 0; bottom: 0; width: 2px; margin-left: -1px; background: #FFFFFF; box-shadow: 0 0 0 1px rgba(10,10,10,.25)"></div>
+<div style="position: absolute; left: 54%; top: 50%; width: 64px; height: 64px; margin: -32px 0 0 -32px; border-radius: 50%; background: #111110; color: #ECE8DF; display: flex; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 10px 30px rgba(10,10,10,.35)"><svg width="10" height="16" viewBox="0 0 10 16" fill="none" stroke="#ECE8DF" stroke-width="2" aria-hidden="true"><path d="M8 2 2 8l6 6"></path></svg><svg width="10" height="16" viewBox="0 0 10 16" fill="none" stroke="#ECE8DF" stroke-width="2" aria-hidden="true"><path d="m2 2 6 6-6 6"></path></svg></div>
+<span class="mono" style="position: absolute; left: 20px; bottom: 20px; background: #111110; color: #ECE8DF; padding: 8px 12px; border-radius: 8px">Design · canvas</span>
+<span class="mono" style="position: absolute; right: 20px; bottom: 20px; background: #FF4F1F; color: #111110; padding: 8px 12px; border-radius: 8px">Live build · React + API</span>
+</div>
+</div>
+
+<!-- PROOF CONSOLE -->
+<div style="display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); gap: 24px; margin-top: 24px">
+<div style="background: #111110; color: #E8E3D8; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column">
+<div style="height: 40px; display: flex; align-items: center; gap: 6px; padding: 0 16px; border-bottom: 1px solid rgba(249,244,236,.1)"><span style="width: 10px; height: 10px; border-radius: 50%; background: #3A3936"></span><span style="width: 10px; height: 10px; border-radius: 50%; background: #3A3936"></span><span style="width: 10px; height: 10px; border-radius: 50%; background: #3A3936"></span><span class="mono" style="margin-left: auto; color: #9A958B">qwerttclients — zsh</span></div>
+<div style="padding: 22px 24px; font-family: 'JetBrains Mono', monospace; font-size: 13.5px; line-height: 1.75; letter-spacing: 0">
+<div><span style="color: #FF4F1F">~/qwerttclients</span> <span style="color: #9A958B">$</span> npm test</div>
+<sc-for list="{{tests}}" as="t" hint-placeholder-count="12"><div><span style="color: #4ADE80">✔</span> <span style="color: #D6D1C6">{{t}}</span></div></sc-for>
+<div style="color: #9A958B">  … 11 more</div>
+<div style="margin-top: 10px"><span style="color: #9A958B">ℹ</span> tests 23 · <span style="color: #4ADE80">pass 23</span> · fail 0 · 4.6 s</div>
+<div><span style="color: #FF4F1F">~/qwerttclients</span> <span style="color: #9A958B">$</span> <span style="display: inline-block; width: 9px; height: 17px; background: #ECE8DF; vertical-align: -3px"></span></div>
+</div>
+</div>
+<div style="background: #DEDAD0; border-radius: 16px; padding: 32px; display: flex; flex-direction: column; gap: 22px">
+<div class="mono" style="color: #5E5A52">Proof, not promises</div>
+<p style="margin: 0; font-size: 34px; line-height: 1; font-weight: 600; letter-spacing: -0.01em">Don’t take my word for it. Here are the checks.</p>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; border-top: 1px solid rgba(10,10,10,.16); margin-top: auto">
+<div style="padding: 16px 12px 16px 0; border-bottom: 1px solid rgba(10,10,10,.16)"><div style="font-family: 'Barlow Condensed', sans-serif; font-size: 44px; font-weight: 600; letter-spacing: -0.01em; line-height: 1">23/23</div><div class="mono" style="color: #5E5A52; margin-top: 8px">API tests passing</div></div>
+<div style="padding: 16px 0 16px 12px; border-bottom: 1px solid rgba(10,10,10,.16); border-left: 1px solid rgba(10,10,10,.16)"><div style="font-family: 'Barlow Condensed', sans-serif; font-size: 44px; font-weight: 600; letter-spacing: -0.01em; line-height: 1">3</div><div class="mono" style="color: #5E5A52; margin-top: 8px">languages, one codebase</div></div>
+<div style="padding: 16px 12px 0 0"><div style="font-family: 'Barlow Condensed', sans-serif; font-size: 44px; font-weight: 600; letter-spacing: -0.01em; line-height: 1">189 KB</div><div class="mono" style="color: #5E5A52; margin-top: 8px">whole app JS, gzipped</div></div>
+<div style="padding: 16px 0 0 12px; border-left: 1px solid rgba(10,10,10,.16)"><div style="font-family: 'Barlow Condensed', sans-serif; font-size: 44px; font-weight: 600; letter-spacing: -0.01em; line-height: 1">6 KB</div><div class="mono" style="color: #5E5A52; margin-top: 8px">all CSS, gzipped</div></div>
+</div>
+</div>
+</div>
+</section><section style="background: #111110; color: #ECE8DF; margin-top: 180px">
+<div style="max-width: 1440px; margin: 0 auto; padding: 160px 32px 180px; box-sizing: border-box">
+<div class="mono" style="display: flex; justify-content: space-between; color: #9A958B"><span>Case 02 / 02</span><span>2026 · Personal project — in development</span></div>
+<div style="display: flex; align-items: center; gap: 36px; margin-top: 20px">
+<div aria-hidden="true" style="display: grid; grid-template-columns: repeat(7, 14px); grid-auto-rows: 14px; flex: none"><sc-for list="{{markFilm}}" as="c" hint-placeholder-count="49"><span style="background: {{c.bg}}; border-radius: 50%"></span></sc-for></div>
+<h2 style="font-family: 'Barlow Condensed', sans-serif; margin: 0; font-size: 168px; line-height: 0.86; font-weight: 600; letter-spacing: -0.01em">kinoqwertt</h2>
+</div>
+<p style="margin: 28px 0 0; max-width: 900px; font-size: 34px; line-height: 1.08; font-weight: 600; letter-spacing: -0.01em">A redesign concept of a film database, built from a Figma file into a live React app — trailers, ratings, title pages and a watchlist.</p>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; margin-top: 48px; border-top: 1px solid rgba(249,244,236,.18); padding-top: 18px">
+<div><div class="mono" style="color: #9A958B">My role</div><div style="font-size: 17px; font-weight: 600; margin-top: 8px; letter-spacing: -0.03em">Frontend development</div></div>
+<div><div class="mono" style="color: #9A958B">Stack</div><div style="font-size: 17px; font-weight: 600; margin-top: 8px; letter-spacing: -0.03em">React 19 · Vite · GSAP · plain CSS</div></div>
+<div><div class="mono" style="color: #9A958B">Data</div><div style="font-size: 17px; font-weight: 600; margin-top: 8px; letter-spacing: -0.03em">TMDB API + local fallback</div></div>
+<div><div class="mono" style="color: #9A958B">Live</div><div style="font-size: 17px; font-weight: 600; margin-top: 8px; letter-spacing: -0.03em">kinoqwertt.vercel.app ↗</div></div>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 72px">
+<div style="background: #1A1917; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 14px"><span class="mono" style="color: #9A958B">The problem</span><p style="margin: 0; font-size: 21px; line-height: 1.25; font-weight: 600; letter-spacing: -0.01em">Film databases are crowded with ads and links. Deciding what to watch tonight takes longer than the trailer.</p></div>
+<div style="background: #1A1917; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 14px"><span class="mono" style="color: #9A958B">Who it’s for</span><p style="margin: 0; font-size: 21px; line-height: 1.25; font-weight: 600; letter-spacing: -0.01em">Movie fans who want to pick fast, read the essentials and keep a watchlist for later.</p></div>
+<div style="background: #ECE8DF; color: #111110; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 14px"><span class="mono" style="color: #5E5A52">What I built</span><p style="margin: 0; font-size: 21px; line-height: 1.25; font-weight: 600; letter-spacing: -0.01em">Home with trailer carousel, title page, Top 250, search, watchlist, sign-in and trailer modals — in English and Russian, light and dark.</p></div>
+</div>
+
+<!-- SCROLL STAGE (pinned, dark) -->
+<div aria-label="Scroll through kinoqwertt" style="margin-top: 24px; background: #1A1917; border-radius: 20px; padding: 40px; display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 40px; height: 820px; box-sizing: border-box">
+<div style="position: relative; border-radius: 12px; overflow: hidden; background: #0C0C0C; box-shadow: 0 40px 80px -40px rgba(0,0,0,.9); outline: 1px solid rgba(249,244,236,.1); display: flex; flex-direction: column">
+<div style="height: 38px; flex: none; background: #262522; display: flex; align-items: center; gap: 6px; padding: 0 14px"><span style="width: 10px; height: 10px; border-radius: 50%; background: #45433E"></span><span style="width: 10px; height: 10px; border-radius: 50%; background: #45433E"></span><span style="width: 10px; height: 10px; border-radius: 50%; background: #45433E"></span><span class="mono" style="margin: 0 auto; color: #9A958B; font-size: 11px">kinoqwertt.vercel.app</span></div>
+<div style="position: relative; flex: 1; overflow: hidden">
+<img src="/_blob/0d6697bf58b09957dc971f42e558da30" alt="kinoqwertt home page scrolled to Featured Today and Top Picks" style="width: 100%; display: block; transform: translateY(-560px)">
+<div style="position: absolute; left: 30%; top: 236px; display: flex; align-items: center; gap: 10px"><span style="width: 14px; height: 14px; border-radius: 50%; background: #FF4F1F; box-shadow: 0 0 0 6px rgba(255,79,31,.25)"></span><span style="background: #ECE8DF; color: #111110; padding: 8px 12px; border-radius: 8px; font-size: 14px; font-weight: 600; letter-spacing: -0.02em">Rails animate in with GSAP as you scroll</span></div>
+<div aria-hidden="true" style="position: absolute; right: 6px; top: 8px; bottom: 8px; width: 4px; border-radius: 4px; background: rgba(249,244,236,.1)"><div style="position: absolute; top: 14%; height: 12%; left: 0; right: 0; border-radius: 4px; background: rgba(249,244,236,.5)"></div></div>
+</div>
+</div>
+<div style="display: flex; flex-direction: column">
+<span class="mono" style="color: #9A958B">Scroll through the live site</span>
+<ol style="margin: 20px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column">
+<sc-for list="{{kinoChapters}}" as="c" hint-placeholder-count="5">
+<li style="display: grid; grid-template-columns: 32px 1fr; gap: 8px; padding: 14px 0; border-top: 1px solid rgba(249,244,236,.14); opacity: {{c.op}}">
+<span class="mono" style="padding-top: 3px">{{c.no}}</span>
+<div><div style="font-size: 19px; font-weight: 600; letter-spacing: -0.01em">{{c.t}}</div><sc-if value="{{c.on}}" hint-placeholder-val="{{false}}"><div style="font-size: 14px; line-height: 1.4; letter-spacing: -0.01em; color: #C8C3B8; margin-top: 6px">{{c.d}}</div><div style="height: 2px; background: rgba(249,244,236,.15); margin-top: 12px"><div style="width: 30%; height: 2px; background: #ECE8DF"></div></div></sc-if></div>
+</li>
+</sc-for>
+</ol>
+<div style="margin-top: auto; display: flex; align-items: center; gap: 12px">
+<svg width="22" height="32" viewBox="0 0 22 32" fill="none" stroke="#ECE8DF" stroke-width="1.6" aria-hidden="true"><rect x="1" y="1" width="20" height="30" rx="10"></rect><line x1="11" y1="7" x2="11" y2="12"></line></svg>
+<span style="font-size: 14px; font-weight: 600; letter-spacing: -0.03em; line-height: 1.2">Keep scrolling — the site moves,<br>the page stays.</span>
+</div>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 40px">
+<figure style="margin: 0"><div class="shot" style="height: 280px; background: #0C0C0C; outline-color: rgba(249,244,236,.12)"><img src="/_blob/b03f5eaf4414fbc1f376917a44f7405d" alt="Title page for Dune: Part Two with rating, cast and where to watch" style="width: 100%; height: 100%; object-fit: cover; object-position: top; display: block"></div><figcaption class="mono" style="color: #9A958B; margin-top: 12px; line-height: 1.6">Title page — trailer, rating, cast, reviews, box office, specs.</figcaption></figure>
+<figure style="margin: 0"><div class="shot" style="height: 280px; background: #0C0C0C; outline-color: rgba(249,244,236,.12)"><img src="/_blob/90c4a944b9daba37af1279840ee00fd7" alt="Top 250 movies list with filters" style="width: 100%; height: 100%; object-fit: cover; object-position: top; display: block"></div><figcaption class="mono" style="color: #9A958B; margin-top: 12px; line-height: 1.6">Top 250 — ranked list with filters, genres and trailers.</figcaption></figure>
+<figure style="margin: 0"><div class="shot" style="height: 280px; background: #0C0C0C; outline-color: rgba(249,244,236,.12)"><img src="/_blob/0d6697bf58b09957dc971f42e558da30" alt="Home page hero with trailer carousel" style="width: 100%; height: 100%; object-fit: cover; object-position: top; display: block"></div><figcaption class="mono" style="color: #9A958B; margin-top: 12px; line-height: 1.6">Home — trailer carousel with featured videos beside it.</figcaption></figure>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-top: 112px">
+<div>
+<h3 style="font-family: 'Barlow Condensed', sans-serif; margin: 0 0 28px; font-size: 48px; line-height: 0.95; font-weight: 600; letter-spacing: -0.01em">How it’s engineered</h3>
+<ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column">
+<li style="display: grid; grid-template-columns: 48px 1fr; gap: 12px; padding: 18px 0; border-top: 1px solid rgba(249,244,236,.18)"><span class="mono" style="color: #9A958B; padding-top: 4px">01</span><div><div style="font-size: 20px; font-weight: 600; letter-spacing: -0.01em">Never a blank page</div><div style="font-size: 15px; line-height: 1.45; letter-spacing: -0.02em; color: #C8C3B8; margin-top: 6px">Live data comes from the TMDB API; if it fails, the site falls back to local data and still renders every section.</div></div></li>
+<li style="display: grid; grid-template-columns: 48px 1fr; gap: 12px; padding: 18px 0; border-top: 1px solid rgba(249,244,236,.18)"><span class="mono" style="color: #9A958B; padding-top: 4px">02</span><div><div style="font-size: 20px; font-weight: 600; letter-spacing: -0.01em">One accent variable for the whole UI</div><div style="font-size: 15px; line-height: 1.45; letter-spacing: -0.02em; color: #C8C3B8; margin-top: 6px">Every highlight reads --movie-accent, so a page can re-colour itself without touching components.</div></div></li>
+<li style="display: grid; grid-template-columns: 48px 1fr; gap: 12px; padding: 18px 0; border-top: 1px solid rgba(249,244,236,.18)"><span class="mono" style="color: #9A958B; padding-top: 4px">03</span><div><div style="font-size: 20px; font-weight: 600; letter-spacing: -0.01em">Two languages, two themes</div><div style="font-size: 15px; line-height: 1.45; letter-spacing: -0.02em; color: #C8C3B8; margin-top: 6px">EN / RU and light / dark, remembered in the browser. No UI kit — plain CSS and GSAP.</div></div></li>
+<li style="display: grid; grid-template-columns: 48px 1fr; gap: 12px; padding: 18px 0; border-top: 1px solid rgba(249,244,236,.18); border-bottom: 1px solid rgba(249,244,236,.18)"><span class="mono" style="color: #9A958B; padding-top: 4px">04</span><div><div style="font-size: 20px; font-weight: 600; letter-spacing: -0.01em">Bugs found and fixed</div><div style="font-size: 15px; line-height: 1.45; letter-spacing: -0.02em; color: #C8C3B8; margin-top: 6px">Header vanishing on navigation; a 726 px overflow on 375 px phones (flex children without min-width: 0).</div></div></li>
+</ol>
+</div>
+<div style="display: flex; flex-direction: column; gap: 16px">
+<div style="background: #141412; border-radius: 16px; padding: 24px 28px; outline: 1px solid rgba(249,244,236,.12)">
+<div class="mono" style="display: flex; justify-content: space-between; color: #9A958B"><span>styles · from the live build</span><span>excerpt</span></div>
+<pre style="margin: 18px 0 0; font-family: 'JetBrains Mono', monospace; font-size: 14px; line-height: 1.7; letter-spacing: 0; color: #E8E3D8; white-space: pre"><span style="color: #8A857B">/* every highlight reads one variable */</span>
+.imdb-header__scope-option--active {
+  color: var(--movie-accent, #f5c518);
+}
+.auth-modal__field input:focus {
+  border-color: var(--movie-accent, #f5c518);
+}
+.trailer-modal__close:hover {
+  color: var(--movie-accent, #f5c518);
+}</pre>
+</div>
+<div style="background: #ECE8DF; color: #111110; border-radius: 16px; padding: 28px"><div class="mono" style="color: #5E5A52">What this shows a client</div><p style="margin: 12px 0 0; font-size: 19px; line-height: 1.35; font-weight: 600; letter-spacing: -0.01em">I can take a designer’s Figma file and ship it as a fast, maintainable app — and catch the bugs before your users do.</p></div>
+<div style="display: flex; gap: 10px; margin-top: 12px"><a class="btn btn-paper" href="CaseKinoqwertt.dc.html">Read the full case →</a><a class="btn btn-ghost" href="https://kinoqwertt.vercel.app">Open live site ↗</a></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" style="max-width: 1440px; margin: 0 auto; padding: 180px 32px 0; box-sizing: border-box">
+<div class="mono" style="color: #5E5A52; text-align: center">Services</div>
+<h2 style="font-family: 'Barlow Condensed', sans-serif; margin: 20px auto 0; max-width: 1000px; text-align: center; font-size: 76px; line-height: 0.95; font-weight: 600; letter-spacing: -0.01em">Design, code and motion — one ticket, one person.</h2>
+<!-- THE DECK: services dealt as cards on scroll (final state shown) -->
+<div aria-label="Services as three tickets" style="position: relative; margin-top: 72px; height: 760px; border-radius: 24px; background: #111110; overflow: hidden">
+<div class="mono" style="position: absolute; left: 32px; top: 28px; color: #9A958B">Three tickets · one trip</div>
+<div class="mono" style="position: absolute; right: 32px; top: 28px; color: #9A958B; display: flex; gap: 8px; align-items: center"><span style="width: 22px; height: 2px; background: #ECE8DF"></span><span style="width: 22px; height: 2px; background: #ECE8DF"></span><span style="width: 22px; height: 2px; background: #ECE8DF"></span>torn &amp; stamped</div>
+<!-- the rest of the deck, face down -->
+<div aria-hidden="true" style="position: absolute; left: 518px; top: 250px; width: 340px; height: 476px; border-radius: 20px; background: #E2DDD0; transform: rotate(2deg) translateY(120px); box-shadow: 0 30px 60px -20px rgba(0,0,0,.8); padding: 14px; box-sizing: border-box">
+<div style="width: 100%; height: 100%; border-radius: 12px; outline: 1.5px solid #111110; overflow: hidden">
+<svg width="100%" height="100%" aria-hidden="true"><defs><pattern id="qback" width="40" height="40" patternUnits="userSpaceOnUse"><g fill="#111110"><rect x="9" y="6" width="12" height="3"></rect><rect x="6" y="9" width="3" height="9"></rect><rect x="21" y="9" width="3" height="9"></rect><rect x="9" y="18" width="15" height="3"></rect><rect x="21" y="21" width="3" height="3"></rect><rect x="21" y="24" width="6" height="3"></rect></g></pattern></defs><rect width="100%" height="100%" fill="url(#qback)"></rect></svg>
+</div>
+</div>
+<sc-for list="{{deck}}" as="c" hint-placeholder-count="3">
+<article style="position: absolute; left: {{c.x}}; top: {{c.y}}; width: 340px; height: 476px; border-radius: 20px; background: #ECE8DF; color: #111110; transform: rotate({{c.r}}); box-shadow: 0 40px 70px -20px rgba(0,0,0,.85); padding: 24px; box-sizing: border-box; display: flex; flex-direction: column">
+<div style="display: flex; justify-content: space-between; align-items: flex-start"><div><div class="mono" style="color: #5E5A52">{{c.no}}</div><div style="font-size: 26px; font-weight: 600; letter-spacing: -0.01em; line-height: 1; margin-top: 6px">{{c.title}}</div></div><div aria-hidden="true" style="display: grid; grid-template-columns: repeat(7, 5px); grid-auto-rows: 5px"><sc-for list="{{c.icon}}" as="p" hint-placeholder-count="49"><span style="background: {{p.bg}}; border-radius: 50%"></span></sc-for></div></div>
+<p style="margin: 34px 0 0; font-size: 19px; line-height: 1.3; font-weight: 600; letter-spacing: -0.01em">{{c.text}}</p>
+<ul style="margin: 20px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px">
+<sc-for list="{{c.items}}" as="it" hint-placeholder-count="4"><li class="mono" style="display: flex; gap: 8px; color: #3B3833"><span style="color: #111110">+</span>{{it}}</li></sc-for>
+</ul>
+<div aria-hidden="true" style="margin: auto -24px 0; position: relative; height: 0; border-top: 2px dashed rgba(17,17,16,.3)"><span style="position: absolute; left: -10px; top: -11px; width: 20px; height: 20px; border-radius: 50%; background: #111110"></span><span style="position: absolute; right: -10px; top: -11px; width: 20px; height: 20px; border-radius: 50%; background: #111110"></span></div>
+<div style="display: flex; justify-content: space-between; align-items: center; padding-top: 16px"><div><div class="mono" style="color: #5E5A52">Admit one · {{c.no}}</div><div style="font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 700; letter-spacing: .02em; margin-top: 4px; text-transform: uppercase">{{c.title}}</div></div><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; color: #FF4F1F; border: 2px solid #FF4F1F; border-radius: 4px; padding: 4px 6px; transform: rotate(-8deg)">INCLUDED</span></div>
+</article>
+</sc-for>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 96px">
+<div style="background: #DEDAD0; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 12px; min-height: 300px; box-sizing: border-box">
+<div style="display: flex; justify-content: space-between"><span style="font-size: 30px; font-weight: 600; letter-spacing: -0.01em">Express</span><span class="mono" style="color: #5E5A52">[3–5] weeks</span></div>
+<span style="font-size: 16px; color: #3B3833; letter-spacing: -0.02em">For focused stories — a launch, a product, a personal brand.</span>
+<div style="margin-top: auto; display: flex; justify-content: space-between; align-items: flex-end"><span style="font-size: 26px; font-weight: 600; letter-spacing: -0.01em">from [PRICE]</span><a class="btn btn-line" href="Connect.dc.html" style="height: 42px">Discuss</a></div>
+</div>
+<div style="background: #111110; color: #ECE8DF; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 12px; min-height: 300px; box-sizing: border-box">
+<div style="display: flex; justify-content: space-between"><span style="font-size: 30px; font-weight: 600; letter-spacing: -0.01em">Full journey</span><span class="mono" style="color: #9A958B">[6–10] weeks</span></div>
+<span style="font-size: 16px; color: #C8C3B8; letter-spacing: -0.02em">For growing brands — multi-page, CMS, booking or catalogue.</span>
+<div style="margin-top: auto; display: flex; justify-content: space-between; align-items: flex-end"><span style="font-size: 26px; font-weight: 600; letter-spacing: -0.01em">from [PRICE]</span><a class="btn btn-paper" href="Connect.dc.html" style="height: 42px">Discuss</a></div>
+</div>
+<div style="background: #DEDAD0; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 12px; min-height: 300px; box-sizing: border-box">
+<div style="display: flex; justify-content: space-between"><span style="font-size: 30px; font-weight: 600; letter-spacing: -0.01em">Code only</span><span class="mono" style="color: #5E5A52">[2–6] weeks</span></div>
+<span style="font-size: 16px; color: #3B3833; letter-spacing: -0.02em">You have the Figma — I build it, pixel-accurate and animated.</span>
+<div style="margin-top: auto; display: flex; justify-content: space-between; align-items: flex-end"><span style="font-size: 26px; font-weight: 600; letter-spacing: -0.01em">from [PRICE]</span><a class="btn btn-line" href="Connect.dc.html" style="height: 42px">Discuss</a></div>
+</div>
+</div>
+</section>
+
+<!-- ABOUT + PROCESS -->
+<section id="about" style="max-width: 1440px; margin: 0 auto; padding: 180px 32px 0; box-sizing: border-box">
+<div style="display: grid; grid-template-columns: 440px 1fr; gap: 80px; align-items: start">
+<div style="width: 440px; height: 550px; border-radius: 16px; background: #DEDAD0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px">
+<div aria-hidden="true" style="display: grid; grid-template-columns: repeat(7, 14px); grid-auto-rows: 14px"><sc-for list="{{markInk}}" as="c" hint-placeholder-count="49"><div style="background: {{c.bg}}; border-radius: 50%"></div></sc-for></div>
+<span class="mono" style="color: #5E5A52">[Your portrait · 4:5]</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 32px">
+<div class="mono" style="color: #5E5A52">About</div>
+<h2 style="font-family: 'Barlow Condensed', sans-serif; margin: 0; font-size: 60px; line-height: 0.98; font-weight: 600; letter-spacing: -0.01em">Hi, I’m [Your Name]. I care about the last 10% — the part most sites skip.</h2>
+<p style="margin: 0; max-width: 680px; font-size: 19px; line-height: 1.45; letter-spacing: -0.02em; color: #2E2B27">[2–3 sentences: where you’re based, how you started, what you love building.] I work as a one-person studio, so the person who designs your site is the person who codes it.</p>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid rgba(10,10,10,.16); padding-top: 16px; gap: 16px">
+<div><div class="mono" style="color: #5E5A52">Based in</div><div style="font-size: 18px; font-weight: 600; margin-top: 8px">[City], Uzbekistan</div></div>
+<div><div class="mono" style="color: #5E5A52">Experience</div><div style="font-size: 18px; font-weight: 600; margin-top: 8px">[N] years</div></div>
+<div><div class="mono" style="color: #5E5A52">Languages</div><div style="font-size: 18px; font-weight: 600; margin-top: 8px">[RU · EN · UZ]</div></div>
+<div><div class="mono" style="color: #5E5A52">Time zone</div><div style="font-size: 18px; font-weight: 600; margin-top: 8px">GMT+5, EU overlap</div></div>
+</div>
+<ol style="margin: 8px 0 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px">
+<li style="border-top: 1.5px solid #111110; padding-top: 14px; display: flex; flex-direction: column; gap: 6px"><span class="mono" style="color: #5E5A52">Week 1</span><span style="font-size: 20px; font-weight: 600; letter-spacing: -0.01em">Discover</span><span style="font-size: 14px; line-height: 1.45; letter-spacing: -0.01em; color: #3B3833">Goals, audience, scope and a fixed quote.</span></li>
+<li style="border-top: 1.5px solid #111110; padding-top: 14px; display: flex; flex-direction: column; gap: 6px"><span class="mono" style="color: #5E5A52">Weeks 2–3</span><span style="font-size: 20px; font-weight: 600; letter-spacing: -0.01em">Design</span><span style="font-size: 14px; line-height: 1.45; letter-spacing: -0.01em; color: #3B3833">Key screens first, then the full system.</span></li>
+<li style="border-top: 1.5px solid #111110; padding-top: 14px; display: flex; flex-direction: column; gap: 6px"><span class="mono" style="color: #5E5A52">Weeks 4–6</span><span style="font-size: 20px; font-weight: 600; letter-spacing: -0.01em">Build</span><span style="font-size: 14px; line-height: 1.45; letter-spacing: -0.01em; color: #3B3833">Live link from day one, weekly updates.</span></li>
+<li style="border-top: 1.5px solid #111110; padding-top: 14px; display: flex; flex-direction: column; gap: 6px"><span class="mono" style="color: #5E5A52">Launch</span><span style="font-size: 20px; font-weight: 600; letter-spacing: -0.01em">Ship &amp; care</span><span style="font-size: 14px; line-height: 1.45; letter-spacing: -0.01em; color: #3B3833">Speed checks, handover, [30] days support.</span></li>
+</ol>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: 200px 1fr; gap: 24px; margin-top: 112px; border-top: 1px solid rgba(10,10,10,.16); padding-top: 24px">
+<div class="mono" style="color: #5E5A52">Tools I use daily</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{stack}}" as="t" hint-placeholder-count="16"><span style="height: 36px; padding: 0 14px; border-radius: 999px; border: 1px solid rgba(10,10,10,.2); display: inline-flex; align-items: center; font-size: 15px; font-weight: 600; letter-spacing: -0.03em">{{t}}</span></sc-for>
+</div>
+</div>
+</section>
+
+<!-- FAQ -->
+<section aria-label="Questions" style="max-width: 1440px; margin: 0 auto; padding: 180px 32px 0; box-sizing: border-box">
+<div style="display: grid; grid-template-columns: 440px 1fr; gap: 80px">
+<h2 style="font-family: 'Barlow Condensed', sans-serif; margin: 0; font-size: 60px; line-height: 0.95; font-weight: 600; letter-spacing: -0.01em">Questions before we start</h2>
+<div style="border-top: 1px solid rgba(10,10,10,.16)">
+<sc-for list="{{faq}}" as="f" hint-placeholder-count="5">
+<div style="border-bottom: 1px solid rgba(10,10,10,.16); padding: 22px 0">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 24px"><span style="font-size: 22px; font-weight: 600; letter-spacing: -0.01em">{{f.q}}</span><span class="mono" style="color: #5E5A52; flex: none">{{f.state}}</span></div>
+<sc-if value="{{f.open}}" hint-placeholder-val="{{false}}"><p style="margin: 12px 0 0; max-width: 720px; font-size: 16px; line-height: 1.5; letter-spacing: -0.02em; color: #3B3833">{{f.a}}</p></sc-if>
+</div>
+</sc-for>
+</div>
+</div>
+</section>
+
+<!-- CONTACT (dark) -->
+<section id="contact" style="background: #111110; color: #ECE8DF; margin-top: 180px">
+<div style="max-width: 1440px; margin: 0 auto; padding: 180px 32px 120px; box-sizing: border-box; text-align: center">
+<div aria-hidden="true" style="display: inline-grid; grid-template-columns: repeat(7, 12px); grid-auto-rows: 12px"><sc-for list="{{markAt}}" as="c" hint-placeholder-count="49"><span style="background: {{c.bg}}; border-radius: 50%"></span></sc-for></div>
+<p class="mono" style="margin: 28px auto 0; max-width: 280px; color: #9A958B; line-height: 1.6">Good websites don’t keep people waiting. Neither do I.</p>
+<div class="fx" style="text-align: left; margin-top: 72px"><!-- DEPARTURE FINALE: lines slide in from alternating sides, windows open from the centre and flip through real shots like a departure board, arrow draws; loops in the canvas, scroll-scrubbed in the build -->
+<div class="mono" style="display: flex; align-items: center; gap: 12px; color: #ECE8DF; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: .06em; text-transform: uppercase"><span style="width: 10px; height: 10px; border-radius: 50%; background: #FF4F1F"></span><span>Final call</span><span style="color: #9A958B">·</span><span>Destination</span><span class="flap" style="color: #FF4F1F"><span><span>YOUR LAUNCH</span><span>NEW SITE</span><span>APP</span><span>REDESIGN</span><span>BOTH</span><span>YOUR LAUNCH</span></span></span></div>
+<a class="fin" href="Connect.dc.html" aria-label="Let’s make your next launch land unforgettable — start a project" style="display: block; margin-top: 40px; color: #ECE8DF; text-decoration: none">
+<span role="heading" aria-level="2" style="font-family: 'Barlow Condensed', sans-serif; font-size: 136px; line-height: 0.95; font-weight: 600; letter-spacing: -0.01em; display: flex; flex-direction: column; gap: 6px">
+<span class="fl l" style="display: flex; align-items: center; gap: 28px; padding-left: 110px">Let’s make<span class="win" data-tag="qwerttclients" aria-hidden="true" style="width: 230px; height: 112px; --tilt: -3deg; --pos: top"><img src="/_blob/8b14532205a87548d90b6a43fa8ccc98" alt=""><img src="/_blob/348e0e76027a8074f7f3c46b67842e27" alt=""><img src="/_blob/5806c8b1126d8615f99e4222df748327" alt=""></span></span>
+<span class="fl r" style="display: flex; align-items: center; gap: 28px; padding-left: 360px"><span class="mono" style="font-size: 13px; letter-spacing: .02em; color: #9A958B; max-width: 130px; line-height: 1.4; font-family: 'JetBrains Mono', monospace">website, app — or both</span>your next</span>
+<span class="fl l" style="display: flex; align-items: center; gap: 28px; padding-left: 40px">launch<span class="win" data-tag="kinoqwertt" aria-hidden="true" style="width: 230px; height: 112px; --tilt: 3deg; --pos: top"><img src="/_blob/0d6697bf58b09957dc971f42e558da30" alt=""><img src="/_blob/b03f5eaf4414fbc1f376917a44f7405d" alt=""><img src="/_blob/90c4a944b9daba37af1279840ee00fd7" alt=""></span>lands</span>
+<span class="fl r" style="display: flex; align-items: center; gap: 28px; padding-left: 300px">unforgettable<svg class="arw" width="120" height="70" viewBox="0 0 120 70" fill="none" stroke="#FF4F1F" stroke-width="12" aria-hidden="true"><path d="M0 35h104M76 7l28 28-28 28"></path></svg></span>
+</span>
+</a>
+</div>
+<div style="display: flex; justify-content: center; align-items: center; gap: 14px; margin-top: 56px">
+<a href="mailto:hello@yourdomain.com" style="font-family: 'Barlow Condensed', sans-serif; font-size: 44px; font-weight: 600; letter-spacing: -0.01em; color: #ECE8DF; text-decoration: none; border-bottom: 2px solid #ECE8DF; line-height: 1.1">[hello@yourdomain.com]</a>
+<button type="button" class="copy" style="background: #ECE8DF; color: #111110">Click to copy</button>
+</div>
+<div style="display: flex; justify-content: center; gap: 10px; margin-top: 36px">
+<a class="btn btn-paper" href="Connect.dc.html">Start a project →</a>
+<a class="btn btn-ghost" href="#contact">Telegram @[your_handle]</a>
+</div>
+<div class="mono" style="margin-top: 28px; color: #9A958B">Tashkent 14:32 · usually replies within [24 hours]</div>
+</div>
+
+<div class="fx"><div aria-hidden="true" style="margin-top: 96px; border-top: 1px solid rgba(236,232,223,.18); border-bottom: 1px solid rgba(236,232,223,.18); overflow: hidden; height: 52px; display: flex; align-items: center; font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: #ECE8DF; white-space: nowrap"><div class="tick"><span style="display: inline-flex; align-items: center; gap: 18px; padding-right: 18px">Flight QW-01 · qwerttclients<span style="width: 8px; height: 8px; border-radius: 50%; background: #FF4F1F"></span></span><span style="display: inline-flex; align-items: center; gap: 18px; padding-right: 18px">Flight QW-02 · kinoqwertt<span style="width: 8px; height: 8px; border-radius: 50%; background: #FF4F1F"></span></span><span style="display: inline-flex; align-items: center; gap: 18px; padding-right: 18px">Design + code, one person<span style="width: 8px; height: 8px; border-radius: 50%; background: #FF4F1F"></span></span><span style="display: inline-flex; align-items: center; gap: 18px; padding-right: 18px">Tashkent ↔ worldwide<span style="width: 8px; height: 8px; border-radius: 50%; background: #FF4F1F"></span></span><span style="display: inline-flex; align-items: center; gap: 18px; padding-right: 18px">Next: your project<span style="width: 8px; height: 8px; border-radius: 50%; background: #FF4F1F"></span></span><span style="display: inline-flex; align-items: center; gap: 18px; padding-right: 18px">Gate open<span style="width: 8px; height: 8px; border-radius: 50%; background: #FF4F1F"></span></span><span style="display: inline-flex; align-items: center; gap: 18px; padding-right: 18px">Flight QW-01 · qwerttclients<span style="width: 8px; height: 8px; border-radius: 50%; background: #FF4F1F"></span></span><span style="display: inline-flex; align-items: center; gap: 18px; padding-right: 18px">Flight QW-02 · kinoqwertt<span style="width: 8px; height: 8px; border-radius: 50%; background: #FF4F1F"></span></span><span style="display: inline-flex; align-items: center; gap: 18px; padding-right: 18px">Design + code, one person<span style="width: 8px; height: 8px; border-radius: 50%; background: #FF4F1F"></span></span><span style="display: inline-flex; align-items: center; gap: 18px; padding-right: 18px">Tashkent ↔ worldwide<span style="width: 8px; height: 8px; border-radius: 50%; background: #FF4F1F"></span></span><span style="display: inline-flex; align-items: center; gap: 18px; padding-right: 18px">Next: your project<span style="width: 8px; height: 8px; border-radius: 50%; background: #FF4F1F"></span></span><span style="display: inline-flex; align-items: center; gap: 18px; padding-right: 18px">Gate open<span style="width: 8px; height: 8px; border-radius: 50%; background: #FF4F1F"></span></span></div></div><!-- TERMINAL FOOTER: sitemap · auto-dealing boarding passes · channels · giant wordmark rising letter by letter -->
+<footer style="max-width: 1440px; margin: 0 auto; padding: 96px 32px 28px; box-sizing: border-box; color: #ECE8DF">
+<div style="display: grid; grid-template-columns: 1fr 320px 1fr; align-items: start">
+<nav aria-label="Sitemap" style="display: flex; flex-direction: column"><span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 14px">Terminal map</span><a class="flink2" href="#work">Work</a><a class="flink2" href="#services">Services</a><a class="flink2" href="#about">About</a><a class="flink2" href="Lab.dc.html">Lab</a><a class="flink2" href="Connect.dc.html">Connect</a></nav>
+<figure aria-label="Projects deck" style="margin: 0; position: relative; width: 300px; height: 290px; justify-self: center"><div class="deal"><img src="/_blob/8b14532205a87548d90b6a43fa8ccc98" alt="qwerttclients — Home" style="width: 100%; height: 190px; object-fit: cover; object-position: top; border-radius: 8px; display: block"><div style="display: flex; justify-content: space-between; align-items: center; padding: 0 4px"><span><span style="display: block; font-size: 15px; font-weight: 600">qwerttclients — Home</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .06em; color: #5E5A52">BOARDING PASS · 01</span></span><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 6px 8px; border-radius: 5px; background: #FF4F1F; color: #111110">ADMIT ONE</span></div></div><div class="deal"><img src="/_blob/0d6697bf58b09957dc971f42e558da30" alt="kinoqwertt — Home" style="width: 100%; height: 190px; object-fit: cover; object-position: top; border-radius: 8px; display: block"><div style="display: flex; justify-content: space-between; align-items: center; padding: 0 4px"><span><span style="display: block; font-size: 15px; font-weight: 600">kinoqwertt — Home</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .06em; color: #5E5A52">BOARDING PASS · 02</span></span><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 6px 8px; border-radius: 5px; background: #FF4F1F; color: #111110">ADMIT ONE</span></div></div><div class="deal"><img src="/_blob/5806c8b1126d8615f99e4222df748327" alt="qwerttclients — Business" style="width: 100%; height: 190px; object-fit: cover; object-position: top; border-radius: 8px; display: block"><div style="display: flex; justify-content: space-between; align-items: center; padding: 0 4px"><span><span style="display: block; font-size: 15px; font-weight: 600">qwerttclients — Business</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .06em; color: #5E5A52">BOARDING PASS · 03</span></span><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 6px 8px; border-radius: 5px; background: #FF4F1F; color: #111110">ADMIT ONE</span></div></div></figure>
+<nav aria-label="Channels" style="display: flex; flex-direction: column; text-align: right"><span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 14px">Channels</span><a class="flink2" href="Connect.dc.html">Telegram</a><a class="flink2" href="Connect.dc.html">GitHub</a><a class="flink2" href="Connect.dc.html">LinkedIn</a><a class="flink2" href="Connect.dc.html">Instagram</a></nav>
+</div>
+<div style="margin-top: 80px; position: relative; border-radius: 22px; background: #ECE8DF; color: #111110; overflow: hidden">
+<div class="holes" style="position: absolute; left: 0; right: 0; top: -7px"></div>
+<div class="word" aria-label="qwertt" style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 340px; line-height: .82; letter-spacing: .01em; text-align: center; padding: 40px 0 6px; overflow: hidden; white-space: nowrap"><span style="animation-delay: 0.00s">Q</span><span style="animation-delay: 0.07s">W</span><span style="animation-delay: 0.14s">E</span><span style="animation-delay: 0.21s">R</span><span style="animation-delay: 0.28s">T</span><span style="animation-delay: 0.35s">T</span></div>
+<div style="display: flex; justify-content: space-between; align-items: center; padding: 16px 28px 22px; border-top: 2px dashed rgba(17,17,16,.3); font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: .06em; text-transform: uppercase"><span>Ticket QW-00 · qwerttportfolio</span><span>Seat: yours · Gate: open · Boarding: [Q1 2027]</span><a href="#top" style="color: #111110; text-decoration: none; border-bottom: 1.5px solid #111110">Back to top ↑</a></div>
+</div>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 28px; font-size: 14px; font-weight: 600">
+<span>©2026</span>
+<span style="display: flex; gap: 18px"><a class="flink2" href="Connect.dc.html" style="font-size: 14px">Imprint</a><a class="flink2" href="Connect.dc.html" style="font-size: 14px">Privacy</a></span>
+<span>Built &amp; stamped by [Your Name]</span>
+</div>
+</footer></div>
+</section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#FF4F1F","options":["#FF4F1F","#111110","#FF5A1F"]},"$preview":{"width":1440,"height":17000}}'>
+class Component extends DCLogic {
+  grid(on, rows) {
+    const q = rows || ['0111100','1000010','1000010','1000010','0111110','0000010','0000011'];
+    const out = [];
+    q.forEach((r) => { for (const ch of r) out.push({ bg: ch === '1' ? on : 'transparent' }); });
+    return out;
+  }
+  renderVals() {
+    const accent = this.props.accent ?? '#FF4F1F';
+    const faq = [
+      { q: 'How long does a website take?', a: 'A one-pager usually takes [3–5] weeks, a full site [6–10]. You get a fixed timeline in the first week, and a live link to watch progress.', open: true },
+      { q: 'Can I edit the site myself after launch?', a: '', open: false },
+      { q: 'Do you take development-only projects?', a: '', open: false },
+      { q: 'Do you work with clients abroad?', a: '', open: false },
+      { q: 'How does payment work?', a: '', open: false }
+    ].map((f) => ({ ...f, state: f.open ? 'Close −' : 'Open +' }));
+    const chap = (list, active) => list.map(([t, d], i) => ({ no: String(i + 1).padStart(2, '0'), t, d, on: i === active, op: i === active ? '1' : '0.45' }));
+    const qcChapters = chap([
+      ['Search', 'Where, date, time, guests — and category tabs. One bar for everything.'],
+      ['Free today', 'Each card shows real free times, so people pick a slot before opening a page.'],
+      ['Venue page', 'Photos, menu, reviews; the booking panel follows you down the page.'],
+      ['Book in steps', 'Five category flows: table, salon, hotel, sport, event.'],
+      ['Business view', 'Today’s schedule, occupancy and requests in one dashboard.']
+    ], 1);
+    const kinoChapters = chap([
+      ['Trailer hero', 'Carousel with featured videos beside it.'],
+      ['Featured & Top picks', 'Horizontal rails of lists, posters and ratings — animated in with GSAP.'],
+      ['Box office & streaming', 'Weekly box office and tabs per streaming service.'],
+      ['Title page', 'Rating, cast, reviews, storyline, box office and specs.'],
+      ['Top 250', 'Ranked list with genres, filters and trailers.']
+    ], 1);
+    return {
+      qcChapters, kinoChapters,
+      demoDays: [['Thu','22'],['Fri','23'],['Sat','24'],['Sun','25'],['Mon','26']].map(([w, n], i) => ({ w, n, bg: i === 1 ? '#579DFF' : '#1D2125', fg: i === 1 ? '#1D2125' : '#DEE4EA', bd: i === 1 ? '#579DFF' : '#2C333A' })),
+      demoSlots: ['17:00','17:30','18:00','18:30','19:00','19:30','20:00','20:30'].map((t) => {
+        if (t === '18:30') return { t, bg: '#579DFF', fg: '#1D2125', bd: '#579DFF', td: 'none' };
+        if (t === '17:30' || t === '19:30') return { t, bg: '#22272B', fg: '#8C9BAB', bd: '#2C333A', td: 'line-through' };
+        return { t, bg: '#1D2125', fg: '#579DFF', bd: '#579DFF', td: 'none' };
+      }),
+      qr: (() => { const o = []; let s = 7; for (let i = 0; i < 81; i++) { s = (s * 37 + 11) % 101; const x = i % 9, y = Math.floor(i / 9); const corner = (x < 3 && y < 3) || (x > 5 && y < 3) || (x < 3 && y > 5); const on = corner ? !(x % 3 === 1 && y % 3 === 1) : s % 2 === 0; o.push({ bg: on ? '#111110' : 'transparent' }); } return o; })(),
+      reel: [
+        ['table', '/_blob/898ea9e0626f2eb70dd3d2a40c4457a8'], ['haircut', '/_blob/1d9d4de2424251d7b690dba0ac63408c'], ['room', '/_blob/2d5404a3485162fceb74dcea9a88a33a'], ['court', '/_blob/1c5012ef5783eb057a130c9e4a2fab1e'], ['ticket', '/_blob/92012b59b6d66b8b38f65e61079fc24c']
+      ].map(([word, src], i) => ({ word, src, op: i === 0 ? '1' : '0.5', ol: i === 0 ? '2px solid #FF4F1F' : 'none' })),
+      qcNumbers: [
+        { v: '5', k: 'booking flows: table, salon,\nhotel, sport, event' },
+        { v: '23/23', k: 'API tests passing' },
+        { v: '3', k: 'languages: EN · RU · UZ' },
+        { v: '38', k: 'screens designed, desktop\nto mobile' }
+      ].map((n, i) => ({ ...n, br: i < 3 ? '1px solid rgba(10,10,10,.16)' : 'none', pl: i === 0 ? '0px' : '20px' })),
+      storm: [
+        ['/_blob/4a24c4cc717638ac6d744ff652ac5e07', 40, 230, 220, 146, -8, 1], ['/_blob/395076cee1c066c993be5ec78f22b309', 290, 160, 170, 113, 6, .9],
+        ['/_blob/462d905fe13b8676ff97603d36bebb36', 120, 430, 190, 126, 4, 1], ['/_blob/85b01d195f2665b81e88be68c5707530', 300, 600, 160, 106, -5, .85],
+        ['/_blob/d07d8908c2a88346796716edc834fdcd', 60, 640, 200, 133, 9, .7], ['/_blob/34e98d58f25c966245b71a9a4976cd78', 330, 330, 120, 80, -3, .8],
+        ['/_blob/dc52a8678031d0427c2a005e84330cec', 1040, 60, 220, 146, 7, 1], ['/_blob/4ab2b8212c3acce7a13f6bd2cab5fc50', 1150, 250, 180, 120, -6, .9],
+        ['/_blob/56f52b8f28f38a2532e1cee61e70ce88', 960, 230, 130, 87, 4, .85], ['/_blob/538c67eb5d5ea029fdd56a3b9cc8d04f', 1110, 430, 190, 126, 3, 1],
+        ['/_blob/5363497a7178483de132a5cb281f8a9b', 970, 560, 150, 100, -9, .8], ['/_blob/d10cfdcdd11baf8ee5d9a1641ed90c72', 560, 40, 170, 113, -4, .75],
+        ['/_blob/6abe4518e9d20f5308e7da8a1966a5ad', 760, 70, 150, 100, 8, .8], ['/_blob/18fab7457c51de62719fbcff0d15d66e', 520, 700, 170, 113, 5, .8],
+        ['/_blob/7b4d59451a6608013e7e2d8077bf6565', 730, 690, 150, 100, -7, .75], ['/_blob/9c2d33d913cbbd4c9f4a601ddf187c5a', 860, 640, 110, 73, 10, .7]
+      ].map(([src, x, y, w, h, r, o]) => ({ src, x: x + 'px', y: y + 'px', w: w + 'px', h: h + 'px', r: r + 'deg', o: String(o) })),
+      deck: [
+        { no: '01 / 03', title: 'Website Design', x: '150px', y: '150px', r: '-7deg', text: 'Structure, art direction and interfaces people enjoy using.', items: ['UX & page structure', 'Art direction', 'Figma design system', 'Every state, every screen'], icon: this.grid('#111110') },
+        { no: '02 / 03', title: 'Development', x: '518px', y: '118px', r: '0deg', text: 'Fast, accessible builds that keep every design detail intact.', items: ['React · Next.js · Astro', 'Webflow + CMS', 'APIs & databases', 'Tests before launch'], icon: this.grid('#111110', ['0000000','0100010','1000001','0001000','1000001','0100010','0000000']) },
+        { no: '03 / 03', title: 'Motion', x: '886px', y: '150px', r: '7deg', text: 'Scroll, hover and page transitions that make the site feel alive.', items: ['Scroll storytelling', 'Micro-interactions', 'Page transitions', 'Reduced-motion ready'], icon: this.grid('#111110', ['1000000','1100000','1110000','1111000','1110000','1100000','1000000']) }
+      ],
+      markTicket: this.grid(accent, ['1111111','1000001','1011101','1000001','1011001','1000001','1111111']),
+      markFilm: this.grid(accent, ['1010101','1111111','1000001','1000001','1000001','1111111','1010101']),
+      markAt: this.grid(accent, ['0111110','1000001','1011101','1010101','1011111','1000000','0111110']),
+      tests: [
+        'signup, session, logout and duplicate email',
+        'wrong credentials and rate limit after five attempts',
+        'restaurant: availability, booking and conflict when the area is full',
+        'past slots and past dates cannot be booked',
+        'salon: overlapping time is blocked, “any specialist” picks a free one',
+        'hotel: price matches the design example and inventory is respected',
+        'sport: duration blocks the following hours',
+        'event: ticket limit and totals',
+        'booking access: owner, guest key, strangers; change and cancel',
+        'two-step verification: setup, login with code, disable',
+        'waitlist is notified when a slot is released',
+        'text search understands Russian, Uzbek and Cyrillic spelling'
+      ],
+      mark: this.grid(accent),
+      markInk: this.grid('#111110'),
+      markLight: this.grid('#ECE8DF'),
+      faq,
+      stack: ['Figma', 'HTML', 'CSS', 'JavaScript', 'TypeScript', 'React', 'React Router', 'Vite', 'Next.js', 'Astro', 'Webflow', 'GSAP', 'Three.js', 'Git', 'Vercel', '[edit list]']
+    };
+  }
+}
+</script>
+</body>
+</html>

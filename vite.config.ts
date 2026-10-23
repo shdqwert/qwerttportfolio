@@ -17,7 +17,7 @@ export default defineConfig({
           // better than a dozen small ones
           const n = id.replace(/\\/g, '/')
           if (/\/src\/(app|motion|styles)\//.test(n) || /\/src\/content\/(shared|i18n|lang|en|images)\./.test(n)) return 'app'
-          if (/\/src\/components\//.test(n) && !/(ConnectDrawer|Konami|Cursor|Intro|Playground|CaseBits|ScrollStage|Finale|TerminalFooter)\./.test(n)) return 'app'
+          if (/\/src\/components\//.test(n) && !/(ConnectDrawer|Konami|Cursor|Intro|Playground|CaseBits|ScrollStage|Finale|TerminalFooter|BoardingFlight|FlightStart)\./.test(n)) return 'app'
         }
       }
     }

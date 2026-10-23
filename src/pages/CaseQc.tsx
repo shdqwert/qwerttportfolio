@@ -1,5 +1,6 @@
 import { useGSAP } from '../motion/useMotion'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, type ComponentProps } from 'react'
+import { deferred } from '../app/deferred'
 import { useNav, whenStageReady } from '../app/Nav'
 import { ProofConsole } from '../components/ProofConsole'
 import { Arrow, Img, MaybeLink, MouseIcon } from '../components/Common'
@@ -8,6 +9,8 @@ import PunchMark from '../components/motion/PunchMark'
 import Reveal from '../components/motion/Reveal'
 import { BoardTile, FlapText, useFlapText } from '../components/motion/SplitFlap'
 import PageEnd, { CabinLight, NextDepartures, SeatTag } from '../components/PageEnd'
+import FlightStart from '../components/FlightStart'
+import { flightText } from '../content/pages/flight'
 import { useT } from '../content/i18n'
 import { useQcText } from '../content/pages/qc'
 import { appTokens, boardActive, boardRows, districts, hiddenPlaceLabels, links, mapX, mapY, placeColors, places, testsCase, type PlaceKind } from '../content/shared'
@@ -117,6 +120,24 @@ const popStyle = (x: number, y: number) => ({
   top: y > 0.5 ? `calc(${y * 100}% + 40px)` : `calc(${y * 100}% - 40px)`,
   translate: y > 0.5 ? '0 -100%' : undefined,
 })
+
+// 1b — F27 boarding flight: a small preview under the hero board flies into
+// the landing mat (real night-mode screen recording).
+const BoardingFlight = deferred<ComponentProps<typeof import('../components/BoardingFlight').default>>(() => import('../components/BoardingFlight'))
+
+function QcFlight() {
+  const sec = useRef<HTMLElement>(null)
+  const startSlot = useRef<HTMLDivElement>(null)
+  const f = flightText[useT().lang]
+  return (
+    <section ref={sec} className={s.flightSec} data-theme="ink" aria-label={f.qc.alt}>
+      <div className={`wrap ${s.flightIn}`}>
+        <FlightStart startRef={startSlot} className={s.flightStart} hint />
+        <BoardingFlight page="qc" video="/assets/video/qwerttclients-reel.mp4" poster="/assets/video/qwerttclients-reel-poster.jpg" startRef={startSlot} triggerRef={sec} start="top 75%" />
+      </div>
+    </section>
+  )
+}
 
 // F21 dock: the fixed gutter rail shows between the problem and the result.
 function RailDock() {
@@ -844,6 +865,7 @@ export default function CaseQc() {
           </div>
         </div>
       </section>
+      <QcFlight />
       <Problem />
       <City />
       <Flows />

@@ -1,0 +1,73 @@
+{
+  "v": 3,
+  "attachments": {},
+  "boards": {
+    "CaseKinoqwertt.dc.html": {
+      "expand": "fill",
+      "h": 9300,
+      "title": "Case page — kinoqwertt",
+      "w": 1440,
+      "x": 4680,
+      "y": 0
+    },
+    "CaseQwerttclients.dc.html": {
+      "expand": "fill",
+      "h": 14900,
+      "title": "Case page — qwerttclients",
+      "w": 1440,
+      "x": 3120,
+      "y": 0
+    },
+    "Connect.dc.html": {
+      "h": 900,
+      "is_interactive": true,
+      "title": "Connect overlay (open state)",
+      "w": 1440,
+      "x": 1560,
+      "y": 0
+    },
+    "Lab.dc.html": {
+      "expand": "fill",
+      "h": 4200,
+      "is_interactive": true,
+      "title": "Lab — 10 switches (interactive)",
+      "w": 1440,
+      "x": -1560,
+      "y": 0
+    },
+    "Main.dc.html": {
+      "expand": "fill",
+      "h": 18400,
+      "title": "Portfolio — Home (desktop)",
+      "w": 1440,
+      "x": 0,
+      "y": 0
+    },
+    "System.dc.html": {
+      "h": 4200,
+      "title": "Design system, storyboards & spec",
+      "w": 1440,
+      "x": 1560,
+      "y": 1060
+    }
+  },
+  "createdOnFiles": {
+    "at": "2026-10-22T12:00:00Z",
+    "v": 1
+  },
+  "designSystems": [],
+  "launch": {
+    "view": "canvas"
+  },
+  "notes": {},
+  "order": [
+    "Main.dc.html",
+    "Connect.dc.html",
+    "System.dc.html",
+    "CaseQwerttclients.dc.html",
+    "CaseKinoqwertt.dc.html",
+    "Lab.dc.html"
+  ],
+  "pages": [],
+  "title": "qwerttportfolio"
+}

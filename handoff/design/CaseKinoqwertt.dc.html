@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>kinoqwertt — case study</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Barlow+Condensed:wght@500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+<style>
+h1,h2,h3{font-family:'Barlow Condensed',sans-serif}
+body{margin:0;background:#111110}
+a{color:#ECE8DF}a:hover{color:#C8C3B8}
+.mono{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.02em;font-weight:500}
+.btn{display:inline-flex;align-items:center;gap:10px;height:48px;padding:0 22px;border-radius:999px;font:600 15px/1 'IBM Plex Sans',sans-serif;letter-spacing:-.005em;text-decoration:none;transition:background .3s,color .3s,transform .35s cubic-bezier(.2,.7,.2,1);box-sizing:border-box}
+.btn:focus-visible,.navlink:focus-visible,.flink:focus-visible,.row:focus-visible{outline:2px solid #FF4F1F;outline-offset:3px}
+.btn-paper{background:#ECE8DF;color:#111110}.btn-paper:hover{background:#FFFFFF;color:#111110;transform:translateY(-2px)}
+.btn-ghost{border:1.5px solid rgba(249,244,236,.35);color:#ECE8DF}.btn-ghost:hover{background:#ECE8DF;color:#111110}
+.navlink{display:inline-flex;align-items:center;height:30px;padding:0 10px;border-radius:8px;font:600 14px/1 'IBM Plex Sans',sans-serif;letter-spacing:-.005em;color:#ECE8DF;text-decoration:none;transition:background .25s,color .25s}
+.navlink:hover{background:#ECE8DF;color:#111110}
+.flink{color:#9A958B;text-decoration:none;font:600 14px/1.6 'IBM Plex Sans',sans-serif;letter-spacing:-.005em}
+.flink:hover{color:#ECE8DF}
+.row{color:#111110;text-decoration:none;transition:color .3s}
+.row:hover{color:#FF4F1F}
+
+/* ===== DEPARTURE FINALE + TERMINAL FOOTER (shared on every page) ===== */
+.fx{--fx-d:10s}
+.fx .fl{animation:fx-in var(--fx-d) cubic-bezier(.2,.7,.2,1) infinite both}
+.fx .fl.l{--from:-140px}.fx .fl.r{--from:160px}
+.fx .fl:nth-child(2){animation-delay:.12s}.fx .fl:nth-child(3){animation-delay:.24s}.fx .fl:nth-child(4){animation-delay:.36s}
+@keyframes fx-in{0%{transform:translateX(var(--from));opacity:.25}22%,92%{transform:none;opacity:1}100%{transform:none;opacity:0}}
+.fx .win{position:relative;flex:none;border-radius:12px;overflow:hidden;animation:fx-open var(--fx-d) cubic-bezier(.65,0,.35,1) infinite both;box-shadow:0 24px 50px -18px rgba(0,0,0,.7)}
+.fx .fl:nth-child(3) .win{animation-delay:.35s}
+@keyframes fx-open{0%,6%{clip-path:inset(0 50% 0 50% round 12px);transform:rotate(0) scale(.9)}26%,92%{clip-path:inset(0 0 0 0 round 12px);transform:rotate(var(--tilt,-3deg)) scale(1)}100%{clip-path:inset(0 0 0 0 round 12px);transform:rotate(var(--tilt,-3deg)) scale(1);opacity:0}}
+.fx .win img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--pos,top);display:block;opacity:0;animation:fx-cyc var(--fx-d) linear infinite}
+.fx .win img:nth-child(1){animation-delay:0s}.fx .win img:nth-child(2){animation-delay:calc(var(--fx-d) / -3 * 2)}.fx .win img:nth-child(3){animation-delay:calc(var(--fx-d) / -3)}
+@keyframes fx-cyc{0%{opacity:1;transform:scale(1.12) translateY(0)}30%{opacity:1;transform:scale(1) translateY(-4%)}33.3%,100%{opacity:0;transform:scale(1) translateY(-4%)}}
+.fx .win[data-tag="next"] img{opacity:1;animation:none}
+.fx .win::after{content:attr(data-tag);position:absolute;left:8px;bottom:8px;padding:4px 7px;border-radius:5px;background:#FF4F1F;color:#111110;font:500 10px/1 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase}
+.fx .arw path{stroke-dasharray:240;animation:fx-draw var(--fx-d) ease-out infinite both;animation-delay:.6s}
+@keyframes fx-draw{0%,20%{stroke-dashoffset:240}40%,100%{stroke-dashoffset:0}}
+.fx a.fin:hover .win{transform:rotate(0) scale(1.05)}
+.fx a.fin:hover .arw{transform:translateX(14px)}.fx .arw{transition:transform .4s cubic-bezier(.2,.7,.2,1)}
+.fx .flap{display:inline-block;height:1.2em;overflow:hidden;vertical-align:bottom}
+.fx .flap>span{display:flex;flex-direction:column;animation:fx-flap 7.5s steps(1) infinite}
+@keyframes fx-flap{0%{transform:translateY(0)}20%{transform:translateY(-1.2em)}40%{transform:translateY(-2.4em)}60%{transform:translateY(-3.6em)}80%{transform:translateY(-4.8em)}}
+.fx .tick{display:flex;width:max-content;animation:fx-tick 32s linear infinite}
+@keyframes fx-tick{to{transform:translateX(-50%)}}
+.fx .deal{position:absolute;inset:0 0 8px 0;border-radius:14px;background:#ECE8DF;color:#111110;padding:10px;box-sizing:border-box;display:flex;flex-direction:column;gap:10px;box-shadow:0 30px 60px -20px rgba(0,0,0,.8);animation:fx-deal 9s cubic-bezier(.65,0,.35,1) infinite both}
+.fx .deal:nth-child(2){animation-delay:-3s}.fx .deal:nth-child(3){animation-delay:-6s}
+@keyframes fx-deal{0%{transform:translate(0,0) rotate(-1.5deg);z-index:3}28%{transform:translate(0,0) rotate(-1.5deg);z-index:3}36%{transform:translate(260px,-40px) rotate(14deg);z-index:3}37%{z-index:1}45%{transform:translate(8px,14px) rotate(6deg);z-index:1}66%{transform:translate(4px,8px) rotate(-4deg);z-index:2}100%{transform:translate(0,0) rotate(-1.5deg);z-index:3}}
+.fx .word span{display:inline-block;animation:fx-rise var(--fx-d) cubic-bezier(.2,.7,.2,1) infinite both}
+@keyframes fx-rise{0%,8%{transform:translateY(60%);opacity:0}30%,100%{transform:none;opacity:1}}
+.fx .holes{background-image:radial-gradient(circle,#111110 0 5px,transparent 5.5px);background-size:22px 14px;background-position:center;height:14px}
+.fx .flink2{color:#9A958B;text-decoration:none;font:600 15px/1.7 'IBM Plex Sans',sans-serif}.fx .flink2:hover{color:#FF4F1F}
+.fx .fbtn{display:inline-flex;align-items:center;gap:10px;height:48px;padding:0 22px;border-radius:999px;font:600 15px/1 'IBM Plex Sans',sans-serif;text-decoration:none;background:#ECE8DF;color:#111110;transition:background .3s,transform .35s}
+.fx .fbtn:hover{background:#FF4F1F;color:#111110;transform:translateY(-2px)}
+.fx a:focus-visible{outline:2px solid #FF4F1F;outline-offset:3px}
+@media (prefers-reduced-motion: reduce){.fx *{animation:none !important}.fx .win img:first-child{opacity:1}}
+
+/* ===== BOARDING FLIGHT (F27): the hero media flies down into its landing mat; canvas = 8 s loop (alternate), build = scroll-scrubbed ===== */
+.flt{position:absolute;transform-origin:0 0;z-index:3;animation:flt-fly 8s cubic-bezier(.65,0,.35,1) infinite alternate both;will-change:transform}
+@keyframes flt-fly{0%,12%{transform:perspective(1800px) translate(var(--dx),var(--dy)) scale(var(--s))}
+48%{transform:perspective(1800px) translate(calc(var(--dx) * .42),calc(var(--dy) * .42)) scale(calc(var(--s) + (1 - var(--s)) * .55)) rotateX(5deg) rotateY(-6deg) rotateZ(-1.4deg)}
+84%,100%{transform:perspective(1800px) translate(0,0) scale(1)}}
+.flt .card{position:relative;width:100%;height:100%;border-radius:14px;overflow:hidden;background:#0C0C0C;box-shadow:0 0 0 1px rgba(236,232,223,.12),0 50px 90px -30px rgba(0,0,0,.95)}
+.flt video,.flt .card>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.flt .card::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.16) 50%,transparent 65%);transform:translateX(-130%);animation:flt-sheen 8s cubic-bezier(.65,0,.35,1) infinite alternate both;pointer-events:none}
+@keyframes flt-sheen{0%,30%{transform:translateX(-130%)}70%,100%{transform:translateX(130%)}}
+.flt .tag{position:absolute;left:12px;top:12px;z-index:2;display:flex;height:26px;border-radius:6px;overflow:hidden;font:500 11px/26px 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase}
+.flt .tag b{font-weight:500;background:#111110;color:#ECE8DF;padding:0 9px;border-right:2px dashed rgba(236,232,223,.35)}
+.flt .tag i{font-style:normal;background:#FF4F1F;color:#111110;padding:0 9px;position:relative;display:inline-grid}
+.flt .tag i span{grid-area:1/1}
+.flt .tag i .a{animation:flt-a 8s steps(1) infinite alternate both}.flt .tag i .b{animation:flt-b 8s steps(1) infinite alternate both}
+@keyframes flt-a{0%,15%{opacity:1}16%,100%{opacity:0}}
+@keyframes flt-b{0%,15%{opacity:0}16%,80%{opacity:1}81%,100%{opacity:0}}
+.flt .tag i .c{animation:flt-c 8s steps(1) infinite alternate both}
+@keyframes flt-c{0%,80%{opacity:0}81%,100%{opacity:1}}
+.flt-mat{position:absolute;background:#1A1917;border-radius:18px;box-shadow:inset 0 0 0 1px rgba(236,232,223,.06)}
+.flt-zone{position:absolute;border:2px dashed rgba(236,232,223,.18);border-radius:14px}
+.flt-stamp{position:absolute;z-index:4;padding:10px 16px;border:3px solid #FF4F1F;border-radius:10px;color:#FF4F1F;font:700 30px/1 'Barlow Condensed',sans-serif;letter-spacing:.06em;transform:rotate(-8deg) scale(1.3);opacity:0;animation:flt-stamp 8s cubic-bezier(.3,1.4,.5,1) infinite alternate both}
+@keyframes flt-stamp{0%,84%{opacity:0;transform:rotate(-8deg) scale(1.3)}92%,100%{opacity:1;transform:rotate(-4deg) scale(1)}}
+.flt-path{position:absolute;inset:0;pointer-events:none;z-index:1;overflow:visible}
+.flt-path path{fill:none;stroke:#FF4F1F;stroke-width:2;stroke-linecap:round;stroke-dasharray:var(--len);stroke-dashoffset:var(--len);animation:flt-path 8s cubic-bezier(.65,0,.35,1) infinite alternate both}
+@keyframes flt-path{0%,12%{stroke-dashoffset:var(--len);opacity:.7}80%{stroke-dashoffset:0;opacity:.7}100%{stroke-dashoffset:0;opacity:0}}
+.flt-hint{position:absolute;z-index:2;display:flex;align-items:center;gap:10px;font:500 12px/1 'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#9A958B;animation:flt-hint 8s linear infinite alternate both}
+@keyframes flt-hint{0%,12%{opacity:1}30%,100%{opacity:0}}
+@media (prefers-reduced-motion: reduce){.flt,.flt *,.flt-stamp,.flt-path path,.flt-hint{animation:none !important}.flt{transform:none}.flt-stamp{opacity:1;transform:rotate(-4deg)}.flt-path,.flt-hint{display:none}}
+</style>
+</helmet>
+<div style="position: relative; width: 100%; background: #111110; color: #ECE8DF; font-family: 'IBM Plex Sans', sans-serif; letter-spacing: -0.01em">
+
+<header id="top" style="max-width: 1440px; margin: 0 auto; padding: 20px 32px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; box-sizing: border-box">
+<nav aria-label="Main" style="display: flex; gap: 2px"><a class="navlink" href="Main.dc.html#services">Service</a><a class="navlink" href="Main.dc.html#work" aria-current="page" style="background: #ECE8DF; color: #111110">Work</a><a class="navlink" href="Connect.dc.html">Connect</a></nav>
+<span style="font-size: 14px; font-weight: 600; color: #9A958B">[Your Name] · Designer &amp; Developer</span>
+<span style="justify-self: end; font-size: 14px; font-weight: 600"><span style="text-decoration: underline">EN</span> <span style="color: #6E6A62">RU</span></span>
+</header>
+
+<div style="position: relative; max-width: 1440px; margin: 0 auto">
+<!-- CASE HERO -->
+<section style="position: relative; max-width: 1440px; margin: 0 auto; height: 860px; padding: 0 32px; box-sizing: border-box">
+<div class="mono" style="position: absolute; left: 32px; top: 120px; color: #9A958B; display: flex; align-items: center; gap: 10px"><span aria-hidden="true" style="display: inline-grid; grid-template-columns: repeat(7, 3px); grid-auto-rows: 3px"><sc-for list="{{markFilm}}" as="c" hint-placeholder-count="49"><span style="background: {{c.bg}}; border-radius: 50%"></span></sc-for></span>Case 02 · ©2026 · Unofficial redesign concept</div>
+<h1 style="font-family: 'Barlow Condensed', sans-serif; position: absolute; left: 32px; top: 150px; margin: 0; font-size: 168px; line-height: 0.86; font-weight: 600; letter-spacing: -0.01em">kinoqwertt</h1>
+<p style="position: absolute; left: 212px; top: 430px; margin: 0; font-size: 24px; line-height: 1.05; font-weight: 600; letter-spacing: -0.01em; display: flex; flex-direction: column">
+<span>Pick</span><span>tonight’s</span><span>film</span><span>faster than</span><span>the trailer.</span>
+</p>
+
+<a href="https://kinoqwertt.vercel.app" style="position: absolute; left: 212px; bottom: 60px; display: inline-flex; align-items: center; height: 48px; border-radius: 999px; background: #ECE8DF; color: #111110; text-decoration: none; overflow: hidden; width: 300px">
+<span style="flex: none; padding: 0 18px; font-size: 15px; font-weight: 600; border-right: 1px solid rgba(10,10,10,.2); height: 100%; display: flex; align-items: center">View site ↗</span>
+<span aria-hidden="true" class="mono" style="white-space: nowrap; padding-left: 14px; color: #5E5A52">kinoqwertt.vercel.app · kinoqwertt.vercel.app</span>
+</a>
+</section>
+<section aria-label="Live screen recording of kinoqwertt" style="position: relative; height: 932px"></section>
+<!-- BOARDING FLIGHT (F27): small boarding-pass preview flies down-left into its landing mat while growing to full size, with a tilt in mid-air; the screen inside is a real screen recording (muted loop). Canvas: 8 s loop. Build: scroll-scrubbed. -->
+<div class="flt-mat" aria-hidden="true" style="left: 32px; top: 900px; width: 1376px; height: 892px"></div>
+<div class="flt-zone" aria-hidden="true" style="left: 96px; top: 956px; width: 1248px; height: 780px"></div>
+<span class="mono" aria-hidden="true" style="position: absolute; left: 52px; top: 918px; color: #9A958B">Landing · Row 02 · Gate open</span>
+<span class="mono" aria-hidden="true" style="position: absolute; left: 1188px; top: 918px; width: 200px; text-align: right; color: #9A958B">00 · live screen recording</span>
+<svg class="flt-path" width="100%" height="100%" aria-hidden="true" style="--len: 1400"><path d="M1028 562 C1088 993 828 1266 720 1346" pathLength="1400"></path></svg>
+<div class="flt-hint" aria-hidden="true" style="left: 648px; top: 816px"><span style="width: 8px; height: 8px; border-radius: 50%; background: #FF4F1F"></span>Now boarding — scroll ↓</div>
+<figure class="flt" style="margin: 0; left: 96px; top: 956px; width: 1248px; height: 780px; --dx: 552px; --dy: -631px; --s: 0.6090">
+<div class="card"><img src="/_blob/af48da4d8976114db06c8d9ff94024f0" alt=""><video src="/_blob/61725925a1b4f8a2311da0cec11b0b8d" poster="/_blob/af48da4d8976114db06c8d9ff94024f0" autoplay muted loop playsinline aria-label="Screen recording of the kinoqwertt site: trailer carousel, featured rails, Top picks, then the Dune: Part Two title page"></video></div>
+<span class="tag" aria-hidden="true"><b>Row 02 · Seat kinoqwertt</b><i><span class="a">Boarding</span><span class="b">In flight</span><span class="c">Landed</span></i></span>
+</figure>
+<div class="flt-stamp" aria-hidden="true" style="left: 1144px; top: 1666px">BOARDED ✓</div>
+</div>
+
+<!-- DETAIL: media column + sticky facts column -->
+<section id="detail" style="max-width: 1440px; margin: 0 auto; padding: 60px 32px 160px; box-sizing: border-box; display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 64px; align-items: start">
+<div style="display: flex; flex-direction: column; gap: 24px">
+<sc-for list="{{media}}" as="m" hint-placeholder-count="6">
+<figure style="margin: 0; position: relative; background: #1A1917; border-radius: 16px; padding: 56px 64px; box-sizing: border-box">
+<span class="mono" style="position: absolute; right: 20px; top: 18px; color: #9A958B">{{m.no}}</span>
+<div style="border-radius: 10px; overflow: hidden; height: {{m.h}}; background: #0C0C0C"><img src="{{m.src}}" alt="{{m.alt}}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; object-position: {{m.pos}}; display: block"></div>
+<figcaption class="mono" style="position: absolute; left: 20px; bottom: 18px; color: #9A958B">{{m.cap}}</figcaption>
+</figure>
+</sc-for>
+</div>
+<aside style="position: sticky; top: 96px; display: flex; flex-direction: column; gap: 26px">
+<p style="margin: 0; font-size: 21px; line-height: 1.25; font-weight: 600; letter-spacing: -0.01em">A film database redesign, taken from a Figma file to a live React app: trailers, ratings, title pages, Top 250 and a watchlist.</p>
+<p style="margin: 0; font-size: 16px; line-height: 1.5; letter-spacing: -0.02em; color: #C8C3B8">I built the front end end to end: components, layout, motion and data. Live data comes from the TMDB API — and when the API is unavailable, the site falls back to local data and still renders every section.</p>
+<div>
+<div style="font-size: 18px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 10px">Credits</div>
+<sc-for list="{{credits}}" as="c" hint-placeholder-count="5"><div style="display: flex; justify-content: space-between; gap: 12px; padding: 9px 0; border-top: 1px solid rgba(249,244,236,.14); font-size: 15px"><span style="color: #9A958B">{{c.k}}</span><span style="font-weight: 600; text-align: right">{{c.v}}</span></div></sc-for>
+</div>
+<div style="background: #141412; border-radius: 12px; padding: 16px 18px; outline: 1px solid rgba(249,244,236,.1)">
+<div class="mono" style="color: #9A958B">from the live build</div>
+<pre style="margin: 10px 0 0; font-family: 'JetBrains Mono', monospace; font-size: 12.5px; line-height: 1.65; letter-spacing: 0; color: #E8E3D8; white-space: pre">.trailer-modal__close:hover {
+  color: var(--movie-accent, #f5c518);
+}</pre>
+</div>
+<div>
+<div style="font-size: 18px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 10px">Fixed along the way</div>
+<div style="padding: 9px 0; border-top: 1px solid rgba(249,244,236,.14); font-size: 14px; line-height: 1.45; color: #C8C3B8">Header vanished on navigation — fixed the layout structure.</div>
+<div style="padding: 9px 0; border-top: 1px solid rgba(249,244,236,.14); border-bottom: 1px solid rgba(249,244,236,.14); font-size: 14px; line-height: 1.45; color: #C8C3B8">726 px overflow on 375 px phones — flex children got min-width: 0.</div>
+</div>
+<div style="display: flex; gap: 8px; flex-wrap: wrap"><a class="btn btn-paper" href="https://kinoqwertt.vercel.app">Open live site ↗</a><a class="btn btn-ghost" href="https://github.com/shdqwert/kinoqwertt">GitHub ↗</a></div>
+<span class="mono" style="color: #9A958B">Unofficial concept. Film titles and posters belong to their owners.</span>
+</aside>
+</section>
+
+<!-- MORE WORK (inverted to paper) -->
+<section class="fx" style="background: #ECE8DF; color: #111110">
+<div style="max-width: 1440px; margin: 0 auto; padding: 160px 32px 140px; box-sizing: border-box">
+<div class="mono" style="display: flex; align-items: center; gap: 10px; margin-left: 300px"><span aria-hidden="true" style="display: inline-grid; grid-template-columns: repeat(7, 3px); grid-auto-rows: 3px"><sc-for list="{{markTicket}}" as="c" hint-placeholder-count="49"><span style="background: {{c.bg}}; border-radius: 50%"></span></sc-for></span>Next departures</div>
+<div style="font-family: 'Barlow Condensed', sans-serif; margin-top: 28px; display: flex; flex-direction: column; gap: 8px; font-size: 136px; line-height: 1; font-weight: 600; letter-spacing: -0.01em">
+<a class="row" href="CaseQwerttclients.dc.html" style="display: flex; align-items: center; gap: 24px; padding-left: 300px">qwertt<span class="win" data-tag="next" aria-hidden="true" style="width: 200px; height: 104px; border-radius: 10px; overflow: hidden; flex: none; outline: 1px solid rgba(10,10,10,.1)"><img src="/_blob/8b14532205a87548d90b6a43fa8ccc98" alt="" style="width: 100%; height: 100%; object-fit: cover; object-position: top; display: block"></span>clients<span class="mono" style="align-self: center; height: 30px; padding: 0 12px; border-radius: 6px; background: #ECE8DF; color: #111110; display: inline-flex; align-items: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: .08em; line-height: 1">BOARDING</span></a>
+<a class="row" href="Connect.dc.html" style="display: flex; align-items: center; gap: 24px; padding-left: 140px">Your<span style="width: 200px; height: 104px; border-radius: 10px; flex: none; border: 2px dashed rgba(10,10,10,.35); display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: .02em; color: #5E5A52">this spot is open</span>project<svg width="110" height="64" viewBox="0 0 120 70" fill="none" stroke="#FF4F1F" stroke-width="12" aria-hidden="true"><path d="M0 35h104M76 7l28 28-28 28"></path></svg><span class="mono" style="align-self: center; height: 30px; padding: 0 12px; border-radius: 6px; background: #FF4F1F; color: #111110; display: inline-flex; align-items: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: .08em; line-height: 1">GATE OPEN</span></a>
+</div>
+</div>
+</section>
+
+<section class="fx" style="background: #111110; color: #ECE8DF">
+<div style="max-width: 1440px; margin: 0 auto; padding: 160px 32px 0; box-sizing: border-box">
+<!-- DEPARTURE FINALE: lines slide in from alternating sides, windows open from the centre and flip through real shots like a departure board, arrow draws; loops in the canvas, scroll-scrubbed in the build -->
+<div class="mono" style="display: flex; align-items: center; gap: 12px; color: #ECE8DF; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: .06em; text-transform: uppercase"><span style="width: 10px; height: 10px; border-radius: 50%; background: #FF4F1F"></span><span>Final call</span><span style="color: #9A958B">·</span><span>Destination</span><span class="flap" style="color: #FF4F1F"><span><span>PREMIERE</span><span>OPENING NIGHT</span><span>FULL HOUSE</span><span>YOUR LAUNCH</span><span>ENCORE</span><span>PREMIERE</span></span></span></div>
+<a class="fin" href="Connect.dc.html" aria-label="Your story deserves a premiere — start a project" style="display: block; margin-top: 40px; color: #ECE8DF; text-decoration: none">
+<span role="heading" aria-level="2" style="font-family: 'Barlow Condensed', sans-serif; font-size: 136px; line-height: 0.95; font-weight: 600; letter-spacing: -0.01em; display: flex; flex-direction: column; gap: 6px">
+<span class="fl l" style="display: flex; align-items: center; gap: 28px; padding-left: 80px">Your story<span class="win" data-tag="now showing" aria-hidden="true" style="width: 150px; height: 120px; --tilt: -3deg; --pos: center"><img src="/_blob/7110ef07e979b145cafd0138fddc45b0" alt=""><img src="/_blob/3a5a17f2c9bc3ed5a956638da5d99acf" alt=""><img src="/_blob/1789cfe5fbebba3cb72244af04ae671d" alt=""></span></span>
+<span class="fl r" style="display: flex; align-items: center; gap: 28px; padding-left: 380px"><span class="mono" style="font-size: 13px; letter-spacing: .02em; color: #9A958B; max-width: 130px; line-height: 1.4; font-family: 'JetBrains Mono', monospace">film, brand or launch</span>deserves</span>
+<span class="fl l" style="display: flex; align-items: center; gap: 28px; padding-left: 30px">a<span class="win" data-tag="scene" aria-hidden="true" style="width: 260px; height: 112px; --tilt: 3deg; --pos: center"><img src="/_blob/16430f540cb223f1ef22bce8d8126df1" alt=""><img src="/_blob/42f165d2a9e72769520742cee7976916" alt=""><img src="/_blob/61b5c5b2b9542d7d540837233f5410c6" alt=""></span>premiere</span>
+<span class="fl r" style="display: flex; align-items: center; gap: 28px; padding-left: 320px">night.<svg class="arw" width="120" height="70" viewBox="0 0 120 70" fill="none" stroke="#FF4F1F" stroke-width="12" aria-hidden="true"><path d="M0 35h104M76 7l28 28-28 28"></path></svg></span>
+</span>
+</a>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 72px; padding-top: 28px; border-top: 1px solid rgba(236,232,223,.18)">
+<a href="mailto:hello@yourdomain.com" style="font-family: 'Barlow Condensed', sans-serif; font-size: 44px; font-weight: 600; letter-spacing: -0.01em; color: #ECE8DF; text-decoration: none; border-bottom: 2px solid #ECE8DF; line-height: 1.1">[hello@yourdomain.com]</a>
+<span style="display: flex; gap: 10px; align-items: center"><span class="mono" style="color: #9A958B; margin-right: 12px">Tashkent 14:32 · replies within [24 hours]</span><a class="fbtn" href="Connect.dc.html">Start a project →</a></span>
+</div>
+</div>
+<div aria-hidden="true" style="margin-top: 96px; border-top: 1px solid rgba(236,232,223,.18); border-bottom: 1px solid rgba(236,232,223,.18); overflow: hidden; height: 52px; display: flex; align-items: center; font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: #ECE8DF; white-space: nowrap"><div class="tick"><span style="display: inline-flex; align-items: center; gap: 18px; padding-right: 18px">Flight QW-02 · kinoqwertt<span style="width: 8px; height: 8px; border-radius: 50%; background: #FF4F1F"></span></span><span style="display: inline-flex; align-items: center; gap: 18px; padding-right: 18px">Now showing<span style="width: 8px; height: 8px; border-radius: 50%; background: #FF4F1F"></span></span><span style="display: inline-flex; align-items: center; gap: 18px; padding-right: 18px">GSAP on board<span style="width: 8px; height: 8px; border-radius: 50%; background: #FF4F1F"></span></span><span style="display: inline-flex; align-items: center; gap: 18px; padding-right: 18px">TMDB + offline fallback<span style="width: 8px; height: 8px; border-radius: 50%; background: #FF4F1F"></span></span><span style="display: inline-flex; align-items: center; gap: 18px; padding-right: 18px">Live on Vercel<span style="width: 8px; height: 8px; border-radius: 50%; background: #FF4F1F"></span></span><span style="display: inline-flex; align-items: center; gap: 18px; padding-right: 18px">Next screening: your project<span style="width: 8px; height: 8px; border-radius: 50%; background: #FF4F1F"></span></span><span style="display: inline-flex; align-items: center; gap: 18px; padding-right: 18px">Gate open<span style="width: 8px; height: 8px; border-radius: 50%; background: #FF4F1F"></span></span><span style="display: inline-flex; align-items: center; gap: 18px; padding-right: 18px">Flight QW-02 · kinoqwertt<span style="width: 8px; height: 8px; border-radius: 50%; background: #FF4F1F"></span></span><span style="display: inline-flex; align-items: center; gap: 18px; padding-right: 18px">Now showing<span style="width: 8px; height: 8px; border-radius: 50%; background: #FF4F1F"></span></span><span style="display: inline-flex; align-items: center; gap: 18px; padding-right: 18px">GSAP on board<span style="width: 8px; height: 8px; border-radius: 50%; background: #FF4F1F"></span></span><span style="display: inline-flex; align-items: center; gap: 18px; padding-right: 18px">TMDB + offline fallback<span style="width: 8px; height: 8px; border-radius: 50%; background: #FF4F1F"></span></span><span style="display: inline-flex; align-items: center; gap: 18px; padding-right: 18px">Live on Vercel<span style="width: 8px; height: 8px; border-radius: 50%; background: #FF4F1F"></span></span><span style="display: inline-flex; align-items: center; gap: 18px; padding-right: 18px">Next screening: your project<span style="width: 8px; height: 8px; border-radius: 50%; background: #FF4F1F"></span></span><span style="display: inline-flex; align-items: center; gap: 18px; padding-right: 18px">Gate open<span style="width: 8px; height: 8px; border-radius: 50%; background: #FF4F1F"></span></span></div></div>
+<!-- TERMINAL FOOTER: sitemap · auto-dealing boarding passes · channels · giant wordmark rising letter by letter -->
+<footer style="max-width: 1440px; margin: 0 auto; padding: 96px 32px 28px; box-sizing: border-box; color: #ECE8DF">
+<div style="display: grid; grid-template-columns: 1fr 320px 1fr; align-items: start">
+<nav aria-label="Sitemap" style="display: flex; flex-direction: column"><span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 14px">Terminal map</span><a class="flink2" href="Main.dc.html">Home</a><a class="flink2" href="Main.dc.html#work">Work</a><a class="flink2" href="CaseQwerttclients.dc.html">qwerttclients</a><a class="flink2" href="CaseKinoqwertt.dc.html">kinoqwertt</a><a class="flink2" href="Lab.dc.html">Lab</a><a class="flink2" href="Connect.dc.html">Connect</a></nav>
+<figure aria-label="Projects deck" style="margin: 0; position: relative; width: 300px; height: 290px; justify-self: center"><div class="deal"><img src="/_blob/0d6697bf58b09957dc971f42e558da30" alt="kinoqwertt — Home" style="width: 100%; height: 190px; object-fit: cover; object-position: top; border-radius: 8px; display: block"><div style="display: flex; justify-content: space-between; align-items: center; padding: 0 4px"><span><span style="display: block; font-size: 15px; font-weight: 600">kinoqwertt — Home</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .06em; color: #5E5A52">BOARDING PASS · 02</span></span><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 6px 8px; border-radius: 5px; background: #FF4F1F; color: #111110">ADMIT ONE</span></div></div><div class="deal"><img src="/_blob/8b14532205a87548d90b6a43fa8ccc98" alt="qwerttclients — Home" style="width: 100%; height: 190px; object-fit: cover; object-position: top; border-radius: 8px; display: block"><div style="display: flex; justify-content: space-between; align-items: center; padding: 0 4px"><span><span style="display: block; font-size: 15px; font-weight: 600">qwerttclients — Home</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .06em; color: #5E5A52">BOARDING PASS · 01</span></span><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 6px 8px; border-radius: 5px; background: #FF4F1F; color: #111110">ADMIT ONE</span></div></div><div class="deal"><img src="/_blob/5806c8b1126d8615f99e4222df748327" alt="qwerttclients — Business" style="width: 100%; height: 190px; object-fit: cover; object-position: top; border-radius: 8px; display: block"><div style="display: flex; justify-content: space-between; align-items: center; padding: 0 4px"><span><span style="display: block; font-size: 15px; font-weight: 600">qwerttclients — Business</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .06em; color: #5E5A52">BOARDING PASS · 03</span></span><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 6px 8px; border-radius: 5px; background: #FF4F1F; color: #111110">ADMIT ONE</span></div></div></figure>
+<nav aria-label="Channels" style="display: flex; flex-direction: column; text-align: right"><span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 14px">Channels</span><a class="flink2" href="Connect.dc.html">Telegram</a><a class="flink2" href="Connect.dc.html">GitHub</a><a class="flink2" href="Connect.dc.html">LinkedIn</a><a class="flink2" href="Connect.dc.html">Instagram</a></nav>
+</div>
+<div style="margin-top: 80px; position: relative; border-radius: 22px; background: #ECE8DF; color: #111110; overflow: hidden">
+<div class="holes" style="position: absolute; left: 0; right: 0; top: -7px"></div>
+<div class="word" aria-label="qwertt" style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 340px; line-height: .82; letter-spacing: .01em; text-align: center; padding: 40px 0 6px; overflow: hidden; white-space: nowrap"><span style="animation-delay: 0.00s">Q</span><span style="animation-delay: 0.07s">W</span><span style="animation-delay: 0.14s">E</span><span style="animation-delay: 0.21s">R</span><span style="animation-delay: 0.28s">T</span><span style="animation-delay: 0.35s">T</span></div>
+<div style="display: flex; justify-content: space-between; align-items: center; padding: 16px 28px 22px; border-top: 2px dashed rgba(17,17,16,.3); font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: .06em; text-transform: uppercase"><span>Ticket QW-02 · kinoqwertt</span><span>Seat: yours · Gate: open · Boarding: [Q1 2027]</span><a href="#top" style="color: #111110; text-decoration: none; border-bottom: 1.5px solid #111110">Back to top ↑</a></div>
+</div>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 28px; font-size: 14px; font-weight: 600">
+<span>©2026</span>
+<span style="display: flex; gap: 18px"><a class="flink2" href="Connect.dc.html" style="font-size: 14px">Imprint</a><a class="flink2" href="Connect.dc.html" style="font-size: 14px">Privacy</a></span>
+<span>Built &amp; stamped by [Your Name]</span>
+</div>
+</footer>
+</section>
+
+<!-- fixed breadcrumb (shown at its resting place) -->
+<nav aria-label="Breadcrumb" style="position: absolute; left: 32px; top: 780px; display: flex; gap: 0; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; font-weight: 500"><a href="Main.dc.html#work" style="height: 32px; padding: 0 12px; border-radius: 6px 0 0 6px; background: #111110; color: #ECE8DF; display: inline-flex; align-items: center; text-decoration: none; border-right: 2px dashed rgba(236,232,223,.4)">← Work</a><span aria-current="page" style="height: 32px; padding: 0 12px; border-radius: 0 6px 6px 0; background: #FF4F1F; color: #111110; display: inline-flex; align-items: center; gap: 10px">Row 02 · Seat kinoqwertt</span></nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":5900}}'>
+class Component extends DCLogic {
+  bits(rows) { const o = []; rows.forEach((r) => { for (const ch of r) o.push({ bg: ch === '1' ? '#FF4F1F' : 'transparent' }); }); return o; }
+  renderVals() {
+    const home = '/_blob/0d6697bf58b09957dc971f42e558da30', title = '/_blob/b03f5eaf4414fbc1f376917a44f7405d', top = '/_blob/90c4a944b9daba37af1279840ee00fd7';
+    const media = [
+      { no: '01', h: '560px', src: home, pos: '50% 0%', alt: 'Home: trailer carousel and featured videos', cap: 'Home — trailer carousel' },
+      { no: '02', h: '560px', src: home, pos: '50% 22%', alt: 'Home: Featured Today and Top Picks rails with ratings', cap: 'Featured today & Top picks' },
+      { no: '03', h: '560px', src: home, pos: '50% 62%', alt: 'Home: streaming tabs and weekly box office', cap: 'Streaming tabs & box office' },
+      { no: '04', h: '600px', src: title, pos: '50% 0%', alt: 'Title page for Dune: Part Two with rating and where to watch', cap: 'Title page — Dune: Part Two' },
+      { no: '05', h: '560px', src: title, pos: '50% 24%', alt: 'Title page: cast and user reviews', cap: 'Cast & reviews' },
+      { no: '06', h: '560px', src: top, pos: '50% 0%', alt: 'Top 250 list with genres and filters', cap: 'Top 250 — ranked list' }
+    ];
+    const credits = [
+      { k: 'Role', v: 'Front-end development' },
+      { k: 'Stack', v: 'React 19 · Vite · GSAP' },
+      { k: 'Styling', v: 'Plain CSS, no UI kit' },
+      { k: 'Data', v: 'TMDB API + local fallback' },
+      { k: 'Extras', v: 'EN / RU · light / dark' }
+    ];
+    return {
+      media, credits,
+      markFilm: this.bits(['1010101','1111111','1000001','1000001','1000001','1111111','1010101']),
+      markTicket: this.bits(['1111111','1000001','1011101','1000001','1011001','1000001','1111111'])
+    };
+  }
+}
+</script>
+</body>
+</html>

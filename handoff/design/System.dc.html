@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>qwertt — Design system and interaction spec</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Barlow+Condensed:wght@500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+<style>
+h1,h2,h3{font-family:'Barlow Condensed',sans-serif}
+body{margin:0}
+.mono{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.02em;font-weight:500}
+</style>
+</helmet>
+<div style="width: 1440px; min-height: 2600px; background: #ECE8DF; color: #111110; font-family: 'IBM Plex Sans', sans-serif; letter-spacing: -0.03em; padding: 80px 64px; box-sizing: border-box; display: flex; flex-direction: column; gap: 96px">
+
+<div style="display: grid; grid-template-columns: 1fr 480px; gap: 64px; align-items: end">
+<div><div class="mono" style="color: #5E5A52">qwertt / Design system v2 · desktop</div><h1 style="font-family: 'Barlow Condensed', sans-serif; margin: 16px 0 0; font-size: 112px; line-height: .9; font-weight: 600; letter-spacing: -0.01em">System &amp; motion</h1></div>
+<p style="margin: 0; font-size: 18px; line-height: 1.45; color: #2E2B27">Own identity: a travel ticket. Warm paper, black ink, condensed departure-board headlines, mono for flight data, punched-hole marks and one signal-orange stamp. Every project is a trip — from brief to launch.</p>
+</div>
+
+<section>
+<div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(10,10,10,.16); padding-bottom: 14px"><h2 style="font-family: 'Barlow Condensed', sans-serif; margin: 0; font-size: 40px; font-weight: 600; letter-spacing: -0.01em">Identity — what it is made of</h2><span class="mono" style="color: #5E5A52">Element · Where it lives · What we avoid</span></div>
+<sc-for list="{{refs}}" as="r" hint-placeholder-count="5">
+<div style="display: grid; grid-template-columns: 220px 1fr 1fr; gap: 32px; padding: 18px 0; border-bottom: 1px solid rgba(10,10,10,.16)">
+<div><div style="font-size: 22px; font-weight: 600; letter-spacing: -0.01em">{{r.name}}</div><div class="mono" style="color: #5E5A52; margin-top: 4px">{{r.role}}</div></div>
+<div style="font-size: 15px; line-height: 1.5">{{r.took}}</div>
+<div style="font-size: 15px; line-height: 1.5; color: #5E5A52">{{r.left}}</div>
+</div>
+</sc-for>
+</section>
+
+<section>
+<h2 style="font-family: 'Barlow Condensed', sans-serif; margin: 0 0 24px; font-size: 40px; font-weight: 600; letter-spacing: -0.01em">Colour</h2>
+<div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px">
+<sc-for list="{{colors}}" as="c" hint-placeholder-count="6">
+<div style="border-radius: 14px; overflow: hidden; outline: 1px solid rgba(10,10,10,.12)">
+<div style="height: 110px; background: {{c.hex}}"></div>
+<div style="padding: 12px; background: #FFFFFF"><div style="font-weight: 600">{{c.name}}</div><div class="mono" style="color: #5E5A52; margin-top: 4px">{{c.hex}}</div><div style="font-size: 13px; line-height: 1.4; margin-top: 6px; color: #3B3833">{{c.use}}</div></div>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section>
+<h2 style="font-family: 'Barlow Condensed', sans-serif; margin: 0 0 24px; font-size: 40px; font-weight: 600; letter-spacing: -0.01em">Type</h2>
+<div style="border-top: 1px solid rgba(10,10,10,.16)">
+<div style="display: grid; grid-template-columns: 300px 1fr; align-items: center; padding: 16px 0; border-bottom: 1px solid rgba(10,10,10,.16)"><div class="mono" style="color: #5E5A52; line-height: 1.7">Hero / case title<br>Barlow Condensed 600 · 112–168 · −1%</div><div style="font-family: 'Barlow Condensed', sans-serif; font-size: 112px; line-height: .9; font-weight: 600; letter-spacing: -0.01em">kinoqwertt</div></div>
+<div style="display: grid; grid-template-columns: 300px 1fr; align-items: center; padding: 16px 0; border-bottom: 1px solid rgba(10,10,10,.16)"><div class="mono" style="color: #5E5A52; line-height: 1.7">Section H2<br>600 · 60–76 · −8%</div><div style="font-family: 'Barlow Condensed', sans-serif; font-size: 60px; line-height: .95; font-weight: 600; letter-spacing: -0.01em">Questions before we start</div></div>
+<div style="display: grid; grid-template-columns: 300px 1fr; align-items: center; padding: 16px 0; border-bottom: 1px solid rgba(10,10,10,.16)"><div class="mono" style="color: #5E5A52; line-height: 1.7">Lead<br>600 · 34/1.08 · −6%</div><div style="font-size: 34px; line-height: 1.08; font-weight: 600; letter-spacing: -0.01em; max-width: 800px">One place to find and book any service.</div></div>
+<div style="display: grid; grid-template-columns: 300px 1fr; align-items: center; padding: 16px 0; border-bottom: 1px solid rgba(10,10,10,.16)"><div class="mono" style="color: #5E5A52; line-height: 1.7">Title / body<br>600 24 · 500 15–17/1.45</div><div><div style="font-size: 24px; font-weight: 600; letter-spacing: -0.01em">One person, design to code</div><div style="font-size: 16px; line-height: 1.45; color: #3B3833; margin-top: 6px">You talk to the one who designs and ships it.</div></div></div>
+<div style="display: grid; grid-template-columns: 300px 1fr; align-items: center; padding: 16px 0; border-bottom: 1px solid rgba(10,10,10,.16)"><div class="mono" style="color: #5E5A52; line-height: 1.7">Label<br>JetBrains Mono 500 · 12</div><div class="mono" style="font-size: 14px">Case 01 / 02 · 2026 · Concept — frontend in progress</div></div>
+</div>
+</section>
+
+<section style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px">
+<div>
+<h2 style="font-family: 'Barlow Condensed', sans-serif; margin: 0 0 24px; font-size: 40px; font-weight: 600; letter-spacing: -0.01em">Components</h2>
+<div style="display: grid; grid-template-columns: 110px repeat(3, minmax(0, 1fr)); gap: 12px; align-items: center">
+<span></span><span class="mono" style="color: #5E5A52">Default</span><span class="mono" style="color: #5E5A52">Hover</span><span class="mono" style="color: #5E5A52">Focus</span>
+<span style="font-weight: 600">Primary</span>
+<span style="justify-self: start; height: 44px; padding: 0 18px; border-radius: 999px; background: #111110; color: #ECE8DF; display: flex; align-items: center; font-weight: 600; font-size: 14px">Start</span>
+<span style="justify-self: start; height: 44px; padding: 0 18px; border-radius: 999px; background: #2A2926; color: #ECE8DF; display: flex; align-items: center; font-weight: 600; font-size: 14px; transform: translateY(-2px)">Start</span>
+<span style="justify-self: start; height: 44px; padding: 0 18px; border-radius: 999px; background: #111110; color: #ECE8DF; display: flex; align-items: center; font-weight: 600; font-size: 14px; outline: 2px solid #FF4F1F; outline-offset: 3px">Start</span>
+<span style="font-weight: 600">Outline</span>
+<span style="justify-self: start; height: 44px; padding: 0 18px; border-radius: 999px; border: 1.5px solid #111110; display: flex; align-items: center; font-weight: 600; font-size: 14px; box-sizing: border-box">Discuss</span>
+<span style="justify-self: start; height: 44px; padding: 0 18px; border-radius: 999px; background: #111110; color: #ECE8DF; display: flex; align-items: center; font-weight: 600; font-size: 14px">Discuss</span>
+<span style="justify-self: start; height: 44px; padding: 0 18px; border-radius: 999px; border: 1.5px solid #111110; display: flex; align-items: center; font-weight: 600; font-size: 14px; outline: 2px solid #FF4F1F; outline-offset: 3px; box-sizing: border-box">Discuss</span>
+<span style="font-weight: 600">Nav link</span>
+<span style="justify-self: start; height: 30px; padding: 0 10px; display: flex; align-items: center; font-weight: 600; font-size: 14px">Work</span>
+<span style="justify-self: start; height: 30px; padding: 0 10px; border-radius: 8px; background: #111110; color: #ECE8DF; display: flex; align-items: center; font-weight: 600; font-size: 14px">Work</span>
+<span style="justify-self: start; height: 30px; padding: 0 10px; border-radius: 8px; display: flex; align-items: center; font-weight: 600; font-size: 14px; outline: 2px solid #FF4F1F; outline-offset: 2px">Work</span>
+</div>
+<div style="display: flex; gap: 16px; align-items: center; margin-top: 36px">
+<div aria-hidden="true" style="display: grid; grid-template-columns: repeat(7, 14px); grid-auto-rows: 14px"><sc-for list="{{mark}}" as="c" hint-placeholder-count="49"><div style="background: {{c.bg}}; border-radius: 50%"></div></sc-for></div>
+<p style="margin: 0; font-size: 15px; line-height: 1.5; max-width: 360px">The only decoration: a 7×7 punched-hole “q”. It appears in the hero, the contact section and the footer signature — nowhere else.</p>
+</div>
+</div>
+<div>
+<h2 style="font-family: 'Barlow Condensed', sans-serif; margin: 0 0 24px; font-size: 40px; font-weight: 600; letter-spacing: -0.01em">Layout &amp; motion</h2>
+<div style="display: flex; flex-direction: column; border-top: 1px solid rgba(10,10,10,.16)">
+<div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(10,10,10,.16)"><span style="font-weight: 600">Frame</span><span class="mono">1440 · side margin 32 · gap 24</span></div>
+<div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(10,10,10,.16)"><span style="font-weight: 600">Section rhythm</span><span class="mono">180 between sections</span></div>
+<div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(10,10,10,.16)"><span style="font-weight: 600">Radii</span><span class="mono">pill 999 · card 16 · shot 12 · nav 8</span></div>
+<div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(10,10,10,.16)"><span style="font-weight: 600">Easing</span><span class="mono">cubic-bezier(.2,.7,.2,1)</span></div>
+<div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(10,10,10,.16)"><span style="font-weight: 600">Durations</span><span class="mono">200 hover · 350 UI · 700 reveal</span></div>
+<div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(10,10,10,.16)"><span style="font-weight: 600">Reduced motion</span><span class="mono">fade only, no transforms</span></div>
+</div>
+</div>
+</section>
+
+<section>
+<div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px"><h2 style="font-family: 'Barlow Condensed', sans-serif; margin: 0; font-size: 40px; font-weight: 600; letter-spacing: -0.01em">Scroll stage — storyboard</h2><span class="mono" style="color: #5E5A52">Pinned for 400vh · wheel / trackpad only, no clicks</span></div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px">
+<sc-for list="{{board}}" as="f" hint-placeholder-count="3">
+<div>
+<div style="background: #DEDAD0; border-radius: 14px; padding: 16px; display: grid; grid-template-columns: minmax(0, 1fr) 90px; gap: 12px; height: 260px; box-sizing: border-box">
+<div style="border-radius: 8px; overflow: hidden; background: #FFFFFF; position: relative"><img src="{{f.src}}" alt="{{f.alt}}" style="width: 100%; display: block; transform: translateY({{f.y}})"><sc-if value="{{f.callout}}" hint-placeholder-val="{{false}}"><span style="position: absolute; left: 12px; top: 96px; background: #111110; color: #ECE8DF; font-size: 10px; font-weight: 600; padding: 4px 6px; border-radius: 4px">● {{f.callout}}</span></sc-if></div>
+<div style="display: flex; flex-direction: column; gap: 6px; padding-top: 4px"><sc-for list="{{f.steps}}" as="s" hint-placeholder-count="5"><div style="height: 6px; border-radius: 3px; background: {{s.bg}}"></div></sc-for></div>
+</div>
+<div style="display: flex; justify-content: space-between; margin-top: 12px"><span style="font-size: 18px; font-weight: 600; letter-spacing: -0.01em">{{f.title}}</span><span class="mono" style="color: #5E5A52">{{f.pct}}</span></div>
+<p style="margin: 6px 0 0; font-size: 14px; line-height: 1.45; color: #3B3833">{{f.text}}</p>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section>
+<div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px"><h2 style="font-family: 'Barlow Condensed', sans-serif; margin: 0; font-size: 40px; font-weight: 600; letter-spacing: -0.01em">The living “q” — storyboard</h2><span class="mono" style="color: #5E5A52">49 cells · one element travels the whole page</span></div>
+<div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px">
+<sc-for list="{{morph}}" as="m" hint-placeholder-count="5">
+<div>
+<div style="height: 200px; border-radius: 14px; background: {{m.bg}}; display: flex; align-items: center; justify-content: center; position: relative">
+<div aria-hidden="true" style="display: grid; grid-template-columns: repeat(7, 14px); grid-auto-rows: 14px"><sc-for list="{{m.cells}}" as="c" hint-placeholder-count="49"><span style="background: {{c.bg}}; border-radius: 50%; transform: {{c.tf}}"></span></sc-for></div>
+<sc-if value="{{m.cursor}}" hint-placeholder-val="{{false}}"><span style="position: absolute; left: 58%; top: 52%; width: 14px; height: 14px; border-radius: 50%; background: #111110; box-shadow: 0 0 0 10px rgba(10,10,10,.08)"></span></sc-if>
+</div>
+<div style="font-size: 17px; font-weight: 600; letter-spacing: -0.01em; margin-top: 12px">{{m.title}}</div>
+<p style="margin: 4px 0 0; font-size: 13px; line-height: 1.45; color: #3B3833">{{m.text}}</p>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section>
+<div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px"><h2 style="font-family: 'Barlow Condensed', sans-serif; margin: 0; font-size: 40px; font-weight: 600; letter-spacing: -0.01em">The deck &amp; the finale — storyboards</h2><span class="mono" style="color: #5E5A52">Scroll-scrubbed · native scroll</span></div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px">
+<sc-for list="{{deckBoard}}" as="f" hint-placeholder-count="3">
+<div>
+<div style="position: relative; height: 230px; border-radius: 14px; background: #111110; overflow: hidden">
+<sc-for list="{{f.cards}}" as="c" hint-placeholder-count="3"><div style="position: absolute; left: {{c.x}}; top: {{c.y}}; width: 96px; height: 134px; border-radius: 8px; background: {{c.bg}}; transform: rotate({{c.r}}); box-shadow: 0 10px 20px rgba(0,0,0,.6); outline: {{c.ol}}; outline-offset: -6px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; letter-spacing: -0.03em; color: #111110">{{c.t}}</div></sc-for>
+</div>
+<div style="display: flex; justify-content: space-between; margin-top: 12px"><span style="font-size: 17px; font-weight: 600; letter-spacing: -0.01em">{{f.title}}</span><span class="mono" style="color: #5E5A52">{{f.pct}}</span></div>
+<p style="margin: 4px 0 0; font-size: 13px; line-height: 1.45; color: #3B3833">{{f.text}}</p>
+</div>
+</sc-for>
+</div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 24px">
+<sc-for list="{{finaleBoard}}" as="f" hint-placeholder-count="3">
+<div>
+<div style="height: 200px; border-radius: 14px; background: #111110; color: #ECE8DF; padding: 22px; box-sizing: border-box; display: flex; flex-direction: column; gap: 4px; font-size: 30px; font-weight: 600; letter-spacing: -0.01em; line-height: 1; overflow: hidden">
+<sc-for list="{{f.lines}}" as="l" hint-placeholder-count="4"><div style="display: flex; align-items: center; gap: 8px; transform: translateX({{l.x}}); opacity: {{l.o}}">{{l.a}}<span style="width: {{l.w}}; height: 22px; border-radius: 4px; background: #9A958B; flex: none"></span>{{l.b}}</div></sc-for>
+</div>
+<div style="display: flex; justify-content: space-between; margin-top: 12px"><span style="font-size: 17px; font-weight: 600; letter-spacing: -0.01em">{{f.title}}</span><span class="mono" style="color: #5E5A52">{{f.pct}}</span></div>
+<p style="margin: 4px 0 0; font-size: 13px; line-height: 1.45; color: #3B3833">{{f.text}}</p>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section>
+<h2 style="font-family: 'Barlow Condensed', sans-serif; margin: 0 0 24px; font-size: 40px; font-weight: 600; letter-spacing: -0.01em">Interaction spec</h2>
+<div style="display: grid; grid-template-columns: 220px 160px 1fr; border-top: 1px solid rgba(10,10,10,.16)">
+<sc-for list="{{spec}}" as="s" hint-placeholder-count="10">
+<div style="padding: 13px 12px 13px 0; border-bottom: 1px solid rgba(10,10,10,.16); font-weight: 600">{{s.el}}</div>
+<div class="mono" style="padding: 15px 12px 13px 0; border-bottom: 1px solid rgba(10,10,10,.16); color: #5E5A52">{{s.trigger}}</div>
+<div style="padding: 13px 0; border-bottom: 1px solid rgba(10,10,10,.16); font-size: 15px; line-height: 1.45">{{s.does}}</div>
+</sc-for>
+</div>
+</section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":4200}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const q = ['0111100','1000010','1000010','1000010','0111110','0000010','0000011'];
+    const mark = []; q.forEach((r) => { for (const ch of r) mark.push({ bg: ch === '1' ? '#FF4F1F' : 'transparent' }); });
+    const refs = [
+      { name: 'Ticket', role: 'Shape', took: 'Header is a boarding pass with side notches; service cards are tickets with a dashed tear line and an “Admit one” stub; pricing reads Express / Full journey / Code only.', left: 'Literal plane icons and airline clichés.' },
+      { name: 'Departure board', role: 'Motion', took: 'Split-flap letters for case titles and the “Next departures” list with BOARDING / GATE OPEN status chips.', left: 'Blinking or looping flaps that never settle.' },
+      { name: 'Punched holes', role: 'Mark', took: 'The q mark is drawn from round punched holes, like a ticket validator — used in labels and the logo dot.', left: 'Square pixel glyphs.' },
+      { name: 'Barlow Condensed', role: 'Voice', took: 'Tall condensed headlines like station signage; IBM Plex Sans for reading; JetBrains Mono for times, gates and codes.', left: 'Tight negative-tracked grotesk.' },
+      { name: 'Signal orange', role: 'Stamp', took: 'One colour for stamps, active state, arrows and focus — never for body text.', left: 'Pink and gradients.' }
+    ];
+    const colors = [
+      { name: 'Paper', hex: '#ECE8DF', use: 'Main ground.' },
+      { name: 'Paper 2', hex: '#DEDAD0', use: 'Cards, problem blocks.' },
+      { name: 'Ink', hex: '#111110', use: 'Text, buttons, dark sections.' },
+      { name: 'Stone', hex: '#5E5A52', use: 'Labels on paper (6.3:1).' },
+      { name: 'Ash', hex: '#9A958B', use: 'Labels on ink (7.0:1).' },
+      { name: 'Signal orange', hex: '#FF4F1F', use: 'Stamps, active state, arrows, focus ring.' }
+    ];
+    const spec = [
+      { el: 'Header', trigger: 'Scroll', does: 'Fixed. Text colour inverts over dark sections. Active link follows the section in view.' },
+      { el: 'Nav link', trigger: 'Hover', does: 'Label rolls up and its copy rolls in (text duplicated, 350 ms); black pill fill.' },
+      { el: 'Hero', trigger: 'Load', does: 'Headline lines rise from a mask (80 ms stagger), punched-hole “q” stamps in hole by hole, preview fades up. Under 1.2 s.' },
+      { el: 'Case title', trigger: 'Scroll in', does: 'Letters settle from +4% tracking to final while the line rises 24 px.' },
+      { el: 'Scroll stage', trigger: 'Wheel / trackpad', does: 'Section pins (position: sticky) for 400vh. Scroll progress 0→1 maps to the screenshot’s translateY inside the browser frame; chapter list and progress bar follow; at chapter boundaries the screenshot cross-fades to the next page (home → venue → booking → business). Unpins at 100%.' },
+      { el: 'Stage callouts', trigger: 'Scroll progress', does: 'Orange dot + label fades in at a set progress point (e.g. 0.35 “Free times on every card”) and out 0.15 later.' },
+      { el: 'Screens', trigger: 'Hover', does: 'Lift 6 px; cursor shows “View screen”; click opens a full-size lightbox.' },
+      { el: 'Page colour', trigger: 'Scroll', does: 'Cream → black when Case 02 reaches mid-screen, back to cream at Services, black again at Contact.' },
+      { el: 'Design → Code slider', trigger: 'Drag / arrow keys', does: 'Handle moves the split between two aligned screenshots (clip-path on the design layer). Starts at 50% and eases once to 30% → 70% → 54% when it enters view, to hint it can be dragged. Keyboard: ← → move 5%, Home/End jump. role="slider" with aria-valuenow.' },
+      { el: 'Proof console', trigger: 'Scroll in view', does: 'Lines of the real npm test output type in one by one (40 ms per line, green ✔ pops with a 1-frame flash); summary line counts up to 23/23; cursor blinks at the end. Runs once.' },
+      { el: 'Living “q”', trigger: 'Cursor / scroll', does: 'Hero: cells within 80 px of the cursor push away (spring, max 18 px) and settle back. On scroll each cell tweens (stagger 10 ms, 600 ms) into the next shape: q → booking ticket at Case 01 → film frame at Case 02 → @ at Contact. Shapes are 7×7 bitmaps; cells not used fade to 0.' },
+      { el: '“Book a ___” opener', trigger: 'Scroll progress', does: 'Full-bleed ink stage, sticky ~300vh. Progress is split in 5: the word reel rolls up one word (table → haircut → room → court → ticket, 400 ms ease), the background photo cross-fades to the matching real venue photo, the side reel highlights its thumbnail (orange outline) and the 5-segment bar fills. Reduced motion: static “Book a table.” with the photo strip.' },
+      { el: 'Photo storm', trigger: 'Scroll progress', does: '16 real venue photos start scattered off-panel and rotated; as the panel crosses the viewport they fly toward the centre frame, shrink and fade into it (stagger by distance), leaving the qwerttclients home page. “50 real places.” / “One search.” fade in at the end. Reduced motion: final state.' },
+      { el: 'Book it by scrolling', trigger: 'Scroll progress', does: 'Sticky ~250vh. Step 1: venue card slides in. Step 2: Fri 23 then 18:30 get selected (chip fills blue). Step 3: Confirm button presses (scale .98 + orange tap ring), then the ticket slides down out of the slot (translateY −100% → 0, rotate 0 → 2°). Steps list updates ✓. Reduced motion: final state with ticket shown.' },
+      { el: 'The deck (Services)', trigger: 'Scroll progress', does: 'Section is sticky for ~250vh. 0–0.4: stacked face-down cards spread to the fan (−7°, 0°, 7°). 0.4–1: cards flip on Y one by one (3D, backface hidden) to show Design, Development, Motion. Reduced motion: three face-up cards, no sticky.' },
+      { el: 'Kinetic finale (Contact)', trigger: 'Scroll progress', does: 'Four lines start offset horizontally (alternating ±60–140 px) and scrub into place; inline project shots open from 0 to 230 px; orange arrow path draws (stroke-dashoffset). The whole block links to Connect. Reduced motion: final layout.' },
+      { el: 'Footer shuffle', trigger: 'Click “Next ↻”', does: 'Top card flies off (rotate + translate, 500 ms) and goes to the bottom of the stack; next real screen comes up; counter updates (03 / 11). Keyboard accessible button.' },
+      { el: 'Case page', trigger: 'Scroll / hover', does: 'Facts column is position: sticky while the numbered media column scrolls. “View app” pill: label fixed, the mono text inside loops as a marquee. “More work” rows: word — screen — word; on hover the row turns orange and the screen scales 1.05. Seat tag (Row · Seat project) fixed bottom-left; rows carry BOARDING / GATE OPEN status chips.' },
+      { el: 'FAQ', trigger: 'Click', does: 'Accordion, one open at a time, height animates 350 ms; label toggles Open + / Close −.' },
+      { el: 'Copy email', trigger: 'Click', does: 'Copies, button reads “Copied ✓” for 1.8 s; mailto fallback.' },
+      { el: 'Connect', trigger: 'Click', does: 'Drawer slides from the right, page dims, focus trapped; Esc or outside click closes.' }
+    ];
+    const steps = (n) => [0,1,2,3,4].map((i) => ({ bg: i < n ? '#111110' : 'rgba(10,10,10,.15)' }));
+    const board = [
+      { title: 'Enter — 0%', pct: 'progress 0.00', src: '/_blob/8b14532205a87548d90b6a43fa8ccc98', alt: 'Frame at start: top of the home page', y: '0px', callout: '', steps: steps(1), text: 'Section pins. The frame shows the top of the real home page; chapter 01 “Search” is active.' },
+      { title: 'Mid — 35%', pct: 'progress 0.35', src: '/_blob/8b14532205a87548d90b6a43fa8ccc98', alt: 'Frame mid-scroll: venues available today', y: '-150px', callout: 'Free times on every card', steps: steps(2), text: 'The page inside the frame has scrolled to “Available today”; a callout explains the decision.' },
+      { title: 'Next page — 70%', pct: 'progress 0.70', src: '/_blob/b79aecf9a282300e8dad140ca0fca1a9', alt: 'Frame switched to the booking step', y: '0px', callout: '', steps: steps(4), text: 'At a chapter boundary the frame cross-fades to the booking flow; at 100% the section unpins.' }
+    ];
+    const shape = (rows, on, scatter) => { const out = []; rows.forEach((r, y) => { for (let x = 0; x < 7; x++) { const isOn = r[x] === '1'; let tf = 'none'; if (scatter && isOn) { const dx = x - 4, dy = y - 3.5, d = Math.hypot(dx, dy) || 1; const k = Math.max(0, 3.2 - d) * 9; tf = 'translate(' + Math.round(dx / d * k) + 'px,' + Math.round(dy / d * k) + 'px)'; } out.push({ bg: isOn ? on : 'transparent', tf }); } }); return out; };
+    const Q = ['0111100','1000010','1000010','1000010','0111110','0000010','0000011'];
+    const morph = [
+      { title: 'Hero — rest', text: 'The q sits in the hero, drawn cell by cell on load.', bg: '#DEDAD0', cells: shape(Q, '#FF4F1F'), cursor: false },
+      { title: 'Hero — cursor near', text: 'Cells push away from the cursor and spring back.', bg: '#DEDAD0', cells: shape(Q, '#FF4F1F', true), cursor: true },
+      { title: 'Case 01 — ticket', text: 'Becomes a booking ticket next to qwerttclients.', bg: '#DEDAD0', cells: shape(['1111111','1000001','1011101','1000001','1011001','1000001','1111111'], '#FF4F1F'), cursor: false },
+      { title: 'Case 02 — film', text: 'Turns into a film frame on the dark kinoqwertt section.', bg: '#111110', cells: shape(['1010101','1111111','1000001','1000001','1000001','1111111','1010101'], '#FF4F1F'), cursor: false },
+      { title: 'Contact — @', text: 'Ends as an @ above the email: time to write.', bg: '#111110', cells: shape(['0111110','1000001','1011101','1010101','1011111','1000000','0111110'], '#FF4F1F'), cursor: false }
+    ];
+    const back = '#E2DDD0', face = '#ECE8DF', ol = '1.5px solid #111110', no = 'none';
+    const deckBoard = [
+      { title: 'Deck enters — 0%', pct: 'progress 0.00', text: 'Three cards stacked face down with the q-pattern back, slightly offset.', cards: [ { x: '140px', y: '54px', r: '-2deg', bg: back, ol, t: '' }, { x: '146px', y: '50px', r: '1deg', bg: back, ol, t: '' }, { x: '152px', y: '46px', r: '3deg', bg: back, ol, t: '' } ] },
+      { title: 'Deal — 40%', pct: 'progress 0.40', text: 'Cards slide apart to their fan positions and rotate (−7°, 0°, 7°), still face down.', cards: [ { x: '40px', y: '60px', r: '-7deg', bg: back, ol, t: '' }, { x: '146px', y: '44px', r: '0deg', bg: back, ol, t: '' }, { x: '252px', y: '60px', r: '7deg', bg: back, ol, t: '' } ] },
+      { title: 'Flip — 100%', pct: 'progress 0.40 → 1.00', text: 'Each card flips on Y (rotateY 180°, 3D, backface hidden) one after another to show its service.', cards: [ { x: '40px', y: '60px', r: '-7deg', bg: face, ol: no, t: 'Design' }, { x: '146px', y: '44px', r: '0deg', bg: face, ol: no, t: 'Development' }, { x: '252px', y: '60px', r: '7deg', bg: face, ol: no, t: 'Motion' } ] }
+    ];
+    const L = (a, b, w, x, o) => ({ a, b, w, x, o });
+    const finaleBoard = [
+      { title: 'Lines enter — 0%', pct: 'progress 0.00', text: 'Lines sit off-axis: odd lines shifted right, even lines left; inline shots closed (0 width).', lines: [ L('Let’s make', '', '0px', '120px', '.4'), L('your next', '', '0px', '-80px', '.4'), L('chapter', 'feel', '0px', '140px', '.4'), L('unforgettable →', '', '0px', '-60px', '.4') ] },
+      { title: 'Align — 60%', pct: 'progress 0.60', text: 'Lines slide into their staggered places; shots open to full width with a slight tilt.', lines: [ L('Let’s make', '', '40px', '30px', '.8'), L('your next', '', '0px', '-10px', '.8'), L('chapter', 'feel', '40px', '30px', '.8'), L('unforgettable →', '', '0px', '-10px', '.8') ] },
+      { title: 'Settled — 100%', pct: 'progress 1.00', text: 'Final layout; orange arrow draws in; whole block is one link to Connect. Hovering a shot enlarges it.', lines: [ L('Let’s make', '', '56px', '0px', '1'), L('your next', '', '0px', '0px', '1'), L('chapter', 'feel', '56px', '0px', '1'), L('unforgettable →', '', '0px', '0px', '1') ] }
+    ];
+    return { mark, refs, colors, spec, board, morph, deckBoard, finaleBoard };
+  }
+}
+</script>
+</body>
+</html>

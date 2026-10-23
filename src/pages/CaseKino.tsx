@@ -1,6 +1,8 @@
 import { useGSAP } from '../motion/useMotion'
 import { useEffect, useRef, useState } from 'react'
 import { whenStageReady } from '../app/Nav'
+import BoardingFlight from '../components/BoardingFlight'
+import FlightStart from '../components/FlightStart'
 import { Img, MaybeLink } from '../components/Common'
 import Marquee from '../components/motion/Marquee'
 import PunchMark from '../components/motion/PunchMark'
@@ -16,6 +18,8 @@ export default function CaseKino() {
   const t = useT()
   const k = useKinoText()
   const ref = useRef<HTMLDivElement>(null)
+  const hero = useRef<HTMLElement>(null)
+  const startSlot = useRef<HTMLDivElement>(null)
   const [lit, setLit] = useState(0)
 
   // Hero: title rises per line, tagline words appear one per line, the intro
@@ -32,7 +36,6 @@ export default function CaseKino() {
         split = SplitText.create(el.querySelector('h1'), { type: 'lines', mask: 'lines', aria: 'none' })
         tl.from(split.lines, { yPercent: 105, duration: 0.9, ease: 'qw.out' }, 0.1)
         tl.from(el.querySelectorAll(`.${s.tagline} span`), { y: 20, autoAlpha: 0, duration: 0.6, stagger: 0.12 }, 0.4)
-        tl.fromTo(el.querySelector(`.${s.heroMedia}`), { clipPath: 'inset(0% 50% 0% 50% round 14px)' }, { clipPath: 'inset(0% 0% 0% 0% round 14px)', duration: 1.1, ease: 'qw.inOut' }, 0.3)
         tl.from(el.querySelector(`.${s.viewSite}`), { y: 16, autoAlpha: 0, duration: 0.6 }, 0.9)
         el.querySelectorAll('[data-reveal]').forEach((n) => n.classList.add('revealed'))
         off = whenStageReady(() => tl.play())
@@ -75,7 +78,7 @@ export default function CaseKino() {
   return (
     <div ref={ref} className={s.page}>
       <SeatTag seat={k.seat} />
-      <section className={s.hero} data-theme="ink" aria-label={k.title}>
+      <section ref={hero} className={s.hero} data-theme="ink" aria-label={k.title}>
         <CabinLight />
         <span className={s.beam} aria-hidden="true">
           {Array.from({ length: 24 }, (_, i) => (
@@ -95,9 +98,8 @@ export default function CaseKino() {
               <span key={w}>{w}</span>
             ))}
           </p>
-          <div className={s.heroMedia} data-reveal>
-            <Img k="shots/kinoqwertt-home" alt={k.heroAlt} eager sizes="760px" />
-          </div>
+          {/* F27: the preview starts here and flies into the landing mat below */}
+          <FlightStart startRef={startSlot} className={s.heroSlot} hint />
           <a className={s.viewSite} href={links.kinoqwerttLive} target="_blank" rel="noopener noreferrer" data-reveal>
             <span className={s.viewLabel}>{k.viewSite}</span>
             <Marquee className={`mono ${s.viewMarquee}`} speed={40}>
@@ -105,6 +107,10 @@ export default function CaseKino() {
             </Marquee>
           </a>
         </div>
+      </section>
+
+      <section className={`wrap ${s.flightSec}`} data-theme="ink" aria-label={k.title}>
+        <BoardingFlight page="kino" video="/assets/video/kinoqwertt-reel.mp4" poster="/assets/video/kinoqwertt-reel-poster.jpg" startRef={startSlot} triggerRef={hero} eager />
       </section>
 
       <section className={`wrap ${s.detail}`} data-theme="ink">

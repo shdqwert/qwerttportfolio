@@ -1,0 +1,1525 @@
+{
+ "errors": [],
+ "log": [
+  {
+   "dir": "down",
+   "y": 29,
+   "card": [
+    988,
+    848,
+    420
+   ],
+   "chip": "Boarding",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 1.7
+   }
+  },
+  {
+   "dir": "down",
+   "y": 71,
+   "card": [
+    988,
+    806,
+    420
+   ],
+   "chip": "Boarding",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 2
+   }
+  },
+  {
+   "dir": "down",
+   "y": 137,
+   "card": [
+    988,
+    740,
+    420
+   ],
+   "chip": "Boarding",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 2.5
+   }
+  },
+  {
+   "dir": "down",
+   "y": 192,
+   "card": [
+    988,
+    685,
+    420
+   ],
+   "chip": "Boarding",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 2.8
+   }
+  },
+  {
+   "dir": "down",
+   "y": 238,
+   "card": [
+    986,
+    639,
+    422
+   ],
+   "chip": "Boarding",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 3.2
+   }
+  },
+  {
+   "dir": "down",
+   "y": 295,
+   "card": [
+    981,
+    584,
+    429
+   ],
+   "chip": "In fli2hT",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 3.4
+   }
+  },
+  {
+   "dir": "down",
+   "y": 354,
+   "card": [
+    968,
+    530,
+    445
+   ],
+   "chip": "In flight",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 3.8
+   }
+  },
+  {
+   "dir": "down",
+   "y": 397,
+   "card": [
+    955,
+    492,
+    461
+   ],
+   "chip": "In flight",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 4.1
+   }
+  },
+  {
+   "dir": "down",
+   "y": 445,
+   "card": [
+    935,
+    452,
+    484
+   ],
+   "chip": "In flight",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 4.3
+   }
+  },
+  {
+   "dir": "down",
+   "y": 501,
+   "card": [
+    903,
+    408,
+    521
+   ],
+   "chip": "In flight",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 4.5
+   }
+  },
+  {
+   "dir": "down",
+   "y": 554,
+   "card": [
+    858,
+    374,
+    572
+   ],
+   "chip": "In flight",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 4.7
+   }
+  },
+  {
+   "dir": "down",
+   "y": 605,
+   "card": [
+    800,
+    349,
+    632
+   ],
+   "chip": "In flight",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 4.9
+   }
+  },
+  {
+   "dir": "down",
+   "y": 674,
+   "card": [
+    677,
+    336,
+    759
+   ],
+   "chip": "In flight",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 5.2
+   }
+  },
+  {
+   "dir": "down",
+   "y": 714,
+   "card": [
+    592,
+    336,
+    845
+   ],
+   "chip": "In flight",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 5.4
+   }
+  },
+  {
+   "dir": "down",
+   "y": 767,
+   "card": [
+    475,
+    339,
+    961
+   ],
+   "chip": "In flight",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 5.6
+   }
+  },
+  {
+   "dir": "down",
+   "y": 820,
+   "card": [
+    372,
+    336,
+    1061
+   ],
+   "chip": "In flight",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 5.7
+   }
+  },
+  {
+   "dir": "down",
+   "y": 869,
+   "card": [
+    293,
+    327,
+    1134
+   ],
+   "chip": "In flight",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 5.9
+   }
+  },
+  {
+   "dir": "down",
+   "y": 923,
+   "card": [
+    231,
+    303,
+    1186
+   ],
+   "chip": "In flight",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 6.1
+   }
+  },
+  {
+   "dir": "down",
+   "y": 981,
+   "card": [
+    178,
+    272,
+    1223
+   ],
+   "chip": "In flight",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 6.3
+   }
+  },
+  {
+   "dir": "down",
+   "y": 1051,
+   "card": [
+    136,
+    223,
+    1241
+   ],
+   "chip": "In flight",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 6.6
+   }
+  },
+  {
+   "dir": "down",
+   "y": 1099,
+   "card": [
+    117,
+    184,
+    1246
+   ],
+   "chip": "In flight",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 6.8
+   }
+  },
+  {
+   "dir": "down",
+   "y": 1148,
+   "card": [
+    107,
+    139,
+    1247
+   ],
+   "chip": "In flight",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 7
+   }
+  },
+  {
+   "dir": "down",
+   "y": 1202,
+   "card": [
+    100,
+    89,
+    1248
+   ],
+   "chip": "LTQXN·",
+   "stamp": 0.6111,
+   "path": [
+    0.5876,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 7.2
+   }
+  },
+  {
+   "dir": "down",
+   "y": 1251,
+   "card": [
+    97,
+    41,
+    1248
+   ],
+   "chip": "LandeJ",
+   "stamp": 1,
+   "path": [
+    0.2181,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 7.4
+   }
+  },
+  {
+   "dir": "down",
+   "y": 1301,
+   "card": [
+    96,
+    -9,
+    1248
+   ],
+   "chip": "Landed",
+   "stamp": 1,
+   "path": [
+    0.0632,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 7.6
+   }
+  },
+  {
+   "dir": "down",
+   "y": 1374,
+   "card": [
+    96,
+    -81,
+    1248
+   ],
+   "chip": "Landed",
+   "stamp": 1,
+   "path": [
+    0.0048,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 7.9
+   }
+  },
+  {
+   "dir": "down",
+   "y": 1425,
+   "card": [
+    96,
+    -132,
+    1248
+   ],
+   "chip": "Landed",
+   "stamp": 1,
+   "path": [
+    0.0001,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 8.2
+   }
+  },
+  {
+   "dir": "down",
+   "y": 1469,
+   "card": [
+    96,
+    -176,
+    1248
+   ],
+   "chip": "Landed",
+   "stamp": 1,
+   "path": [
+    0,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 8.4
+   }
+  },
+  {
+   "dir": "down",
+   "y": 1518,
+   "card": [
+    96,
+    -225,
+    1248
+   ],
+   "chip": "Landed",
+   "stamp": 1,
+   "path": [
+    0,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 8.5
+   }
+  },
+  {
+   "dir": "down",
+   "y": 1567,
+   "card": [
+    96,
+    -274,
+    1248
+   ],
+   "chip": "Landed",
+   "stamp": 1,
+   "path": [
+    0,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 8.7
+   }
+  },
+  {
+   "dir": "down",
+   "y": 1631,
+   "card": [
+    96,
+    -338,
+    1248
+   ],
+   "chip": "Landed",
+   "stamp": 1,
+   "path": [
+    0,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 8.9
+   }
+  },
+  {
+   "dir": "down",
+   "y": 1693,
+   "card": [
+    96,
+    -400,
+    1248
+   ],
+   "chip": "Landed",
+   "stamp": 1,
+   "path": [
+    0,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 9.2
+   }
+  },
+  {
+   "dir": "down",
+   "y": 1755,
+   "card": [
+    96,
+    -462,
+    1248
+   ],
+   "chip": "Landed",
+   "stamp": 1,
+   "path": [
+    0,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 9.5
+   }
+  },
+  {
+   "dir": "rest",
+   "y": 1782,
+   "card": [
+    96,
+    -489,
+    1248
+   ],
+   "chip": "Landed",
+   "stamp": 1,
+   "path": [
+    0,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 10.9
+   }
+  },
+  {
+   "dir": "up",
+   "y": 1732,
+   "card": [
+    96,
+    -439,
+    1248
+   ],
+   "chip": "Landed",
+   "stamp": 1,
+   "path": [
+    0,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 11.4
+   }
+  },
+  {
+   "dir": "up",
+   "y": 1694,
+   "card": [
+    96,
+    -401,
+    1248
+   ],
+   "chip": "Landed",
+   "stamp": 1,
+   "path": [
+    0,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 11.7
+   }
+  },
+  {
+   "dir": "up",
+   "y": 1655,
+   "card": [
+    96,
+    -362,
+    1248
+   ],
+   "chip": "Landed",
+   "stamp": 1,
+   "path": [
+    0,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 11.9
+   }
+  },
+  {
+   "dir": "up",
+   "y": 1611,
+   "card": [
+    96,
+    -318,
+    1248
+   ],
+   "chip": "Landed",
+   "stamp": 1,
+   "path": [
+    0,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 12
+   }
+  },
+  {
+   "dir": "up",
+   "y": 1559,
+   "card": [
+    96,
+    -266,
+    1248
+   ],
+   "chip": "Landed",
+   "stamp": 1,
+   "path": [
+    0,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 12.2
+   }
+  },
+  {
+   "dir": "up",
+   "y": 1506,
+   "card": [
+    96,
+    -213,
+    1248
+   ],
+   "chip": "Landed",
+   "stamp": 1,
+   "path": [
+    0,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 12.4
+   }
+  },
+  {
+   "dir": "up",
+   "y": 1450,
+   "card": [
+    96,
+    -157,
+    1248
+   ],
+   "chip": "Landed",
+   "stamp": 1,
+   "path": [
+    0,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 12.6
+   }
+  },
+  {
+   "dir": "up",
+   "y": 1398,
+   "card": [
+    96,
+    -105,
+    1248
+   ],
+   "chip": "Landed",
+   "stamp": 1,
+   "path": [
+    0,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 12.8
+   }
+  },
+  {
+   "dir": "up",
+   "y": 1342,
+   "card": [
+    96,
+    -49,
+    1248
+   ],
+   "chip": "Landed",
+   "stamp": 1,
+   "path": [
+    0,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 12.9
+   }
+  },
+  {
+   "dir": "up",
+   "y": 1284,
+   "card": [
+    96,
+    9,
+    1248
+   ],
+   "chip": "Landed",
+   "stamp": 1,
+   "path": [
+    0,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 13.1
+   }
+  },
+  {
+   "dir": "up",
+   "y": 1233,
+   "card": [
+    96,
+    60,
+    1248
+   ],
+   "chip": "Landed",
+   "stamp": 1,
+   "path": [
+    0,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 13.3
+   }
+  },
+  {
+   "dir": "up",
+   "y": 1177,
+   "card": [
+    96,
+    115,
+    1248
+   ],
+   "chip": "Landed",
+   "stamp": 1,
+   "path": [
+    0.1851,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 13.5
+   }
+  },
+  {
+   "dir": "up",
+   "y": 1120,
+   "card": [
+    100,
+    171,
+    1248
+   ],
+   "chip": "IA flJ4NW",
+   "stamp": 0.543,
+   "path": [
+    0.6033,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 13.7
+   }
+  },
+  {
+   "dir": "up",
+   "y": 1058,
+   "card": [
+    110,
+    228,
+    1247
+   ],
+   "chip": "In flight",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 14
+   }
+  },
+  {
+   "dir": "up",
+   "y": 1002,
+   "card": [
+    126,
+    276,
+    1244
+   ],
+   "chip": "In flight",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 14.3
+   }
+  },
+  {
+   "dir": "up",
+   "y": 960,
+   "card": [
+    142,
+    310,
+    1239
+   ],
+   "chip": "In flight",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 14.4
+   }
+  },
+  {
+   "dir": "up",
+   "y": 914,
+   "card": [
+    164,
+    346,
+    1230
+   ],
+   "chip": "In flight",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 14.6
+   }
+  },
+  {
+   "dir": "up",
+   "y": 860,
+   "card": [
+    200,
+    382,
+    1210
+   ],
+   "chip": "In flight",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 14.8
+   }
+  },
+  {
+   "dir": "up",
+   "y": 804,
+   "card": [
+    255,
+    410,
+    1167
+   ],
+   "chip": "In flight",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 14.9
+   }
+  },
+  {
+   "dir": "up",
+   "y": 749,
+   "card": [
+    333,
+    427,
+    1098
+   ],
+   "chip": "In flight",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 15.1
+   }
+  },
+  {
+   "dir": "up",
+   "y": 694,
+   "card": [
+    443,
+    428,
+    992
+   ],
+   "chip": "In flight",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 15.3
+   }
+  },
+  {
+   "dir": "up",
+   "y": 640,
+   "card": [
+    577,
+    417,
+    860
+   ],
+   "chip": "In flight",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 15.5
+   }
+  },
+  {
+   "dir": "up",
+   "y": 588,
+   "card": [
+    690,
+    416,
+    746
+   ],
+   "chip": "In flight",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 15.7
+   }
+  },
+  {
+   "dir": "up",
+   "y": 530,
+   "card": [
+    783,
+    432,
+    650
+   ],
+   "chip": "In flight",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 15.9
+   }
+  },
+  {
+   "dir": "up",
+   "y": 472,
+   "card": [
+    857,
+    457,
+    573
+   ],
+   "chip": "In flight",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 16.1
+   }
+  },
+  {
+   "dir": "up",
+   "y": 420,
+   "card": [
+    904,
+    489,
+    521
+   ],
+   "chip": "In flight",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 16.3
+   }
+  },
+  {
+   "dir": "up",
+   "y": 355,
+   "card": [
+    948,
+    537,
+    469
+   ],
+   "chip": "In flight",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 16.7
+   }
+  },
+  {
+   "dir": "up",
+   "y": 308,
+   "card": [
+    963,
+    578,
+    451
+   ],
+   "chip": "In flight",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 16.9
+   }
+  },
+  {
+   "dir": "up",
+   "y": 258,
+   "card": [
+    976,
+    623,
+    435
+   ],
+   "chip": "In flight",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 17.2
+   }
+  },
+  {
+   "dir": "up",
+   "y": 198,
+   "card": [
+    984,
+    680,
+    425
+   ],
+   "chip": "BAardi4N",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 17.4
+   }
+  },
+  {
+   "dir": "up",
+   "y": 143,
+   "card": [
+    988,
+    734,
+    420
+   ],
+   "chip": "Boarding",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 17.8
+   }
+  },
+  {
+   "dir": "up",
+   "y": 69,
+   "card": [
+    988,
+    808,
+    420
+   ],
+   "chip": "Boarding",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 18.2
+   }
+  },
+  {
+   "dir": "up",
+   "y": 29,
+   "card": [
+    988,
+    848,
+    420
+   ],
+   "chip": "Boarding",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 18.5
+   }
+  },
+  {
+   "dir": "up",
+   "y": 9,
+   "card": [
+    988,
+    868,
+    420
+   ],
+   "chip": "Boarding",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 18.7
+   }
+  },
+  {
+   "dir": "up",
+   "y": 3,
+   "card": [
+    988,
+    874,
+    420
+   ],
+   "chip": "Boarding",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 18.9
+   }
+  },
+  {
+   "dir": "up",
+   "y": 1,
+   "card": [
+    988,
+    876,
+    420
+   ],
+   "chip": "Boarding",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 19.1
+   }
+  },
+  {
+   "dir": "top",
+   "y": 0,
+   "card": [
+    988,
+    877,
+    420
+   ],
+   "chip": "Boarding",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 20.4
+   }
+  },
+  {
+   "dir": "fast",
+   "y": 317,
+   "card": [
+    987,
+    560,
+    421
+   ],
+   "chip": "Boarding",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 20.6
+   }
+  },
+  {
+   "dir": "fast",
+   "y": 858,
+   "card": [
+    737,
+    125,
+    698
+   ],
+   "chip": "In fli2hT",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 21.1
+   }
+  },
+  {
+   "dir": "fast",
+   "y": 1315,
+   "card": [
+    127,
+    -37,
+    1243
+   ],
+   "chip": "2TMBli",
+   "stamp": 0,
+   "path": [
+    0.7,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 21.4
+   }
+  },
+  {
+   "dir": "fast",
+   "y": 1825,
+   "card": [
+    97,
+    -533,
+    1248
+   ],
+   "chip": "LandeJ",
+   "stamp": 1,
+   "path": [
+    0.3277,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 21.6
+   }
+  },
+  {
+   "dir": "fast",
+   "y": 2298,
+   "card": [
+    96,
+    -1006,
+    1248
+   ],
+   "chip": "Landed",
+   "stamp": 1,
+   "path": [
+    0.0681,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 21.8
+   }
+  },
+  {
+   "dir": "fast",
+   "y": 2793,
+   "card": [
+    96,
+    -1500,
+    1248
+   ],
+   "chip": "Landed",
+   "stamp": 1,
+   "path": [
+    0.0098,
+    0
+   ],
+   "video": {
+    "paused": false,
+    "t": 22
+   }
+  },
+  {
+   "dir": "fast",
+   "y": 3353,
+   "card": [
+    96,
+    -2060,
+    1248
+   ],
+   "chip": "Landed",
+   "stamp": 1,
+   "path": [
+    0.0006,
+    0
+   ],
+   "video": {
+    "paused": true,
+    "t": 22.1
+   }
+  },
+  {
+   "dir": "fast",
+   "y": 3884,
+   "card": [
+    96,
+    -2591,
+    1248
+   ],
+   "chip": "Landed",
+   "stamp": 1,
+   "path": [
+    0,
+    0
+   ],
+   "video": {
+    "paused": true,
+    "t": 22.1
+   }
+  },
+  {
+   "dir": "end",
+   "y": 4320,
+   "card": [
+    96,
+    -3027,
+    1248
+   ],
+   "chip": "Landed",
+   "stamp": 1,
+   "path": [
+    0,
+    0
+   ],
+   "video": {
+    "paused": true,
+    "t": 22.1
+   }
+  }
+ ]
+}

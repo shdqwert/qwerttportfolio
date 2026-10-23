@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>qwerttclients — case study</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Barlow+Condensed:wght@500;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;family=Source+Sans+3:wght@400;600;700&amp;display=swap">
+<style>
+h1,h2,h3{font-family:'Barlow Condensed',sans-serif}
+body{margin:0;background:#ECE8DF}
+a{color:#111110}a:hover{color:#5E5A52}
+.mono{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.02em;font-weight:500}
+.btn{display:inline-flex;align-items:center;gap:10px;height:48px;padding:0 22px;border-radius:999px;font:600 15px/1 'IBM Plex Sans',sans-serif;letter-spacing:-.005em;text-decoration:none;transition:background .3s,color .3s,transform .35s cubic-bezier(.2,.7,.2,1);box-sizing:border-box}
+.btn:focus-visible,.navlink:focus-visible,.flink:focus-visible,.row:focus-visible,.chap:focus-visible{outline:2px solid #FF4F1F;outline-offset:3px}
+.btn-ink{background:#111110;color:#ECE8DF}.btn-ink:hover{background:#2A2926;color:#ECE8DF;transform:translateY(-2px)}
+.btn-paper{background:#ECE8DF;color:#111110}.btn-paper:hover{background:#FFFFFF;color:#111110;transform:translateY(-2px)}
+.btn-ghost{border:1.5px solid rgba(249,244,236,.35);color:#ECE8DF}.btn-ghost:hover{background:#ECE8DF;color:#111110}
+.navlink{display:inline-flex;align-items:center;height:30px;padding:0 10px;border-radius:8px;font:600 14px/1 'IBM Plex Sans',sans-serif;letter-spacing:-.005em;color:#111110;text-decoration:none;transition:background .25s,color .25s}
+.navlink:hover{background:#111110;color:#ECE8DF}
+.flink{color:#9A958B;text-decoration:none;font:600 14px/1.6 'IBM Plex Sans',sans-serif;letter-spacing:-.005em}
+.flink:hover{color:#ECE8DF}
+.row{color:#ECE8DF;text-decoration:none;transition:color .3s}
+.row:hover{color:#FF4F1F}
+.chap{display:flex;gap:10px;align-items:center;text-decoration:none;color:#9A958B;font:600 14px/1 'IBM Plex Sans',sans-serif;letter-spacing:-.005em;padding:7px 0}
+.chap:hover{color:#111110}
+.qc{font-family:'Source Sans 3',system-ui,sans-serif;letter-spacing:0;color:#DEE4EA}
+
+/* ===== DEPARTURE FINALE + TERMINAL FOOTER (shared on every page) ===== */
+.fx{--fx-d:10s}
+.fx .fl{animation:fx-in var(--fx-d) cubic-bezier(.2,.7,.2,1) infinite both}
+.fx .fl.l{--from:-140px}.fx .fl.r{--from:160px}
+.fx .fl:nth-child(2){animation-delay:.12s}.fx .fl:nth-child(3){animation-delay:.24s}.fx .fl:nth-child(4){animation-delay:.36s}
+@keyframes fx-in{0%{transform:translateX(var(--from));opacity:.25}22%,92%{transform:none;opacity:1}100%{transform:none;opacity:0}}
+.fx .win{position:relative;flex:none;border-radius:12px;overflow:hidden;animation:fx-open var(--fx-d) cubic-bezier(.65,0,.35,1) infinite both;box-shadow:0 24px 50px -18px rgba(0,0,0,.7)}
+.fx .fl:nth-child(3) .win{animation-delay:.35s}
+@keyframes fx-open{0%,6%{clip-path:inset(0 50% 0 50% round 12px);transform:rotate(0) scale(.9)}26%,92%{clip-path:inset(0 0 0 0 round 12px);transform:rotate(var(--tilt,-3deg)) scale(1)}100%{clip-path:inset(0 0 0 0 round 12px);transform:rotate(var(--tilt,-3deg)) scale(1);opacity:0}}
+.fx .win img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--pos,top);display:block;opacity:0;animation:fx-cyc var(--fx-d) linear infinite}
+.fx .win img:nth-child(1){animation-delay:0s}.fx .win img:nth-child(2){animation-delay:calc(var(--fx-d) / -3 * 2)}.fx .win img:nth-child(3){animation-delay:calc(var(--fx-d) / -3)}
+@keyframes fx-cyc{0%{opacity:1;transform:scale(1.12) translateY(0)}30%{opacity:1;transform:scale(1) translateY(-4%)}33.3%,100%{opacity:0;transform:scale(1) translateY(-4%)}}
+.fx .win[data-tag="next"] img{opacity:1;animation:none}
+.fx .win::after{content:attr(data-tag);position:absolute;left:8px;bottom:8px;padding:4px 7px;border-radius:5px;background:#FF4F1F;color:#111110;font:500 10px/1 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase}
+.fx .arw path{stroke-dasharray:240;animation:fx-draw var(--fx-d) ease-out infinite both;animation-delay:.6s}
+@keyframes fx-draw{0%,20%{stroke-dashoffset:240}40%,100%{stroke-dashoffset:0}}
+.fx a.fin:hover .win{transform:rotate(0) scale(1.05)}
+.fx a.fin:hover .arw{transform:translateX(14px)}.fx .arw{transition:transform .4s cubic-bezier(.2,.7,.2,1)}
+.fx .flap{display:inline-block;height:1.2em;overflow:hidden;vertical-align:bottom}
+.fx .flap>span{display:flex;flex-direction:column;animation:fx-flap 7.5s steps(1) infinite}
+@keyframes fx-flap{0%{transform:translateY(0)}20%{transform:translateY(-1.2em)}40%{transform:translateY(-2.4em)}60%{transform:translateY(-3.6em)}80%{transform:translateY(-4.8em)}}
+.fx .tick{display:flex;width:max-content;animation:fx-tick 32s linear infinite}
+@keyframes fx-tick{to{transform:translateX(-50%)}}
+.fx .deal{position:absolute;inset:0 0 8px 0;border-radius:14px;background:#ECE8DF;color:#111110;padding:10px;box-sizing:border-box;display:flex;flex-direction:column;gap:10px;box-shadow:0 30px 60px -20px rgba(0,0,0,.8);animation:fx-deal 9s cubic-bezier(.65,0,.35,1) infinite both}
+.fx .deal:nth-child(2){animation-delay:-3s}.fx .deal:nth-child(3){animation-delay:-6s}
+@keyframes fx-deal{0%{transform:translate(0,0) rotate(-1.5deg);z-index:3}28%{transform:translate(0,0) rotate(-1.5deg);z-index:3}36%{transform:translate(260px,-40px) rotate(14deg);z-index:3}37%{z-index:1}45%{transform:translate(8px,14px) rotate(6deg);z-index:1}66%{transform:translate(4px,8px) rotate(-4deg);z-index:2}100%{transform:translate(0,0) rotate(-1.5deg);z-index:3}}
+.fx .word span{display:inline-block;animation:fx-rise var(--fx-d) cubic-bezier(.2,.7,.2,1) infinite both}
+@keyframes fx-rise{0%,8%{transform:translateY(60%);opacity:0}30%,100%{transform:none;opacity:1}}
+.fx .holes{background-image:radial-gradient(circle,#111110 0 5px,transparent 5.5px);background-size:22px 14px;background-position:center;height:14px}
+.fx .flink2{color:#9A958B;text-decoration:none;font:600 15px/1.7 'IBM Plex Sans',sans-serif}.fx .flink2:hover{color:#FF4F1F}
+.fx .fbtn{display:inline-flex;align-items:center;gap:10px;height:48px;padding:0 22px;border-radius:999px;font:600 15px/1 'IBM Plex Sans',sans-serif;text-decoration:none;background:#ECE8DF;color:#111110;transition:background .3s,transform .35s}
+.fx .fbtn:hover{background:#FF4F1F;color:#111110;transform:translateY(-2px)}
+.fx a:focus-visible{outline:2px solid #FF4F1F;outline-offset:3px}
+@media (prefers-reduced-motion: reduce){.fx *{animation:none !important}.fx .win img:first-child{opacity:1}}
+
+/* ===== BOARDING FLIGHT (F27): the hero media flies down into its landing mat; canvas = 8 s loop (alternate), build = scroll-scrubbed ===== */
+.flt{position:absolute;transform-origin:0 0;z-index:3;animation:flt-fly 8s cubic-bezier(.65,0,.35,1) infinite alternate both;will-change:transform}
+@keyframes flt-fly{0%,12%{transform:perspective(1800px) translate(var(--dx),var(--dy)) scale(var(--s))}
+48%{transform:perspective(1800px) translate(calc(var(--dx) * .42),calc(var(--dy) * .42)) scale(calc(var(--s) + (1 - var(--s)) * .55)) rotateX(5deg) rotateY(-6deg) rotateZ(-1.4deg)}
+84%,100%{transform:perspective(1800px) translate(0,0) scale(1)}}
+.flt .card{position:relative;width:100%;height:100%;border-radius:14px;overflow:hidden;background:#0C0C0C;box-shadow:0 0 0 1px rgba(236,232,223,.12),0 50px 90px -30px rgba(0,0,0,.95)}
+.flt video,.flt .card>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.flt .card::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.16) 50%,transparent 65%);transform:translateX(-130%);animation:flt-sheen 8s cubic-bezier(.65,0,.35,1) infinite alternate both;pointer-events:none}
+@keyframes flt-sheen{0%,30%{transform:translateX(-130%)}70%,100%{transform:translateX(130%)}}
+.flt .tag{position:absolute;left:12px;top:12px;z-index:2;display:flex;height:26px;border-radius:6px;overflow:hidden;font:500 11px/26px 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase}
+.flt .tag b{font-weight:500;background:#111110;color:#ECE8DF;padding:0 9px;border-right:2px dashed rgba(236,232,223,.35)}
+.flt .tag i{font-style:normal;background:#FF4F1F;color:#111110;padding:0 9px;position:relative;display:inline-grid}
+.flt .tag i span{grid-area:1/1}
+.flt .tag i .a{animation:flt-a 8s steps(1) infinite alternate both}.flt .tag i .b{animation:flt-b 8s steps(1) infinite alternate both}
+@keyframes flt-a{0%,15%{opacity:1}16%,100%{opacity:0}}
+@keyframes flt-b{0%,15%{opacity:0}16%,80%{opacity:1}81%,100%{opacity:0}}
+.flt .tag i .c{animation:flt-c 8s steps(1) infinite alternate both}
+@keyframes flt-c{0%,80%{opacity:0}81%,100%{opacity:1}}
+.flt-mat{position:absolute;background:#1A1917;border-radius:18px;box-shadow:inset 0 0 0 1px rgba(236,232,223,.06)}
+.flt-zone{position:absolute;border:2px dashed rgba(236,232,223,.18);border-radius:14px}
+.flt-stamp{position:absolute;z-index:4;padding:10px 16px;border:3px solid #FF4F1F;border-radius:10px;color:#FF4F1F;font:700 30px/1 'Barlow Condensed',sans-serif;letter-spacing:.06em;transform:rotate(-8deg) scale(1.3);opacity:0;animation:flt-stamp 8s cubic-bezier(.3,1.4,.5,1) infinite alternate both}
+@keyframes flt-stamp{0%,84%{opacity:0;transform:rotate(-8deg) scale(1.3)}92%,100%{opacity:1;transform:rotate(-4deg) scale(1)}}
+.flt-path{position:absolute;inset:0;pointer-events:none;z-index:1;overflow:visible}
+.flt-path path{fill:none;stroke:#FF4F1F;stroke-width:2;stroke-linecap:round;stroke-dasharray:var(--len);stroke-dashoffset:var(--len);animation:flt-path 8s cubic-bezier(.65,0,.35,1) infinite alternate both}
+@keyframes flt-path{0%,12%{stroke-dashoffset:var(--len);opacity:.7}80%{stroke-dashoffset:0;opacity:.7}100%{stroke-dashoffset:0;opacity:0}}
+.flt-hint{position:absolute;z-index:2;display:flex;align-items:center;gap:10px;font:500 12px/1 'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#9A958B;animation:flt-hint 8s linear infinite alternate both}
+@keyframes flt-hint{0%,12%{opacity:1}30%,100%{opacity:0}}
+@media (prefers-reduced-motion: reduce){.flt,.flt *,.flt-stamp,.flt-path path,.flt-hint{animation:none !important}.flt{transform:none}.flt-stamp{opacity:1;transform:rotate(-4deg)}.flt-path,.flt-hint{display:none}}
+</style>
+</helmet>
+<div style="position: relative; width: 100%; background: #ECE8DF; color: #111110; font-family: 'IBM Plex Sans', sans-serif; letter-spacing: -0.01em; overflow-x: clip">
+
+<header id="top" style="position: relative; z-index: 2; max-width: 1440px; margin: 0 auto; padding: 20px 32px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; box-sizing: border-box; background: #111110; color: #ECE8DF; max-width: none">
+<nav aria-label="Main" style="display: flex; gap: 2px"><a class="navlink" href="Main.dc.html#services" style="color: #ECE8DF">Service</a><a class="navlink" href="Main.dc.html#work" aria-current="page" style="background: #ECE8DF; color: #111110">Work</a><a class="navlink" href="Connect.dc.html" style="color: #ECE8DF">Connect</a></nav>
+<span style="font-size: 14px; font-weight: 600; color: #9A958B">[Your Name] · Designer &amp; Developer</span>
+<span style="justify-self: end; font-size: 14px; font-weight: 600"><span style="text-decoration: underline">EN</span> <span style="color: #6E6A62">RU</span></span>
+</header>
+
+<!-- 1 · HERO: split-flap departure board of real bookings -->
+<section aria-label="qwerttclients — case study" style="position: relative; background: #111110; color: #ECE8DF; padding: 72px 0 96px">
+<div style="max-width: 1440px; margin: 0 auto; padding: 0 32px; box-sizing: border-box">
+<div class="mono" style="display: flex; justify-content: space-between; color: #9A958B"><span style="display: flex; gap: 10px; align-items: center"><span aria-hidden="true" style="display: inline-grid; grid-template-columns: repeat(7, 4px); grid-auto-rows: 4px"><sc-for list="{{markTicket}}" as="c" hint-placeholder-count="49"><span style="background: {{c.bg}}; border-radius: 50%"></span></sc-for></span>Case 01 · Working product</span><span>Tashkent · today, 23 Oct</span></div>
+<!-- the board -->
+<div role="table" aria-label="Bookings board" style="margin: 48px auto 0; width: fit-content; background: #141412; border-radius: 18px; padding: 26px 30px 30px; box-shadow: inset 0 0 0 1px rgba(249,244,236,.06), 0 60px 120px -40px rgba(0,0,0,.9)">
+<div role="row" class="mono" style="display: grid; grid-template-columns: 150px 393px 312px 270px; gap: 12px; color: #9A958B; margin-bottom: 14px; padding-left: 2px"><span role="columnheader">Time</span><span role="columnheader">Place</span><span role="columnheader">What</span><span role="columnheader">Status</span></div>
+<sc-for list="{{board}}" as="r" hint-placeholder-count="5">
+<div role="row" aria-label="{{r.label}}" style="display: flex; gap: 3px; margin-top: 6px">
+<sc-for list="{{r.cells}}" as="c" hint-placeholder-count="42"><span aria-hidden="true" style="position: relative; width: 24px; height: 36px; border-radius: 3px; background: {{c.bg}}; color: {{c.fg}}; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 19px; letter-spacing: 0; box-shadow: inset 0 -1px 0 rgba(0,0,0,.6)">{{c.ch}}<span style="position: absolute; left: 0; right: 0; top: 17px; height: 1px; background: rgba(0,0,0,.55)"></span></span></sc-for>
+</div>
+</sc-for>
+</div>
+<div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: 72px">
+<h1 style="font-family: 'Barlow Condensed', sans-serif; margin: 0; font-size: 184px; line-height: 0.84; font-weight: 600; letter-spacing: -0.01em">qwerttclients</h1>
+<div style="max-width: 360px; margin-bottom: 14px">
+<p style="margin: 0; font-size: 24px; line-height: 1.12; font-weight: 600; letter-spacing: -0.01em">A city’s free times on one board. Book anything nearby — no calls.</p>
+<div class="mono" style="color: #9A958B; margin-top: 16px; display: flex; align-items: center; gap: 10px"><svg width="16" height="24" viewBox="0 0 22 32" fill="none" stroke="#ECE8DF" stroke-width="2" aria-hidden="true"><rect x="1" y="1" width="20" height="30" rx="10"></rect><line x1="11" y1="7" x2="11" y2="12"></line></svg>Scroll — the board keeps flipping</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 1b · BOARDING FLIGHT -->
+<section aria-label="Live screen recording of qwerttclients" style="position: relative; background: #111110; color: #ECE8DF">
+<div style="position: relative; max-width: 1440px; height: 1412px; margin: 0 auto">
+<!-- BOARDING FLIGHT (F27): small boarding-pass preview flies down-left into its landing mat while growing to full size, with a tilt in mid-air; the screen inside is a real screen recording (muted loop). Canvas: 8 s loop. Build: scroll-scrubbed. -->
+<div class="flt-mat" aria-hidden="true" style="left: 32px; top: 400px; width: 1376px; height: 892px"></div>
+<div class="flt-zone" aria-hidden="true" style="left: 96px; top: 456px; width: 1248px; height: 780px"></div>
+<span class="mono" aria-hidden="true" style="position: absolute; left: 52px; top: 418px; color: #9A958B">Landing · Row 01 · Gate open</span>
+<span class="mono" aria-hidden="true" style="position: absolute; left: 1188px; top: 418px; width: 200px; text-align: right; color: #9A958B">00 · live screen recording</span>
+<svg class="flt-path" width="100%" height="100%" aria-hidden="true" style="--len: 1400"><path d="M1198 171 C1258 542 887 766 720 846" pathLength="1400"></path></svg>
+<div class="flt-hint" aria-hidden="true" style="left: 988px; top: 318px"><span style="width: 8px; height: 8px; border-radius: 50%; background: #FF4F1F"></span>Watch it work — scroll ↓</div>
+<figure class="flt" style="margin: 0; left: 96px; top: 456px; width: 1248px; height: 780px; --dx: 892px; --dy: -416px; --s: 0.3365">
+<div class="card"><img src="/_blob/8778939790216098f7784faae8875097" alt=""><video src="/_blob/232bcaac5bb6ed8fdb89e8d9df3f3dbc" poster="/_blob/8778939790216098f7784faae8875097" autoplay muted loop playsinline aria-label="Screen recording of qwerttclients in night mode: home, restaurant search, the Amber venue page and Studio Noir booking"></video></div>
+<span class="tag" aria-hidden="true"><b>Row 01 · Seat qwerttclients</b><i><span class="a">Boarding</span><span class="b">In flight</span><span class="c">Landed</span></i></span>
+</figure>
+<div class="flt-stamp" aria-hidden="true" style="left: 1144px; top: 1166px">BOARDED ✓</div>
+</div>
+</section>
+
+<!-- 2 · PROBLEM: before / after -->
+<section id="problem" style="max-width: 1440px; margin: 0 auto; padding: 160px 32px 140px; box-sizing: border-box; display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 48px">
+<nav aria-label="Chapters" style="position: sticky; top: 96px; align-self: start; display: flex; flex-direction: column; border-left: 1.5px solid rgba(10,10,10,.14); padding-left: 16px">
+<sc-for list="{{chapters}}" as="c" hint-placeholder-count="8"><a class="chap" href="#problem" style="color: {{c.fg}}"><span class="mono" style="font-size: 11px">{{c.no}}</span>{{c.t}}</a></sc-for>
+</nav>
+<div>
+<div class="mono" style="color: #5E5A52">01 · The problem</div>
+<h2 style="font-family: 'Barlow Condensed', sans-serif; margin: 16px 0 0; font-size: 96px; line-height: 0.9; font-weight: 600; letter-spacing: -0.01em">Booking shouldn’t take<br>a phone call.</h2>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 64px">
+<!-- before -->
+<div style="background: #DEDAD0; border-radius: 20px; padding: 32px; display: flex; flex-direction: column; gap: 12px; min-height: 520px; box-sizing: border-box">
+<div style="display: flex; justify-content: space-between"><span class="mono" style="color: #5E5A52">Before · DMs and calls</span><span class="mono" style="color: #C9372C">2 h 46 min</span></div>
+<sc-for list="{{before}}" as="m" hint-placeholder-count="6">
+<div style="align-self: {{m.side}}; max-width: 78%; background: {{m.bg}}; color: {{m.fg}}; border-radius: 16px; padding: 12px 14px; font-size: 16px; line-height: 1.35; letter-spacing: -0.02em; font-weight: 500"><div>{{m.t}}</div><div class="mono" style="font-size: 10px; margin-top: 6px; opacity: .6">{{m.at}}</div></div>
+</sc-for>
+</div>
+<!-- after -->
+<div style="background: #111110; color: #ECE8DF; border-radius: 20px; padding: 32px; display: flex; flex-direction: column; min-height: 520px; box-sizing: border-box">
+<div style="display: flex; justify-content: space-between"><span class="mono" style="color: #9A958B">After · qwerttclients</span><span class="mono" style="color: #4ADE80">4 seconds</span></div>
+<div class="qc" style="margin-top: 28px; background: #1D2125; border-radius: 12px; overflow: hidden">
+<img src="/_blob/4a24c4cc717638ac6d744ff652ac5e07" alt="Pasta at Amber restaurant" style="width: 100%; height: 150px; object-fit: cover; display: block">
+<div style="padding: 16px 18px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; justify-content: space-between; align-items: center"><span style="font-weight: 700; font-size: 18px">Amber</span><span style="height: 20px; padding: 0 6px; border-radius: 3px; background: #164B35; color: #4BCE97; font-size: 11px; font-weight: 700; display: flex; align-items: center">INSTANT CONFIRMATION</span></div>
+<div style="font-size: 13px; color: #B6C2CF">Restaurant · Italian · Amir Temur St 45 · ★ 4.8</div>
+<div style="display: flex; gap: 6px"><span style="height: 32px; padding: 0 10px; border-radius: 4px; border: 1px solid #579DFF; color: #579DFF; font-weight: 600; font-size: 13px; display: flex; align-items: center">18:00</span><span style="height: 32px; padding: 0 10px; border-radius: 4px; background: #579DFF; color: #1D2125; font-weight: 600; font-size: 13px; display: flex; align-items: center">19:00</span><span style="height: 32px; padding: 0 10px; border-radius: 4px; border: 1px solid #E2B203; color: #E2B203; font-weight: 600; font-size: 13px; display: flex; align-items: center">20:30 · 1 LEFT</span></div>
+</div>
+</div>
+<div style="margin-top: auto; display: flex; align-items: center; gap: 14px; padding-top: 24px"><span style="width: 40px; height: 40px; border-radius: 50%; background: #216E4E; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></span><div><div style="font-size: 22px; font-weight: 600; letter-spacing: -0.01em">Table for 2 · 19:00 · Terrace</div><div class="mono" style="color: #9A958B; margin-top: 4px">Confirmed · QW-7K2M9 · reminder 2 h before</div></div></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 3 · THE CITY: real venues plotted from their real coordinates -->
+<section id="city" style="background: #111110; color: #ECE8DF">
+<div style="max-width: 1440px; margin: 0 auto; padding: 140px 32px; box-sizing: border-box">
+<div style="display: flex; justify-content: space-between; align-items: flex-end">
+<div><div class="mono" style="color: #9A958B">02 · The city</div><h2 style="font-family: 'Barlow Condensed', sans-serif; margin: 16px 0 0; font-size: 96px; line-height: 0.9; font-weight: 600; letter-spacing: -0.01em">15 places. 6 districts.<br>One search.</h2></div>
+<p style="margin: 0; max-width: 340px; font-size: 16px; line-height: 1.45; color: #C8C3B8; letter-spacing: -0.02em">Every pin is a real venue from the app’s database, placed by its own latitude and longitude. Search by name, district or “near me” — sorted by real distance.</p>
+</div>
+<div role="img" aria-label="Map of Tashkent with 15 venue pins across Mirabad, Yunusabad, Chilanzar, Old City, Mirzo Ulugbek and Shaykhontohur" style="position: relative; margin-top: 56px; height: 720px; border-radius: 20px; background: #141412; overflow: hidden; outline: 1px solid rgba(249,244,236,.08)">
+<svg width="1376" height="720" viewBox="0 0 1376 720" fill="none" aria-hidden="true" style="position: absolute; inset: 0">
+<path d="M-20 120 C 300 160, 420 300, 560 330 S 900 420, 1400 380" stroke="#24322E" stroke-width="18"></path>
+<path d="M-20 120 C 300 160, 420 300, 560 330 S 900 420, 1400 380" stroke="#2F4A44" stroke-width="2"></path>
+<path d="M120 -10 L 520 730" stroke="#262522" stroke-width="10"></path>
+<path d="M-10 520 L 1400 260" stroke="#262522" stroke-width="10"></path>
+<path d="M700 -10 C 690 200, 760 420, 720 730" stroke="#262522" stroke-width="12"></path>
+<path d="M0 640 C 400 600, 900 620, 1400 560" stroke="#1F1E1C" stroke-width="6"></path>
+<path d="M1000 -10 L 1180 730" stroke="#1F1E1C" stroke-width="6"></path>
+<circle cx="688" cy="370" r="210" stroke="#1F1E1C" stroke-width="6"></circle>
+</svg>
+<sc-for list="{{districts}}" as="d" hint-placeholder-count="6"><span class="mono" style="position: absolute; left: {{d.x}}; top: {{d.y}}; color: #6E6A62; text-transform: uppercase; letter-spacing: .12em">{{d.name}} · {{d.count}}</span></sc-for>
+<sc-for list="{{pins}}" as="p" hint-placeholder-count="15">
+<span style="position: absolute; left: {{p.x}}; top: {{p.y}}; transform: translate(-50%, -50%); display: flex; align-items: center; gap: 8px">
+<span style="width: {{p.size}}; height: {{p.size}}; border-radius: 50%; background: {{p.color}}; box-shadow: 0 0 0 5px {{p.halo}}; flex: none"></span>
+<span class="mono" style="color: {{p.label}}; white-space: nowrap; font-size: 11px">{{p.name}}</span>
+</span>
+</sc-for>
+<!-- popover on the active pin -->
+<div class="qc" style="position: absolute; left: {{pop.x}}; top: {{pop.y}}; width: 260px; background: #1D2125; border-radius: 10px; overflow: hidden; box-shadow: 0 24px 50px -10px rgba(0,0,0,.8)">
+<img src="/_blob/898ea9e0626f2eb70dd3d2a40c4457a8" alt="Amber restaurant interior" style="width: 100%; height: 110px; object-fit: cover; display: block">
+<div style="padding: 12px 14px"><div style="display: flex; justify-content: space-between; font-weight: 700"><span>Amber</span><span>★ 4.8</span></div><div style="font-size: 12px; color: #B6C2CF; margin-top: 2px">Mirabad · Amir Temur St 45 · from $25 / guest</div><div style="display: flex; gap: 4px; margin-top: 10px"><span style="height: 26px; padding: 0 8px; border-radius: 4px; border: 1px solid #579DFF; color: #579DFF; font-size: 12px; font-weight: 600; display: flex; align-items: center">12:00</span><span style="height: 26px; padding: 0 8px; border-radius: 4px; border: 1px solid #579DFF; color: #579DFF; font-size: 12px; font-weight: 600; display: flex; align-items: center">12:30</span><span style="height: 26px; padding: 0 8px; border-radius: 4px; border: 1px solid #579DFF; color: #579DFF; font-size: 12px; font-weight: 600; display: flex; align-items: center">13:00</span></div></div>
+</div>
+<div class="mono" style="position: absolute; left: 24px; bottom: 20px; display: flex; gap: 18px; color: #9A958B"><sc-for list="{{legend}}" as="l" hint-placeholder-count="5"><span style="display: flex; align-items: center; gap: 6px"><span style="width: 9px; height: 9px; border-radius: 50%; background: {{l.c}}"></span>{{l.t}}</span></sc-for></div>
+</div>
+</div>
+</section>
+
+<!-- 4 · FIVE FLOWS -->
+<section id="flows" style="max-width: 1440px; margin: 0 auto; padding: 160px 32px 140px; box-sizing: border-box">
+<div class="mono" style="color: #5E5A52">03 · Five ways to book</div>
+<div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: 16px">
+<h2 style="font-family: 'Barlow Condensed', sans-serif; margin: 0; font-size: 96px; line-height: 0.9; font-weight: 600; letter-spacing: -0.01em">A table is not<br>a hotel room.</h2>
+<p style="margin: 0 0 8px; max-width: 380px; font-size: 16px; line-height: 1.45; color: #3B3833; letter-spacing: -0.02em">Each category books the way it works in real life — then all five share one checkout, one account and one design system.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; margin-top: 56px">
+<sc-for list="{{flows}}" as="f" hint-placeholder-count="5">
+<article style="background: #1D2125; color: #DEE4EA; border-radius: 16px; overflow: hidden; outline: 1px solid rgba(10,10,10,.1); display: flex; flex-direction: column; transform: translateY({{f.dy}})">
+<div style="position: relative; height: 150px"><img src="{{f.photo}}" alt="{{f.photoAlt}}" style="width: 100%; height: 100%; object-fit: cover; display: block"><span class="mono" style="position: absolute; left: 10px; top: 10px; background: #111110; color: #ECE8DF; padding: 5px 8px; border-radius: 6px">{{f.no}} {{f.cat}}</span></div>
+<div style="padding: 16px; display: flex; flex-direction: column; gap: 12px; flex: 1">
+<div style="font-size: 22px; font-weight: 600; letter-spacing: -0.01em; line-height: 1">{{f.title}}</div>
+<ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 6px">
+<sc-for list="{{f.steps}}" as="s" hint-placeholder-count="3"><li class="mono" style="display: flex; gap: 8px; color: #B6C2CF"><span style="color: #579DFF">{{s.n}}</span>{{s.t}}</li></sc-for>
+</ol>
+<div style="margin-top: auto; border-radius: 8px; overflow: hidden; height: 160px; outline: 1px solid rgba(222,228,234,.1)"><img src="{{f.shot}}" alt="{{f.shotAlt}}" style="width: 100%; height: 100%; object-fit: cover; object-position: top left; display: block"></div>
+</div>
+</article>
+</sc-for>
+</div>
+</section>
+
+<!-- 5 · THE SYSTEM: the app's own tokens and components, rebuilt here -->
+<section id="system" style="background: #111110; color: #ECE8DF">
+<div style="max-width: 1440px; margin: 0 auto; padding: 140px 32px; box-sizing: border-box">
+<div class="mono" style="color: #9A958B">04 · Design system · night theme</div>
+<h2 style="font-family: 'Barlow Condensed', sans-serif; margin: 16px 0 0; font-size: 96px; line-height: 0.9; font-weight: 600; letter-spacing: -0.01em">A system, not<br>38 separate screens.</h2>
+<div style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 24px; margin-top: 56px">
+<div style="background: #1D2125; color: #DEE4EA; border-radius: 20px; padding: 28px; display: flex; flex-direction: column; gap: 22px">
+<div class="mono" style="color: #8C9BAB">Tokens · from the app’s stylesheet</div>
+<div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px">
+<sc-for list="{{tokens}}" as="t" hint-placeholder-count="12"><div><div style="height: 64px; border-radius: 8px; background: {{t.hex}}; outline: 1px solid rgba(222,228,234,.1)"></div><div class="mono" style="font-size: 10px; margin-top: 6px">{{t.name}}</div><div class="mono" style="font-size: 10px; color: #8C9BAB">{{t.hex}}</div></div></sc-for>
+</div>
+<div class="qc" style="display: flex; align-items: baseline; gap: 20px; border-top: 1px solid rgba(222,228,234,.12); padding-top: 18px"><span style="font-family: 'Barlow Condensed', sans-serif; font-size: 56px; font-weight: 700; letter-spacing: -.01em">Aa</span><div><div style="font-weight: 700; font-size: 16px">Source Sans 3</div><div style="font-size: 13px; color: #B6C2CF">36/40 · 28/32 · 20/24 · 16/24 · 14/20 · 12/16</div></div><span class="mono" style="margin-left: auto; color: #8C9BAB">radius 3 · 4 · 8</span></div>
+</div>
+<div class="qc" style="background: #1D2125; color: #DEE4EA; border-radius: 20px; padding: 28px; display: flex; flex-direction: column; gap: 18px">
+<div class="mono" style="color: #8C9BAB; letter-spacing: .02em">Components · real states</div>
+<div style="display: flex; gap: 8px; flex-wrap: wrap"><span style="height: 40px; padding: 0 16px; border-radius: 4px; background: #579DFF; color: #1D2125; font-weight: 600; display: flex; align-items: center">Reserve a table</span><span style="height: 40px; padding: 0 16px; border-radius: 4px; background: #85B8FF; color: #1D2125; font-weight: 600; display: flex; align-items: center">Hover</span><span style="height: 40px; padding: 0 16px; border-radius: 4px; border: 1px solid #454F59; font-weight: 600; display: flex; align-items: center">Manage booking</span><span style="height: 40px; padding: 0 16px; border-radius: 4px; background: #22272B; color: #8C9BAB; font-weight: 600; display: flex; align-items: center">Disabled</span></div>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px"><span style="height: 40px; border: 1px solid #579DFF; color: #579DFF; border-radius: 4px; font-weight: 600; display: flex; align-items: center; justify-content: center">18:00</span><span style="height: 40px; background: #579DFF; color: #1D2125; border-radius: 4px; font-weight: 600; display: flex; align-items: center; justify-content: center">19:00</span><span style="height: 40px; border: 1px solid #E2B203; color: #E2B203; border-radius: 4px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 4px">20:30 <small style="font-size: 10px">1 LEFT</small></span><span style="height: 40px; border: 1px solid #2C333A; background: #22272B; color: #8C9BAB; border-radius: 4px; display: flex; align-items: center; justify-content: center; text-decoration: line-through">21:00</span></div>
+<div style="display: flex; gap: 6px; flex-wrap: wrap"><span style="height: 20px; padding: 0 6px; border-radius: 3px; background: #164B35; color: #4BCE97; font-size: 11px; font-weight: 700; display: flex; align-items: center">CONFIRMED</span><span style="height: 20px; padding: 0 6px; border-radius: 3px; background: #1C2B41; color: #579DFF; font-size: 11px; font-weight: 700; display: flex; align-items: center">INSTANT</span><span style="height: 20px; padding: 0 6px; border-radius: 3px; background: #533F04; color: #E2B203; font-size: 11px; font-weight: 700; display: flex; align-items: center">WAITLIST</span><span style="height: 20px; padding: 0 6px; border-radius: 3px; background: #5D1F1A; color: #F87168; font-size: 11px; font-weight: 700; display: flex; align-items: center">CANCELLED</span></div>
+<div style="display: flex; align-items: center; gap: 8px; font-weight: 600"><span style="display: flex; align-items: center; gap: 6px; color: #DEE4EA"><b style="width: 22px; height: 22px; border-radius: 50%; background: #579DFF; color: #1D2125; display: flex; align-items: center; justify-content: center; font-size: 12px">1</b>Service</span><span style="width: 24px; height: 1px; background: #579DFF"></span><span style="display: flex; align-items: center; gap: 6px; color: #579DFF"><b style="width: 22px; height: 22px; border-radius: 50%; border: 1px solid #579DFF; box-shadow: 0 0 0 3px #1C2B41; display: flex; align-items: center; justify-content: center; font-size: 12px">2</b>Date &amp; time</span><span style="width: 24px; height: 1px; background: #454F59"></span><span style="display: flex; align-items: center; gap: 6px; color: #8C9BAB"><b style="width: 22px; height: 22px; border-radius: 50%; border: 1px solid #454F59; display: flex; align-items: center; justify-content: center; font-size: 12px">3</b>Confirm</span></div>
+<div style="display: flex; gap: 10px; padding: 12px 16px; border-radius: 4px; background: #1C2B41; border: 1px solid #09326C; font-size: 14px">Free cancellation until 17:00 — change the time in My bookings.</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 6 · LANGUAGES & THEMES: real renders -->
+<section id="languages" style="background: #111110; color: #ECE8DF">
+<div style="max-width: 1440px; margin: 0 auto; padding: 140px 32px; box-sizing: border-box">
+<div style="display: flex; justify-content: space-between; align-items: flex-end">
+<div><div class="mono" style="color: #9A958B">05 · Languages &amp; themes</div><h2 style="font-family: 'Barlow Condensed', sans-serif; margin: 16px 0 0; font-size: 96px; line-height: 0.9; font-weight: 600; letter-spacing: -0.01em">Day or night.<br>English, русский, oʻzbek.</h2></div>
+<div style="display: flex; flex-direction: column; gap: 10px; align-items: flex-end">
+<div style="display: flex; padding: 4px; gap: 2px; border-radius: 999px; background: #262522"><span style="height: 36px; padding: 0 14px; border-radius: 999px; display: flex; align-items: center; font-weight: 600; font-size: 14px">EN</span><span style="height: 36px; padding: 0 14px; border-radius: 999px; background: #ECE8DF; color: #111110; display: flex; align-items: center; font-weight: 600; font-size: 14px">RU</span><span style="height: 36px; padding: 0 14px; border-radius: 999px; display: flex; align-items: center; font-weight: 600; font-size: 14px">UZ</span></div>
+<div style="display: flex; padding: 4px; gap: 2px; border-radius: 999px; background: #262522"><span style="height: 36px; padding: 0 14px; border-radius: 999px; display: flex; align-items: center; font-weight: 600; font-size: 14px">☀ Day</span><span style="height: 36px; padding: 0 14px; border-radius: 999px; background: #ECE8DF; color: #111110; display: flex; align-items: center; font-weight: 600; font-size: 14px">☾ Night</span></div>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 24px; margin-top: 56px">
+<!-- day / night wipe -->
+<div role="img" aria-label="The same home page in night theme and day theme, split by a diagonal wipe" style="position: relative; height: 560px; border-radius: 16px; overflow: hidden; outline: 1px solid rgba(249,244,236,.1)">
+<img src="/_blob/85f4dbbd805f27f629f08e004818d19c" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; display: block">
+<div style="position: absolute; inset: 0; clip-path: polygon(0 0, 58% 0, 42% 100%, 0 100%)"><img src="/_blob/1b0ec49f46fa3728e7ba369e8d870e4e" alt="" style="width: 100%; height: 100%; object-fit: cover; object-position: top; display: block"></div>
+<svg aria-hidden="true" style="position: absolute; inset: 0" width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="58" y1="0" x2="42" y2="100" stroke="#FF4F1F" stroke-width="0.4"></line></svg>
+<span class="mono" style="position: absolute; left: 16px; bottom: 16px; background: #111110; color: #ECE8DF; padding: 7px 10px; border-radius: 6px">☾ Night</span>
+<span class="mono" style="position: absolute; right: 16px; bottom: 16px; background: #ECE8DF; color: #111110; padding: 7px 10px; border-radius: 6px">☀ Day</span>
+</div>
+<!-- language stack -->
+<div style="position: relative; height: 560px">
+<div style="position: absolute; left: 20px; top: 0; width: 88%; border-radius: 12px; overflow: hidden; transform: rotate(-4deg); box-shadow: 0 30px 60px -20px rgba(0,0,0,.9)"><img src="/_blob/6a46f2ed8b34ca92b42e698a29c83eda" alt="Home page in Uzbek: Yaqin atrofdagi hamma narsani bron qiling" style="width: 100%; display: block"></div>
+<div style="position: absolute; right: 0; top: 140px; width: 88%; border-radius: 12px; overflow: hidden; transform: rotate(3deg); box-shadow: 0 30px 60px -20px rgba(0,0,0,.9)"><img src="/_blob/2fdc93be3e3e68ee14da1dc76f858730" alt="Home page in Russian: Бронируйте всё, что рядом" style="width: 100%; display: block"></div>
+<div style="position: absolute; left: 40px; top: 290px; width: 88%; border-radius: 12px; overflow: hidden; transform: rotate(-1deg); box-shadow: 0 30px 60px -20px rgba(0,0,0,.9)"><img src="/_blob/d16d52b08e8635027b6bb5c402a71f06" alt="Venue page in Russian, night theme" style="width: 100%; display: block"></div>
+<span class="mono" style="position: absolute; right: 8px; bottom: 0; color: #9A958B">Dates, plurals and server messages are translated too</span>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 7 · UNDER THE HOOD -->
+<section id="engine" style="max-width: 1440px; margin: 0 auto; padding: 160px 32px 140px; box-sizing: border-box">
+<div class="mono" style="color: #5E5A52">06 · Under the hood</div>
+<h2 style="font-family: 'Barlow Condensed', sans-serif; margin: 16px 0 0; font-size: 96px; line-height: 0.9; font-weight: 600; letter-spacing: -0.01em">Not a mockup.<br>It runs.</h2>
+<div style="display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 24px; margin-top: 56px; align-items: stretch">
+<!-- architecture -->
+<div role="img" aria-label="Architecture: React single-page app talks to a Fastify API backed by SQLite; shared TypeScript types, dates and pricing are used on both sides" style="background: #FFFFFF; border-radius: 20px; padding: 32px; display: flex; flex-direction: column; gap: 16px; outline: 1px solid rgba(10,10,10,.08)">
+<div style="display: grid; grid-template-columns: 1fr 56px 1fr 56px 1fr; align-items: center">
+<div style="border: 1.5px solid #111110; border-radius: 14px; padding: 18px"><div class="mono" style="color: #5E5A52">Browser</div><div style="font-size: 22px; font-weight: 600; letter-spacing: -0.01em; margin-top: 8px">React 19</div><div style="font-size: 13px; color: #3B3833; margin-top: 4px">React Router · Vite · i18n · themes</div></div>
+<svg width="56" height="20" viewBox="0 0 56 20" fill="none" stroke="#111110" stroke-width="1.5" aria-hidden="true"><path d="M2 10h50M44 4l8 6-8 6"></path></svg>
+<div style="background: #111110; color: #ECE8DF; border-radius: 14px; padding: 18px"><div class="mono" style="color: #9A958B">API</div><div style="font-size: 22px; font-weight: 600; letter-spacing: -0.01em; margin-top: 8px">Fastify</div><div style="font-size: 13px; color: #C8C3B8; margin-top: 4px">zod validation · cookie sessions · 2FA</div></div>
+<svg width="56" height="20" viewBox="0 0 56 20" fill="none" stroke="#111110" stroke-width="1.5" aria-hidden="true"><path d="M2 10h50M44 4l8 6-8 6"></path></svg>
+<div style="border: 1.5px solid #111110; border-radius: 14px; padding: 18px"><div class="mono" style="color: #5E5A52">Data</div><div style="font-size: 22px; font-weight: 600; letter-spacing: -0.01em; margin-top: 8px">SQLite</div><div style="font-size: 13px; color: #3B3833; margin-top: 4px">node:sqlite · seed · bookings</div></div>
+</div>
+<div style="border: 1.5px dashed rgba(10,10,10,.35); border-radius: 14px; padding: 14px 18px; display: flex; justify-content: space-between; align-items: center"><span style="font-size: 17px; font-weight: 600; letter-spacing: -0.01em">Shared TypeScript</span><span class="mono" style="color: #5E5A52">types · dates · pricing — one source for both sides</span></div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: auto">
+<sc-for list="{{engine}}" as="e" hint-placeholder-count="6"><div style="background: #ECE8DF; border-radius: 10px; padding: 12px 14px"><div style="font-size: 15px; font-weight: 600; letter-spacing: -0.03em">{{e.t}}</div><div style="font-size: 12px; color: #5E5A52; margin-top: 4px; line-height: 1.35">{{e.d}}</div></div></sc-for>
+</div>
+</div>
+<!-- test console -->
+<div style="background: #111110; color: #E8E3D8; border-radius: 20px; overflow: hidden; display: flex; flex-direction: column">
+<div style="height: 40px; display: flex; align-items: center; gap: 6px; padding: 0 16px; border-bottom: 1px solid rgba(249,244,236,.1)"><span style="width: 10px; height: 10px; border-radius: 50%; background: #3A3936"></span><span style="width: 10px; height: 10px; border-radius: 50%; background: #3A3936"></span><span style="width: 10px; height: 10px; border-radius: 50%; background: #3A3936"></span><span class="mono" style="margin-left: auto; color: #9A958B">npm test</span></div>
+<div style="padding: 20px 22px; font-family: 'JetBrains Mono', monospace; font-size: 12.5px; line-height: 1.75; letter-spacing: 0">
+<sc-for list="{{tests}}" as="t" hint-placeholder-count="14"><div><span style="color: #4ADE80">✔</span> <span style="color: #D6D1C6">{{t}}</span></div></sc-for>
+<div style="margin-top: 10px"><span style="color: #9A958B">ℹ</span> tests 23 · <span style="color: #4ADE80">pass 23</span> · fail 0 · 4.6 s</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 8 · THE STRIP: vertical scroll moves the screens sideways -->
+<section id="screens" aria-label="All key screens" style="background: #111110; color: #ECE8DF; padding: 120px 0; overflow: hidden">
+<div style="max-width: 1440px; margin: 0 auto; padding: 0 32px; box-sizing: border-box; display: flex; justify-content: space-between; align-items: flex-end">
+<div><div class="mono" style="color: #9A958B">07 · Screens</div><h2 style="font-family: 'Barlow Condensed', sans-serif; margin: 16px 0 0; font-size: 72px; line-height: 0.92; font-weight: 600; letter-spacing: -0.01em">Scroll down — the screens<br>slide sideways.</h2></div>
+<span class="mono" style="color: #9A958B">03 / 08</span>
+</div>
+<div style="display: flex; gap: 24px; margin-top: 56px; padding-left: 32px; transform: translateX(-420px)">
+<sc-for list="{{strip}}" as="s" hint-placeholder-count="8">
+<figure style="margin: 0; flex: none; width: 600px"><div style="height: 375px; border-radius: 12px; overflow: hidden; background: #FFFFFF; transform: scale({{s.sc}}); transform-origin: bottom center; outline: 1px solid rgba(249,244,236,.1)"><img src="{{s.src}}" alt="{{s.alt}}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; object-position: top; display: block"></div><figcaption class="mono" style="margin-top: 14px; color: #9A958B">{{s.no}} — {{s.cap}}</figcaption></figure>
+</sc-for>
+</div>
+<div style="max-width: 1440px; margin: 40px auto 0; padding: 0 32px; box-sizing: border-box"><div style="height: 2px; background: rgba(249,244,236,.15)"><div style="width: 34%; height: 2px; background: #ECE8DF"></div></div></div>
+</section>
+
+<!-- 9 · RESULT & CTA -->
+<section style="max-width: 1440px; margin: 0 auto; padding: 160px 32px; box-sizing: border-box">
+<div class="mono" style="color: #5E5A52">08 · What this means for your project</div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 32px">
+<div style="border-top: 1.5px solid #111110; padding-top: 18px"><div style="font-size: 28px; font-weight: 600; letter-spacing: -0.01em">Design that ships</div><p style="margin: 10px 0 0; font-size: 16px; line-height: 1.45; color: #3B3833">The same person drew the 38 screens and wrote the code — nothing lost in between.</p></div>
+<div style="border-top: 1.5px solid #111110; padding-top: 18px"><div style="font-size: 28px; font-weight: 600; letter-spacing: -0.01em">Real product logic</div><p style="margin: 10px 0 0; font-size: 16px; line-height: 1.45; color: #3B3833">Availability, conflicts, pricing, waitlists, 2FA — the hard parts, tested.</p></div>
+<div style="border-top: 1.5px solid #111110; padding-top: 18px"><div style="font-size: 28px; font-weight: 600; letter-spacing: -0.01em">Ready for your market</div><p style="margin: 10px 0 0; font-size: 16px; line-height: 1.45; color: #3B3833">Three languages, two themes, local dates and currencies from day one.</p></div>
+</div>
+<a href="Connect.dc.html" style="display: flex; justify-content: space-between; align-items: center; margin-top: 120px; text-decoration: none; color: #111110; border-top: 1.5px solid #111110; border-bottom: 1.5px solid #111110; padding: 28px 0">
+<span style="font-family: 'Barlow Condensed', sans-serif; font-size: 120px; line-height: 0.9; font-weight: 600; letter-spacing: -0.01em">Need bookings,<br>not calls?</span>
+<span style="width: 180px; height: 180px; border-radius: 50%; background: #111110; color: #ECE8DF; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 6px; font-size: 18px; font-weight: 600; letter-spacing: -0.01em; flex: none">Let’s talk<svg width="48" height="28" viewBox="0 0 120 70" fill="none" stroke="#FF4F1F" stroke-width="12" aria-hidden="true"><path d="M0 35h104M76 7l28 28-28 28"></path></svg></span>
+</a>
+<div style="display: flex; gap: 10px; margin-top: 28px"><a class="btn btn-ink" href="https://claude.ai/artifact/JXSTpeT2DMm6nLsUvURD6Q">Open all 38 design screens ↗</a><span class="mono" style="align-self: center; color: #5E5A52; margin-left: 12px">Venue photos in the app: Unsplash · [live URL]</span></div>
+</section>
+
+<!-- MORE WORK -->
+<section class="fx" style="background: #111110; color: #ECE8DF">
+<div style="max-width: 1440px; margin: 0 auto; padding: 140px 32px 80px; box-sizing: border-box">
+<div class="mono" style="display: flex; align-items: center; gap: 10px; margin-left: 300px"><span aria-hidden="true" style="display: inline-grid; grid-template-columns: repeat(7, 3px); grid-auto-rows: 3px"><sc-for list="{{markFilm}}" as="c" hint-placeholder-count="49"><span style="background: {{c.bg}}; border-radius: 50%"></span></sc-for></span>Next departures</div>
+<div style="font-family: 'Barlow Condensed', sans-serif; margin-top: 28px; display: flex; flex-direction: column; gap: 8px; font-size: 136px; line-height: 1; font-weight: 600; letter-spacing: -0.01em">
+<a class="row" href="CaseKinoqwertt.dc.html" style="display: flex; align-items: center; gap: 24px; padding-left: 300px">kino<span class="win" data-tag="next" aria-hidden="true" style="width: 200px; height: 104px; border-radius: 10px; overflow: hidden; flex: none"><img src="/_blob/0d6697bf58b09957dc971f42e558da30" alt="" style="width: 100%; height: 100%; object-fit: cover; object-position: top; display: block"></span>qwertt<span class="mono" style="align-self: center; height: 30px; padding: 0 12px; border-radius: 6px; background: #ECE8DF; color: #111110; display: inline-flex; align-items: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: .08em; line-height: 1">BOARDING</span></a>
+<a class="row" href="Connect.dc.html" style="display: flex; align-items: center; gap: 24px; padding-left: 140px">Your<span style="width: 200px; height: 104px; border-radius: 10px; flex: none; border: 2px dashed rgba(249,244,236,.4); display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: .02em; color: #9A958B">this spot is open</span>project<svg width="110" height="64" viewBox="0 0 120 70" fill="none" stroke="#FF4F1F" stroke-width="12" aria-hidden="true"><path d="M0 35h104M76 7l28 28-28 28"></path></svg><span class="mono" style="align-self: center; height: 30px; padding: 0 12px; border-radius: 6px; background: #FF4F1F; color: #111110; display: inline-flex; align-items: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: .08em; line-height: 1">GATE OPEN</span></a>
+</div>
+</div>
+</section>
+<section class="fx" style="background: #111110; color: #ECE8DF">
+<div style="max-width: 1440px; margin: 0 auto; padding: 160px 32px 0; box-sizing: border-box">
+<!-- DEPARTURE FINALE: lines slide in from alternating sides, windows open from the centre and flip through real shots like a departure board, arrow draws; loops in the canvas, scroll-scrubbed in the build -->
+<div class="mono" style="display: flex; align-items: center; gap: 12px; color: #ECE8DF; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: .06em; text-transform: uppercase"><span style="width: 10px; height: 10px; border-radius: 50%; background: #FF4F1F"></span><span>Final call</span><span style="color: #9A958B">·</span><span>Destination</span><span class="flap" style="color: #FF4F1F"><span><span>BOOKINGS</span><span>NO CALLS</span><span>FULL TABLES</span><span>YOUR LAUNCH</span><span>24/7</span><span>BOOKINGS</span></span></span></div>
+<a class="fin" href="Connect.dc.html" aria-label="Your guests book while you sleep — start a project" style="display: block; margin-top: 40px; color: #ECE8DF; text-decoration: none">
+<span role="heading" aria-level="2" style="font-family: 'Barlow Condensed', sans-serif; font-size: 136px; line-height: 0.95; font-weight: 600; letter-spacing: -0.01em; display: flex; flex-direction: column; gap: 6px">
+<span class="fl l" style="display: flex; align-items: center; gap: 28px; padding-left: 80px">Your guests<span class="win" data-tag="real venues" aria-hidden="true" style="width: 230px; height: 112px; --tilt: -3deg; --pos: top"><img src="/_blob/898ea9e0626f2eb70dd3d2a40c4457a8" alt=""><img src="/_blob/1d9d4de2424251d7b690dba0ac63408c" alt=""><img src="/_blob/4a24c4cc717638ac6d744ff652ac5e07" alt=""></span></span>
+<span class="fl r" style="display: flex; align-items: center; gap: 28px; padding-left: 380px"><span class="mono" style="font-size: 13px; letter-spacing: .02em; color: #9A958B; max-width: 130px; line-height: 1.4; font-family: 'JetBrains Mono', monospace">24/7 · no phone tag</span>book</span>
+<span class="fl l" style="display: flex; align-items: center; gap: 28px; padding-left: 30px">while you<span class="win" data-tag="live product" aria-hidden="true" style="width: 230px; height: 112px; --tilt: 3deg; --pos: top"><img src="/_blob/8b14532205a87548d90b6a43fa8ccc98" alt=""><img src="/_blob/48029e7b13c04a00e6de045e6874e60f" alt=""><img src="/_blob/5806c8b1126d8615f99e4222df748327" alt=""></span>rest</span>
+<span class="fl r" style="display: flex; align-items: center; gap: 28px; padding-left: 320px">easy.<svg class="arw" width="120" height="70" viewBox="0 0 120 70" fill="none" stroke="#FF4F1F" stroke-width="12" aria-hidden="true"><path d="M0 35h104M76 7l28 28-28 28"></path></svg></span>
+</span>
+</a>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 72px; padding-top: 28px; border-top: 1px solid rgba(236,232,223,.18)">
+<a href="mailto:hello@yourdomain.com" style="font-family: 'Barlow Condensed', sans-serif; font-size: 44px; font-weight: 600; letter-spacing: -0.01em; color: #ECE8DF; text-decoration: none; border-bottom: 2px solid #ECE8DF; line-height: 1.1">[hello@yourdomain.com]</a>
+<span style="display: flex; gap: 10px; align-items: center"><span class="mono" style="color: #9A958B; margin-right: 12px">Tashkent 14:32 · replies within [24 hours]</span><a class="fbtn" href="Connect.dc.html">Start a project →</a></span>
+</div>
+</div>
+<div aria-hidden="true" style="margin-top: 96px; border-top: 1px solid rgba(236,232,223,.18); border-bottom: 1px solid rgba(236,232,223,.18); overflow: hidden; height: 52px; display: flex; align-items: center; font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: #ECE8DF; white-space: nowrap"><div class="tick"><span style="display: inline-flex; align-items: center; gap: 18px; padding-right: 18px">Flight QW-01 · qwerttclients<span style="width: 8px; height: 8px; border-radius: 50%; background: #FF4F1F"></span></span><span style="display: inline-flex; align-items: center; gap: 18px; padding-right: 18px">Departed on time<span style="width: 8px; height: 8px; border-radius: 50%; background: #FF4F1F"></span></span><span style="display: inline-flex; align-items: center; gap: 18px; padding-right: 18px">3 languages<span style="width: 8px; height: 8px; border-radius: 50%; background: #FF4F1F"></span></span><span style="display: inline-flex; align-items: center; gap: 18px; padding-right: 18px">Night mode on board<span style="width: 8px; height: 8px; border-radius: 50%; background: #FF4F1F"></span></span><span style="display: inline-flex; align-items: center; gap: 18px; padding-right: 18px">23/23 tests passed<span style="width: 8px; height: 8px; border-radius: 50%; background: #FF4F1F"></span></span><span style="display: inline-flex; align-items: center; gap: 18px; padding-right: 18px">Next stop: your business<span style="width: 8px; height: 8px; border-radius: 50%; background: #FF4F1F"></span></span><span style="display: inline-flex; align-items: center; gap: 18px; padding-right: 18px">Gate open<span style="width: 8px; height: 8px; border-radius: 50%; background: #FF4F1F"></span></span><span style="display: inline-flex; align-items: center; gap: 18px; padding-right: 18px">Flight QW-01 · qwerttclients<span style="width: 8px; height: 8px; border-radius: 50%; background: #FF4F1F"></span></span><span style="display: inline-flex; align-items: center; gap: 18px; padding-right: 18px">Departed on time<span style="width: 8px; height: 8px; border-radius: 50%; background: #FF4F1F"></span></span><span style="display: inline-flex; align-items: center; gap: 18px; padding-right: 18px">3 languages<span style="width: 8px; height: 8px; border-radius: 50%; background: #FF4F1F"></span></span><span style="display: inline-flex; align-items: center; gap: 18px; padding-right: 18px">Night mode on board<span style="width: 8px; height: 8px; border-radius: 50%; background: #FF4F1F"></span></span><span style="display: inline-flex; align-items: center; gap: 18px; padding-right: 18px">23/23 tests passed<span style="width: 8px; height: 8px; border-radius: 50%; background: #FF4F1F"></span></span><span style="display: inline-flex; align-items: center; gap: 18px; padding-right: 18px">Next stop: your business<span style="width: 8px; height: 8px; border-radius: 50%; background: #FF4F1F"></span></span><span style="display: inline-flex; align-items: center; gap: 18px; padding-right: 18px">Gate open<span style="width: 8px; height: 8px; border-radius: 50%; background: #FF4F1F"></span></span></div></div>
+<!-- TERMINAL FOOTER: sitemap · auto-dealing boarding passes · channels · giant wordmark rising letter by letter -->
+<footer style="max-width: 1440px; margin: 0 auto; padding: 96px 32px 28px; box-sizing: border-box; color: #ECE8DF">
+<div style="display: grid; grid-template-columns: 1fr 320px 1fr; align-items: start">
+<nav aria-label="Sitemap" style="display: flex; flex-direction: column"><span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 14px">Terminal map</span><a class="flink2" href="Main.dc.html">Home</a><a class="flink2" href="Main.dc.html#work">Work</a><a class="flink2" href="CaseQwerttclients.dc.html">qwerttclients</a><a class="flink2" href="CaseKinoqwertt.dc.html">kinoqwertt</a><a class="flink2" href="Lab.dc.html">Lab</a><a class="flink2" href="Connect.dc.html">Connect</a></nav>
+<figure aria-label="Projects deck" style="margin: 0; position: relative; width: 300px; height: 290px; justify-self: center"><div class="deal"><img src="/_blob/8b14532205a87548d90b6a43fa8ccc98" alt="qwerttclients — Home" style="width: 100%; height: 190px; object-fit: cover; object-position: top; border-radius: 8px; display: block"><div style="display: flex; justify-content: space-between; align-items: center; padding: 0 4px"><span><span style="display: block; font-size: 15px; font-weight: 600">qwerttclients — Home</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .06em; color: #5E5A52">BOARDING PASS · 01</span></span><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 6px 8px; border-radius: 5px; background: #FF4F1F; color: #111110">ADMIT ONE</span></div></div><div class="deal"><img src="/_blob/0d6697bf58b09957dc971f42e558da30" alt="kinoqwertt — Home" style="width: 100%; height: 190px; object-fit: cover; object-position: top; border-radius: 8px; display: block"><div style="display: flex; justify-content: space-between; align-items: center; padding: 0 4px"><span><span style="display: block; font-size: 15px; font-weight: 600">kinoqwertt — Home</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .06em; color: #5E5A52">BOARDING PASS · 02</span></span><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 6px 8px; border-radius: 5px; background: #FF4F1F; color: #111110">ADMIT ONE</span></div></div><div class="deal"><img src="/_blob/5806c8b1126d8615f99e4222df748327" alt="qwerttclients — Business" style="width: 100%; height: 190px; object-fit: cover; object-position: top; border-radius: 8px; display: block"><div style="display: flex; justify-content: space-between; align-items: center; padding: 0 4px"><span><span style="display: block; font-size: 15px; font-weight: 600">qwerttclients — Business</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .06em; color: #5E5A52">BOARDING PASS · 03</span></span><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 6px 8px; border-radius: 5px; background: #FF4F1F; color: #111110">ADMIT ONE</span></div></div></figure>
+<nav aria-label="Channels" style="display: flex; flex-direction: column; text-align: right"><span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 14px">Channels</span><a class="flink2" href="Connect.dc.html">Telegram</a><a class="flink2" href="Connect.dc.html">GitHub</a><a class="flink2" href="Connect.dc.html">LinkedIn</a><a class="flink2" href="Connect.dc.html">Instagram</a></nav>
+</div>
+<div style="margin-top: 80px; position: relative; border-radius: 22px; background: #ECE8DF; color: #111110; overflow: hidden">
+<div class="holes" style="position: absolute; left: 0; right: 0; top: -7px"></div>
+<div class="word" aria-label="qwertt" style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 340px; line-height: .82; letter-spacing: .01em; text-align: center; padding: 40px 0 6px; overflow: hidden; white-space: nowrap"><span style="animation-delay: 0.00s">Q</span><span style="animation-delay: 0.07s">W</span><span style="animation-delay: 0.14s">E</span><span style="animation-delay: 0.21s">R</span><span style="animation-delay: 0.28s">T</span><span style="animation-delay: 0.35s">T</span></div>
+<div style="display: flex; justify-content: space-between; align-items: center; padding: 16px 28px 22px; border-top: 2px dashed rgba(17,17,16,.3); font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: .06em; text-transform: uppercase"><span>Ticket QW-01 · qwerttclients</span><span>Seat: yours · Gate: open · Boarding: [Q1 2027]</span><a href="#top" style="color: #111110; text-decoration: none; border-bottom: 1.5px solid #111110">Back to top ↑</a></div>
+</div>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 28px; font-size: 14px; font-weight: 600">
+<span>©2026</span>
+<span style="display: flex; gap: 18px"><a class="flink2" href="Connect.dc.html" style="font-size: 14px">Imprint</a><a class="flink2" href="Connect.dc.html" style="font-size: 14px">Privacy</a></span>
+<span>Built &amp; stamped by [Your Name]</span>
+</div>
+</footer>
+</section>
+
+<!-- fixed breadcrumb (resting place) -->
+<nav aria-label="Breadcrumb" style="position: absolute; left: 32px; top: 92px; display: flex; gap: 0; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; font-weight: 500; z-index: 3"><a href="Main.dc.html#work" style="height: 32px; padding: 0 12px; border-radius: 6px 0 0 6px; background: #111110; color: #ECE8DF; display: inline-flex; align-items: center; text-decoration: none; border-right: 2px dashed rgba(236,232,223,.4)">← Work</a><span aria-current="page" style="height: 32px; padding: 0 12px; border-radius: 0 6px 6px 0; background: #FF4F1F; color: #111110; display: inline-flex; align-items: center; gap: 10px">Row 01 · Seat qwerttclients</span></nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":11000}}'>
+class Component extends DCLogic {
+  bits(rows, on) { const o = []; rows.forEach((r) => { for (const ch of r) o.push({ bg: ch === '1' ? on : 'transparent' }); }); return o; }
+  renderVals() {
+    const pink = '#FF4F1F';
+    // split-flap board
+    const pad = (s, n) => (s + ' '.repeat(n)).slice(0, n);
+    const rowsData = [
+      ['09:30', 'PULSE STUDIO', 'YOGA CLASS', 'CONFIRMED', false],
+      ['12:00', 'AMBER', 'TABLE FOR 2', 'CONFIRMED', false],
+      ['18:30', 'STUDIO NOIR', 'HAIRCUT', 'CONFIRMED', true],
+      ['19:00', 'RIVERSIDE', 'COURT 1', 'CONFIRMED', false],
+      ['20:00', 'BLUE ROOM JAZZ', 'TICKETS X2', 'DOORS 1900', false]
+    ];
+    const board = rowsData.map(([t, p, w, s, active]) => {
+      const text = pad(t, 5) + ' ' + pad(p, 14) + ' ' + pad(w, 11) + ' ' + pad(s, 10);
+      const cells = [...text].map((ch, i) => {
+        const inStatus = i >= 33;
+        return { ch: ch === ' ' ? '' : ch, bg: ch === ' ' ? '#1C1B19' : '#262522', fg: active && inStatus ? pink : (active ? '#FFFFFF' : '#E8E3D8') };
+      });
+      return { cells, label: t + ', ' + p + ', ' + w + ', ' + s };
+    });
+    const chapters = ['Problem', 'The city', 'Five flows', 'System', 'Languages', 'Under the hood', 'Screens', 'Result'].map((t, i) => ({ no: String(i + 1).padStart(2, '0'), t, fg: i === 0 ? '#111110' : '#9A958B' }));
+    const before = [
+      { t: 'Hi! Do you have a table for 2 tonight?', at: '17:02 · sent', side: 'flex-end', bg: '#111110', fg: '#ECE8DF' },
+      { t: 'Seen', at: '17:40', side: 'flex-end', bg: 'transparent', fg: '#5E5A52' },
+      { t: 'Missed call × 3', at: '18:05 – 18:31', side: 'flex-start', bg: '#FFFFFF', fg: '#C9372C' },
+      { t: 'Hello? Anyone?', at: '18:52 · sent', side: 'flex-end', bg: '#111110', fg: '#ECE8DF' },
+      { t: 'Sorry, we are full tonight.', at: '19:48', side: 'flex-start', bg: '#FFFFFF', fg: '#111110' }
+    ];
+    // map: project real coordinates
+    const places = [
+      ['Amber', 41.289832, 69.274704, 'restaurant'], ['Oq Saroy', 41.32252, 69.224288, 'restaurant'], ['City Dental Clinic', 41.277736, 69.207576, 'salon'],
+      ['Studio Noir', 41.270176, 69.202944, 'salon'], ['Sakura House', 41.292196, 69.277692, 'restaurant'], ['Tavola', 41.295184, 69.278664, 'restaurant'],
+      ['Merion Hotel', 41.319208, 69.255256, 'hotel'], ['Pulse Studio', 41.336868, 69.334364, 'sport'], ['Sage & Stone', 41.289748, 69.278892, 'salon'],
+      ['Corner Cup', 41.297524, 69.27678, 'restaurant'], ['Riverside Sports Club', 41.313532, 69.24838, 'sport'], ['Nomad Coworking', 41.369176, 69.281984, 'sport'],
+      ['Ambar Bistro', 41.363248, 69.284744, 'restaurant'], ['Blue Room Jazz Night', 41.332152, 69.335888, 'event'], ['Amber Hair Studio', 41.336472, 69.34016, 'salon']
+    ];
+    const colors = { restaurant: '#ECE8DF', salon: '#C8C3B8', hotel: '#9A958B', sport: '#4ADE80', event: '#FF4F1F' };
+    const X = (lng) => Math.round(80 + (lng - 69.195) / (69.35 - 69.195) * 1180);
+    const Y = (lat) => Math.round(50 + (41.378 - lat) / (41.378 - 41.262) * 620);
+    const hidden = ['Sakura House', 'Tavola', 'Sage & Stone', 'Corner Cup', 'Amber Hair Studio', 'City Dental Clinic'];
+    const pins = places.map(([name, lat, lng, k]) => {
+      const active = name === 'Amber';
+      return { name: hidden.includes(name) ? '' : name, x: X(lng) + 'px', y: Y(lat) + 'px', color: active ? pink : colors[k], halo: active ? 'rgba(255,79,31,.25)' : 'rgba(249,244,236,.06)', size: active ? '16px' : '10px', label: active ? '#FF4F1F' : '#C8C3B8' };
+    });
+    const pop = { x: (X(69.274704) + 24) + 'px', y: (Y(41.289832) - 40) + 'px' };
+    const districts = [
+      ['Yunusabad', 2, 69.27, 41.375], ['Shaykhontohur', 2, 69.235, 41.33], ['Old City', 1, 69.205, 41.335], ['Mirzo Ulugbek', 3, 69.31, 41.35], ['Mirabad', 5, 69.285, 41.282], ['Chilanzar', 2, 69.196, 41.262]
+    ].map(([name, count, lng, lat]) => ({ name, count, x: X(lng) + 'px', y: Y(lat) + 'px' }));
+    const legend = [['Food & drink', colors.restaurant], ['Beauty & health', colors.salon], ['Hotels', colors.hotel], ['Sport & work', colors.sport], ['Events', colors.event]].map(([t, c]) => ({ t, c }));
+    const S = (arr) => arr.map((t, i) => ({ n: String(i + 1).padStart(2, '0'), t }));
+    const flows = [
+      { no: '01', cat: 'Restaurant', title: 'Table & seating', photo: '/_blob/898ea9e0626f2eb70dd3d2a40c4457a8', photoAlt: 'Restaurant dining room', steps: S(['Date & time', 'Party size', 'Terrace, hall or bar']), shot: '/_blob/ee2b72545bdc83758aa5438bd30fea81', shotAlt: 'Restaurant booking: date, lunch and dinner times', dy: '0px' },
+      { no: '02', cat: 'Salon', title: 'Service & specialist', photo: '/_blob/1d9d4de2424251d7b690dba0ac63408c', photoAlt: 'Barbershop interior', steps: S(['Service', 'Specialist or “any”', 'Free time']), shot: '/_blob/b79aecf9a282300e8dad140ca0fca1a9', shotAlt: 'Barber booking: services and specialists', dy: '28px' },
+      { no: '03', cat: 'Hotel', title: 'Dates & room', photo: '/_blob/2d5404a3485162fceb74dcea9a88a33a', photoAlt: 'Hotel room', steps: S(['Check-in & out', 'Guests', 'Room & extras']), shot: '/_blob/d6dfc9dfe6e83027f1a2482de4316d88', shotAlt: 'Hotel booking: two-month calendar and guests', dy: '0px' },
+      { no: '04', cat: 'Sport', title: 'Court & duration', photo: '/_blob/1c5012ef5783eb057a130c9e4a2fab1e', photoAlt: 'Tennis court', steps: S(['Court', 'Day & start', '60 · 90 · 120 min']), shot: '/_blob/b8c622a25189ba1cbd5c57ef1484747b', shotAlt: 'Sports booking: courts, days and durations', dy: '28px' },
+      { no: '05', cat: 'Event', title: 'Date & tickets', photo: '/_blob/92012b59b6d66b8b38f65e61079fc24c', photoAlt: 'Jazz stage', steps: S(['Show date', 'Ticket type', 'Quantity']), shot: '/_blob/43444907c7c74a8f84d72b522d8a9cb3', shotAlt: 'Event booking: show dates and ticket types', dy: '0px' }
+    ];
+    const tokens = [['ink', '#DEE4EA'], ['ink-2', '#B6C2CF'], ['ink-3', '#8C9BAB'], ['bg', '#161A1D'], ['surface', '#1D2125'], ['line-strong', '#454F59'], ['accent', '#579DFF'], ['accent-tint', '#1C2B41'], ['success', '#4BCE97'], ['warn', '#E2B203'], ['danger', '#F87168'], ['success-tint', '#164B35']].map(([name, hex]) => ({ name, hex }));
+    const engine = [
+      { t: 'Live availability', d: 'Slots computed per venue, staff and duration' },
+      { t: 'No double booking', d: 'Conflicts blocked on the server' },
+      { t: 'Waitlist', d: 'Guests notified when a slot frees up' },
+      { t: 'Two-step login', d: 'TOTP codes, rate-limited sign-in' },
+      { t: 'Calendar export', d: '.ics for every booking' },
+      { t: 'Smart search', d: 'Latin and Cyrillic spellings, near me' }
+    ];
+    const tests = [
+      'signup, session, logout and duplicate email',
+      'wrong credentials and rate limit after five attempts',
+      'restaurant: availability, booking and conflict when the area is full',
+      'past slots and past dates cannot be booked',
+      'salon: overlapping time is blocked, “any specialist” picks a free one',
+      'hotel: price matches the design example and inventory is respected',
+      'sport: duration blocks the following hours',
+      'event: ticket limit and totals',
+      'booking access: owner, guest key, strangers; change and cancel',
+      'reviews are only for guests whose visit is completed',
+      'two-step verification: setup, login with code, disable',
+      'waitlist is notified when a slot is released',
+      'near me sorts by real distance',
+      'text search understands Russian, Uzbek and Cyrillic spelling'
+    ];
+    const strip = [
+      ['/_blob/f15a6dc0c226bc3f87481cdcef905ae3', 'Scroll-driven intro', 'Intro: categories orbit the logo'],
+      ['/_blob/8b14532205a87548d90b6a43fa8ccc98', 'Home', 'Home page with search and venues'],
+      ['/_blob/48029e7b13c04a00e6de045e6874e60f', 'Search & filters', 'Search results with filters'],
+      ['/_blob/348e0e76027a8074f7f3c46b67842e27', 'Venue page', 'Amber venue page'],
+      ['/_blob/ee2b72545bdc83758aa5438bd30fea81', 'Restaurant booking', 'Restaurant booking calendar'],
+      ['/_blob/5806c8b1126d8615f99e4222df748327', 'Owner dashboard', 'Business dashboard'],
+      ['/_blob/d16d52b08e8635027b6bb5c402a71f06', 'Night theme · RU', 'Venue page, Russian, night'],
+      ['/_blob/11d399288d20da6cd88955a8d57592c4', 'Where it started', 'Original design canvas']
+    ].map(([src, cap, alt], i) => ({ src, cap, alt, no: String(i + 1).padStart(2, '0'), sc: i === 2 ? '1' : '0.92' }));
+    return {
+      board, chapters, before, pins, pop, districts, legend, flows, tokens, engine, tests, strip,
+      markTicket: this.bits(['1111111','1000001','1011101','1000001','1011001','1000001','1111111'], pink),
+      markFilm: this.bits(['1010101','1111111','1000001','1000001','1000001','1111111','1010101'], pink)
+    };
+  }
+}
+</script>
+</body>
+</html>

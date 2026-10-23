@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>qwertt — Connect overlay</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Barlow+Condensed:wght@500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+<style>
+h1,h2,h3{font-family:'Barlow Condensed',sans-serif}
+body{margin:0}
+a{color:#111110}a:hover{color:#111110}
+.mono{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.04em;text-transform:uppercase;font-weight:500}
+.pick{height:38px;padding:0 14px;border-radius:999px;border:1px solid rgba(14,14,12,.22);background:transparent;font:500 14px/1 'IBM Plex Sans',sans-serif;color:#111110;cursor:pointer;transition:background .2s,color .2s}
+.pick:hover{border-color:#111110}
+.pick:focus-visible,.field:focus-visible,.send:focus-visible,.close:focus-visible{outline:2px solid #FF4F1F;outline-offset:2px}
+.field{width:100%;height:48px;border:1px solid rgba(14,14,12,.22);border-radius:12px;background:#FBF8F2;padding:0 14px;font:500 15px 'IBM Plex Sans',sans-serif;color:#111110;box-sizing:border-box}
+.send{height:54px;border-radius:999px;border:none;background:#111110;color:#FFFFFF;font:600 16px 'IBM Plex Sans',sans-serif;cursor:pointer;transition:background .3s}
+.send:hover{background:#2A2926}
+.close{height:40px;padding:0 16px;border-radius:999px;border:1.5px solid #111110;background:transparent;font:600 14px 'IBM Plex Sans',sans-serif;cursor:pointer}
+.close:hover{background:#111110;color:#ECE8DF}
+</style>
+</helmet>
+<div style="width: 1440px; height: 900px; position: relative; overflow: hidden; background: #ECE8DF; font-family: 'IBM Plex Sans', sans-serif; color: #111110">
+<div aria-hidden="true" style="position: absolute; inset: 0; padding: 150px 64px; box-sizing: border-box">
+<div style="font-family: 'Barlow Condensed', sans-serif; font-size: 112px; line-height: .92; font-weight: 600; letter-spacing: -0.01em; text-align: center">Websites people<br>love to use.</div>
+</div>
+<div aria-hidden="true" style="position: absolute; inset: 0; background: rgba(14,14,12,.62)"></div>
+<div aria-hidden="true" class="mono" style="position: absolute; left: 64px; bottom: 48px; color: #ECE8DF; display: flex; gap: 24px"><span>Esc to close</span><span>Click outside to close</span></div>
+
+<aside role="dialog" aria-label="Connect" style="position: absolute; right: 16px; top: 16px; bottom: 16px; width: 700px; background: #ECE8DF; border-radius: 24px; padding: 28px 36px; box-sizing: border-box; display: flex; flex-direction: column; gap: 20px; box-shadow: 0 40px 80px rgba(0,0,0,.35)">
+<div style="display: flex; justify-content: space-between; align-items: center">
+<div style="display: flex; gap: 4px; padding: 4px; background: #DEDAD0; border-radius: 999px">
+<span style="height: 36px; padding: 0 16px; border-radius: 999px; background: #111110; color: #ECE8DF; display: flex; align-items: center; font-size: 14px; font-weight: 600">Contact</span>
+<span style="height: 36px; padding: 0 16px; border-radius: 999px; display: flex; align-items: center; font-size: 14px; font-weight: 600">Pricing</span>
+<span style="height: 36px; padding: 0 16px; border-radius: 999px; display: flex; align-items: center; font-size: 14px; font-weight: 600">FAQ</span>
+</div>
+<a class="close" href="Main.dc.html" style="display: inline-flex; align-items: center; text-decoration: none; color: #111110">Close ✕</a>
+</div>
+
+<div style="background: #111110; color: #ECE8DF; border-radius: 18px; padding: 22px 24px; display: flex; flex-direction: column; gap: 14px">
+<div class="mono" style="display: flex; justify-content: space-between; color: #A8A398"><span>Email — fastest reply</span><span>Tashkent 14:32 · online</span></div>
+<div style="display: flex; justify-content: space-between; align-items: center">
+<span style="font-size: 34px; font-weight: 600; letter-spacing: -0.01em">[hello@yourdomain.com]</span>
+<button type="button" onClick="{{copy}}" class="mono" style="height: 36px; padding: 0 14px; border-radius: 999px; border: none; background: {{copyBg}}; color: {{copyFg}}; cursor: pointer">{{copyLabel}}</button>
+</div>
+<div style="display: flex; gap: 20px; font-size: 15px; color: #C9C4B8"><span>Telegram @[your_handle]</span><span>LinkedIn /in/[your-name]</span></div>
+</div>
+
+<form style="display: flex; flex-direction: column; gap: 16px">
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+<label style="display: flex; flex-direction: column; gap: 6px"><span class="mono" style="color: #57534B">Your name</span><input class="field" type="text" placeholder="Jane Doe"></label>
+<label style="display: flex; flex-direction: column; gap: 6px"><span class="mono" style="color: #57534B">Email</span><input class="field" type="email" placeholder="jane@company.com"></label>
+</div>
+<fieldset style="border: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px">
+<legend class="mono" style="color: #57534B; padding: 0; margin-bottom: 8px">What do you need?</legend>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{services}}" as="s" hint-placeholder-count="5"><button type="button" class="pick" onClick="{{s.pick}}" aria-pressed="{{s.on}}" style="background: {{s.bg}}; color: {{s.fg}}">{{s.label}}</button></sc-for>
+</div>
+</fieldset>
+<fieldset style="border: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px">
+<legend class="mono" style="color: #57534B; padding: 0; margin-bottom: 8px">Budget</legend>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{budgets}}" as="b" hint-placeholder-count="4"><button type="button" class="pick" onClick="{{b.pick}}" aria-pressed="{{b.on}}" style="background: {{b.bg}}; color: {{b.fg}}">{{b.label}}</button></sc-for>
+</div>
+</fieldset>
+<label style="display: flex; flex-direction: column; gap: 6px"><span class="mono" style="color: #57534B">Tell me about the project</span><textarea class="field" placeholder="Goals, timeline, links to references…" style="height: 84px; padding: 12px 14px; resize: none"></textarea></label>
+<button type="button" class="send">Send brief →</button>
+</form>
+
+<div style="margin-top: auto; border-top: 1px solid rgba(14,14,12,.16)">
+<div style="display: flex; justify-content: space-between; align-items: center; height: 46px; border-bottom: 1px solid rgba(14,14,12,.16); font-size: 16px; font-weight: 600"><span>Do you take development-only projects?</span><span class="mono">Open +</span></div>
+<div style="display: flex; justify-content: space-between; align-items: center; height: 46px; font-size: 16px; font-weight: 600"><span>Can I edit the site myself after launch?</span><span class="mono">Open +</span></div>
+</div>
+</aside>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { svc: ['Website design'], budget: '[Range B]', copied: false }; }
+  renderVals() {
+    const st = this.state;
+    const on = { bg: '#111110', fg: '#ECE8DF' }, off = { bg: 'transparent', fg: '#111110' };
+    const services = ['Website design', 'Development', 'Redesign', 'Motion / WebGL', 'Not sure yet'].map((label) => {
+      const sel = st.svc.includes(label);
+      return { label, on: sel ? 'true' : 'false', ...(sel ? on : off), pick: () => this.setState({ svc: sel ? st.svc.filter((x) => x !== label) : [...st.svc, label] }) };
+    });
+    const budgets = ['[Range A]', '[Range B]', '[Range C]', 'Let’s discuss'].map((label) => {
+      const sel = st.budget === label;
+      return { label, on: sel ? 'true' : 'false', ...(sel ? on : off), pick: () => this.setState({ budget: label }) };
+    });
+    return {
+      services, budgets,
+      copyLabel: st.copied ? 'Copied ✓' : 'Click to copy',
+      copyBg: st.copied ? '#1E9E5A' : '#ECE8DF',
+      copyFg: st.copied ? '#FFFFFF' : '#111110',
+      copy: () => { this.setState({ copied: true }); setTimeout(() => this.setState({ copied: false }), 1800); }
+    };
+  }
+}
+</script>
+</body>
+</html>

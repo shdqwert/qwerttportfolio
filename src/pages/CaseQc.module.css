@@ -239,12 +239,3 @@ span.pin { cursor: default; }
 
 /* engine.ts: holds still while the page scrolls (targeted, so the class toggle stays cheap) */
 :global(.is-scrolling) .pinOn { animation-play-state: paused; }
-
-/* 1b — F27 boarding flight */
-.flightSec { background: var(--ink); color: var(--paper); padding: 0 0 120px; }
-.flightIn { position: relative; padding-top: 400px; }
-.flightStart { position: absolute; right: var(--gutter); top: 40px; width: 420px; }
-@media (max-width: 1023px), (prefers-reduced-motion: reduce), (pointer: coarse) {
-  .flightIn { padding-top: 40px; }
-  .flightStart { display: none; }
-}

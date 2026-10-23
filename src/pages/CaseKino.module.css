@@ -10,9 +10,8 @@
 .kicker { position: absolute; left: var(--gutter); top: 120px; display: flex; align-items: center; gap: 10px; }
 .h1 { position: absolute; left: var(--gutter); top: 150px; font-size: clamp(96px, 11.67vw, 168px); line-height: .86; }
 .tagline { position: absolute; left: 212px; top: 430px; font-size: 24px; line-height: 1.05; font-weight: 600; display: flex; flex-direction: column; }
-.heroSlot { position: absolute; right: var(--gutter); bottom: 60px; width: min(760px, 55%); }
-.flightSec { padding-top: 32px; }
-@media (prefers-reduced-motion: reduce), (pointer: coarse) { .heroSlot { visibility: hidden; } }
+.heroMedia { position: absolute; right: var(--gutter); bottom: 60px; width: min(760px, 55%); aspect-ratio: 760 / 475; border-radius: 14px; overflow: hidden; background: var(--ink-3); box-shadow: 0 40px 80px -30px rgba(0, 0, 0, .9); outline: 1px solid rgba(249, 244, 236, .1); }
+.heroMedia img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
 .viewSite { position: absolute; left: 212px; bottom: 60px; display: inline-flex; align-items: center; height: 48px; border-radius: 999px; background: var(--paper); color: var(--ink); text-decoration: none; overflow: hidden; width: 300px; }
 .viewLabel { flex: none; padding: 0 18px; font-size: 15px; font-weight: 600; border-right: 1px solid rgba(10, 10, 10, .2); height: 100%; display: flex; align-items: center; }
 .viewMarquee { flex: 1; min-width: 0; color: var(--stone); padding-left: 14px; }
@@ -41,8 +40,8 @@
 
 @media (max-width: 1023px) {
   .heroIn { height: auto; padding: 140px var(--gutter) 60px; display: flex; flex-direction: column; gap: 24px; }
-  .kicker, .h1, .tagline, .viewSite { position: relative; left: auto; top: auto; right: auto; bottom: auto; }
-  .heroSlot { display: none; }
+  .kicker, .h1, .tagline, .heroMedia, .viewSite { position: relative; left: auto; top: auto; right: auto; bottom: auto; }
+  .heroMedia { width: 100%; }
   .detail { grid-template-columns: minmax(0, 1fr); }
   .aside { position: static; }
   .panel { padding: 40px 20px; }

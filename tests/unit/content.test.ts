@@ -9,7 +9,6 @@ import { homeRu } from '../../src/content/pages/home.ru'
 import { texts as kino } from '../../src/content/pages/kino'
 import { texts as lab } from '../../src/content/pages/lab'
 import { texts as qc } from '../../src/content/pages/qc'
-import { flightText } from '../../src/content/pages/flight'
 
 // Every RU object must have exactly the EN shape: same keys, same array
 // lengths, same value types (so no section silently renders in English).
@@ -25,8 +24,7 @@ describe('RU copy mirrors EN', () => {
     ['home', homeEn, homeRu],
     ['qc', qc.en, qc.ru],
     ['kino', kino.en, kino.ru],
-    ['lab', lab.en, lab.ru],
-    ['flight', flightText.en, flightText.ru]
+    ['lab', lab.en, lab.ru]
   ])('%s', (_, a, b) => {
     expect(shape(b)).toEqual(shape(a))
   })

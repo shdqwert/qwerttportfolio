@@ -1,5 +1,6 @@
 import { useReveal } from '../lib/motion.js'
 import PixelMark from './PixelMark.jsx'
+import { Scramble, Split } from './Reveal.jsx'
 import ScreenGallery from './ScreenGallery.jsx'
 import ScrollStage from './ScrollStage.jsx'
 
@@ -7,7 +8,7 @@ export function NumberedList({ title, items }) {
   const [ref, cls] = useReveal({ threshold: 0.2 })
   return (
     <div>
-      <h3 className="h3">{title}</h3>
+      <Scramble as="h3" className="h3" text={title} />
       <ol className={`numlist ${cls}`} ref={ref}>
         {items.map(([t, d], i) => (
           <li className="numlist__row" key={t} style={{ '--i': i }}>
@@ -26,19 +27,18 @@ export function NumberedList({ title, items }) {
 // Case template shared by both projects (light and dark).
 export default function CaseStudy({ project, aside, after }) {
   const dark = project.theme === 'dark'
-  const [titleRef, titleCls] = useReveal({ threshold: 0.5 })
   const [factsRef, factsCls] = useReveal({ threshold: 0.3 })
   const [cardsRef, cardsCls] = useReveal({ threshold: 0.2 })
 
   return (
     <>
       <div className="mono case__meta">
-        <span>{project.index}</span>
-        <span>{project.meta}</span>
+        <Scramble text={project.index} />
+        <Scramble text={project.meta} />
       </div>
-      <div className={`case__head ${titleCls}`} ref={titleRef}>
+      <div className="case__head">
         <PixelMark shape={project.mark} from={project.markFrom} cell={14} />
-        <h2 className="case__title">{project.title}</h2>
+        <Split as="h2" className="case__title" text={project.title} stagger={35} seed={dark ? 9 : 4} />
       </div>
       <p className="lead case__lead">{project.lead}</p>
       <dl className={`facts ${factsCls}`} ref={factsRef}>

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useT } from '../content/i18n.jsx'
 import { images } from '../content/shared.js'
 import { clamp, prefersReduced } from '../lib/motion.js'
+import { PixelTiles, Scramble } from './Reveal.jsx'
 
 const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2)
 
@@ -84,7 +85,7 @@ export default function CompareSlider() {
     <div className="compare">
       <div className="compare__head">
         <div>
-          <div className="mono muted">{compare.label}</div>
+          <Scramble className="mono muted" text={compare.label} />
           <h3 className="compare__title">
             {compare.title[0]}
             <br />
@@ -121,6 +122,7 @@ export default function CompareSlider() {
         </div>
         <span className="mono compare__tag compare__tag--design">{compare.designTag}</span>
         <span className="mono compare__tag compare__tag--built">{compare.builtTag}</span>
+        <PixelTiles cols={16} rows={7} seed={31} />
       </div>
     </div>
   )

@@ -5,6 +5,7 @@ import { clamp, useReducedMotion, useScrollProgress } from '../lib/motion.js'
 import BrowserFrame from './BrowserFrame.jsx'
 import { ConnectLink } from './ConnectContext.jsx'
 import PixelMark from './PixelMark.jsx'
+import { Split } from './Reveal.jsx'
 
 export default function Hero() {
   const { hero, owner } = useT()
@@ -37,11 +38,9 @@ export default function Hero() {
         areaRef.current = el
       }}
     >
-      <h1 className="hero__title">
+      <h1 className="hero__title" aria-label={hero.lines.join(' ')}>
         {hero.lines.map((line, i) => (
-          <span className="mask" key={line}>
-            <span className="hero__line" style={{ '--i': i }}>{line}</span>
-          </span>
+          <Split key={line} load text={line} stagger={20} seed={i + 1} className="hero__line" style={{ '--line': i }} aria-hidden="true" />
         ))}
       </h1>
       <div className="hero__mark">

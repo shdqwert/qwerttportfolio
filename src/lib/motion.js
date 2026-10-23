@@ -2,6 +2,12 @@ import { useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } fr
 
 const useIsoLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect
 
+// Deterministic pseudo-random in [0, 1) — same on server and client.
+export const rnd = (i, seed = 1) => {
+  const x = Math.sin(i * 12.9898 + seed * 78.233) * 43758.5453
+  return x - Math.floor(x)
+}
+
 export const clamp = (v, min = 0, max = 1) => Math.min(max, Math.max(min, v))
 
 // ---- media queries -------------------------------------------------------
@@ -89,17 +95,18 @@ export function useScrollProgress(fn, { enabled = true } = {}) {
 // `rv` class that hides it, then `is-in` once it enters the viewport.
 export function useReveal({ threshold = 0.2, rootMargin = '0px 0px -8% 0px', once = true } = {}) {
   const ref = useRef(null)
-  const [state, setState] = useState('idle') // idle | armed | in
+  // idle (SSR) | shown (visible without animation) | armed (hidden, waiting) | in (animating in)
+  const [state, setState] = useState('idle')
   useIsoLayoutEffect(() => {
     const el = ref.current
     if (!el || prefersReduced()) {
-      setState('in')
+      setState('shown')
       return
     }
     const r = el.getBoundingClientRect()
     const alreadyVisible = r.top < window.innerHeight * 0.92 && r.bottom > 0
     if (alreadyVisible) {
-      setState('in')
+      setState('shown')
       return
     }
     setState('armed')
@@ -116,7 +123,7 @@ export function useReveal({ threshold = 0.2, rootMargin = '0px 0px -8% 0px', onc
     return () => io.disconnect()
   }, [threshold, rootMargin, once])
   const className = state === 'armed' ? 'rv' : state === 'in' ? 'rv is-in' : ''
-  return [ref, className, state === 'in']
+  return [ref, className, state === 'in' || state === 'shown']
 }
 
 // Animate a number from 0 to `to` once `run` turns true.

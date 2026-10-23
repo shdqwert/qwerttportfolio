@@ -4,6 +4,8 @@ import ConnectDrawer from './components/ConnectDrawer.jsx'
 import { ConnectProvider } from './components/ConnectContext.jsx'
 import Hero from './components/Hero.jsx'
 import InkSection from './components/InkSection.jsx'
+import Konami from './components/Konami.jsx'
+import Playground from './components/Playground.jsx'
 import ProofConsole from './components/ProofConsole.jsx'
 import { About, Contact, Faq, Footer, KinoAside, QcHelps, Services, ValueColumns } from './components/Sections.jsx'
 import SiteHeader from './components/SiteHeader.jsx'
@@ -41,10 +43,12 @@ function Page() {
         <Services />
         <About />
         <Faq />
+        <Playground />
         <Contact />
       </main>
       <Footer />
       <ConnectDrawer />
+      <Konami />
     </ConnectProvider>
   )
 }

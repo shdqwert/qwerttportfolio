@@ -17,10 +17,7 @@ for (const [lang, out] of [['en', 'dist/index.html'], ['ru', 'dist/ru/index.html
   const html = template
     .replace('<html lang="en">', `<html lang="${lang}">`)
     .replace(/<title>.*?<\/title>/, `<title>${escape(m.title)}</title>`)
-    .replace(
-      /<meta name="description" content=".*?" \/>/,
-      `<meta name="description" content="${escape(m.description)}" />\n    <link rel="alternate" hreflang="en" href="/" />\n    <link rel="alternate" hreflang="ru" href="/ru/" />`
-    )
+    .replace(/<meta name="description" content=".*?" \/>/, `<meta name="description" content="${escape(m.description)}" />`)
     .replace(marker, `<div id="root">${render(lang)}</div>`)
   if (lang === 'ru') await mkdir(`${root}dist/ru`, { recursive: true })
   await writeFile(`${root}${out}`, html)

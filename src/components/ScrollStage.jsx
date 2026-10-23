@@ -3,6 +3,7 @@ import { useT } from '../content/i18n.jsx'
 import { images } from '../content/shared.js'
 import { NARROW, clamp, onScrollFrame, useMediaQuery, useReducedMotion } from '../lib/motion.js'
 import BrowserFrame from './BrowserFrame.jsx'
+import { Scramble } from './Reveal.jsx'
 
 // Groups consecutive chapters that share one screenshot: the image scrolls
 // continuously across all of them.
@@ -159,7 +160,7 @@ export default function ScrollStage({ stage, dark = false }) {
           </div>
         </BrowserFrame>
         <div className="stage__rail">
-          <span className="mono stage__label">{stage.railLabel}</span>
+          <Scramble className="mono stage__label" text={stage.railLabel} />
           <ol className="stage__chapters">
             {stage.chapters.map((c, i) => (
               <li key={c.t} className={`stage__chapter${i === active ? ' is-active' : ''}`} aria-current={i === active ? 'step' : undefined}>

@@ -137,6 +137,29 @@ Dependencies added: none at runtime. Build-time: none (the prerender uses Vite's
 - Verified? **Yes** — click RU → `/ru/#…`, stored `ru`; visiting `/` redirects to `/ru/`; click EN → `/`, stored `en`; RU screenshots of every section and the drawer at 1440 px; validation messages in Russian; 0 px overflow at 820–1920 px; no console or hydration errors.
 - Limitations: both languages ship in one JS bundle (+8 KB gzip).
 
+### Creative layer (added after owner feedback: "less ordinary, more fun")
+**Intro** (`Intro.jsx`, mounted in its own React root from `main.jsx`)
+- 49 pink pixels fly in from random points and assemble the "q" while a counter runs 000 → 100; then the q bursts outward and a 16×10 ink tile grid dissolves from the centre, revealing the hero, whose headline letters then fly in.
+- Plays once per browser session (`sessionStorage.introSeen`). Skipped with reduced motion, deep links (`#…`) or `?nointro`. "Skip intro →" button + Esc.
+- An inline head script sets `html.intro-pending` before first paint (ink cover, hero animations paused). Safety: the class is removed after 4 s even if JS fails, so the page can never stay covered.
+- Limitation: the intro mounts after the Google Fonts CSS loads (~0.5–1.5 s on a cold load); until then the visitor sees the plain ink cover.
+
+**New reveals** (replace the uniform "rise from below") — `Reveal.jsx`
+- `Scramble`: mono labels and small headings decode from random glyphs (Latin or Cyrillic per language). Real text is always present for screen readers.
+- `Split`: hero, case titles, FAQ/playground/contact headings — letters fly in from scattered positions with rotation and blur, then the element switches back to plain text (keeps kerning).
+- `PixelTiles`: screenshots and the Design→Code slider are uncovered by a tile grid dissolving in a diagonal wave.
+- Diagonal clip "shutters" on cards, pricing and playground cards; facts and FAQ rows wipe in from the left; numbered rows slide in from the left out of a blur; value/process columns sharpen out of a blur after the rule draws.
+- All still respect the "visible unless armed below the fold" rule and reduced motion.
+
+**Playground section** (`Playground.jsx`, `#play`, between FAQ and Contact)
+- Pixel editor: 7×7 grid (click or drag to paint, arrow keys + Space), presets q / ticket / film / @, Random, Mirror, Invert, Clear; live breathing preview and the mark as copy-pasteable bitmap code.
+- "Catch the pixel": 20-second round; the pixel flees when the mouse gets within 64 px (then rests 420 ms), hops on its own on touch screens; score, timer, best score in `localStorage`.
+- Easter egg (`Konami.jsx`): ↑↑↓↓←→←→BA rains pixels and wobbles the page for 5 s with a toast; hint under the section.
+- Verified: drawing, presets, keyboard navigation, pixel flees (190–260 px jumps), click scores, Konami shows and clears after 5 s — no console errors.
+
+**Lighthouse after the creative layer** (desktop, prod): `/` with intro — Performance 91 · Accessibility 100 · Best Practices 100 · SEO 100 · CLS 0.001; `/ru/` — same, CLS 0.003.
+`hreflang` alternates were removed because they require absolute URLs — add them once the production domain is known.
+
 ### Extras added
 - Unsplash credit under Case 01 screens; "Unofficial redesign concept — not affiliated with IMDb" under Case 02 screens.
 - Skip link, `robots.txt`, meta description, `theme-color`, image preload for the hero.

@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { useT } from '../content/i18n.jsx'
 import { images } from '../content/shared.js'
 import { useDialog } from '../lib/dialog.js'
-import { useReveal } from '../lib/motion.js'
+import { PixelTiles } from './Reveal.jsx'
 
 function Lightbox({ screens, index, onClose, onMove }) {
   const { ui } = useT()
@@ -52,13 +52,12 @@ function Lightbox({ screens, index, onClose, onMove }) {
 export default function ScreenGallery({ screens, caption, dark }) {
   const { ui } = useT()
   const [open, setOpen] = useState(null)
-  const [ref, cls] = useReveal({ threshold: 0.15 })
   const close = useCallback(() => setOpen(null), [])
   const move = useCallback((d) => setOpen((i) => (i === null ? i : (i + d + screens.length) % screens.length)), [screens.length])
 
   return (
     <>
-      <div className={`screens ${cls}`} ref={ref}>
+      <div className="screens">
         {screens.map((s, i) => {
           const im = images[s.img]
           return (
@@ -66,6 +65,7 @@ export default function ScreenGallery({ screens, caption, dark }) {
               <button type="button" className={`shot screen__shot${dark ? ' is-dark' : ''}`} onClick={() => setOpen(i)} aria-label={ui.viewScreenLabel + s.caption}>
                 <img src={im.src} width={im.w} height={im.h} alt={s.alt} loading="lazy" decoding="async" />
                 <span className="screen__view" aria-hidden="true">{ui.viewScreen}</span>
+                <PixelTiles cols={10} rows={6} seed={i + (dark ? 20 : 0)} />
               </button>
               <figcaption className="mono screen__caption">{s.caption}</figcaption>
             </figure>

@@ -1,6 +1,7 @@
 import { useT } from '../content/i18n.jsx'
 import { terminal } from '../content/shared.js'
 import { useCountUp, useReveal } from '../lib/motion.js'
+import { Scramble } from './Reveal.jsx'
 
 function Stat({ stat, run, armed }) {
   const n = useCountUp(stat.value, run)
@@ -55,7 +56,7 @@ export default function ProofConsole() {
         </div>
       </div>
       <div className="proof__card">
-        <div className="mono muted">{proof.label}</div>
+        <Scramble className="mono muted" text={proof.label} />
         <p className="proof__lead">{proof.lead}</p>
         <div className="proof__stats">
           {proof.stats.map((s) => (

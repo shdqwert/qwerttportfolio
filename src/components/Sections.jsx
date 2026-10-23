@@ -6,6 +6,7 @@ import { CopyEmail, LiveClock, MaybeLink } from './Common.jsx'
 import { ConnectLink } from './ConnectContext.jsx'
 import InkSection from './InkSection.jsx'
 import PixelMark from './PixelMark.jsx'
+import { Scramble, Split } from './Reveal.jsx'
 
 export function ValueColumns() {
   const { values, ui } = useT()
@@ -29,7 +30,7 @@ export function QcHelps() {
   const { qcHelps } = useT()
   return (
     <>
-      <h3 className="h3 helps__title">{qcHelps.title}</h3>
+      <Scramble as="h3" className="h3 helps__title" text={qcHelps.title} />
       <div className="panel">
         <div className="mono muted">{qcHelps.clientsLabel}</div>
         <ul className="helps__list">
@@ -67,7 +68,7 @@ export function KinoAside() {
     <>
       <div className="codecard">
         <div className="mono ash codecard__head">
-          <span>{k.codeLabel}</span>
+          <Scramble text={k.codeLabel} />
           <span>{k.excerpt}</span>
         </div>
         <pre className={`codecard__pre ${cls}`} ref={ref}>
@@ -155,7 +156,7 @@ export function Services() {
   const [ref, cls] = useReveal({ threshold: 0.3 })
   return (
     <section id="services" className="wrap section">
-      <div className="mono muted center">{services.label}</div>
+      <Scramble className="mono muted center services__label" text={services.label} />
       <ScrubHeading text={services.title} className="services__title" />
       <div className={`trio ${cls}`} ref={ref}>
         {services.items.map(([t, d], i) => (
@@ -189,7 +190,7 @@ export function About() {
           <span className="mono muted">{owner.portrait}</span>
         </div>
         <div className="about__body">
-          <div className="mono muted">{about.label}</div>
+          <Scramble className="mono muted" text={about.label} />
           <h2 className="h2">{about.title}</h2>
           <p className="about__text">
             {owner.bio} {about.text}
@@ -262,9 +263,7 @@ export function Faq() {
   return (
     <section aria-labelledby="faq-title" className="wrap section">
       <div className="faq-grid">
-        <h2 className="h2" id="faq-title">
-          {faq.title}
-        </h2>
+        <Split as="h2" className="h2" id="faq-title" text={faq.title} stagger={18} />
         <div className={`faq-wrap ${cls}`} ref={ref}>
           <FaqList items={faq.items} />
         </div>
@@ -281,14 +280,10 @@ export function Contact() {
     <InkSection id="contact" className="contact-section" label={ui.contact}>
       <div className={`wrap contact ${cls}`} ref={ref}>
         <PixelMark shape="at" from="film" cell={12} />
-        <p className="mono ash contact__motto">{contact.motto}</p>
+        <Scramble as="p" className="mono ash contact__motto" text={contact.motto} />
         <h2 className="contact__title">
           {contact.title.map((l, i) => (
-            <span className="mask" key={l}>
-              <span className="contact__line" style={{ '--i': i }}>
-                {l}
-              </span>
-            </span>
+            <Split key={l} text={l} className="contact__line" stagger={28} seed={i + 40} />
           ))}
         </h2>
         <div className="contact__email-row">

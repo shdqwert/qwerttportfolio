@@ -10,6 +10,14 @@
       try {
         if (location.pathname === '/' && localStorage.getItem('lang') === 'ru') location.replace('/ru/' + location.hash)
       } catch (e) {}
+      // First visit this session, motion allowed, no deep link → play the intro.
+      try {
+        var h = document.documentElement
+        if (!sessionStorage.getItem('introSeen') && !location.hash && !matchMedia('(prefers-reduced-motion: reduce)').matches && !/[?&]nointro/.test(location.search)) {
+          h.classList.add('intro-pending')
+          setTimeout(function () { h.classList.remove('intro-pending') }, 4000)
+        }
+      } catch (e) {}
     </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />

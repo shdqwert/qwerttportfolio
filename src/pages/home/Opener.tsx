@@ -3,7 +3,7 @@ import { useRef, useState } from 'react'
 import { CabinLight } from '../../components/PageEnd'
 import { Img, MouseIcon } from '../../components/Common'
 import PunchMark from '../../components/motion/PunchMark'
-import { useT } from '../../content/i18n'
+import { useHomeText } from '../../content/pages/home'
 import { gsap, MQ } from '../../motion/engine'
 import { useStatic } from '../../motion/hooks'
 import s from './Home.module.css'
@@ -12,7 +12,7 @@ import s from './Home.module.css'
 // word (qw.inOut), the photo cross-fades with a slow push-in, the thumbnail
 // outline moves, the 5-segment bar fills.
 export default function Opener() {
-  const { opener: o } = useT()
+  const { opener: o } = useHomeText()
   const isStatic = useStatic()
   const ref = useRef<HTMLElement>(null)
   const [active, setActive] = useState(0)

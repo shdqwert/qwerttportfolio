@@ -1,7 +1,7 @@
 import { useGSAP } from '@gsap/react'
 import { useEffect, useRef, useState } from 'react'
 import { useNav, whenStageReady } from '../app/Nav'
-import { ProofConsole } from '../components/CaseBits'
+import { ProofConsole } from '../components/ProofConsole'
 import { Arrow, Img, MaybeLink, MouseIcon } from '../components/Common'
 import Magnetic from '../components/motion/Magnetic'
 import PunchMark from '../components/motion/PunchMark'
@@ -9,6 +9,7 @@ import Reveal from '../components/motion/Reveal'
 import { BoardTile, FlapText, useFlapText } from '../components/motion/SplitFlap'
 import PageEnd, { CabinLight, NextDepartures, SeatTag } from '../components/PageEnd'
 import { useT } from '../content/i18n'
+import { useQcText } from '../content/pages/qc'
 import { appTokens, boardActive, boardRows, districts, hiddenPlaceLabels, links, mapX, mapY, placeColors, places, testsCase, type PlaceKind } from '../content/shared'
 import { gsap, MQ, ScrollTrigger } from '../motion/engine'
 import { useStatic } from '../motion/hooks'
@@ -31,8 +32,7 @@ function BoardRow({ text, active, run, seed }: { text: string; active: boolean; 
 // F20 — split-flap bookings board: every tile flips through random glyphs on
 // load; every ~120 px of scroll the board advances one row.
 function Board() {
-  const t = useT()
-  const c = t.caseQc
+  const c = useQcText()
   const ref = useRef<HTMLDivElement>(null)
   const [offset, setOffset] = useState(0)
   const [run, setRun] = useState(false)
@@ -119,7 +119,7 @@ const popStyle = (x: number, y: number) => ({
 })
 
 function Rail({ active }: { active: number }) {
-  const { caseQc: c } = useT()
+  const c = useQcText()
   const { go } = useNav()
   return (
     <nav aria-label={c.chaptersLabel} className={s.rail}>
@@ -134,7 +134,7 @@ function Rail({ active }: { active: number }) {
 }
 
 function Problem({ active }: { active: number }) {
-  const { caseQc: c } = useT()
+  const c = useQcText()
   const p = c.problem
   const { go } = useNav()
   const ref = useRef<HTMLElement>(null)
@@ -229,7 +229,7 @@ function Problem({ active }: { active: number }) {
 // F22 — real map: pins drop by district and switch on like night lights;
 // the popover cycles through 3 venues every 2.5 s while in view.
 function City() {
-  const { caseQc: c } = useT()
+  const c = useQcText()
   const m = c.city
   const ref = useRef<HTMLDivElement>(null)
   const [pop, setPop] = useState(0)
@@ -338,7 +338,7 @@ function City() {
 }
 
 function Flows() {
-  const { caseQc: c } = useT()
+  const c = useQcText()
   const f = c.flows
   const ref = useRef<HTMLElement>(null)
   useGSAP(
@@ -395,7 +395,7 @@ function Flows() {
 }
 
 function System() {
-  const { caseQc: c } = useT()
+  const c = useQcText()
   const y = c.system
   const ref = useRef<HTMLElement>(null)
   const [slot, setSlot] = useState(0)
@@ -495,7 +495,7 @@ function System() {
 // F23 — diagonal wipe 20 → 80 % (scrubbed) between night and day; language
 // cards fan out; the pills follow the wipe.
 function Languages() {
-  const { caseQc: c } = useT()
+  const c = useQcText()
   const l = c.languages
   const ref = useRef<HTMLElement>(null)
   const [day, setDay] = useState(false)
@@ -590,7 +590,7 @@ function Languages() {
 }
 
 function Engine() {
-  const { caseQc: c } = useT()
+  const c = useQcText()
   const e = c.engine
   const ref = useRef<HTMLElement>(null)
   useGSAP(
@@ -656,7 +656,7 @@ function Engine() {
 // F24 — pinned ~200vh: vertical scroll moves the row sideways; centre card
 // scales to 1, others .92 and dimmed; counter flips; velocity skew ≤ 4°.
 function Strip() {
-  const { caseQc: c } = useT()
+  const c = useQcText()
   const st = c.strip
   const isStatic = useStatic()
   const ref = useRef<HTMLElement>(null)
@@ -741,7 +741,7 @@ function Strip() {
 }
 
 function Result() {
-  const { caseQc: c } = useT()
+  const c = useQcText()
   const r = c.result
   const { openConnect } = useNav()
   const ref = useRef<HTMLElement>(null)
@@ -795,7 +795,7 @@ function Result() {
 
 export default function CaseQc() {
   const t = useT()
-  const c = t.caseQc
+  const c = useQcText()
   const active = useChapter(CH_IDS)
   const [showRail, setShowRail] = useState(false)
   useEffect(() => {

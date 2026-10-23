@@ -1,15 +1,19 @@
 import { useGSAP } from '@gsap/react'
 import { useRef, type ReactNode } from 'react'
+import { deferred } from '../app/deferred'
 import { TLink } from '../app/Nav'
 import { useT } from '../content/i18n'
 import type { RouteKey } from '../content/lang'
 import type { ImgKey } from '../content/shared'
 import { gsap, MQ } from '../motion/engine'
 import { Arrow, Img } from './Common'
-import Finale from './Finale'
 import PunchMark from './motion/PunchMark'
-import TerminalFooter, { ContactRow, Ticker } from './TerminalFooter'
 import s from './PageEnd.module.css'
+
+const Finale = deferred<{ page: RouteKey }>(() => import('./Finale'))
+const ContactRow = deferred<object>(() => import('./TerminalFooter').then((m) => ({ default: m.ContactRow })))
+const Ticker = deferred<{ page: RouteKey }>(() => import('./TerminalFooter').then((m) => ({ default: m.Ticker })))
+const TerminalFooter = deferred<{ page: RouteKey }>(() => import('./TerminalFooter'))
 
 // L1 — warm cabin light that trails the pointer across an ink section.
 export function CabinLight() {

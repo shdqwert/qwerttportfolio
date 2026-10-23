@@ -2,13 +2,24 @@
 // one GSAP ticker for the whole app. Browser-only: call initMotion() once.
 import gsap from 'gsap'
 import { CustomEase } from 'gsap/CustomEase'
-import { Flip } from 'gsap/Flip'
-import { Observer } from 'gsap/Observer'
+import type { Flip as FlipT } from 'gsap/Flip'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { SplitText } from 'gsap/SplitText'
 import Lenis from 'lenis'
 
-export { gsap, ScrollTrigger, SplitText, Flip, Observer }
+export { gsap, ScrollTrigger, SplitText }
+
+// Flip is only needed after an interaction (nav pill, lightbox), so it loads
+// in the background; callers fall back to no animation until it is there.
+let flip: typeof FlipT | null = null
+export const getFlip = () => flip
+export function loadFlip() {
+  return import('gsap/Flip').then((m) => {
+    gsap.registerPlugin(m.Flip)
+    flip = m.Flip
+    return m.Flip
+  })
+}
 
 export const MQ = {
   desktop: '(min-width: 1024px) and (prefers-reduced-motion: no-preference)',
@@ -27,12 +38,14 @@ export const getLenis = () => lenis
 export function initMotion() {
   if (ready || typeof window === 'undefined') return
   ready = true
-  gsap.registerPlugin(ScrollTrigger, SplitText, CustomEase, Flip, Observer)
+  gsap.registerPlugin(ScrollTrigger, SplitText, CustomEase)
   CustomEase.create('qw.out', '0.2,0.7,0.2,1')
   CustomEase.create('qw.inOut', '0.65,0,0.35,1')
   CustomEase.create('qw.snap', '0.3,1.4,0.5,1')
   gsap.defaults({ ease: 'qw.out', duration: 0.8 })
   ScrollTrigger.config({ ignoreMobileResize: true })
+  // pin by transform: switching to position:fixed registers as a layout shift
+  ScrollTrigger.defaults({ pinType: 'transform' })
 
   if (!isReduced()) {
     lenis = new Lenis({ lerp: 0.085, wheelMultiplier: 0.9, smoothWheel: true, syncTouch: false })
@@ -44,6 +57,7 @@ export function initMotion() {
   const refresh = () => ScrollTrigger.refresh()
   document.fonts?.ready.then(refresh)
   window.addEventListener('load', refresh, { once: true })
+  window.addEventListener('load', () => setTimeout(() => void loadFlip(), 1200), { once: true })
   ;(window as unknown as { __motionReady: boolean }).__motionReady = true
 }
 

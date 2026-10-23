@@ -14,9 +14,9 @@ import { StrictMode } from 'react'
 import { createRoot, hydrateRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router'
 import App from './App.tsx'
-import Intro from './components/Intro'
 import { LangProvider } from './content/i18n'
-import { BASE, LANGS, langFromPath } from './content/lang'
+import { preloadAll, preloadPage } from './app/pages'
+import { BASE, langFromPath, loadLang, routeKey } from './content/lang'
 import { initMotion } from './motion/engine'
 import { initLight } from './motion/light'
 import './styles/tokens.css'
@@ -27,6 +27,9 @@ document.documentElement.lang = lang
 history.scrollRestoration = 'manual'
 initMotion()
 initLight()
+
+// this route's chunk + language first, so the first render is synchronous
+await Promise.all([loadLang(lang), preloadPage(routeKey(location.pathname), lang)])
 
 const app = (
   <StrictMode>
@@ -44,10 +47,13 @@ else {
   root.textContent = ''
   createRoot(root).render(app)
 }
-void LANGS
+// the other pages arrive in the background once the browser is idle
+const idle = window.requestIdleCallback || ((cb: () => void) => setTimeout(cb, 1))
+window.addEventListener('load', () => setTimeout(() => idle(() => void Promise.all([preloadAll(lang), import('./components/ConnectDrawer')])), 2500), { once: true })
 
 // The intro lives in its own root so it never affects hydration.
 if (document.documentElement.classList.contains('intro-pending')) {
+  const { default: Intro } = await import('./components/Intro')
   const host = document.createElement('div')
   document.body.appendChild(host)
   const r = createRoot(host)

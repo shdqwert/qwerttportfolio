@@ -6,13 +6,15 @@ import PunchMark from '../components/motion/PunchMark'
 import Reveal from '../components/motion/Reveal'
 import { FlapText } from '../components/motion/SplitFlap'
 import PageEnd from '../components/PageEnd'
-import Playground from '../components/Playground'
-import { useT } from '../content/i18n'
+import { deferred } from '../app/deferred'
+import { useLabText } from '../content/pages/lab'
 import { labIcons, type ImgKey } from '../content/shared'
-import { Flip, gsap, isReduced, MQ } from '../motion/engine'
+import { getFlip, gsap, isReduced, loadFlip, MQ } from '../motion/engine'
 import { useReduced } from '../motion/hooks'
 import type { Cleanup } from './lab/modes'
 import s from './Lab.module.css'
+
+const Playground = deferred(() => import('../components/Playground'))
 
 type Mode = 'none' | 'parallax' | 'film' | 'gravity' | 'xray' | 'flash' | 'pixel' | 'magnet' | 'glitch' | 'speed' | 'y1999'
 const MODES: Mode[] = ['parallax', 'film', 'gravity', 'xray', 'flash', 'pixel', 'magnet', 'glitch', 'speed', 'y1999']
@@ -32,7 +34,7 @@ function FilmImg({ film, kind, className, alt }: { film: Film; kind: 'bg' | 'pos
 }
 
 function FilmMode() {
-  const { lab } = useT()
+  const lab = useLabText()
   const f = lab.film
   const [q, setQ] = useState('Dune')
   const [results, setResults] = useState<Film[]>(LOCAL_FILMS)
@@ -206,7 +208,7 @@ function useSpeed(active: boolean) {
 }
 
 export default function Lab() {
-  const { lab } = useT()
+  const lab = useLabText()
   const [params, setParams] = useSearchParams()
   const initial = (MODES as string[]).includes(params.get('mode') || '') ? (params.get('mode') as Mode) : 'none'
   const [mode, setMode] = useState<Mode>(initial)
@@ -219,10 +221,12 @@ export default function Lab() {
   const heavy = ['parallax', 'gravity', 'magnet', 'glitch', 'film']
   const label = mode === 'none' ? lab.normal : names[mode] + (reduced && heavy.includes(mode) ? lab.reducedNote : '')
 
+  useEffect(() => void loadFlip(), [])
+
   const pick = useCallback(
     (m: Mode) => {
       const el = stage.current
-      if (el) flipState.current = Flip.getState(el.querySelectorAll('[data-body]'))
+      if (el) flipState.current = getFlip()?.getState(el.querySelectorAll('[data-body]')) ?? null
       setMode(m)
       const next = new URLSearchParams(params)
       if (m === 'none') next.delete('mode')
@@ -245,7 +249,7 @@ export default function Lab() {
     let cleanup: Cleanup | null = null
     let dead = false
     if (flipState.current && !isReduced()) {
-      Flip.from(flipState.current, { duration: 0.5, ease: 'qw.inOut' })
+      getFlip()?.from(flipState.current, { duration: 0.5, ease: 'qw.inOut' })
       gsap.fromTo(el, { autoAlpha: 0.6 }, { autoAlpha: 1, duration: 0.3 })
     }
     flipState.current = null
@@ -396,7 +400,7 @@ export default function Lab() {
 }
 
 function Y1999() {
-  const { lab } = useT()
+  const lab = useLabText()
   const y = lab.y1999
   return (
     <div className={s.y99}>

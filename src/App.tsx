@@ -1,16 +1,10 @@
-import { useEffect } from 'react'
+import { lazy, Suspense, useEffect, useState } from 'react'
 import { Route, Routes, useLocation } from 'react-router'
-import { NavProvider } from './app/Nav'
-import ConnectDrawer from './components/ConnectDrawer'
+import { NavProvider, useNav } from './app/Nav'
+import { Page } from './app/pages'
 import Header, { Runway } from './components/Header'
-import Cursor from './components/motion/Cursor'
-import { Konami } from './components/Playground'
 import { LangProvider, useT } from './content/i18n'
 import { routeKey, type Lang } from './content/lang'
-import CaseKino from './pages/CaseKino'
-import CaseQc from './pages/CaseQc'
-import Home from './pages/Home'
-import Lab from './pages/Lab'
 
 function Meta() {
   const t = useT()
@@ -22,6 +16,39 @@ function Meta() {
     document.body.classList.toggle('is-ink', key === 'kino')
   }, [key, t])
   return null
+}
+
+// The drawer is its own chunk: fetched on the first open (or on idle, see
+// main.tsx) and kept mounted afterwards so its exit animation can play.
+const ConnectDrawer = lazy(() => import('./components/ConnectDrawer'))
+function Drawer() {
+  const { connectOpen } = useNav()
+  const [used, setUsed] = useState(false)
+  if (connectOpen && !used) setUsed(true)
+  return used ? (
+    <Suspense fallback={null}>
+      <ConnectDrawer />
+    </Suspense>
+  ) : null
+}
+
+// Pointer cursor and the Konami egg are extras: they load once the page has
+// finished loading and the browser is idle.
+const Cursor = lazy(() => import('./components/motion/Cursor'))
+const Konami = lazy(() => import('./components/Konami').then((m) => ({ default: m.Konami })))
+function Extras() {
+  const [on, setOn] = useState(false)
+  useEffect(() => {
+    const go = () => setTimeout(() => setOn(true), 1500)
+    if (document.readyState === 'complete') go()
+    else window.addEventListener('load', go, { once: true })
+  }, [])
+  return on ? (
+    <Suspense fallback={null}>
+      <Cursor />
+      <Konami />
+    </Suspense>
+  ) : null
 }
 
 function Shell() {
@@ -36,18 +63,19 @@ function Shell() {
       <Runway />
       <div id="page">
         <main id="main">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/work/qwerttclients" element={<CaseQc />} />
-            <Route path="/work/kinoqwertt" element={<CaseKino />} />
-            <Route path="/lab" element={<Lab />} />
-            <Route path="*" element={<Home />} />
-          </Routes>
+          <Suspense fallback={null}>
+            <Routes>
+              <Route path="/" element={<Page k="home" />} />
+              <Route path="/work/qwerttclients" element={<Page k="qc" />} />
+              <Route path="/work/kinoqwertt" element={<Page k="kino" />} />
+              <Route path="/lab" element={<Page k="lab" />} />
+              <Route path="*" element={<Page k="home" />} />
+            </Routes>
+          </Suspense>
         </main>
       </div>
-      <ConnectDrawer />
-      <Cursor />
-      <Konami />
+      <Drawer />
+      <Extras />
     </NavProvider>
   )
 }

@@ -2,7 +2,7 @@ import { useGSAP } from '@gsap/react'
 import { useRef } from 'react'
 import { Img } from '../../components/Common'
 import PunchMark from '../../components/motion/PunchMark'
-import { useT } from '../../content/i18n'
+import { useHomeText } from '../../content/pages/home'
 import { gsap, MQ } from '../../motion/engine'
 import { useStatic } from '../../motion/hooks'
 import s from './Home.module.css'
@@ -24,7 +24,7 @@ const QR = (() => {
 // 18:30 fill blue (qw.snap). Step 3: Confirm presses with an orange tap ring,
 // the ticket prints in 3 jerks, lands tilted, the stamp hits, the tear draws.
 export default function Demo() {
-  const { demo: d } = useT()
+  const { demo: d } = useHomeText()
   const isStatic = useStatic()
   const ref = useRef<HTMLDivElement>(null)
   useGSAP(

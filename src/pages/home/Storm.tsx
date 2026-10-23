@@ -1,7 +1,7 @@
 import { useGSAP } from '@gsap/react'
 import { useRef } from 'react'
 import { Img } from '../../components/Common'
-import { useT } from '../../content/i18n'
+import { useHomeText } from '../../content/pages/home'
 import type { ImgKey } from '../../content/shared'
 import { gsap, MQ } from '../../motion/engine'
 import { useStatic } from '../../motion/hooks'
@@ -23,7 +23,7 @@ const TILES: [ImgKey, number, number, number, number, number, number][] = [
 // positions into the centre frame, shrinking and fading (stagger from edges);
 // the frame settles and the headlines fade in for the last 20 %.
 export default function Storm() {
-  const { storm } = useT()
+  const { storm } = useHomeText()
   const isStatic = useStatic()
   const ref = useRef<HTMLDivElement>(null)
   useGSAP(

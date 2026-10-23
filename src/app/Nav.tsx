@@ -2,6 +2,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useRef, use
 import { useLocation, useNavigate, useNavigationType } from 'react-router'
 import { useT } from '../content/i18n'
 import { routeKey } from '../content/lang'
+import { preloadPage } from './pages'
 import { gsap, isReduced, refreshWhenReady, scrollToTarget } from '../motion/engine'
 import { FlapText } from '../components/motion/SplitFlap'
 import s from './Nav.module.css'
@@ -82,10 +83,13 @@ export function NavProvider({ children }: { children: ReactNode }) {
       }
       sessionStorage.setItem(POS_KEY(location.pathname), String(window.scrollY))
       const el = overlay.current
-      const doNav = () => {
-        pending.current = { hash }
-        navigate(target + (hash ? `#${hash}` : ''))
-      }
+      // the next page's chunk loads while the gate closes
+      const ready = preloadPage(routeKey(target), t.lang)
+      const doNav = () =>
+        void ready.then(() => {
+          pending.current = { hash }
+          navigate(target + (hash ? `#${hash}` : ''))
+        })
       if (!el || isReduced()) {
         if (el) gsap.fromTo(el, { autoAlpha: 0, yPercent: 0 }, { autoAlpha: 1, duration: 0.15, onComplete: doNav })
         else doNav()
@@ -96,7 +100,7 @@ export function NavProvider({ children }: { children: ReactNode }) {
       document.documentElement.classList.add('page-entering')
       gsap.fromTo(el, { autoAlpha: 1, yPercent: 100 }, { yPercent: 0, duration: 0.5, ease: 'qw.inOut', onComplete: doNav })
     },
-    [location.pathname, navigate, openConnect, t.transition]
+    [location.pathname, navigate, openConnect, t.transition, t.lang]
   )
 
   // After a route change: scroll, refresh triggers, then lift the overlay.

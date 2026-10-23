@@ -4,7 +4,7 @@ import { useLocation } from 'react-router'
 import { TLink, useNav } from '../app/Nav'
 import { useT } from '../content/i18n'
 import { BASE, rememberLang, routeKey, stripLang } from '../content/lang'
-import { Flip, gsap, MQ, ScrollTrigger } from '../motion/engine'
+import { getFlip, gsap, MQ, ScrollTrigger } from '../motion/engine'
 import { clamp } from '../motion/hooks'
 import { FlapText } from './motion/SplitFlap'
 import PunchMark from './motion/PunchMark'
@@ -114,10 +114,11 @@ export default function Header() {
       gsap.to(p, { autoAlpha: 0, duration: 0.2 })
       return
     }
-    const state = Flip.getState(p)
+    const Flip = getFlip()
+    const state = Flip?.getState(p)
     host.prepend(p)
     gsap.set(p, { autoAlpha: 1 })
-    if (window.matchMedia(MQ.motion).matches) Flip.from(state, { duration: 0.5, ease: 'qw.inOut' })
+    if (Flip && state && window.matchMedia(MQ.motion).matches) Flip.from(state, { duration: 0.5, ease: 'qw.inOut' })
   }, [active])
 
   return (

@@ -7,13 +7,14 @@ import PunchMark from '../components/motion/PunchMark'
 import Reveal from '../components/motion/Reveal'
 import PageEnd, { CabinLight, NextDepartures, SeatTag } from '../components/PageEnd'
 import { useT } from '../content/i18n'
+import { useKinoText } from '../content/pages/kino'
 import { links } from '../content/shared'
 import { gsap, MQ, SplitText } from '../motion/engine'
 import s from './CaseKino.module.css'
 
 export default function CaseKino() {
   const t = useT()
-  const k = t.caseKino
+  const k = useKinoText()
   const ref = useRef<HTMLDivElement>(null)
   const [lit, setLit] = useState(0)
 

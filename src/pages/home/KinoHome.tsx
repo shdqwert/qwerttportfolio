@@ -8,7 +8,7 @@ import PunchMark from '../../components/motion/PunchMark'
 import { CabinLight } from '../../components/PageEnd'
 import ScrollStage from '../../components/ScrollStage'
 import { NumberedList } from '../../components/Shared'
-import { useT } from '../../content/i18n'
+import { useHomeText } from '../../content/pages/home'
 import { cssLines, links } from '../../content/shared'
 import { gsap, MQ } from '../../motion/engine'
 import s from './Home.module.css'
@@ -17,7 +17,7 @@ import s from './Home.module.css'
 // "lights dimming" circle that expands from the pointer (centre on touch),
 // scrubbed over 35vh. L10: a faint projector beam with drifting dust.
 export default function KinoHome() {
-  const { kinoHome: k } = useT()
+  const { kinoHome: k } = useHomeText()
   const ref = useRef<HTMLElement>(null)
   useGSAP(
     () => {

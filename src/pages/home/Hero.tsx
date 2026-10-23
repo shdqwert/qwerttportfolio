@@ -6,6 +6,7 @@ import Magnetic from '../../components/motion/Magnetic'
 import PunchMark from '../../components/motion/PunchMark'
 import { BrowserFrame } from '../../components/Shared'
 import { useT } from '../../content/i18n'
+import { useHomeText } from '../../content/pages/home'
 import { gsap, MQ, SplitText } from '../../motion/engine'
 import s from './Home.module.css'
 
@@ -13,7 +14,8 @@ import s from './Home.module.css'
 // distance from centre, copy rises, preview scales in with its shadow layer,
 // taglines type on. Scroll out: preview lifts, taglines fade. L5 ambient blob.
 export default function Hero() {
-  const { hero, owner } = useT()
+  const { owner } = useT()
+  const { hero } = useHomeText()
   const { go, openConnect } = useNav()
   const ref = useRef<HTMLElement>(null)
 

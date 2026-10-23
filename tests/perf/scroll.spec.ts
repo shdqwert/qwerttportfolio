@@ -24,7 +24,8 @@ async function measure(page: Page, path: string) {
     }).observe({ type: 'largest-contentful-paint', buffered: true })
   })
   await page.goto(path + '?nointro', { waitUntil: 'networkidle' })
-  await page.waitForTimeout(1200)
+  // let late hydration + idle prefetch finish: this gate is about scrolling
+  await page.waitForTimeout(3000)
   await page.mouse.move(700, 450)
   await page.evaluate(() => {
     const w = window as unknown as { __perf: { frames: number[] }; __stop: boolean }

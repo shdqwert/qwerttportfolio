@@ -155,9 +155,13 @@ export function TLink({ to, children, onClick, ...rest }: { to: string; children
   const { go } = useNav()
   const { lang } = useT()
   const href = to.startsWith('#') ? to : (lang === 'ru' ? '/ru' : '') + (to === '/' ? '/' : to)
+  // intent prefetch: the target page's chunk starts loading on hover / focus
+  const warm = () => void (to.startsWith('#') || preloadPage(routeKey(to.split('#')[0] || '/'), lang))
   return (
     <a
       href={href}
+      onPointerEnter={warm}
+      onFocus={warm}
       onClick={(e) => {
         onClick?.(e)
         if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return

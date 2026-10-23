@@ -76,3 +76,6 @@
   .nav { overflow-x: auto; scrollbar-width: none; }
   .link { padding: 0 7px; font-size: 13px; }
 }
+
+/* engine.ts: holds still while the page scrolls (targeted, so the class toggle stays cheap) */
+:global(.is-scrolling) .pulse::after { animation-play-state: paused; }

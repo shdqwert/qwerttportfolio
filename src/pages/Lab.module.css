@@ -130,3 +130,6 @@
   .film { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr; }
   .speed { left: 24px; width: auto; }
 }
+
+/* engine.ts: holds still while the page scrolls */
+:global(.is-scrolling) .dust i, :global(.is-scrolling) .y99Marquee span { animation-play-state: paused; }

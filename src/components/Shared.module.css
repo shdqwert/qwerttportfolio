@@ -64,3 +64,6 @@
 }
 
 .numlist { position: relative; }
+
+/* engine.ts: holds still while the page scrolls (targeted, so the class toggle stays cheap) */
+:global(.is-scrolling) .priceInk::after { animation-play-state: paused; }

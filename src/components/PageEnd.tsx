@@ -1,11 +1,12 @@
 import { useGSAP } from '@gsap/react'
-import { useRef, type ReactNode } from 'react'
+import { useEffect, useRef, type ReactNode } from 'react'
 import { deferred } from '../app/deferred'
 import { TLink } from '../app/Nav'
 import { useT } from '../content/i18n'
 import type { RouteKey } from '../content/lang'
 import type { ImgKey } from '../content/shared'
 import { gsap, MQ } from '../motion/engine'
+import { addCabin } from '../motion/light'
 import { Arrow, Img } from './Common'
 import PunchMark from './motion/PunchMark'
 import s from './PageEnd.module.css'
@@ -17,7 +18,13 @@ const TerminalFooter = deferred<{ page: RouteKey }>(() => import('./TerminalFoot
 
 // L1 — warm cabin light that trails the pointer across an ink section.
 export function CabinLight() {
-  return <span className={s.cabin} aria-hidden="true" />
+  const ref = useRef<HTMLSpanElement>(null)
+  useEffect(() => (ref.current ? addCabin(ref.current) : undefined), [])
+  return (
+    <span ref={ref} className={s.cabin} aria-hidden="true">
+      <span className={s.glow} />
+    </span>
+  )
 }
 
 // Finale + (contact row on sub-pages) + ticker + terminal footer, on ink.

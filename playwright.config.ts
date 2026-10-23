@@ -8,6 +8,7 @@ export default defineConfig({
   timeout: 60_000,
   fullyParallel: true,
   workers: 3,
+  retries: 1,
   reporter: [['list'], ['html', { open: 'never', outputFolder: 'playwright-report' }]],
   use: { baseURL: 'http://localhost:4173', viewport: { width: 1440, height: 900 } },
   webServer: { command: 'npm run preview -- --port 4173 --strictPort', url: 'http://localhost:4173', reuseExistingServer: true },

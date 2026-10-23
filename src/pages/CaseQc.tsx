@@ -118,6 +118,24 @@ const popStyle = (x: number, y: number) => ({
   translate: y > 0.5 ? '0 -100%' : undefined,
 })
 
+// F21 dock: the fixed gutter rail shows between the problem and the result.
+function RailDock() {
+  const active = useChapter(CH_IDS)
+  const [show, setShow] = useState(false)
+  useEffect(() => {
+    const p = document.getElementById('problem')
+    const r = document.getElementById('result')
+    if (!p || !r) return
+    const st = ScrollTrigger.create({ trigger: p, start: 'bottom 40%', endTrigger: r, end: 'bottom 40%', onToggle: (self) => setShow(self.isActive) })
+    return () => st.kill()
+  }, [])
+  return (
+    <div className={`${s.railWrap} ${show ? s.railShow : ''}`}>
+      <Rail active={active} />
+    </div>
+  )
+}
+
 function Rail({ active }: { active: number }) {
   const c = useQcText()
   const { go } = useNav()
@@ -133,7 +151,8 @@ function Rail({ active }: { active: number }) {
   )
 }
 
-function Problem({ active }: { active: number }) {
+function Problem() {
+  const active = useChapter(CH_IDS)
   const c = useQcText()
   const p = c.problem
   const { go } = useNav()
@@ -796,21 +815,10 @@ function Result() {
 export default function CaseQc() {
   const t = useT()
   const c = useQcText()
-  const active = useChapter(CH_IDS)
-  const [showRail, setShowRail] = useState(false)
-  useEffect(() => {
-    const p = document.getElementById('problem')
-    const r = document.getElementById('result')
-    if (!p || !r) return
-    const st = ScrollTrigger.create({ trigger: p, start: 'bottom 40%', endTrigger: r, end: 'bottom 40%', onToggle: (self) => setShowRail(self.isActive) })
-    return () => st.kill()
-  }, [])
   return (
     <>
       <SeatTag seat={c.seat} />
-      <div className={`${s.railWrap} ${showRail ? s.railShow : ''}`}>
-        <Rail active={active} />
-      </div>
+      <RailDock />
       <section className={s.hero} data-theme="ink" aria-label={c.title}>
         <CabinLight />
         <div className="wrap">
@@ -836,7 +844,7 @@ export default function CaseQc() {
           </div>
         </div>
       </section>
-      <Problem active={active} />
+      <Problem />
       <City />
       <Flows />
       <System />

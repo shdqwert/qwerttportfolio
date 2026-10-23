@@ -11,6 +11,7 @@ import { NumberedList } from '../../components/Shared'
 import { useHomeText } from '../../content/pages/home'
 import { cssLines, links } from '../../content/shared'
 import { gsap, MQ } from '../../motion/engine'
+import { getLight } from '../../motion/light'
 import s from './Home.module.css'
 
 // Case 02 on the home page. F12 + L8: the ink section arrives through a
@@ -32,10 +33,8 @@ export default function KinoHome() {
           ease: 'none',
           scrollTrigger: st,
           onUpdate: () => {
-            const root = document.documentElement
-            const lx = parseFloat(root.style.getPropertyValue('--lx')) || innerWidth / 2
-            const ly = parseFloat(root.style.getPropertyValue('--ly')) || innerHeight / 2
-            el.style.clipPath = o.r >= 149 ? '' : `circle(${o.r}% at ${lx}px ${ly + scrollY - top}px)`
+            const p = getLight()
+            el.style.clipPath = o.r >= 149 ? '' : `circle(${o.r}% at ${p.x}px ${p.y + scrollY - top}px)`
           }
         })
       })

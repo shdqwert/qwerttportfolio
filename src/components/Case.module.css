@@ -18,8 +18,9 @@
 .chapter > :global(.mono) { padding-top: 3px; }
 .chOn { opacity: 1; }
 .chTitle { font-size: 19px; font-weight: 600; letter-spacing: var(--track); }
-.chMore { display: grid; grid-template-rows: 0fr; transition: grid-template-rows var(--d-ui) var(--ease-out); }
-.chOn .chMore { grid-template-rows: 1fr; }
+/* text keeps its space (no layout shift while chapters change), only fades */
+.chMore { opacity: 0; transform: translateY(-4px); transition: opacity var(--d-ui) var(--ease-out), transform var(--d-ui) var(--ease-out); }
+.chOn .chMore { opacity: 1; transform: none; }
 .chInner { overflow: hidden; }
 .chText { margin-top: 6px; font-size: 14px; line-height: 1.4; color: var(--body-muted-dark); }
 .bar { height: 2px; margin-top: 12px; background: rgba(236, 232, 223, .15); }
@@ -108,3 +109,6 @@
 .tLine { display: block; }
 .sumNum { display: inline-block; min-width: 2ch; }
 .dark { color: var(--paper); }
+
+/* engine.ts: holds still while the page scrolls (targeted, so the class toggle stays cheap) */
+:global(.is-scrolling) .cursor { animation-play-state: paused; }

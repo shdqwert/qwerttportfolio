@@ -19,6 +19,7 @@ import { preloadAll, preloadPage } from './app/pages'
 import { BASE, langFromPath, loadLang, routeKey } from './content/lang'
 import { initMotion } from './motion/engine'
 import { initLight } from './motion/light'
+import { initPredecode } from './motion/predecode'
 import './styles/tokens.css'
 import './styles/base.css'
 
@@ -47,9 +48,12 @@ else {
   root.textContent = ''
   createRoot(root).render(app)
 }
+initPredecode(root)
+
 // the other pages arrive in the background once the browser is idle
 const idle = window.requestIdleCallback || ((cb: () => void) => setTimeout(cb, 1))
-window.addEventListener('load', () => setTimeout(() => idle(() => void Promise.all([preloadAll(lang), import('./components/ConnectDrawer')])), 2500), { once: true })
+// (late, so it does not land on the first scroll; links also prefetch on hover)
+window.addEventListener('load', () => setTimeout(() => idle(() => void Promise.all([preloadAll(lang), import('./components/ConnectDrawer')])), 9000), { once: true })
 
 // The intro lives in its own root so it never affects hydration.
 if (document.documentElement.classList.contains('intro-pending')) {

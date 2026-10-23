@@ -47,12 +47,31 @@ export function initMotion() {
   // pin by transform: switching to position:fixed registers as a layout shift
   ScrollTrigger.defaults({ pinType: 'transform' })
 
-  if (!isReduced()) {
+  // ?lenis=off: native scrolling, for QA comparisons
+  if (!isReduced() && new URLSearchParams(location.search).get('lenis') !== 'off') {
     lenis = new Lenis({ lerp: 0.085, wheelMultiplier: 0.9, smoothWheel: true, syncTouch: false })
     lenis.on('scroll', ScrollTrigger.update)
     gsap.ticker.add((t) => lenis?.raf(t * 1000))
     gsap.ticker.lagSmoothing(0)
   }
+
+  // While the page scrolls, decorative CSS animations (pulse rings, blinking
+  // cursors, dust) pause: each running one dirties style every frame, which the
+  // scroll handlers then pay for. They resume 200 ms after the scroll stops.
+  let still = 0
+  const root = document.documentElement
+  addEventListener(
+    'scroll',
+    () => {
+      if (!still) root.classList.add('is-scrolling')
+      clearTimeout(still)
+      still = window.setTimeout(() => {
+        still = 0
+        root.classList.remove('is-scrolling')
+      }, 200)
+    },
+    { passive: true }
+  )
 
   const refresh = () => ScrollTrigger.refresh()
   document.fonts?.ready.then(refresh)

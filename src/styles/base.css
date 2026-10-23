@@ -104,3 +104,4 @@ html.js-motion [data-reveal]:not(.revealed) { visibility: hidden; }
 html.intro-pending { overflow: hidden; }
 html.intro-pending body::after { content: ""; position: fixed; inset: 0; z-index: 259; background: var(--ink); }
 .split-line { padding-bottom: .04em; }
+

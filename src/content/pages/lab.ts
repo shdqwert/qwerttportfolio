@@ -145,3 +145,6 @@ const ru: typeof en = {
 }
 
 export const useLabText = () => (useT().lang === 'ru' ? ru : en)
+
+// for the content-shape unit test
+export const texts = { en, ru }

@@ -46,3 +46,6 @@
   .aside { position: static; }
   .panel { padding: 40px 20px; }
 }
+
+/* engine.ts: holds still while the page scrolls (targeted, so the class toggle stays cheap) */
+:global(.is-scrolling) .beam i { animation-play-state: paused; }

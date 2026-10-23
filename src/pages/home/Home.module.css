@@ -258,3 +258,6 @@
   .demoHead { flex-direction: column; align-items: flex-start; }
   .demoTitle { font-size: 44px; }
 }
+
+/* engine.ts: holds still while the page scrolls (targeted, so the class toggle stays cheap) */
+:global(.is-scrolling) .beam i { animation-play-state: paused; }

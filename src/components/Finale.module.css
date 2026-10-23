@@ -49,3 +49,6 @@
   .line { flex-wrap: wrap; white-space: normal; padding-left: 0 !important; gap: 14px; }
   .win { width: 160px !important; height: 80px !important; }
 }
+
+/* engine.ts: holds still while the page scrolls (targeted, so the class toggle stays cheap) */
+:global(.is-scrolling) .callDot::after { animation-play-state: paused; }

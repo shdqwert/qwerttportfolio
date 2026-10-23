@@ -1,4 +1,4 @@
-import { useGSAP } from '@gsap/react'
+import { useGSAP } from '../motion/useMotion'
 import { useEffect, useRef, useState } from 'react'
 import { useLocation } from 'react-router'
 import { TLink, useNav } from '../app/Nav'

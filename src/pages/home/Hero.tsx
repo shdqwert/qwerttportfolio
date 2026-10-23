@@ -1,4 +1,4 @@
-import { useGSAP } from '@gsap/react'
+import { useGSAP } from '../../motion/useMotion'
 import { useRef } from 'react'
 import { useNav, whenStageReady } from '../../app/Nav'
 import { Img } from '../../components/Common'

@@ -1,4 +1,4 @@
-import { useGSAP } from '@gsap/react'
+import { useGSAP } from '../../motion/useMotion'
 import { useRef, useState } from 'react'
 import { CabinLight } from '../../components/PageEnd'
 import { Img, MouseIcon } from '../../components/Common'

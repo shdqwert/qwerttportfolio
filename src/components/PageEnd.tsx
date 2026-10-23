@@ -1,4 +1,4 @@
-import { useGSAP } from '@gsap/react'
+import { useGSAP } from '../motion/useMotion'
 import { useEffect, useRef, type ReactNode } from 'react'
 import { deferred } from '../app/deferred'
 import { TLink } from '../app/Nav'

@@ -73,9 +73,8 @@ export function initMotion() {
     { passive: true }
   )
 
-  const refresh = () => ScrollTrigger.refresh()
-  document.fonts?.ready.then(refresh)
-  window.addEventListener('load', refresh, { once: true })
+  // ScrollTrigger refreshes on load by itself; fonts may settle after that
+  document.fonts?.ready.then(requestRefresh)
   window.addEventListener('load', () => setTimeout(() => void loadFlip(), 1200), { once: true })
   ;(window as unknown as { __motionReady: boolean }).__motionReady = true
 }
@@ -110,6 +109,14 @@ export function unlockScroll() {
   document.documentElement.classList.remove('scroll-locked')
   document.documentElement.style.removeProperty('--scrollbar-gap')
   lenis?.start()
+}
+
+// Many things want a re-measure around load (fonts, late-hydrated blocks).
+// A refresh re-lays-out the whole page, so requests within 150 ms coalesce.
+let refreshTimer = 0
+export function requestRefresh() {
+  clearTimeout(refreshTimer)
+  refreshTimer = window.setTimeout(() => ScrollTrigger.refresh(), 150)
 }
 
 // Wait for fonts + decoded images in a container, then refresh triggers.

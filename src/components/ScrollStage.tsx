@@ -1,4 +1,4 @@
-import { useGSAP } from '@gsap/react'
+import { useGSAP } from '../motion/useMotion'
 import { useMemo, useRef, useState } from 'react'
 import { useT } from '../content/i18n'
 import { img as imgData, type ImgKey } from '../content/shared'

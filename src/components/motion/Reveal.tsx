@@ -1,4 +1,4 @@
-import { useGSAP } from '@gsap/react'
+import { useGSAP } from '../../motion/useMotion'
 import { createElement, useRef, type CSSProperties, type ReactNode } from 'react'
 import { gsap, MQ, SplitText } from '../../motion/engine'
 
@@ -31,7 +31,7 @@ export default function Reveal({ as = 'div', variant = 'rise', children, classNa
       const el = ref.current
       if (!el) return
       const mm = gsap.matchMedia()
-      mm.add(MQ.motion, () => {
+      mm.add(MQ.motion, (ctx) => {
         const st = { trigger: el, start, once: true }
         const kids = targets ? gsap.utils.toArray<HTMLElement>(targets, el) : (Array.from(el.children) as HTMLElement[])
         switch (variant) {
@@ -58,17 +58,29 @@ export default function Reveal({ as = 'div', variant = 'rise', children, classNa
             break
           }
           case 'mask': {
-            SplitText.create(el, {
-              type: 'lines',
-              mask: 'lines',
-              aria: 'none',
-              autoSplit: true,
-              linesClass: 'split-line',
-              onSplit(self) {
-                return gsap.from(self.lines, { yPercent: 105, duration: 0.9, stagger: 0.08, delay, ease: 'qw.out', scrollTrigger: st })
-              }
-            })
-            break
+            // Line splitting measures layout, so it waits until the heading is
+            // about a screen away — keeps it out of the load-time work.
+            const split = () =>
+              SplitText.create(el, {
+                type: 'lines',
+                mask: 'lines',
+                aria: 'none',
+                autoSplit: true,
+                linesClass: 'split-line',
+                onSplit(self) {
+                  return gsap.from(self.lines, { yPercent: 105, duration: 0.9, stagger: 0.08, delay, ease: 'qw.out', scrollTrigger: st })
+                }
+              })
+            const io = new IntersectionObserver(
+              (es) => {
+                if (!es.some((e) => e.isIntersecting)) return
+                io.disconnect()
+                ctx.add(split)
+              },
+              { rootMargin: '100% 0px' }
+            )
+            io.observe(el)
+            return () => io.disconnect()
           }
           case 'track':
             gsap.from(el, { letterSpacing: '0.03em', y: 24, autoAlpha: 0, duration: 1, delay, ease: 'qw.out', scrollTrigger: st })

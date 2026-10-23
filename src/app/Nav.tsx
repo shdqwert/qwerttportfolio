@@ -104,7 +104,13 @@ export function NavProvider({ children }: { children: ReactNode }) {
   )
 
   // After a route change: scroll, refresh triggers, then lift the overlay.
+  // (The first render is the page load itself — ScrollTrigger handles that.)
+  const firstRun = useRef(true)
   useEffect(() => {
+    if (firstRun.current) {
+      firstRun.current = false
+      return
+    }
     const el = overlay.current
     const html = document.documentElement
     if (pending.current) {

@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect, type ComponentType } from 'react'
-import { ScrollTrigger } from '../motion/engine'
+import { requestRefresh } from '../motion/engine'
 
 // Progressive hydration for heavy blocks far down the page (finale, footer,
 // playground). The prerender renders them in full; in the browser they sit in
@@ -35,9 +35,6 @@ export function deferred<P extends object>(load: () => Promise<{ default: Compon
 
 // a late block may add pins / height: re-measure every trigger once it is in
 function Refresh() {
-  useEffect(() => {
-    const id = requestAnimationFrame(() => ScrollTrigger.refresh())
-    return () => cancelAnimationFrame(id)
-  }, [])
+  useEffect(requestRefresh, [])
   return null
 }

@@ -1,4 +1,4 @@
-import { useGSAP } from '@gsap/react'
+import { useGSAP } from '../../motion/useMotion'
 import { useEffect, useRef, useState } from 'react'
 import PunchMark from '../../components/motion/PunchMark'
 import Reveal from '../../components/motion/Reveal'

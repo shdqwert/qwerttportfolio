@@ -1,4 +1,4 @@
-import { useGSAP } from '@gsap/react'
+import { useGSAP } from '../../motion/useMotion'
 import { useRef } from 'react'
 import { TLink } from '../../app/Nav'
 import { ScreenGallery } from '../../components/CaseBits'

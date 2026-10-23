@@ -1,4 +1,4 @@
-import { useGSAP } from '@gsap/react'
+import { useGSAP } from '../../motion/useMotion'
 import { useRef, useState } from 'react'
 import { useT } from '../../content/i18n'
 import { gsap, MQ } from '../../motion/engine'

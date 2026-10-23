@@ -1,4 +1,4 @@
-import { useGSAP } from '@gsap/react'
+import { useGSAP } from '../../motion/useMotion'
 import { useRef, type RefObject } from 'react'
 import { marks, type MarkName } from '../../content/shared'
 import { gsap, MQ } from '../../motion/engine'

@@ -1,4 +1,4 @@
-import { useGSAP } from '@gsap/react'
+import { useGSAP } from '../motion/useMotion'
 import { useCallback, useRef, useState } from 'react'
 import { TLink, useNav } from '../app/Nav'
 import { useT } from '../content/i18n'

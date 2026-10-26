@@ -35,7 +35,7 @@ function About() {
     () => {
       const mm = gsap.matchMedia()
       mm.add(MQ.desktop, () => {
-        gsap.fromTo(`.${s.portrait}`, { y: 20 }, { y: -20, ease: 'none', scrollTrigger: { trigger: ref.current, start: 'top bottom', end: 'bottom top', scrub: 0.8 } })
+        gsap.fromTo(`.${s.portrait}`, { y: 20 }, { y: -20, ease: 'none', scrollTrigger: { trigger: ref.current, start: 'top bottom', end: 'bottom top', scrub: 0.5 } })
       })
     },
     { scope: ref }

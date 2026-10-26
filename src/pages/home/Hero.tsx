@@ -44,10 +44,10 @@ export default function Hero() {
         }))
 
         // scroll out
-        gsap.timeline({ scrollTrigger: { trigger: el, start: 'top top', end: 'bottom top', scrub: 0.8 } })
+        gsap.timeline({ scrollTrigger: { trigger: el, start: 'top top', end: 'bottom top', scrub: 0.5 } })
           .to(el.querySelector(`.${s.previewWrap}`), { scale: 1.04, y: -40, ease: 'none' }, 0)
           .fromTo(el.querySelector(`.${s.contact}`), { opacity: 0.6, scale: 1 }, { opacity: 1, scale: 1.1, ease: 'none', immediateRender: false }, 0)
-        gsap.to(el.querySelectorAll(`.${s.tag}`), { autoAlpha: 0, ease: 'none', scrollTrigger: { trigger: el, start: 'top top', end: '30% top', scrub: 0.8 } })
+        gsap.to(el.querySelectorAll(`.${s.tag}`), { autoAlpha: 0, ease: 'none', scrollTrigger: { trigger: el, start: 'top top', end: '30% top', scrub: 0.5 } })
         // L5 — ambient warm blob drifts on a 40 s loop
         gsap.to(el.querySelector(`.${s.blob}`), { xPercent: 6, yPercent: -6, duration: 20, ease: 'sine.inOut', yoyo: true, repeat: -1 })
         return () => {
@@ -92,7 +92,7 @@ export default function Hero() {
           <br />
           {hero.taglineLeft[1]}
         </p>
-        <div className={s.previewWrap}>
+        <div className={s.previewWrap} data-reveal>
           <span className={s.contact} aria-hidden="true" />
           <BrowserFrame url="qwerttclients.com" className={`${s.preview} shot`}>
             <Img k="dark/d-home" alt={hero.previewAlt} eager sizes="880px" className={s.previewImg} />

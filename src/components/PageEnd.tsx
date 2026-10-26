@@ -59,7 +59,7 @@ export function NextDepartures({ rows, ink, mark }: { rows: Row[]; ink?: boolean
         const st = { trigger: el, start: 'top 75%', once: true }
         const tl = gsap.timeline({ scrollTrigger: st })
         tl.from(gsap.utils.toArray(`.${s.row}`, el), { x: (i: number) => (i % 2 ? 140 : -140), autoAlpha: 0, duration: 0.9, stagger: 0.12, ease: 'qw.out' })
-        tl.fromTo(gsap.utils.toArray(`.${s.win}`, el), { clipPath: 'inset(0% 50% 0% 50% round 10px)' }, { clipPath: 'inset(0% 0% 0% 0% round 10px)', duration: 0.8, ease: 'qw.inOut' }, 0.3)
+        tl.from(gsap.utils.toArray(`.${s.win}`, el), { autoAlpha: 0, scale: 0.85, duration: 0.8, ease: 'qw.out' }, 0.3)
         tl.fromTo(gsap.utils.toArray(`.${s.chip}`, el), { autoAlpha: 0.2 }, { autoAlpha: 1, duration: 0.08, repeat: 3, yoyo: true, ease: 'steps(1)' }, 0.8)
       })
     },

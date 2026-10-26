@@ -120,13 +120,23 @@ export function requestRefresh() {
 }
 
 // Wait for fonts + decoded images in a container, then refresh triggers.
-export async function refreshWhenReady(root?: HTMLElement | null) {
-  try {
+// Only eager images count: a lazy one below the fold never loads by itself, so
+// waiting on it would hang the page transition. The wait is capped either way.
+export async function refreshWhenReady(root?: HTMLElement | null, cap = 900) {
+  const settle = (async () => {
     await document.fonts?.ready
-    const imgs = root ? [...root.querySelectorAll('img')] : []
-    await Promise.all(imgs.slice(0, 12).map((i) => (i.complete ? i.decode?.().catch(() => {}) : new Promise((r) => i.addEventListener('load', r, { once: true })))))
-  } catch {
-    /* ignore */
-  }
+    const imgs = root ? [...root.querySelectorAll('img')].filter((i) => i.loading !== 'lazy') : []
+    await Promise.all(
+      imgs.slice(0, 12).map((i) =>
+        i.complete
+          ? i.decode?.().catch(() => {})
+          : new Promise((r) => {
+              i.addEventListener('load', r, { once: true })
+              i.addEventListener('error', r, { once: true })
+            })
+      )
+    )
+  })().catch(() => {})
+  await Promise.race([settle, new Promise((r) => setTimeout(r, cap))])
   ScrollTrigger.refresh()
 }

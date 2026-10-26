@@ -162,7 +162,7 @@ function Problem() {
       const mm = gsap.matchMedia()
       mm.add(MQ.motion, () => {
         const msgs = gsap.utils.toArray<HTMLElement>(`.${s.msg}`, ref.current)
-        const tl = gsap.timeline({ scrollTrigger: { trigger: `.${s.before}`, start: 'top 70%', end: 'bottom 60%', scrub: 0.8 } })
+        const tl = gsap.timeline({ scrollTrigger: { trigger: `.${s.before}`, start: 'top 70%', end: 'bottom 60%', scrub: 0.5 } })
         msgs.forEach((m, i) => tl.from(m, { y: 16, autoAlpha: 0, duration: 0.5 }, i * 0.4))
         gsap.fromTo(`.${s.missed}`, { x: 0 }, { keyframes: { x: [-3, 3, -3, 3, 0] }, duration: 0.3, scrollTrigger: { trigger: `.${s.missed}`, start: 'top 70%', once: true } })
         gsap.from(`.${s.appCard}`, { scale: 0.92, autoAlpha: 0, duration: 0.5, ease: 'qw.snap', scrollTrigger: { trigger: `.${s.after}`, start: 'top 70%', once: true } })
@@ -367,7 +367,7 @@ function Flows() {
         const cards = gsap.utils.toArray<HTMLElement>(`.${s.flow}`, ref.current)
         gsap.from(cards, { y: (i: number) => 60 + (i % 2) * 28, autoAlpha: 0, duration: 0.9, stagger: 0.1, scrollTrigger: { trigger: ref.current, start: 'top 70%', once: true } })
         gsap.fromTo(gsap.utils.toArray(`.${s.flowShot}`, ref.current), { clipPath: 'inset(0% 0% 100% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1, stagger: 0.1, delay: 0.3, ease: 'qw.inOut', scrollTrigger: { trigger: ref.current, start: 'top 70%', once: true } })
-        cards.forEach((card, i) => gsap.fromTo(card, { y: i % 2 ? 48 : 20 }, { y: i % 2 ? 8 : -20, ease: 'none', scrollTrigger: { trigger: ref.current, start: 'top bottom', end: 'bottom top', scrub: 0.8 } }))
+        cards.forEach((card, i) => gsap.fromTo(card, { y: i % 2 ? 48 : 20 }, { y: i % 2 ? 8 : -20, ease: 'none', scrollTrigger: { trigger: ref.current, start: 'top bottom', end: 'bottom top', scrub: 0.5 } }))
       })
     },
     { scope: ref }
@@ -529,7 +529,7 @@ function Languages() {
         gsap.to(o, {
           p: 80,
           ease: 'none',
-          scrollTrigger: { trigger: `.${s.wipe}`, start: 'top 75%', end: 'bottom 35%', scrub: 0.8 },
+          scrollTrigger: { trigger: `.${s.wipe}`, start: 'top 75%', end: 'bottom 35%', scrub: 0.5 },
           onUpdate: () => {
             const top = o.p + 8
             const bottom = o.p - 8
@@ -700,7 +700,7 @@ function Strip() {
             end: '+=100%',
             pin: true,
             anticipatePin: 1,
-            scrub: 1,
+            scrub: 0.5,
             invalidateOnRefresh: true,
             onUpdate: (self) => {
               const p = self.progress

@@ -4,7 +4,7 @@ import { useT } from '../content/i18n'
 import { contactInfo, links } from '../content/shared'
 import { gsap, isReduced } from '../motion/engine'
 import { CopyEmail, LiveClock, MaybeLink } from './Common'
-import { FaqList, PricingCards } from './Shared'
+import { FaqList } from './Shared'
 import { useDialog } from './useDialog'
 import s from './ConnectDrawer.module.css'
 
@@ -31,7 +31,6 @@ function Chips({ legend, options, isOn, onPick }: { legend: string; options: str
 function BriefForm() {
   const { connect: c, owner } = useT()
   const [svc, setSvc] = useState([c.defaultService])
-  const [budget, setBudget] = useState(c.defaultBudget)
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
   const [errors, setErrors] = useState<{ name?: string; email?: string }>({})
 
@@ -49,10 +48,10 @@ function BriefForm() {
       form.querySelector<HTMLElement>(`[name="${firstErr}"]`)?.focus()
       return
     }
-    const brief = { name: data.name.trim(), email: data.email.trim(), services: svc, budget, message: data.message || '' }
+    const brief = { name: data.name.trim(), email: data.email.trim(), services: svc, message: data.message || '' }
     if (!ENDPOINT) {
       const m = c.mail
-      const body = `${m.name}: ${brief.name}\n${m.email}: ${brief.email}\n${m.needs}: ${brief.services.join(', ') || '—'}\n${m.budget}: ${brief.budget}\n\n${brief.message}`
+      const body = `${m.name}: ${brief.name}\n${m.email}: ${brief.email}\n${m.needs}: ${brief.services.join(', ') || '—'}\n\n${brief.message}`
       window.location.href = `mailto:${contactInfo.email}?subject=${encodeURIComponent(m.subject(brief.name))}&body=${encodeURIComponent(body)}`
       return
     }
@@ -92,7 +91,6 @@ function BriefForm() {
       </div>
       <input className={s.hp} name="company" tabIndex={-1} autoComplete="off" aria-hidden="true" />
       <Chips legend={c.needLabel} options={c.services} isOn={(o) => svc.includes(o)} onPick={(o) => setSvc((v) => (v.includes(o) ? v.filter((x) => x !== o) : [...v, o]))} />
-      <Chips legend={c.budgetLabel} options={c.budgets} isOn={(o) => budget === o} onPick={setBudget} />
       <label className={s.fieldWrap}>
         <span className={`mono ${s.label}`}>{c.messageLabel}</span>
         <textarea className={`${s.field} ${s.area}`} name="message" placeholder={c.messagePh} />
@@ -110,7 +108,7 @@ function BriefForm() {
   )
 }
 
-const TABS = ['Contact', 'Pricing', 'FAQ'] as const
+const TABS = ['Contact', 'FAQ'] as const
 
 export default function ConnectDrawer() {
   const { connect: c, faq, ui } = useT()
@@ -132,7 +130,8 @@ export default function ConnectDrawer() {
     tl.fromTo(panel.current, { xPercent: 104 }, { xPercent: 0, duration: 0.75, ease: 'qw.inOut' })
     tl.fromTo(`.${s.backdrop}`, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.6 }, 0)
     if (page) tl.to(page, { scale: 0.985, transformOrigin: '50% 30vh', duration: 0.75, ease: 'qw.inOut' }, 0)
-    tl.from(panel.current!.querySelectorAll(`.${s.top}, .${s.mail}, .${s.brief} > *, .${s.faqs}`), { y: 18, autoAlpha: 0, duration: 0.5, stagger: 0.05 }, 0.25)
+    // fromTo, not from: a re-run must never read a half-faded state as the end
+    tl.fromTo(panel.current!.querySelectorAll(`.${s.top}, .${s.mail}, .${s.brief} > *, .${s.faqs}`), { y: 18, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.5, stagger: 0.05 }, 0.25)
     return () => {
       tl.kill()
     }
@@ -215,11 +214,10 @@ export default function ConnectDrawer() {
               </div>
               <BriefForm />
               <div className={s.faqs}>
-                <FaqList items={[faq.items[2], faq.items[1]]} initial={-1} compact />
+                <FaqList items={[faq.items[1], faq.items[0]]} initial={-1} compact />
               </div>
             </>
           )}
-          {tab === 'Pricing' && <PricingCards compact />}
           {tab === 'FAQ' && <FaqList items={faq.items} compact />}
         </div>
       </aside>

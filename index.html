@@ -21,9 +21,11 @@
         }
         try {
           var home = /^\/(ru\/?)?$/.test(location.pathname)
-          if (home && !reduce && !sessionStorage.getItem('introSeen') && !location.hash && !/[?&]nointro/.test(location.search)) {
+          var forced = /[?&]intro/.test(location.search)
+          if (home && !reduce && (forced || !sessionStorage.getItem('introSeen')) && !location.hash && !/[?&]nointro/.test(location.search)) {
             h.classList.add('intro-pending')
-            setTimeout(function () { h.classList.remove('intro-pending') }, 4000)
+            // the intro waits for the visitor's scroll; only bail out if the app never boots
+            setTimeout(function () { if (!window.__motionReady) h.classList.remove('intro-pending') }, 4000)
           }
         } catch (e) {}
       })()

@@ -84,18 +84,6 @@ export const testsCase = [
 ]
 export const terminal = { title: 'qwerttclients — zsh', prompt: '~/qwerttclients', command: 'npm test', more: '… 11 more', total: 23, duration: '4.6 s' }
 
-export const cssLines = [
-  '.imdb-header__scope-option--active {',
-  '  color: var(--movie-accent, #f5c518);',
-  '}',
-  '.auth-modal__field input:focus {',
-  '  border-color: var(--movie-accent, #f5c518);',
-  '}',
-  '.trailer-modal__close:hover {',
-  '  color: var(--movie-accent, #f5c518);',
-  '}'
-]
-
 export const stack = ['Figma', 'HTML', 'CSS', 'JavaScript', 'TypeScript', 'React', 'React Router', 'Vite', 'Next.js', 'Astro', 'Webflow', 'GSAP', 'Three.js', 'Git', 'Vercel']
 
 // qwerttclients app tokens (night theme) — from its stylesheet

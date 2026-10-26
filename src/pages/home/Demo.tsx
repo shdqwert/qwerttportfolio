@@ -35,7 +35,7 @@ export default function Demo() {
       mm.add(MQ.desktop, () => {
         const q = (c: string) => el.querySelector<HTMLElement>(`.${c}`)
         const ticks = gsap.utils.toArray<HTMLElement>(`.${s.stepTick}`, el)
-        const tl = gsap.timeline({ defaults: { ease: 'qw.out' }, scrollTrigger: { trigger: el, start: 'center center', end: '+=150%', pin: true, anticipatePin: 1, scrub: 1 } })
+        const tl = gsap.timeline({ defaults: { ease: 'qw.out' }, scrollTrigger: { trigger: el, start: 'center center', end: '+=150%', pin: true, anticipatePin: 1, scrub: 0.5 } })
         tl.from(q(s.venue), { x: 60, autoAlpha: 0, duration: 0.12 }, 0)
         tl.from(ticks[0], { scale: 0, duration: 0.04, ease: 'qw.snap' }, 0.14)
         tl.from(q(s.dayFill), { scale: 0.92, autoAlpha: 0, duration: 0.06, ease: 'qw.snap' }, 0.22)

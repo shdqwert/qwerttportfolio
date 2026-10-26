@@ -21,9 +21,8 @@ const en = {
   body: 'I built the front end end to end: components, layout, motion and data. Live data comes from the TMDB API — and when the API is unavailable, the site falls back to local data and still renders every section.',
   creditsTitle: 'Credits',
   credits: [['Role', 'Front-end development'], ['Stack', 'React 19 · Vite · GSAP'], ['Styling', 'Plain CSS, no UI kit'], ['Data', 'TMDB API + local fallback'], ['Extras', 'EN / RU · light / dark']] as [string, string][],
-  codeLabel: 'from the live build',
-  fixedTitle: 'Fixed along the way',
-  fixed: ['Header vanished on navigation — fixed the layout structure.', '726 px overflow on 375 px phones — flex children got min-width: 0.'],
+  fixedTitle: 'Polished along the way',
+  fixed: ['Smooth page transitions — the header stays in place.', 'Clean layout on small phones — nothing spills off the screen.'],
   live: 'Open live site ↗',
   repo: 'GitHub ↗',
   caption: 'Unofficial concept. Film titles and posters belong to their owners.'
@@ -41,9 +40,8 @@ const ru: typeof en = {
   body: 'Я сделал фронтенд целиком: компоненты, вёрстку, анимацию и данные. Живые данные приходят из TMDB API — а когда API недоступен, сайт берёт локальные данные и всё равно показывает каждую секцию.',
   creditsTitle: 'Участие',
   credits: [['Роль', 'Фронтенд-разработка'], ['Стек', 'React 19 · Vite · GSAP'], ['Стили', 'Чистый CSS, без UI-кита'], ['Данные', 'TMDB API + локальный запас'], ['Ещё', 'EN / RU · светлая / тёмная']],
-  codeLabel: 'из живой сборки',
-  fixedTitle: 'Исправлено по пути',
-  fixed: ['Шапка пропадала при переходах — исправил структуру вёрстки.', 'Вылет на 726 px на телефонах 375 px — flex-элементам добавил min-width: 0.'],
+  fixedTitle: 'Доведено до блеска',
+  fixed: ['Плавные переходы между страницами — шапка всегда на месте.', 'Аккуратная вёрстка на маленьких телефонах — ничего не вылезает за экран.'],
   live: 'Открыть сайт ↗',
   caption: 'Неофициальный концепт. Названия фильмов и постеры принадлежат правообладателям.'
 }

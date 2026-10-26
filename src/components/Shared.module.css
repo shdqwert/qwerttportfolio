@@ -24,12 +24,9 @@
 @keyframes glow { 50% { opacity: .75; } }
 .priceTop { display: flex; justify-content: space-between; gap: 12px; }
 .priceName { font: 600 34px/1 var(--font-display); letter-spacing: var(--track); }
-.weeks { color: var(--stone); white-space: nowrap; }
-.priceInk .weeks { color: var(--ash); }
 .priceText { font-size: 16px; color: var(--body-muted); letter-spacing: -.02em; }
 .priceInk .priceText { color: var(--body-muted-dark); }
 .priceBottom { margin-top: auto; display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; }
-.amount { font: 600 30px/1 var(--font-display); letter-spacing: var(--track); }
 .pricingCompact { grid-template-columns: 1fr; margin-top: 0; gap: 12px; }
 .pricingCompact .price { min-height: 0; padding: 22px 24px; gap: 10px; }
 

@@ -20,8 +20,8 @@ export const en = {
     name,
     role: 'Designer & Frontend Developer',
     roleShort: 'Designer & Developer',
-    availability: '[Q1 2027]',
-    replyTime: '[24 hours]',
+    availability: 'FOR PROJECTS',
+    replyTime: '24 hours',
     portrait: '[Your portrait · 4:5]',
     bio: '[2–3 sentences: where you’re based, how you started, what you love building.]',
     timeLabel: 'Tashkent'
@@ -38,9 +38,9 @@ export const en = {
     mainNav: 'Main',
     langLabel: 'Language',
     home: 'qwertt — home',
-    gate: 'GATE',
+    gate: 'TIME',
     status: 'STATUS',
-    boarding: 'BOARDING',
+    boarding: 'OPEN',
     copy: 'Click to copy',
     copied: 'Copied ✓',
     placeholderTitle: 'Placeholder — add the URL in src/content/shared.ts',
@@ -55,7 +55,7 @@ export const en = {
     prevScreen: 'Previous screen',
     nextScreen: 'Next screen',
     fullScreenshot: 'Full screenshot, scrollable',
-    keepScrolling: ['Keep scrolling — the site moves,', 'the page stays.'],
+    keepScrolling: ['Scroll or click a chapter —', 'the site moves, the page stays.'],
     seatWork: '← Work',
     breadcrumb: 'Breadcrumb',
     nowBoarding: 'NOW BOARDING',
@@ -72,8 +72,8 @@ export const en = {
     stats: [
       { value: 23, suffix: '/23', label: 'API tests passing' },
       { value: 3, suffix: '', label: 'languages, one codebase' },
-      { value: 189, suffix: ' KB', label: 'whole app JS, gzipped' },
-      { value: 6, suffix: ' KB', label: 'all CSS, gzipped' }
+      { value: 5, suffix: '', label: 'booking flows, one system' },
+      { value: 2, suffix: '', label: 'live products, end to end' }
     ]
   },
   services: {
@@ -93,9 +93,9 @@ export const en = {
     discussAria: (p: string) => `Discuss the ${p} package`
   },
   pricing: [
-    { name: 'Express', weeks: '[3–5] weeks', text: 'For focused stories — a launch, a product, a personal brand.', price: 'from [PRICE]', ink: false },
-    { name: 'Full journey', weeks: '[6–10] weeks', text: 'For growing brands — multi-page, CMS, booking or catalogue.', price: 'from [PRICE]', ink: true },
-    { name: 'Code only', weeks: '[2–6] weeks', text: 'You have the Figma — I build it, pixel-accurate and animated.', price: 'from [PRICE]', ink: false }
+    { name: 'Landing page', text: 'One strong page for a launch, a product or a personal brand.', ink: false },
+    { name: 'Full website', text: 'Multi-page site for a growing brand — CMS, booking or catalogue.', ink: true },
+    { name: 'Code only', text: 'You already have the design — I build it pixel-accurate and animated.', ink: false }
   ],
   about: {
     label: 'About',
@@ -103,10 +103,10 @@ export const en = {
     text: 'I work as a one-person studio, so the person who designs your site is the person who codes it.',
     facts: [['Based in', '[City], Uzbekistan'], ['Experience', '[N] years'], ['Languages', '[RU · EN · UZ]'], ['Time zone', 'GMT+5, EU overlap']] as [string, string][],
     process: [
-      ['Week 1', 'Discover', 'Goals, audience, scope and a fixed quote.'],
-      ['Weeks 2–3', 'Design', 'Key screens first, then the full system.'],
-      ['Weeks 4–6', 'Build', 'Live link from day one, weekly updates.'],
-      ['Launch', 'Ship & care', 'Speed checks, handover, [30] days support.']
+      ['01', 'Discover', 'Goals, audience and a clear plan for the project.'],
+      ['02', 'Design', 'Key screens first, then the full system.'],
+      ['03', 'Build', 'A live link from day one, so you see every step.'],
+      ['04', 'Launch', 'Final checks, handover and support after launch.']
     ] as [string, string, string][],
     stackLabel: 'Tools I use daily',
     stackEdit: '[edit list]'
@@ -115,11 +115,10 @@ export const en = {
     title: 'Questions before we start',
     label: 'Questions',
     items: [
-      { q: 'How long does a website take?', a: 'A one-pager usually takes [3–5] weeks, a full site [6–10]. You get a fixed timeline in the first week, and a live link to watch progress.' },
-      { q: 'Can I edit the site myself after launch?', a: '[ANSWER]' },
-      { q: 'Do you take development-only projects?', a: '[ANSWER]' },
-      { q: 'Do you work with clients abroad?', a: '[ANSWER]' },
-      { q: 'How does payment work?', a: '[ANSWER]' }
+      { q: 'Can I edit the site myself after launch?', a: 'Yes. Texts and images live in a simple editor, and a short handover call shows your team how to update everything without me.' },
+      { q: 'Do you take development-only projects?', a: 'Yes. Send me your Figma file — I build it pixel-accurate, responsive and with smooth animation.' },
+      { q: 'Do you work with clients abroad?', a: 'Yes. I work remotely with clients in any country, in English or Russian, and my time zone overlaps with Europe.' },
+      { q: 'How do we start?', a: 'Write to me with a few words about your project. I reply within a day and we set up a short call to plan the work.' }
     ]
   },
   contact: {
@@ -193,7 +192,7 @@ export const en = {
     ],
     admit: 'ADMIT ONE',
     nextCard: 'Deal next boarding pass',
-    seat: 'Seat: yours · Gate: open · Boarding: [Q1 2027]',
+    seat: 'Seat: yours · Gate: open · Taking new projects',
     tickets: { home: 'Ticket QW-00 · qwerttportfolio', qc: 'Ticket QW-01 · qwerttclients', kino: 'Ticket QW-02 · kinoqwertt', lab: 'Ticket QW-03 · lab' },
     top: 'Back to top ↑',
     imprint: 'Imprint',
@@ -238,9 +237,11 @@ export const en = {
     konami: 'Konami code accepted · +30 lives'
   },
   intro: {
-    board: ['DEPARTURES', 'QW-00  PORTFOLIO', 'GATE   OPEN'],
-    status: 'NOW BOARDING',
-    brand: 'qwertt · portfolio © 2026'
+    status: 'Design · Frontend · Portfolio',
+    brand: 'qwertt · portfolio © 2026',
+    hint: 'Scroll to start the show',
+    presents: 'A portfolio premiere',
+    leader: 'Reel 01 · Picture start'
   },
   transition: {
     home: 'NOW BOARDING · ROW 00 · HOME',
@@ -249,22 +250,19 @@ export const en = {
     lab: 'NOW BOARDING · ROW 03 · LAB'
   },
   connect: {
-    tabs: { Contact: 'Contact', Pricing: 'Pricing', FAQ: 'FAQ' } as Record<'Contact' | 'Pricing' | 'FAQ', string>,
+    tabs: { Contact: 'Contact', FAQ: 'FAQ' } as Record<'Contact' | 'FAQ', string>,
     tabsLabel: 'Connect sections',
     dialog: 'Connect',
     emailLabel: 'Email — fastest reply',
     services: ['Website design', 'Development', 'Redesign', 'Motion / WebGL', 'Not sure yet'],
-    budgets: ['[Range A]', '[Range B]', '[Range C]', 'Let’s discuss'],
     defaultService: 'Website design',
-    defaultBudget: '[Range B]',
     nameLabel: 'Your name',
     namePh: 'Jane Doe',
     emailField: 'Email',
     emailPh: 'jane@company.com',
     needLabel: 'What do you need?',
-    budgetLabel: 'Budget',
     messageLabel: 'Tell me about the project',
-    messagePh: 'Goals, timeline, links to references…',
+    messagePh: 'Goals, ideas, links to references…',
     errName: 'Please add your name.',
     errEmail: 'Please enter a valid email.',
     sending: 'Sending…',
@@ -274,7 +272,7 @@ export const en = {
     errSend: (email: string) => `Couldn’t send — please try again or write to ${email}.`,
     doneTitle: 'Thanks — your brief is in.',
     doneText: (t: string) => `I’ll reply within ${t}.`,
-    mail: { subject: (n: string) => `Project brief from ${n}`, name: 'Name', email: 'Email', needs: 'Needs', budget: 'Budget' }
+    mail: { subject: (n: string) => `Project brief from ${n}`, name: 'Name', email: 'Email', needs: 'Needs' }
   }
 }
 

@@ -48,7 +48,7 @@ export default function Deck() {
       const mm = gsap.matchMedia()
       mm.add(MQ.desktop, () => {
         const cards = gsap.utils.toArray<HTMLElement>(`.${s.card}`, el)
-        const tl = gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: el, start: 'center center', end: '+=150%', pin: true, anticipatePin: 1, scrub: 1 } })
+        const tl = gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: el, start: 'center center', end: '+=150%', pin: true, anticipatePin: 1, scrub: 0.5 } })
         tl.set({}, {}, 1)
         cards.forEach((c, i) => {
           const f = FAN[i]

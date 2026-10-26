@@ -80,11 +80,9 @@ export function PricingCards({ compact = false }: { compact?: boolean }) {
           <Sheen />
           <div className={s.priceTop}>
             <span className={s.priceName}>{p.name}</span>
-            <span className={`mono ${s.weeks}`}>{p.weeks}</span>
           </div>
           <span className={s.priceText}>{p.text}</span>
           <div className={s.priceBottom}>
-            <span className={s.amount}>{p.price}</span>
             {!compact && (
               <Magnetic max={8}>
                 <a href="#connect" className={`btn btn-sm ${p.ink ? 'btn-paper' : 'btn-line'}`} aria-label={services.discussAria(p.name)} onClick={(e) => (e.preventDefault(), openConnect())}>

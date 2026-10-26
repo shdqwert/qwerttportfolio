@@ -38,7 +38,7 @@ export default function Opener() {
             end: '+=200%',
             pin: true,
             anticipatePin: 1,
-            scrub: 1,
+            scrub: 0.5,
             invalidateOnRefresh: true,
             onUpdate: (self) => {
               const idx = Math.min(n - 1, Math.floor(self.progress * n))

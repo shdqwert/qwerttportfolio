@@ -153,13 +153,10 @@ export const homeEn = {
     listTitle: 'How it’s engineered',
     list: [
       ['Never a blank page', 'Live data comes from the TMDB API; if it fails, the site falls back to local data and still renders every section.'],
-      ['One accent variable for the whole UI', 'Every highlight reads --movie-accent, so a page can re-colour itself without touching components.'],
+      ['Colours that follow the film', 'Each title page picks up the mood of its poster, so every film feels like its own world.'],
       ['Two languages, two themes', 'EN / RU and light / dark, remembered in the browser. No UI kit — plain CSS and GSAP.'],
-      ['Bugs found and fixed', 'Header vanishing on navigation; a 726 px overflow on 375 px phones (flex children without min-width: 0).']
+      ['Polished on every screen', 'Tested on phones, tablets and desktops — no broken layouts, no sideways scrolling.']
     ] as [string, string][],
-    codeLabel: 'styles · from the live build',
-    excerpt: 'excerpt',
-    comment: '/* every highlight reads one variable */',
     clientLabel: 'What this shows a client',
     clientText: 'I can take a designer’s Figma file and ship it as a fast, maintainable app — and catch the bugs before your users do.',
     readCase: 'Read the full case →',

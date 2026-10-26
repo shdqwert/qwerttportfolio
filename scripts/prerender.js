@@ -57,3 +57,6 @@ for (const lang of ['en', 'ru']) {
   }
 }
 await rm(`${root}dist-ssr`, { recursive: true, force: true })
+// SSR modules (GSAP's ticker and friends) can leave timers behind; the work is
+// done, so end the process instead of waiting on them.
+process.exit(0)

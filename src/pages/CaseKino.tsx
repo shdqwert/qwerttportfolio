@@ -4,7 +4,6 @@ import { whenStageReady } from '../app/Nav'
 import { Img, MaybeLink } from '../components/Common'
 import Marquee from '../components/motion/Marquee'
 import PunchMark from '../components/motion/PunchMark'
-import Reveal from '../components/motion/Reveal'
 import PageEnd, { CabinLight, NextDepartures, SeatTag } from '../components/PageEnd'
 import { useT } from '../content/i18n'
 import { useKinoText } from '../content/pages/kino'
@@ -32,7 +31,7 @@ export default function CaseKino() {
         split = SplitText.create(el.querySelector('h1'), { type: 'lines', mask: 'lines', aria: 'none' })
         tl.from(split.lines, { yPercent: 105, duration: 0.9, ease: 'qw.out' }, 0.1)
         tl.from(el.querySelectorAll(`.${s.tagline} span`), { y: 20, autoAlpha: 0, duration: 0.6, stagger: 0.12 }, 0.4)
-        tl.fromTo(el.querySelector(`.${s.heroMedia}`), { clipPath: 'inset(0% 50% 0% 50% round 14px)' }, { clipPath: 'inset(0% 0% 0% 0% round 14px)', duration: 1.1, ease: 'qw.inOut' }, 0.3)
+        tl.from(el.querySelector(`.${s.heroMedia}`), { autoAlpha: 0, scale: 0.94, y: 30, duration: 1.1, ease: 'qw.out' }, 0.3)
         tl.from(el.querySelector(`.${s.viewSite}`), { y: 16, autoAlpha: 0, duration: 0.6 }, 0.9)
         el.querySelectorAll('[data-reveal]').forEach((n) => n.classList.add('revealed'))
         off = whenStageReady(() => tl.play())
@@ -46,7 +45,7 @@ export default function CaseKino() {
         gsap.utils.toArray<HTMLElement>(`.${s.panel}`, el).forEach((p) => {
           const im = p.querySelector('img')
           const base = Number(p.dataset.pos || 0)
-          if (im) gsap.fromTo(im, { objectPosition: `50% ${base}%` }, { objectPosition: `50% ${base + 6}%`, ease: 'none', scrollTrigger: { trigger: p, start: 'top bottom', end: 'bottom top', scrub: 0.8 } })
+          if (im) gsap.fromTo(im, { objectPosition: `50% ${base}%` }, { objectPosition: `50% ${base + 6}%`, ease: 'none', scrollTrigger: { trigger: p, start: 'top bottom', end: 'bottom top', scrub: 0.5 } })
           gsap.fromTo(p, { clipPath: 'inset(8% 0% 8% 0% round 16px)' }, { clipPath: 'inset(0% 0% 0% 0% round 16px)', ease: 'qw.out', duration: 1, scrollTrigger: { trigger: p, start: 'top 85%', once: true } })
         })
         gsap.from(el.querySelectorAll(`.${s.fixed} li`), { x: -16, autoAlpha: 0, stagger: 0.1, duration: 0.5, scrollTrigger: { trigger: `.${s.fixed}`, start: 'top 85%', once: true } })
@@ -130,14 +129,6 @@ export default function CaseKino() {
                 <span>{b}</span>
               </div>
             ))}
-          </div>
-          <div className={s.code}>
-            <div className="mono ash">{k.codeLabel}</div>
-            <Reveal as="pre" variant="fade" className={s.pre}>
-              <span>{'.trailer-modal__close:hover {\n'}</span>
-              <span>{'  color: var(--movie-accent, #f5c518);\n'}</span>
-              <span>{'}'}</span>
-            </Reveal>
           </div>
           <div>
             <h2 className={s.asideTitle}>{k.fixedTitle}</h2>

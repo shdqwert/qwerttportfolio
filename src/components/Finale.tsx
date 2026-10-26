@@ -39,7 +39,7 @@ export default function Finale({ page }: { page: RouteKey }) {
             trigger: block,
             start: 'top 75%',
             end: 'bottom 60%',
-            scrub: 1.2,
+            scrub: 0.6,
             onUpdate: (self) => {
               const idx = Math.min(cfg.flap.length - 1, Math.floor((Math.min(self.progress, 0.15) / 0.15) * (cfg.flap.length - 1)))
               if (idx !== lastIdx) {
@@ -51,14 +51,14 @@ export default function Finale({ page }: { page: RouteKey }) {
         })
         tl.set({}, {}, 1) // timeline length = 1 (progress units)
         lines.forEach((l, i) => {
-          tl.fromTo(l, { x: i % 2 ? 160 : -140, opacity: 0.25 }, { x: 0, opacity: 1, duration: 0.5, ease: 'qw.out' }, 0.05 + i * 0.08)
+          tl.fromTo(l, { x: i % 2 ? 60 : -60, opacity: 0.25 }, { x: 0, opacity: 1, duration: 0.5, ease: 'qw.out' }, 0.05 + i * 0.08)
         })
         if (spot) {
           lines.forEach((l, i) => tl.to(spot, { y: () => l.offsetTop + l.offsetHeight / 2 - 150, duration: 0.12 }, 0.05 + i * 0.08))
         }
         wins.forEach((w, i) => {
           const tilt = Number(w.dataset.tilt || 0)
-          tl.fromTo(w, { clipPath: 'inset(0% 50% 0% 50% round 12px)', rotate: 0, scale: 0.9 }, { clipPath: 'inset(0% 0% 0% 0% round 12px)', rotate: tilt, scale: 1, duration: 0.4, ease: 'qw.inOut' }, 0.2 + i * 0.05)
+          tl.fromTo(w, { autoAlpha: 0, rotate: 0, scale: 0.86, y: 24 }, { autoAlpha: 1, rotate: tilt, scale: 1, y: 0, duration: 0.4, ease: 'qw.out' }, 0.2 + i * 0.05)
           tl.fromTo(w.querySelector(`.${s.bloom}`), { opacity: 0 }, { opacity: 1, duration: 0.3 }, 0.3 + i * 0.05)
         })
         if (arrow) tl.fromTo(arrow, { strokeDashoffset: 240 }, { strokeDashoffset: 0, duration: 0.25 }, 0.5)
@@ -70,7 +70,7 @@ export default function Finale({ page }: { page: RouteKey }) {
           imgs.forEach((img, k) => {
             const next = imgs[(k + 1) % imgs.length]
             c.to(img, { autoAlpha: 0, duration: 0.6 }, k * 2.6 + 2)
-            c.fromTo(next, { autoAlpha: 0, scale: 1.12, yPercent: 0 }, { autoAlpha: 1, scale: 1, yPercent: -4, duration: 2.6, ease: 'power1.out' }, k * 2.6 + 2)
+            c.fromTo(next, { autoAlpha: 0, scale: 1.1 }, { autoAlpha: 1, scale: 1, duration: 2.6, ease: 'power1.out' }, k * 2.6 + 2)
           })
           gsap.set(imgs.slice(1), { autoAlpha: 0 })
           return c

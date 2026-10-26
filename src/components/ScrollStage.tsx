@@ -2,7 +2,7 @@ import { useGSAP } from '../motion/useMotion'
 import { useMemo, useRef, useState } from 'react'
 import { useT } from '../content/i18n'
 import { img as imgData, type ImgKey } from '../content/shared'
-import { gsap, MQ } from '../motion/engine'
+import { gsap, MQ, scrollToTarget, type ScrollTrigger } from '../motion/engine'
 import { useStatic } from '../motion/hooks'
 import { Img, MouseIcon } from './Common'
 import { BrowserFrame } from './Shared'
@@ -36,6 +36,14 @@ export default function ScrollStage({ stage, dark = true }: { stage: Stage; dark
   const [active, setActive] = useState(0)
   const ref = useRef<HTMLDivElement>(null)
   const view = useRef<HTMLDivElement>(null)
+  const trigger = useRef<ScrollTrigger | null>(null)
+
+  // a chapter title jumps the pinned scroll to that chapter (smooth, via Lenis)
+  const goTo = (i: number) => {
+    const st = trigger.current
+    if (!st) return
+    scrollToTarget(Math.round(st.start + ((i + 0.15) / n) * (st.end - st.start)), { duration: 0.9 })
+  }
 
   useGSAP(
     () => {
@@ -59,7 +67,7 @@ export default function ScrollStage({ stage, dark = true }: { stage: Stage; dark
             pin: true,
             pinSpacing: true,
             anticipatePin: 1,
-            scrub: 1,
+            scrub: 0.5,
             invalidateOnRefresh: true,
             onUpdate: (self) => {
               const f = self.progress * n
@@ -79,15 +87,17 @@ export default function ScrollStage({ stage, dark = true }: { stage: Stage; dark
           const len = (seg.end - seg.start + 1) / n
           tl.fromTo(imgs[k], { y: 0 }, { y: () => -Math.max(0, (v.clientWidth * im.h) / im.w - v.clientHeight), duration: len }, a)
           if (k > 0) {
-            tl.fromTo(imgs[k], { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.06 }, a - 0.03)
-            tl.to(imgs[k - 1], { autoAlpha: 0, duration: 0.06 }, a - 0.03)
+            tl.fromTo(imgs[k], { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.03 }, a - 0.015)
+            tl.to(imgs[k - 1], { autoAlpha: 0, duration: 0.03 }, a - 0.005)
           }
         })
         stage.callouts.forEach((c, i) => {
           tl.fromTo(callouts[i], { autoAlpha: 0, scale: 0.8, y: 10 }, { autoAlpha: 1, scale: 1, y: 0, duration: 0.04, ease: 'qw.snap' }, c.from)
           tl.to(callouts[i], { autoAlpha: 0, y: -8, duration: 0.04 }, c.to)
         })
+        trigger.current = tl.scrollTrigger ?? null
         if (thumb) tl.fromTo(thumb, { yPercent: 0 }, { yPercent: 355, duration: 1 }, 0)
+        return () => (trigger.current = null)
       })
     },
     { scope: ref, dependencies: [isStatic, stage] }
@@ -146,7 +156,9 @@ export default function ScrollStage({ stage, dark = true }: { stage: Stage; dark
             <li key={c.t} className={`${s.chapter} ${i === active ? s.chOn : ''}`} aria-current={i === active ? 'step' : undefined}>
               <span className="mono">{String(i + 1).padStart(2, '0')}</span>
               <div>
-                <div className={s.chTitle}>{c.t}</div>
+                <button type="button" className={s.chTitle} onClick={() => goTo(i)}>
+                  {c.t}
+                </button>
                 <div className={s.chMore}>
                   <div className={s.chInner}>
                     <p className={s.chText}>{c.d}</p>

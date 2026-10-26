@@ -35,7 +35,7 @@ export default function Storm() {
         const tiles = gsap.utils.toArray<HTMLElement>(`.${s.tile}`, el)
         const kx = () => el.clientWidth / 1376
         const ky = () => el.clientHeight / 860
-        const tl = gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: el, start: 'center center', end: '+=120%', pin: true, anticipatePin: 1, scrub: 1, invalidateOnRefresh: true } })
+        const tl = gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: el, start: 'center center', end: '+=120%', pin: true, anticipatePin: 1, scrub: 0.5, invalidateOnRefresh: true } })
         tiles.forEach((t, i) => {
           const [, x, y, w, h, r] = TILES[i]
           const dx = 688 - (x + w / 2)

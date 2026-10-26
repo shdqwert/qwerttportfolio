@@ -18,6 +18,8 @@
 .chapter > :global(.mono) { padding-top: 3px; }
 .chOn { opacity: 1; }
 .chTitle { font-size: 19px; font-weight: 600; letter-spacing: var(--track); }
+button.chTitle { display: block; width: 100%; padding: 0; border: 0; background: none; color: inherit; font-family: inherit; text-align: left; cursor: pointer; transition: color var(--d-micro); }
+button.chTitle:hover { color: var(--accent); }
 /* text keeps its space (no layout shift while chapters change), only fades */
 .chMore { opacity: 0; transform: translateY(-4px); transition: opacity var(--d-ui) var(--ease-out), transform var(--d-ui) var(--ease-out); }
 .chOn .chMore { opacity: 1; transform: none; }

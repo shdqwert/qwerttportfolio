@@ -9,7 +9,7 @@ import { CabinLight } from '../../components/PageEnd'
 import ScrollStage from '../../components/ScrollStage'
 import { NumberedList } from '../../components/Shared'
 import { useHomeText } from '../../content/pages/home'
-import { cssLines, links } from '../../content/shared'
+import { links } from '../../content/shared'
 import { gsap, MQ } from '../../motion/engine'
 import { getLight } from '../../motion/light'
 import s from './Home.module.css'
@@ -26,7 +26,7 @@ export default function KinoHome() {
       const mm = gsap.matchMedia()
       mm.add(MQ.motion, () => {
         let top = 0
-        const st = { trigger: el, start: 'top bottom', end: () => `top+=${innerHeight * 0.35} bottom-=${innerHeight * 0.35}`, scrub: 0.8, onRefresh: () => (top = el.getBoundingClientRect().top + scrollY) }
+        const st = { trigger: el, start: 'top bottom', end: () => `top+=${innerHeight * 0.35} bottom-=${innerHeight * 0.35}`, scrub: 0.5, onRefresh: () => (top = el.getBoundingClientRect().top + scrollY) }
         const o = { r: 0 }
         gsap.to(o, {
           r: 150,
@@ -92,18 +92,6 @@ export default function KinoHome() {
         <div className={s.cols}>
           <NumberedList title={k.listTitle} items={k.list} dark />
           <div className={s.aside}>
-            <div className={s.codecard}>
-              <div className={`mono ash ${s.codeHead}`}>
-                <span>{k.codeLabel}</span>
-                <span>{k.excerpt}</span>
-              </div>
-              <Reveal as="pre" variant="fade" className={s.pre} stagger={0.06}>
-                <span className={s.comment}>{k.comment + '\n'}</span>
-                {cssLines.map((l, i) => (
-                  <span key={i}>{l + '\n'}</span>
-                ))}
-              </Reveal>
-            </div>
             <div className={s.panelPaper}>
               <div className="mono muted">{k.clientLabel}</div>
               <p>{k.clientText}</p>

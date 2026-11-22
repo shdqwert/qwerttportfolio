@@ -2,7 +2,7 @@
 // it is rendered visibly on purpose. ru.ts must keep exactly the same shape.
 import type { ImgKey, MarkName } from './shared'
 
-const name = '[Your Name]'
+const name = 'qwertt'
 
 type Win = { tag: string; imgs: ImgKey[]; w: number; h: number; tilt: number; pos: string }
 type FLine = { a: string; win?: Win; note?: string; b?: string; arrow?: boolean }
@@ -22,14 +22,14 @@ export const en = {
     roleShort: 'Designer & Developer',
     availability: 'FOR PROJECTS',
     replyTime: '24 hours',
-    portrait: '[Your portrait · 4:5]',
-    bio: '[2–3 sentences: where you’re based, how you started, what you love building.]',
+    tagline: 'Portfolio · Design, code & motion',
+    portrait: 'qwertt · portfolio',
     timeLabel: 'Tashkent'
   },
   nav: [
     { id: 'work', label: 'Work', to: '/#work' },
     { id: 'services', label: 'Services', to: '/#services' },
-    { id: 'about', label: 'About', to: '/#about' },
+    { id: 'about', label: 'Skills', to: '/#about' },
     { id: 'lab', label: 'Lab', to: '/lab' },
     { id: 'connect', label: 'Connect', to: '#connect' }
   ],
@@ -98,18 +98,17 @@ export const en = {
     { name: 'Code only', text: 'You already have the design — I build it pixel-accurate and animated.', ink: false }
   ],
   about: {
-    label: 'About',
-    title: `Hi, I’m ${name}. I care about the last 10% — the part most sites skip.`,
-    text: 'I work as a one-person studio, so the person who designs your site is the person who codes it.',
-    facts: [['Based in', '[City], Uzbekistan'], ['Experience', '[N] years'], ['Languages', '[RU · EN · UZ]'], ['Time zone', 'GMT+5, EU overlap']] as [string, string][],
+    label: 'Skills',
+    title: 'This is my portfolio — what I design, build and bring to life.',
+    text: 'Real projects, the skills behind them and the way I work: from the first sketch to a fast, finished site.',
+    facts: [['Design', 'Figma · UX · UI'], ['Frontend', 'React · TypeScript'], ['Motion', 'GSAP · CSS'], ['Backend', 'APIs · databases']] as [string, string][],
     process: [
       ['01', 'Discover', 'Goals, audience and a clear plan for the project.'],
       ['02', 'Design', 'Key screens first, then the full system.'],
       ['03', 'Build', 'A live link from day one, so you see every step.'],
       ['04', 'Launch', 'Final checks, handover and support after launch.']
     ] as [string, string, string][],
-    stackLabel: 'Tools I use daily',
-    stackEdit: '[edit list]'
+    stackLabel: 'Tools I use daily'
   },
   faq: {
     title: 'Questions before we start',
@@ -198,7 +197,7 @@ export const en = {
     imprint: 'Imprint',
     privacy: 'Privacy',
     stamped: `Built & stamped by ${name}`,
-    links: { home: 'Home', work: 'Work', services: 'Services', about: 'About', lab: 'Lab', connect: 'Connect', qc: 'qwerttclients', kino: 'kinoqwertt' }
+    links: { home: 'Home', work: 'Work', services: 'Services', about: 'Skills', lab: 'Lab', connect: 'Connect', qc: 'qwerttclients', kino: 'kinoqwertt' }
   },
   nextDepartures: {
     label: 'Next departures',

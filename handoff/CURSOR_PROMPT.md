@@ -346,7 +346,6 @@ Notation: **T** = triggered once (`start: 'top 82%'`), **S** = scrubbed to scrol
 | # | Section | Animation |
 |---|---|---|
 | 0 | Page enter | §7.6 transition. The seat tag "← Work · Row 01 · Seat qwerttclients" slides in from the left (qw.snap) with L2 sheen and stays fixed bottom-left. |
-| 1b | **Boarding flight (F27)** | New section between the board and the chat: a small preview flies into a big landing mat with the night-mode screen recording. Spec: `handoff/TASK_F27_BOARDING_FLIGHT.md`. |
 | 1 | Split-flap bookings board (F20) | **L:** every tile flips through random glyphs before landing (column stagger 25 ms, total ≤ 1.6 s) with L3 flicker. **S:** every ~120 px of scroll the board advances one row (top row flips out, a new row flips in from a list of ~10 real rows). Giant title: track-settle. |
 | 2 | Chat before/after | The sticky chapter rail (F21) appears with the rule draw; the active chapter follows the section in view (Flip on the marker). Left: DM bubbles appear one by one (scrubbed), with "Seen" ticks and missed-call rows shaking once (x ±3, 0.3 s). Right: the dark app card snaps in with "Confirmed in 4 seconds", which counts 0 → 4 s. |
 | 3 | Real map (F22) | Pins drop by district (y −30 → 0, qw.snap, 40 ms stagger) and switch on like night lights (L9). The popover cycles through 3 venues every 2.5 s while in view (Flip between pins). Roads draw with `stroke-dashoffset`. |
@@ -364,7 +363,6 @@ Notation: **T** = triggered once (`start: 'top 82%'`), **S** = scrubbed to scrol
 | # | Section | Animation |
 |---|---|---|
 | 0 | Page enter | §7.6. Seat tag "Row 02 · Seat kinoqwertt". |
-| 0b | **Boarding flight (F27)** | The hero preview flies down into its landing mat, growing and tilting in mid-air; inside, a real screen recording plays. Full spec: `handoff/TASK_F27_BOARDING_FLIGHT.md`. |
 | 1 | Hero | The title rises per line through the mask; the tagline words appear one per line (stagger 0.12). The intro media opens like a **cinema curtain** (clip-path `inset(0 50%)` → `inset(0)`, 1.1 s qw.inOut) with L10 projector beam and dust. The "View site ↗" pill marquee runs (pauses on hover/focus). |
 | 2 | Media panels 01–06 + sticky credits | Panels clip-reveal with the inner image `object-position` drifting 0 → 6% (S) — the screenshot feels like it scrolls. Credits column sticky (`top: 96px`); each credit row lights up (opacity .45 → 1) when its paired panel is centred. The CSS excerpt lines fade in top→bottom; the "Fixed along the way" list ticks in. |
 | 3 | Next departures (paper) | As §7.3 #10. |

@@ -32,9 +32,10 @@ function Drawer() {
   ) : null
 }
 
-// Pointer cursor and the Konami egg are extras: they load once the page has
+// Pointer cursor (touch effects on phones) and the Konami egg are extras: they load once the page has
 // finished loading and the browser is idle.
 const Cursor = lazy(() => import('./components/motion/Cursor'))
+const TouchFx = lazy(() => import('./components/motion/TouchFx'))
 const Konami = lazy(() => import('./components/Konami').then((m) => ({ default: m.Konami })))
 function Extras() {
   const [on, setOn] = useState(false)
@@ -46,6 +47,7 @@ function Extras() {
   return on ? (
     <Suspense fallback={null}>
       <Cursor />
+      <TouchFx />
       <Konami />
     </Suspense>
   ) : null

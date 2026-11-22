@@ -67,11 +67,11 @@ export default function Hero() {
         <br />
         {hero.lines[1]}
       </h1>
-      <div className={s.heroMark} data-reveal>
+      <div className={s.heroMark} data-reveal data-tilt data-tilt-ask style={{ ['--depth' as string]: '-14px' }}>
         <PunchMark shape="q" cell={9} repelRef={ref} />
       </div>
       <p className={s.heroName} data-hero-rise data-reveal>
-        {owner.name} · {owner.role}
+        {owner.tagline}
       </p>
       <p className={s.heroLead} data-hero-rise data-reveal>
         {hero.lead}
@@ -92,7 +92,7 @@ export default function Hero() {
           <br />
           {hero.taglineLeft[1]}
         </p>
-        <div className={s.previewWrap} data-reveal>
+        <div className={s.previewWrap} data-reveal data-tilt style={{ ['--depth' as string]: '12px' }}>
           <span className={s.contact} aria-hidden="true" />
           <BrowserFrame url="qwerttclients.com" className={`${s.preview} shot`}>
             <Img k="dark/d-home" alt={hero.previewAlt} eager sizes="880px" className={s.previewImg} />

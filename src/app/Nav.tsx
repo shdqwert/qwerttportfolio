@@ -3,7 +3,7 @@ import { useLocation, useNavigate, useNavigationType } from 'react-router'
 import { useT } from '../content/i18n'
 import { routeKey } from '../content/lang'
 import { preloadPage } from './pages'
-import { gsap, isReduced, refreshWhenReady, scrollToTarget } from '../motion/engine'
+import { gsap, headerOffset, isReduced, refreshWhenReady, scrollToTarget } from '../motion/engine'
 import { FlapText } from '../components/motion/SplitFlap'
 import s from './Nav.module.css'
 
@@ -45,6 +45,40 @@ export function NavProvider({ children }: { children: ReactNode }) {
   const pending = useRef<null | { hash: string }>(null)
   const [label, setLabel] = useState('')
   const [connectOpen, setConnectOpen] = useState(false)
+
+  // Deep link (/#about, /work/kinoqwertt#…): the browser's own jump runs before
+  // the app lays out, and the lower home sections hydrate late — so wait for
+  // the section to exist and the pinned sections to measure, then jump.
+  useEffect(() => {
+    const hash = window.location.hash
+    if (!hash || hash === '#connect' || !/^#[\w-]+$/.test(hash)) return
+    let off = false
+    let tries = 0
+    let timer = 0
+    const tick = () => {
+      if (off) return
+      if (!document.querySelector(hash)) {
+        if (++tries < 50) timer = window.setTimeout(tick, 100)
+        return
+      }
+      // the page keeps growing while late sections pin themselves, so the
+      // jump is repeated until the section sits under the header
+      let left = 6
+      const jump = () => {
+        if (off) return
+        const el = document.querySelector<HTMLElement>(hash)
+        if (!el) return
+        if (Math.abs(el.getBoundingClientRect().top - headerOffset()) > 4) scrollToTarget(el, { immediate: true })
+        if (--left > 0) timer = window.setTimeout(jump, 400)
+      }
+      refreshWhenReady(document.getElementById('main')).then(jump)
+    }
+    tick()
+    return () => {
+      off = true
+      clearTimeout(timer)
+    }
+  }, [])
 
   // Connect drawer follows the #connect hash so it is linkable and Back closes it.
   useEffect(() => {

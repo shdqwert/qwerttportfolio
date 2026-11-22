@@ -4,7 +4,7 @@
   "boards": {
     "CaseKinoqwertt.dc.html": {
       "expand": "fill",
-      "h": 9300,
+      "h": 8300,
       "title": "Case page — kinoqwertt",
       "w": 1440,
       "x": 4680,
@@ -12,7 +12,7 @@
     },
     "CaseQwerttclients.dc.html": {
       "expand": "fill",
-      "h": 14900,
+      "h": 13400,
       "title": "Case page — qwerttclients",
       "w": 1440,
       "x": 3120,

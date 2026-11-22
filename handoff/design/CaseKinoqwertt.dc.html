@@ -59,35 +59,6 @@ a{color:#ECE8DF}a:hover{color:#C8C3B8}
 .fx .fbtn:hover{background:#FF4F1F;color:#111110;transform:translateY(-2px)}
 .fx a:focus-visible{outline:2px solid #FF4F1F;outline-offset:3px}
 @media (prefers-reduced-motion: reduce){.fx *{animation:none !important}.fx .win img:first-child{opacity:1}}
-
-/* ===== BOARDING FLIGHT (F27): the hero media flies down into its landing mat; canvas = 8 s loop (alternate), build = scroll-scrubbed ===== */
-.flt{position:absolute;transform-origin:0 0;z-index:3;animation:flt-fly 8s cubic-bezier(.65,0,.35,1) infinite alternate both;will-change:transform}
-@keyframes flt-fly{0%,12%{transform:perspective(1800px) translate(var(--dx),var(--dy)) scale(var(--s))}
-48%{transform:perspective(1800px) translate(calc(var(--dx) * .42),calc(var(--dy) * .42)) scale(calc(var(--s) + (1 - var(--s)) * .55)) rotateX(5deg) rotateY(-6deg) rotateZ(-1.4deg)}
-84%,100%{transform:perspective(1800px) translate(0,0) scale(1)}}
-.flt .card{position:relative;width:100%;height:100%;border-radius:14px;overflow:hidden;background:#0C0C0C;box-shadow:0 0 0 1px rgba(236,232,223,.12),0 50px 90px -30px rgba(0,0,0,.95)}
-.flt video,.flt .card>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;display:block}
-.flt .card::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.16) 50%,transparent 65%);transform:translateX(-130%);animation:flt-sheen 8s cubic-bezier(.65,0,.35,1) infinite alternate both;pointer-events:none}
-@keyframes flt-sheen{0%,30%{transform:translateX(-130%)}70%,100%{transform:translateX(130%)}}
-.flt .tag{position:absolute;left:12px;top:12px;z-index:2;display:flex;height:26px;border-radius:6px;overflow:hidden;font:500 11px/26px 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase}
-.flt .tag b{font-weight:500;background:#111110;color:#ECE8DF;padding:0 9px;border-right:2px dashed rgba(236,232,223,.35)}
-.flt .tag i{font-style:normal;background:#FF4F1F;color:#111110;padding:0 9px;position:relative;display:inline-grid}
-.flt .tag i span{grid-area:1/1}
-.flt .tag i .a{animation:flt-a 8s steps(1) infinite alternate both}.flt .tag i .b{animation:flt-b 8s steps(1) infinite alternate both}
-@keyframes flt-a{0%,15%{opacity:1}16%,100%{opacity:0}}
-@keyframes flt-b{0%,15%{opacity:0}16%,80%{opacity:1}81%,100%{opacity:0}}
-.flt .tag i .c{animation:flt-c 8s steps(1) infinite alternate both}
-@keyframes flt-c{0%,80%{opacity:0}81%,100%{opacity:1}}
-.flt-mat{position:absolute;background:#1A1917;border-radius:18px;box-shadow:inset 0 0 0 1px rgba(236,232,223,.06)}
-.flt-zone{position:absolute;border:2px dashed rgba(236,232,223,.18);border-radius:14px}
-.flt-stamp{position:absolute;z-index:4;padding:10px 16px;border:3px solid #FF4F1F;border-radius:10px;color:#FF4F1F;font:700 30px/1 'Barlow Condensed',sans-serif;letter-spacing:.06em;transform:rotate(-8deg) scale(1.3);opacity:0;animation:flt-stamp 8s cubic-bezier(.3,1.4,.5,1) infinite alternate both}
-@keyframes flt-stamp{0%,84%{opacity:0;transform:rotate(-8deg) scale(1.3)}92%,100%{opacity:1;transform:rotate(-4deg) scale(1)}}
-.flt-path{position:absolute;inset:0;pointer-events:none;z-index:1;overflow:visible}
-.flt-path path{fill:none;stroke:#FF4F1F;stroke-width:2;stroke-linecap:round;stroke-dasharray:var(--len);stroke-dashoffset:var(--len);animation:flt-path 8s cubic-bezier(.65,0,.35,1) infinite alternate both}
-@keyframes flt-path{0%,12%{stroke-dashoffset:var(--len);opacity:.7}80%{stroke-dashoffset:0;opacity:.7}100%{stroke-dashoffset:0;opacity:0}}
-.flt-hint{position:absolute;z-index:2;display:flex;align-items:center;gap:10px;font:500 12px/1 'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#9A958B;animation:flt-hint 8s linear infinite alternate both}
-@keyframes flt-hint{0%,12%{opacity:1}30%,100%{opacity:0}}
-@media (prefers-reduced-motion: reduce){.flt,.flt *,.flt-stamp,.flt-path path,.flt-hint{animation:none !important}.flt{transform:none}.flt-stamp{opacity:1;transform:rotate(-4deg)}.flt-path,.flt-hint{display:none}}
 </style>
 </helmet>
 <div style="position: relative; width: 100%; background: #111110; color: #ECE8DF; font-family: 'IBM Plex Sans', sans-serif; letter-spacing: -0.01em">
@@ -98,7 +69,6 @@ a{color:#ECE8DF}a:hover{color:#C8C3B8}
 <span style="justify-self: end; font-size: 14px; font-weight: 600"><span style="text-decoration: underline">EN</span> <span style="color: #6E6A62">RU</span></span>
 </header>
 
-<div style="position: relative; max-width: 1440px; margin: 0 auto">
 <!-- CASE HERO -->
 <section style="position: relative; max-width: 1440px; margin: 0 auto; height: 860px; padding: 0 32px; box-sizing: border-box">
 <div class="mono" style="position: absolute; left: 32px; top: 120px; color: #9A958B; display: flex; align-items: center; gap: 10px"><span aria-hidden="true" style="display: inline-grid; grid-template-columns: repeat(7, 3px); grid-auto-rows: 3px"><sc-for list="{{markFilm}}" as="c" hint-placeholder-count="49"><span style="background: {{c.bg}}; border-radius: 50%"></span></sc-for></span>Case 02 · ©2026 · Unofficial redesign concept</div>
@@ -106,26 +76,14 @@ a{color:#ECE8DF}a:hover{color:#C8C3B8}
 <p style="position: absolute; left: 212px; top: 430px; margin: 0; font-size: 24px; line-height: 1.05; font-weight: 600; letter-spacing: -0.01em; display: flex; flex-direction: column">
 <span>Pick</span><span>tonight’s</span><span>film</span><span>faster than</span><span>the trailer.</span>
 </p>
-
+<div style="position: absolute; right: 32px; bottom: 60px; width: 760px; height: 475px; border-radius: 14px; overflow: hidden; background: #141412; box-shadow: 0 40px 80px -30px rgba(0,0,0,.9); outline: 1px solid rgba(249,244,236,.1)">
+<img src="/_blob/0d6697bf58b09957dc971f42e558da30" alt="kinoqwertt home page: trailer carousel with featured videos" style="width: 100%; height: 100%; object-fit: cover; object-position: top; display: block">
+</div>
 <a href="https://kinoqwertt.vercel.app" style="position: absolute; left: 212px; bottom: 60px; display: inline-flex; align-items: center; height: 48px; border-radius: 999px; background: #ECE8DF; color: #111110; text-decoration: none; overflow: hidden; width: 300px">
 <span style="flex: none; padding: 0 18px; font-size: 15px; font-weight: 600; border-right: 1px solid rgba(10,10,10,.2); height: 100%; display: flex; align-items: center">View site ↗</span>
 <span aria-hidden="true" class="mono" style="white-space: nowrap; padding-left: 14px; color: #5E5A52">kinoqwertt.vercel.app · kinoqwertt.vercel.app</span>
 </a>
 </section>
-<section aria-label="Live screen recording of kinoqwertt" style="position: relative; height: 932px"></section>
-<!-- BOARDING FLIGHT (F27): small boarding-pass preview flies down-left into its landing mat while growing to full size, with a tilt in mid-air; the screen inside is a real screen recording (muted loop). Canvas: 8 s loop. Build: scroll-scrubbed. -->
-<div class="flt-mat" aria-hidden="true" style="left: 32px; top: 900px; width: 1376px; height: 892px"></div>
-<div class="flt-zone" aria-hidden="true" style="left: 96px; top: 956px; width: 1248px; height: 780px"></div>
-<span class="mono" aria-hidden="true" style="position: absolute; left: 52px; top: 918px; color: #9A958B">Landing · Row 02 · Gate open</span>
-<span class="mono" aria-hidden="true" style="position: absolute; left: 1188px; top: 918px; width: 200px; text-align: right; color: #9A958B">00 · live screen recording</span>
-<svg class="flt-path" width="100%" height="100%" aria-hidden="true" style="--len: 1400"><path d="M1028 562 C1088 993 828 1266 720 1346" pathLength="1400"></path></svg>
-<div class="flt-hint" aria-hidden="true" style="left: 648px; top: 816px"><span style="width: 8px; height: 8px; border-radius: 50%; background: #FF4F1F"></span>Now boarding — scroll ↓</div>
-<figure class="flt" style="margin: 0; left: 96px; top: 956px; width: 1248px; height: 780px; --dx: 552px; --dy: -631px; --s: 0.6090">
-<div class="card"><img src="/_blob/af48da4d8976114db06c8d9ff94024f0" alt=""><video src="/_blob/61725925a1b4f8a2311da0cec11b0b8d" poster="/_blob/af48da4d8976114db06c8d9ff94024f0" autoplay muted loop playsinline aria-label="Screen recording of the kinoqwertt site: trailer carousel, featured rails, Top picks, then the Dune: Part Two title page"></video></div>
-<span class="tag" aria-hidden="true"><b>Row 02 · Seat kinoqwertt</b><i><span class="a">Boarding</span><span class="b">In flight</span><span class="c">Landed</span></i></span>
-</figure>
-<div class="flt-stamp" aria-hidden="true" style="left: 1144px; top: 1666px">BOARDED ✓</div>
-</div>
 
 <!-- DETAIL: media column + sticky facts column -->
 <section id="detail" style="max-width: 1440px; margin: 0 auto; padding: 60px 32px 160px; box-sizing: border-box; display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 64px; align-items: start">

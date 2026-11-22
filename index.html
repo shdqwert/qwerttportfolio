@@ -21,8 +21,11 @@
         }
         try {
           var home = /^\/(ru\/?)?$/.test(location.pathname)
-          var forced = /[?&]intro/.test(location.search)
-          if (home && !reduce && (forced || !sessionStorage.getItem('introSeen')) && !location.hash && !/[?&]nointro/.test(location.search)) {
+          // a refresh is a new visit: drop a section hash left by the menu (/#about)
+          // so the intro plays and the page starts from the top
+          var nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0]
+          if (home && location.hash && nav && nav.type === 'reload') history.replaceState(null, '', location.pathname + location.search)
+          if (home && !reduce && !location.hash && !/[?&]nointro/.test(location.search)) {
             h.classList.add('intro-pending')
             // the intro waits for the visitor's scroll; only bail out if the app never boots
             setTimeout(function () { if (!window.__motionReady) h.classList.remove('intro-pending') }, 4000)

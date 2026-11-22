@@ -1,0 +1,43 @@
+.layer { position: fixed; inset: 0; z-index: 260; pointer-events: none; overflow: hidden; }
+
+/* a ring that expands and fades, with eight punched holes flying out of it */
+.stamp {
+  position: absolute; width: 0; height: 0;
+}
+.stamp::before {
+  content: ""; position: absolute; left: -22px; top: -22px; width: 44px; height: 44px; border-radius: 50%;
+  border: 2px solid var(--accent);
+  animation: ring .55s var(--ease-out) forwards;
+}
+.stamp i {
+  position: absolute; left: -3px; top: -3px; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent);
+  --a: 0deg;
+  animation: hole .55s var(--ease-out) forwards;
+}
+.stamp i:nth-child(1) { --a: 0deg; }
+.stamp i:nth-child(2) { --a: 45deg; }
+.stamp i:nth-child(3) { --a: 90deg; }
+.stamp i:nth-child(4) { --a: 135deg; }
+.stamp i:nth-child(5) { --a: 180deg; }
+.stamp i:nth-child(6) { --a: 225deg; }
+.stamp i:nth-child(7) { --a: 270deg; }
+.stamp i:nth-child(8) { --a: 315deg; }
+
+/* on buttons and links the stamp is bigger and lands harder */
+.strong::before { border-width: 3px; animation-name: ringStrong; }
+.strong i { width: 7px; height: 7px; --d: 40px; }
+
+@keyframes ring {
+  from { transform: scale(.2); opacity: .9; }
+  to { transform: scale(1.25); opacity: 0; }
+}
+@keyframes ringStrong {
+  0% { transform: scale(.2); opacity: 1; }
+  40% { opacity: .9; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+@keyframes hole {
+  from { transform: rotate(var(--a)) translateX(6px) scale(1); opacity: 1; }
+  to { transform: rotate(var(--a)) translateX(var(--d, 30px)) scale(.2); opacity: 0; }
+}

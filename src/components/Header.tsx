@@ -63,7 +63,10 @@ export default function Header() {
   )
 
   // Hide on the way down after 200 px (direction only — no layout reads).
+  // A new page opens at the top, where no scroll event will ever un-hide the
+  // header, so every route change starts with it shown.
   useEffect(() => {
+    setHidden(false)
     const st = ScrollTrigger.create({
       start: 0,
       end: 'max',
@@ -126,7 +129,9 @@ export default function Header() {
       <div className={s.strip}>
         <TLink to="/" className={s.logo} aria-label={ui.home}>
           <PunchMark shape="q" cell={4} gap={1} color="currentColor" />
-          <span className={s.word}>QWERTT</span>
+          <span className={s.word} aria-hidden="true">
+            <span className="q-tail">O</span>WERTT
+          </span>
           <span className={s.dot} aria-hidden="true" />
         </TLink>
         <nav aria-label={ui.mainNav} className={s.nav}>

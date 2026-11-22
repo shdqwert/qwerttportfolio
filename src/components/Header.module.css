@@ -32,6 +32,12 @@
   color: inherit; text-decoration: none;
   transition: color .25s;
 }
+/* phones: the visible pill stays small, the tap area fills the strip height */
+@media (pointer: coarse) {
+  .link::after { content: ""; position: absolute; inset: -11px 0; }
+  .lang a { position: relative; }
+  .lang a::after { content: ""; position: absolute; inset: -17px -10px; }
+}
 .link.on { color: var(--ink); }
 .link:not(.on):hover { color: var(--accent); }
 .meta {
@@ -77,8 +83,15 @@
 }
 @media (max-width: 640px) {
   .header { padding: 10px 12px; }
-  .nav { overflow-x: auto; scrollbar-width: none; }
-  .link { padding: 0 7px; font-size: 13px; }
+  .nav { overflow-x: auto; scrollbar-width: none; padding: 0 4px; gap: 0; }
+  .link { padding: 0 6px; font-size: 13px; }
+  .logo { padding: 0 10px; }
+  .logo .dot { display: none; }
+  .meta { padding-left: 8px; padding-right: 12px; }
+}
+/* the five links fit a 360 px phone without hidden scrolling */
+@media (max-width: 400px) {
+  .link { padding: 0 5px; font-size: 12px; }
 }
 
 /* engine.ts: holds still while the page scrolls (targeted, so the class toggle stays cheap) */

@@ -47,6 +47,14 @@ ol, ul { padding: 0; list-style: none; }
 .muted { color: var(--stone); }
 .ash { color: var(--ash); }
 .display { font-family: var(--font-display); font-weight: 600; letter-spacing: var(--track); }
+/* Brand Q: Barlow Condensed's Q has only a short vertical stub ("0|"), so the
+   wordmark draws an O and adds a real diagonal tail. Fixed line-height keeps
+   the tail in the same spot whatever the parent's line-height is. */
+.q-tail { display: inline-block; position: relative; line-height: .82; }
+.q-tail::after {
+  content: ''; position: absolute; left: 50%; top: 74%; width: .12em; height: .27em;
+  background: currentColor; border-radius: .02em; transform: rotate(-40deg); transform-origin: 50% 0;
+}
 .is-placeholder { cursor: help; text-decoration: underline dotted; text-underline-offset: 4px; }
 
 /* buttons */
@@ -105,3 +113,16 @@ html.intro-pending { overflow: hidden; }
 html.intro-pending body::after { content: ""; position: fixed; inset: 0; z-index: 259; background: var(--ink); }
 .split-line { padding-bottom: .04em; }
 
+
+/* Phones (TouchFx): [data-tilt] elements drift with the device tilt / resting
+   finger. Uses the individual `translate` property, so it stacks on top of any
+   GSAP transform on the same element. --depth sets how far (negative = against). */
+:root { --tilt-x: 0; --tilt-y: 0; }
+.touch-fx [data-tilt] {
+  translate: calc(var(--tilt-x) * var(--depth, 10px)) calc(var(--tilt-y) * var(--depth, 10px));
+  will-change: translate;
+}
+/* no grey flash on tap: the stamp is the feedback */
+@media (pointer: coarse) {
+  a, button, summary, label { -webkit-tap-highlight-color: transparent; }
+}

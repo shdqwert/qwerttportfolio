@@ -212,14 +212,15 @@ export default function TerminalFooter({ page }: { page: RouteKey }) {
         </div>
         <div className={s.word} aria-label="qwertt" role="img">
           <span className={s.letters} aria-hidden="true">
+            {/* Q = O + diagonal tail, see .q-tail in base.css */}
             {'QWERTT'.split('').map((c, i) => (
-              <span key={i} className={s.letter}>
-                {c}
+              <span key={i} className={c === 'Q' ? `${s.letter} q-tail` : s.letter}>
+                {c === 'Q' ? 'O' : c}
               </span>
             ))}
           </span>
           <span className={s.sweep} aria-hidden="true">
-            QWERTT
+            OWERTT
           </span>
         </div>
         <div className={`mono caps ${s.stub}`}>

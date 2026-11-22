@@ -40,9 +40,12 @@
 .a { overflow: hidden; }
 .item:not(.isOpen) .a { height: 0; visibility: hidden; }
 .state { display: inline-block; }
-.a p { max-width: 720px; padding-bottom: 22px; margin-top: -10px; font-size: 16px; line-height: 1.5; letter-spacing: -.02em; color: var(--body-muted); }
+/* the pull-up sits on the panel, not the text, so overflow:hidden never clips the first line */
+.isOpen .a { margin-top: -10px; }
+.faqCompact .isOpen .a { margin-top: -4px; }
+.a p { max-width: 720px; padding-bottom: 22px; font-size: 16px; line-height: 1.5; letter-spacing: -.02em; color: var(--body-muted); }
 .faqCompact .q { padding: 13px 0; font-size: 16px; }
-.faqCompact .a p { font-size: 14px; padding-bottom: 14px; margin-top: -4px; }
+.faqCompact .a p { font-size: 14px; padding-bottom: 14px; }
 
 .h3 { margin-bottom: 28px; font-size: clamp(38px, 3.33vw, 48px); line-height: .95; }
 .numrow { position: relative; display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 12px; padding: 18px 0; }

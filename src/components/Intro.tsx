@@ -160,11 +160,6 @@ export default function Intro({ onDone }: { onDone: () => void }) {
       quiet = window.setTimeout(settle, 700)
       document.documentElement.classList.remove('intro-pending')
       window.dispatchEvent(new Event('intro-done'))
-      try {
-        sessionStorage.setItem('introSeen', '1')
-      } catch {
-        /* ignore */
-      }
       // the screen is paper-coloured, so fading the overlay reveals the hero seamlessly
       gsap.to(el, { autoAlpha: 0, duration: fast ? 0.45 : 0.6, ease: 'power1.out', onComplete: onDone })
     }
@@ -196,8 +191,8 @@ export default function Intro({ onDone }: { onDone: () => void }) {
         <div className={s.title}>
           <span className={s.word}>
             {[...WORD].map((c, i) => (
-              <span key={i} className={s.letter}>
-                {c}
+              <span key={i} className={c === 'Q' ? `${s.letter} q-tail` : s.letter}>
+                {c === 'Q' ? 'O' : c}
               </span>
             ))}
           </span>

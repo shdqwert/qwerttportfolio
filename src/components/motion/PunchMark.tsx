@@ -93,6 +93,27 @@ export default function PunchMark({ shape = 'q', rows, from, color = 'var(--acce
             cancelAnimationFrame(raf)
           }
         })
+        // touch: a tap on the mark blasts the holes outward from the finger,
+        // then they spring back into the letter
+        mm.add(`${MQ.coarse} and ${MQ.motion}`, () => {
+          const on = cells.filter((_, i) => target[i])
+          const tap = (e: PointerEvent) => {
+            if (e.pointerType === 'mouse') return
+            on.forEach((c) => {
+              const r = c.getBoundingClientRect()
+              const dx = r.left + r.width / 2 - e.clientX
+              const dy = r.top + r.height / 2 - e.clientY
+              const d = Math.hypot(dx, dy) || 1
+              const k = Math.max(0, 1 - d / 160) * 42 + 4
+              gsap.killTweensOf(c, 'x,y,scale')
+              gsap.timeline()
+                .to(c, { x: (dx / d) * k, y: (dy / d) * k, scale: 0.6, duration: 0.18, ease: 'power2.out' })
+                .to(c, { x: 0, y: 0, scale: 1, duration: 1.1, ease: 'elastic.out(1, 0.35)' })
+            })
+          }
+          el.addEventListener('pointerdown', tap, { passive: true })
+          return () => el.removeEventListener('pointerdown', tap)
+        })
       }
     },
     { scope: ref, dependencies: [shape, from, pop] }

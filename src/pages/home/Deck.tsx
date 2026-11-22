@@ -4,7 +4,7 @@ import PunchMark from '../../components/motion/PunchMark'
 import { Sheen } from '../../components/Shared'
 import { useT } from '../../content/i18n'
 import { gsap, MQ } from '../../motion/engine'
-import { useStatic } from '../../motion/hooks'
+import { useNarrow, useReduced, useStatic } from '../../motion/hooks'
 import s from './Home.module.css'
 
 const FAN = [
@@ -13,6 +13,14 @@ const FAN = [
   { x: 886, y: 150, r: 7 }
 ]
 const STACK = { x: 518, y: 250, r: 2 }
+// FAN x values are laid out for a 1376 px stage (centre card at 518). Place the
+// cards around the real centre instead, and pull the side cards in on narrower
+// desktops so none of them is cut by the panel edge.
+const fanLeft = (x: number) => {
+  const off = x - STACK.x
+  if (off === 0) return 'calc(50% - 170px)'
+  return `calc(50% - 170px ${off < 0 ? '-' : '+'} min(${Math.abs(off)}px, (100% - 340px) / 2 - 32px))`
+}
 
 function QBack() {
   return (
@@ -40,11 +48,16 @@ function QBack() {
 export default function Deck() {
   const { services: sv } = useT()
   const isStatic = useStatic()
+  // phones/tablets with motion: the static list becomes a swipeable ticket rail
+  const narrow = useNarrow()
+  const reduced = useReduced()
+  const swipe = narrow && !reduced
   const ref = useRef<HTMLDivElement>(null)
   useGSAP(
     () => {
-      if (isStatic) return
       const el = ref.current!
+      if (swipe) return swipeRail(el)
+      if (isStatic) return
       const mm = gsap.matchMedia()
       mm.add(MQ.desktop, () => {
         const cards = gsap.utils.toArray<HTMLElement>(`.${s.card}`, el)
@@ -82,10 +95,10 @@ export default function Deck() {
         return () => offs.forEach((f) => f())
       })
     },
-    { scope: ref, dependencies: [isStatic] }
+    { scope: ref, dependencies: [isStatic, swipe] }
   )
   return (
-    <div ref={ref} className={`${s.deck} ${isStatic ? s.deckStatic : ''}`} aria-label={sv.deckLabel} data-theme="ink">
+    <div ref={ref} className={`${s.deck} ${isStatic ? s.deckStatic : ''} ${swipe ? s.deckSwipe : ''}`} aria-label={sv.deckLabel} data-theme="ink">
       <div className={`mono ${s.deckKicker}`}>{sv.deckKicker}</div>
       <div className={`mono ${s.deckTorn}`}>
         <i />
@@ -93,15 +106,9 @@ export default function Deck() {
         <i />
         {sv.deckTorn}
       </div>
-      {!isStatic && (
-        <div className={s.deckBack} aria-hidden="true">
-          <div className={s.deckBackIn}>
-            <QBack />
-          </div>
-        </div>
-      )}
+      <div className={s.deckTrack}>
       {sv.cards.map((c, i) => (
-        <article key={c.no} className={s.card} style={isStatic ? undefined : { left: FAN[i].x, top: FAN[i].y, transform: `rotate(${FAN[i].r}deg)` }}>
+        <article key={c.no} className={s.card} style={isStatic ? undefined : { left: fanLeft(FAN[i].x), top: FAN[i].y, transform: `rotate(${FAN[i].r}deg)` }}>
           <div className={s.cardFloat}>
             <div className={s.cardInner}>
               <div className={s.cardFace}>
@@ -147,6 +154,66 @@ export default function Deck() {
           </div>
         </article>
       ))}
+      </div>
     </div>
   )
+}
+
+// Phone rail: native horizontal scroll with snap; each card turns in 3D by its
+// distance from the centre (cover-flow), the cards deal face-up the first time
+// the rail comes into view, and the phone ticks when a new card settles.
+function swipeRail(el: HTMLElement) {
+  const track = el.querySelector<HTMLElement>(`.${s.deckTrack}`)!
+  const cards = gsap.utils.toArray<HTMLElement>(`.${s.card}`, el)
+  const floats = cards.map((c) => c.querySelector<HTMLElement>(`.${s.cardFloat}`)!)
+  let raf = 0
+  let current = -1
+  const frame = () => {
+    raf = 0
+    const mid = track.scrollLeft + track.clientWidth / 2
+    let best = 0
+    let bestD = Infinity
+    cards.forEach((c, i) => {
+      const o = (c.offsetLeft + c.offsetWidth / 2 - mid) / c.offsetWidth
+      const a = Math.min(1.4, Math.abs(o))
+      if (Math.abs(o) < bestD) {
+        bestD = Math.abs(o)
+        best = i
+      }
+      gsap.set(floats[i], { rotateY: gsap.utils.clamp(-38, 38, -o * 32), rotate: o * 5, scale: 1 - a * 0.12, y: a * 22, opacity: 1 - a * 0.35 })
+    })
+    if (best !== current) {
+      if (current !== -1 && 'vibrate' in navigator) {
+        try {
+          navigator.vibrate(6)
+        } catch {
+          /* ignored */
+        }
+      }
+      current = best
+      el.dataset.active = String(best)
+    }
+  }
+  const onScroll = () => {
+    if (!raf) raf = requestAnimationFrame(frame)
+  }
+  frame()
+  track.addEventListener('scroll', onScroll, { passive: true })
+  addEventListener('resize', onScroll)
+
+  // deal: face-down → flip → stub tears → INCLUDED stamps, once
+  const tl = gsap.timeline({ scrollTrigger: { trigger: track, start: 'top 75%', once: true } })
+  cards.forEach((c, i) => {
+    const at = i * 0.16
+    tl.fromTo(c.querySelector(`.${s.cardInner}`), { rotateY: 180 }, { rotateY: 0, duration: 0.7, ease: 'qw.inOut' }, at)
+    tl.from(c.querySelector(`.${s.tearLine}`), { scaleX: 0, transformOrigin: '0 50%', duration: 0.35 }, at + 0.5)
+    tl.to(c.querySelector(`.${s.stub}`), { y: 6, rotate: 3, duration: 0.25, ease: 'qw.snap' }, at + 0.7)
+    tl.fromTo(c.querySelector(`.${s.included}`), { scale: 1.4, rotate: -16, autoAlpha: 0 }, { scale: 1, rotate: -8, autoAlpha: 1, duration: 0.3, ease: 'qw.snap' }, at + 0.75)
+    tl.fromTo(c.querySelector('[data-sheen]'), { xPercent: -130 }, { xPercent: 130, duration: 0.6 }, at + 0.8)
+  })
+  return () => {
+    cancelAnimationFrame(raf)
+    track.removeEventListener('scroll', onScroll)
+    removeEventListener('resize', onScroll)
+  }
 }

@@ -175,7 +175,6 @@
 .deckKicker { position: absolute; left: 32px; top: 28px; color: var(--ash); }
 .deckTorn { position: absolute; right: 32px; top: 28px; color: var(--ash); display: flex; gap: 8px; align-items: center; }
 .deckTorn i { width: 22px; height: 2px; background: var(--paper); }
-.deckBack { position: absolute; left: 518px; top: 250px; width: 340px; height: 476px; border-radius: 20px; background: var(--paper-3); transform: rotate(2deg) translateY(120px); box-shadow: 0 30px 60px -20px rgba(0, 0, 0, .8); padding: 14px; }
 .deckBackIn { width: 100%; height: 100%; border-radius: 12px; outline: 1.5px solid var(--ink); overflow: hidden; }
 .card { position: absolute; width: 340px; height: 476px; perspective: 1200px; }
 .cardFloat { width: 100%; height: 100%; transform-style: preserve-3d; }
@@ -198,7 +197,30 @@
 .stubTitle { font: 700 22px/1 var(--font-display); letter-spacing: .02em; margin-top: 4px; text-transform: uppercase; }
 .included { font: 700 11px var(--font-mono); color: var(--accent); border: 2px solid var(--accent); border-radius: 4px; padding: 4px 6px; transform: rotate(-8deg); }
 .deckStatic { height: auto; padding: 88px 32px 40px; display: grid; grid-template-columns: repeat(3, minmax(0, 340px)); justify-content: center; gap: 28px; }
-.deckStatic .card { position: relative; perspective: none; }
+.deckStatic .card { position: relative; perspective: none; width: 100%; }
+/* the rail wrapper only exists for the phone layout; elsewhere it is invisible */
+.deckTrack { display: contents; }
+.deck.deckSwipe { padding: 72px 0 28px; display: block; --card-w: min(82%, 300px); }
+.deckSwipe .deckTrack {
+  display: flex; gap: 14px; overflow-x: auto; overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory; scrollbar-width: none;
+  padding: 18px calc((100% - var(--card-w)) / 2) 36px;
+}
+.deckSwipe .deckTrack::-webkit-scrollbar { display: none; }
+.deckSwipe .card { flex: 0 0 var(--card-w); scroll-snap-align: center; scroll-snap-stop: always; perspective: 900px; }
+.deckSwipe .cardFloat { transform-origin: 50% 60%; }
+.deckSwipe .deckTorn { display: none; }
+.deckSwipe .deckKicker { left: 20px; }
+/* three dots under the rail follow the centred card */
+.deckSwipe::after {
+  content: ""; display: block; width: 42px; height: 6px; margin: 0 auto;
+  background:
+    radial-gradient(circle 3px, var(--paper) 98%, transparent) 0 0 / 14px 6px no-repeat,
+    radial-gradient(circle 3px, var(--ash) 98%, transparent) 0 0 / 14px 6px repeat-x;
+  transition: background-position .3s var(--ease-out);
+}
+.deckSwipe[data-active="1"]::after { background-position: 14px 0, 0 0; }
+.deckSwipe[data-active="2"]::after { background-position: 28px 0, 0 0; }
 
 /* ---------- about / faq ---------- */
 .about { display: grid; grid-template-columns: 440px minmax(0, 1fr); gap: 80px; align-items: start; }
@@ -233,6 +255,7 @@
 @media (max-width: 1023px) {
   .values, .numbers, .facts, .aboutFacts, .process { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .cards3, .cols, .about, .faqGrid, .stack, .demo { grid-template-columns: minmax(0, 1fr); }
+  .portrait { display: none; }
   .qcHead { flex-direction: column; align-items: flex-start; }
   .opener { height: auto; min-height: 640px; padding: 140px 0 120px; }
   .openerTitle { position: relative; left: auto; top: auto; transform: none; flex-direction: column; align-items: flex-start; gap: 0; padding: 0 var(--gutter); }
@@ -241,7 +264,7 @@
   .storm { height: 560px; }
   .stormFrame { width: 70%; height: 50%; margin: 0; left: 15%; top: 25%; }
   .stormText { font-size: 52px; }
-  .deckStatic { grid-template-columns: minmax(0, 340px); }
+  .deckStatic { grid-template-columns: minmax(0, 340px); padding: 72px 16px 24px; }
   .number { border-right: 0; padding-left: 0; }
   .printer { overflow: hidden; }
 }
@@ -251,6 +274,8 @@
 .hero { overflow-x: clip; }
 @media (max-width: 600px) {
   .caseTitle { font-size: 15.5vw; }
+  /* the film mark sits above the title, so "kinoqwertt" keeps its full width */
+  .caseHead { flex-direction: column; align-items: flex-start; gap: 18px; }
   .steps { flex-wrap: wrap; }
 }
 @media (max-width: 600px) {
@@ -261,3 +286,6 @@
 
 /* engine.ts: holds still while the page scrolls (targeted, so the class toggle stays cheap) */
 :global(.is-scrolling) .beam i { animation-play-state: paused; }
+/* phone rail: narrower cards, so the stamp must not hit the card edge */
+.deckSwipe .stubRow { gap: 10px; }
+.deckSwipe .included { flex: none; margin-right: 2px; }

@@ -60,7 +60,7 @@ function About() {
             {about.title}
           </Reveal>
           <p className={s.aboutText}>
-            {owner.bio} {about.text}
+            {about.text}
           </p>
           <Reveal as="dl" className={s.aboutFacts} stagger={0.08}>
             {about.facts.map(([a, b]) => (
@@ -91,7 +91,7 @@ function About() {
       <div className={s.stack}>
         <div className="mono muted">{about.stackLabel}</div>
         <ul className={s.chips}>
-          {[...stack, about.stackEdit].map((t, i) => (
+          {stack.map((t, i) => (
             <li key={t} className={s.chip}>
               <FlapText text={t} run={run} seed={i + 11} />
             </li>
